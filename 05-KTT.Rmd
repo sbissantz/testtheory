@@ -1,0 +1,637 @@
+---
+title: "Klassische Test Theory"
+output: 
+  beamer_presentation:
+    theme: "Boadilla"
+    fonttheme: "default"
+    slide_level: 2
+author: Jalynskij et al. 
+incremental: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Einstieg
+
+Stellen Sie sich vor, Sie dürfen völlig frei ein Thema für eine Forschungsarbeit
+wählen. Was würden Sie untersuchen?
+
+## Auflösung
+
+Viele Sozialwissenschaftlern/innen gemeint ist, ist ein aufgeprägtes Interesse
+an komplexen (oft unbeobachtbaren) sozialwissenschaftlichen Konstrukten (z.B.
+Intelligenz, Narzissmus, Ehre, Liebe, Depression...).
+
+$\longrightarrow$ "The burden of complex measurement"
+
+## The burden of complex measurment
+
+> "Psychological measurement can be a difficult task. We aim to measure not
+directly observable variables like cognitive abilities, personality traits,
+motivation, quality of life, diseases in psychopathology, etc. Measuring such
+latent constructs is much more challenging than determining body height or
+weight (for which we have a measuring tape and a scale as measurement
+instruments). Obviously we cannot simply ask: “How depressed are you?” or “How
+intelligent are you?”. We need a measurement instrument such as a test or
+questionnaire to assess a participant’s location on the underlying latent
+variable." [Mair, 2018, S. 1](https://www.springer.com/gp/book/9783319931753)
+
+## Die Bürde der Messung komplexer Phänomene
+
+\begin{block}{Die Bürde der Messung komplexer Phänomene}
+...being (almost always) doomed to measure with error when accessing latent
+constructs.
+\end{block}
+
+...zur Kontrolle benötigen wir eine Theorie über die Entstehung des
+Messfehlers (Messfehlertheorie).
+
+- Beispieltheorie: Klassische Test Theorie (KTT)
+- Erklärung: True Score $\sim$ Observed Score $\sim$ Measurement Error.
+
+## Lösungsvorschlag: Das True Score Approach 
+
+\begin{equation}
+\Large \tau = X + \epsilon \Leftrightarrow X = \tau - \epsilon  
+\end{equation}
+
+- $X$: observed score (known)
+- $\tau$: true score (unknown)
+- $\epsilon$: error component (unknown)
+
+<!-- ## Lantent variable logic & inference  -->
+
+<!--   Crux: lantent variable logic  -->
+<!--        LV (Konstrukt) -> OV (Verhalten, Item)  -->
+<!--        LV (Konstrukt) <- Testtheorie — OV (Verhalten, Item)  -->
+
+## CTT als Messfehlertheorie
+
+\begin{block}{Grundannahme}
+$E(\epsilon) = 0$ (die Fehler sind unsystematisch)
+\end{block}
+
+```{r, out.width="80%", results='hide', fig.align='center'}
+old.par <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
+plot(rnorm(100), ylab = "Fehlerkomponente")
+abline(h=0, lty=2)
+mtext("unsystematische Fehlerkomponente")
+
+seq <- seq(1, 100)
+f <- function(x) 3*x + rnorm(1, 0, 50)
+plot(sapply(seq, f), ylab = "Fehlerkomponente")
+abline(h=0, lty=2)
+mtext("systematische Fehlerkomponente")
+```
+
+## Warum "unsystematisch"?
+
+\begin{alertblock}{Fluktuationsphänomen}
+..Adding small fluctuations tend to dampen one another!
+\end{alertblock}
+
+<p>&nbsp;</p>
+
+ >"Consider a simple case of asking students their ages but to insure privacy,
+ asking them to flip a coin before giving their answer. If the coin comes up
+ heads, they should add 1 to their real age, if it comes up tails, they should
+ subtract 1. Clearly no observed score corresponds to the true scores. But if
+ we repeat this exercise 10 times, then the mean for each student will be quite
+ close to their true age". 
+ ([Revelle, in prep., S. 207](https://personality-project.org/r/book/Chapter7.pdf))
+ 
+## Let's do it! (..in R) 
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+true_age <- 28 # Verändere mich
+add_privacy <- function(true_age){
+  # heads or tails
+  hot <- sample(c(0,1), 1, replace = TRUE)
+  ifelse(hot==1, true_age+1, true_age-1)
+}
+M <- 10 # Verändere mich!
+# Messung duzende (M) Male wiederholen
+reps <- replicate(M, add_privacy(true_age))
+mean(reps)
+```
+
+## Prognose & Selbstexperiment
+
+- Wie verändert sich der Wert mit steigender Wiederholungszahl?
+- Ab wann sind die Veränderungen konstant?
+
+<p>&nbsp;</p>
+
+\begin{example}
+Versuchen Sie es selbst! Nutzen Sie den Code auf der vorherigen Folie. Geben Sie
+ihr eigenes Alter ein und verändern Sie den Wert für \texttt{n}. (siehe:
+Übungsaufgabe 1)
+\end{example}
+
+Anmerkung: Sie sollen die Konzepte nicht jede Zeile des Codes verstehen!
+
+## Die True Score Logik: ein Gedankenexperiment
+
+\begin{block}{Gedankenexperiment}
+Hätten wir die Möglichkeit eine Person i unzählige Male zu unter den gleichen
+Bedinungen zu messen (m=1,...,M), dann erhalten wir eine (Normal-)verteilung
+seiner Messwerte (unter der Annahme $E(\epsilon) = 0$)), wobei im Mittel über
+alle intraindividuellen Messwerte ($X_j = 1, \dots, M$) die Beobachtungswerte
+dem wahren Wert der Person entsprechen
+\end{block}
+
+\begin{equation}
+E(X_{j=1, \dots, M}) = \tau  \quad | \quad  \epsilon \sim Normal(0, \sigma)
+\end{equation}
+
+## Let's do it! (..in R) 
+
+```{r echo=TRUE}
+set.seed(123)
+# unzählige Male
+M <- 1e4 # Verändere mich!
+# True Score: i (z.B. Intelligenztest)
+T <- 100 
+# random error; Schwankungsbreite +/- 10
+E <- rnorm(M, 0, 10)
+# Measurements
+X <- T + E 
+# Imaginäre Wdh des Messung 
+reps <- replicate(M, sample(X, 1))
+```
+
+## Ergebnisse: Intraindividuelle Merkmalsverteilung
+
+```{r}
+# Intraindividuelle Merkmalsverteilung 
+hist(reps, main = NULL, xlab="Messwiederholungen", ylab="Häufigkeiten: Erwartungswerte")
+mtext("Intraindividuelle Merkmalsverteilung")
+```
+
+## Ergebnisse: Beobachtungs- & Erwartungswert  
+
+```{r echo=TRUE}
+set.seed(123)
+# Ein tatsächlicher Beobachtungswert (Zufallszug)
+(X_i <- sample(X, 1))
+# Erwartungswert des Individuums: T = E(X) 
+(E_X <- mean(reps))
+```
+
+## Prognose & Selbstexperiment
+
+- Wie verändert sich der Wert mit steigender Wiederholungszahl?
+- Ab wann sind die Veränderungen konstant?
+
+<p>&nbsp;</p>
+
+\begin{example}
+Versuchen Sie es selbst! Nutzen Sie den Code auf der vorherigen Folie. Verändern
+Sie den Wert für \texttt{M} und überprüfen Sie Ihre Prognose. (siehe:
+Übungsaufgabe 2)
+\end{example}
+
+Anmerkungen: Wollen Sie unsere Ergebnisse exakt reproduzieren setzen Sie
+folgendes Snippet vor jedes Codebeispiel
+
+```{r echo=TRUE}
+# Set RNG state 
+set.seed(123)
+```
+
+## Auflösung
+
+```{r, out.width="80%", results='hide', fig.align='center'}
+set.seed(123)
+# True Score: i
+T <- 100
+generator <- function(M, T){
+# Faster implementation
+mean(rnorm(M, T, 5))
+}
+seq <- c(1:10, 100, 1e3, 1e4, 1e5, 1e6) 
+E_X <- lapply(seq, generator, T=T)
+plot(1:length(seq), E_X, xaxt='n', xlab = "N", ylab = "Erwarungswert von X")
+axis(side = 1,  1:length(seq), as.character(seq))
+abline(h=T, lty=2)
+text(c(3,T+.3), labels = "True Score")
+mtext("Approximation von T bei imaginären Wiederholungszahlen des Tests")
+```
+
+## True Score Logik
+
+Um die True Score Logik zu verinnerlichen, wollen wir die einzelnen Konzepte in
+R umsetzen und mit den Kennwerten "spielen" um eine Intuition für sie zu
+bekommen; v.a.:
+
+- Interindividuelle Merkmalsverteilung
+- Intrainduviduelle Merkmalsverteilung
+- True, Observed & Error Score -- $\tau. X, \epsilon$
+
+## Zur Verortung: Kernkonzepte
+
+![half-size image](image.png)
+
+## Anwendungsbeispiel: Intelligenztest
+
+\begin{block}{Gedankenexperiment}
+Stellen Sie sich vor wir würden mit 10.000 Probanden einen Intelligenztest
+durchführen, indem jeder Proband 5000 mal den gleichen Intelligenztest
+wiederholt.
+\end{block}
+
+## Populationen: Individuen & Messwerte
+
+..dazu ziehen wir (zufällig) aus einer normalerweise unbekannten Population
+N=10.000 Personen mit den True Scores ($\tau$)
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+# Populationsgröße (N)
+N <- 1e4 # (1e4): Verändere mich!
+# Generierung der True Scores
+# 100: Mittlere Intelligenz in der Population
+# 30: Abweichungen vom Populationnsmittelwert
+T <- round(rnorm(N, 100, 30), digits = 0)
+# Anzahl der (sonst imaginären) Testwiederholungen
+M <- 5000 # (5000): Verändere mich!
+X <- lapply(T, function(T) rnorm(M, T , 5))
+names(X) <- T
+```
+
+## Verteilung der True Scores in der Population
+
+...die uns unbekannten True Scores sind gemäß der Simulation wie folgt verteilt
+
+```{r, out.width="80%", results='hide', fig.align='center'}
+hist(T, main = NULL, xlab = "True Scores")
+mtext("Verteilung der wahren Intelligenzwerte in der Population")
+```
+
+## Interindividuelle Merkmalsverteilung
+
+...mitteln wir die 5000 durchgeführten Testergebnisse ($X_{j = 1,\dots,5000}$)
+für jede Person ($i = 1,\dots,10000$) und plotten diese, dann erhalten wir die
+interindividuelle Merkmalsverteilung ($E(X) \approx T$)
+
+```{r, out.width="80%", results='hide', fig.align='center'}
+hist(rapply(X, mean), main = NULL, xlab="Erwartungswert der M Intelligenztests")
+mtext("Veteilung der Erwartungswerte in der Population")
+```
+
+## Intraindividuelle Merkmalsverteilungen  
+
+...aus dieser Population (interindividueller Merkmalsverteilung) ziehen wir
+zufällig 4 Probanden/Probandinnen und betrachten ihre intraindividuellen
+Merkmalsverteilung über die 1000 Testwiederholungen.
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r, out.width="80%", results='hide', fig.align='center'}
+rnd_smpl <- sample(X, 4)
+old.par <- par(no.readonly = TRUE)
+par(mfrow=c(2,2))
+lapply(rnd_smpl, hist, main=NULL, xlab="Testwerte der Person")
+par(old.par)
+```
+
+## Intraindividuelle Merkmalsverteilungen
+
+..da wir nur ein einzes Mal messen, ziehen wir (zufällig) einen Wert aus der
+(Normal-)verteilung der intraindividuellen Messwerte. Dieser intraindividuelle
+Messwert ($X_{ij}$) ist ein Schätzer für den True Score ($\tau_{i}$) der Person
+der wegen des Messfehlers unter oder über dem Messwert liegt.
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+X_i <- sample(X, 1) 
+# Sample randomly a testvalue
+(X_ij <- sample(X_i[[1]], 1)) ; names(X_i)
+```
+
+## Prognose & Selbsttests
+
+\begin{example}
+Versuchen Sie es selbst! Nutzen Sie nachfolgende Funktion und führen sie sie
+immer wieder aus. Damit ziehen Sie aus unserer Population immer wieder zufällig
+neue Probanden. Achten sie darauf, wie sich True Score, Observed Score und
+Messfehler verändern. (siehe: Übungsaufgabe 3)
+\end{example}
+
+- Funktion einlesen: Makieren + Str/Ctrl/Cmd-Enter
+- Mehrfach ausführen: Makieren + Str/Ctrl/Cmd-Enter
+- Ergebnis auf Folie wiederholen:
+
+## Zufallsziehung 
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+rsample_i <- function(){
+  # Sample (randomly) an individual 
+  (X_i <- sample(X, 1)) 
+  # Sample randomly a testvalue
+  (X_ij <- sample(X_i[[1]], 1))
+  cat(" True Score (T):", names(X_i), "\n", 
+      "Testwert (X):", round(X_ij), "\n", 
+      "Messfehler (E):", 
+      abs(round(X_ij) - as.numeric(names(X_i))))}
+# Sample an individual randomly!
+rsample_i()
+```
+
+## Prognose & Selbsttest
+
+- Wie wirken sich Veränderungen in der Wiederholungszahl des Tests ($M$) aus?
+- Was geschieht bei Veränderungen der Populationsgröße ($N$)? 
+- Wie wirken sich die Veränderungen auf den Zusammenhang zwischen True Score,
+Observed Score und Messfehler aus (Tipp: $\tau = X + \epsilon$)
+
+<p>&nbsp;</p>
+
+\begin{example}
+Versuchen Sie es nun selbst! In vorherigem Code finden Sie die Anmerkung
+\texttt{Verändere mich!} (siehe v.a. $\texttt{N, M}$). Erstellen Sie ihre
+eigenen Populationen und variieren Sie systematisch die Werte $M$ und $N$.
+(siehe: Übungsaufgabe 4)
+\end{example}
+
+## Lokale Unabhängigkeit
+
+\begin{alertblock}{Lokale Unabhängigkeit}
+Lokale Unabhängigkeit $\Leftrightarrow$ die Itemantworten sind unter Kontrolle
+der Traitausprägung unabhängig voneinander
+\end{alertblock}
+
+- Die Logik lantenter Variablen (2.0)
+
+\begin{equation}
+  \zeta: gen. process \rightarrow VAR(j = 1, \dots, M) : cor(j, k) > 0)
+\end{equation}
+
+- Die Logik lokaler Unabhängigkeit
+
+\begin{equation}
+  cor(j, k) | \zeta = 0
+\end{equation}
+
+- $\zeta$: Konstrutk (latente Variable)
+- $j,k$: Items in einem Test (beobachtete Variablen)
+- $M$: Anzahl der Items in einem Test 
+
+<!-- Latent variable logic: Beinflusst die LV die OVs, kovariieren die Items -->
+<!-- miteinander (LV_gen.process -> VAR(OVs) : cor(i, j) > 0). Ist die LV der -->
+<!-- einzige Grund warum die Items korrelieren, dann sollte der Zusammenhang unter -->
+<!-- Kontrolle der LV verschwinden. Die Items sind dann LSU und die LV erklärt/saugt -->
+<!-- die gesamte Varianz zwischen den Items. Die Varianzaufklärungsmission ist damit -->
+<!-- beendet (cov(i,j) = 0 | LV). D.h. OV := Indikator für LV <=> OVs lokal -->
+<!-- statistisch unabhängig. -->
+
+<!-- Hängt jedoch die Antworten zweier Items zusammen, dann korrelieren sie -->
+<!-- ebenfalls miteinander -- auch unabhängig von der LV. Unter Kontrolle der LV -->
+<!-- bleibt damit ein Rest übrig (d.h. nicht die gesamte Varianz wird durch die LV -->
+<!-- herauspatrialisiert/-gesaugt). Die vollständige Varianzaufklärungsmission (im -->
+<!-- Sinne der LV) ist damit gescheitert. -->
+
+## Lokale Unabhängigkeit $\sim$ Korrelationsmatrizen
+
+```{r, out.width="100%", results='hide', fig.align='center'}
+old.par <- par(no.readonly = TRUE)
+par(mfrow=c(1,2))
+set.seed(359)
+# Define factor loadings
+loads <- rep(0.7, 10)
+# Sample correlation matrix
+R_1 <- psych::sim.congeneric(loads=loads,N=50)
+X_2 <- replicate(10, rnorm(100)) 
+R_2 <- cor(X_2) 
+attributes(R_2) <- attributes(R_1)
+# Visualize the correlation matrix
+lapply(list(R_1, R_2), function(R)  
+  corrplot::corrplot.mixed(R, number.cex=.7))
+par(old.par)
+```
+
+\begin{example}
+Hier sehen Sie zwei Korrelationsmatrizen. Besprechen Sie sich mit Ihren
+Nachbarn. Wenden Sie das Prinzip lokaler Unabhängigkeit auf die 3
+Korrelationmatritzen an. Zu welchem Ergebnis kommen Sie?
+\end{example}
+
+## Lokale Unabhängigkeit $\sim$ Korrelationsmatrizen II
+
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r, out.width="50%", results='hide', fig.align='center'}
+loads <- rep(0.4, 10)
+R <- psych::sim.congeneric(loads=loads,N=50)
+# Visualize the correlation matrix
+corrplot::corrplot.mixed(R, number.cex=.7)
+```
+
+\begin{example}
+Stellen Sie sich vor, nach Kontrolle der Traitausprägung sieht Ihre
+Korrelationsmatrix wie folgt aus. Zu welchen Schluss kommen Sie bezüglich der
+Annahme lokal statistischer Unabhängigkeit? Warum?
+\end{example}
+
+## Reliabilität
+
+..von der additive Varianzzerlegung zu Definition der Reliabilität
+
+\begin{alertblock}{Definition: Reliabilität}
+\begin{equation}
+  Rel(Y_j) = \frac{Var(\tau_j)}{Var(Y_j)} = \frac{Var(\tau_j)}{Var(\tau_j) + Var(\epsilon_j)}
+\end{equation}
+\end{alertblock}
+
+Die Reliabilität wird definiert als Anteil ($Var(\tau_j)$) der wahren Varianz an
+der Gesamtvarianz ($Var(Y_j)$).
+
+## Prognose & Selbsttest
+
+Wie wirken sich eine steigende Varianz im Fehlerterm auf die Reliabilität der
+Messung aus? (Tipp: $Rel(Y_j) = \frac{Var(\tau_j)}{Var(\tau_j) + Var(\epsilon_j)}$)
+
+<p>&nbsp;</p>
+
+\begin{example}
+Versuchen Sie es nun selbst! In folgendem Code finden Sie die Anmerkung
+\texttt{Verändere mich!}. Variieren Sie die Werte und überprüfen Sie ihre
+Prognose. (siehe: Übungsaufgabe 7)
+\end{example}
+
+## Reliabilität $\sim$ Messfehler 
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+N <- 1000 # Verändere mich
+tau <- rnorm(N, mean = 100, 30)
+var_epsilon <- 25 # (25): Verändere mich!
+epsilon <- rnorm(N, 0, var_epsilon) 
+reliab <- function(tau, epsilon){
+ rel <- var(tau) / var(tau + epsilon)
+ cat("Reliabilität der Messung:", rel)
+}
+reliab(tau, epsilon)
+```
+
+## Auflösung
+
+```{r, out.width="80%", results='hide', fig.align='center'}
+set.seed(123)
+reliab <- function(var_epsilon){
+  N <- 1000
+  tau <- rnorm(N, mean = 100, 30)
+  epsilon <- rnorm(N, 0, var_epsilon) 
+  var(tau) / var(tau + epsilon)
+}
+var_epsilon <- seq(0, 200, 5)
+plot(sapply(var_epsilon, reliab), xaxt='n', ylim = c(-0.01, 1),
+     xlab="Varianz in Epsilon", ylab="Reliabilität")
+axis(side = 1,  1:length(var_epsilon), as.character(var_epsilon))
+abline(h=c(0,1), lty=2) 
+text(x= 7, y= 0.1, "Minimum") ; text(x= 35, y= 0.9, "Maximum")
+```
+
+...Die Reliabilität ist also ein Maß für die Messfehlerfreiheit einer Messung 
+
+## Exkurs: Zum Problem(?) systematischer Störeinflüsse
+
+\begin{block}{Ausganssituation}
+Da die KTT nur unsystamtische Störeinflüsse berücksichtigt,
+bleiben systematische Einflüsse unberücksichtigt.
+\end{block}
+
+z.B.: soziale Erwünschtheit, politische Korrektheit
+
+Frage: Wie wirken sich systematische Störeinflüsse aus? 
+
+- z.B. auf Korrelationen?
+- z.B. auf Regressionsgewichte?
+
+## Auswkirungen system. Störeinflüsse: Korrelationen
+
+\begin{block}{Szenario}
+Systematischer Einfluss über alle Fälle hinweg
+\end{block}
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+n <- 100
+x <- rnorm(n)
+y <- rnorm(x)
+cor(x, y) ; cor(x+3, y) ; cor(x, y + 3) ; cor(x + 3, y + 3)
+```
+
+## Auswikrungen system. Störeinflüsse: Korrelationen
+
+\begin{block}{Szenario}
+Systematischer Störeinfluss auf einige (die ersten 50) Probanden  
+\end{block}
+
+```{r echo=TRUE}
+x[1:50] <- x[1:50] + 3
+cor(x, y) 
+
+# Additional increase MME
+x[1:50] <- x[1:50] + 6
+cor(x, y) 
+```
+
+## Auswirkungen system. Störeinflüsse: Regressionsgewichte 
+
+\begin{block}{Szenario}
+Systematischer Einfluss über alle Fälle hinweg
+\end{block}
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+x <- rnorm(100) ; y <- rnorm(x)
+# Original result
+lm(y ~ x)$coef[[2]] 
+# Manipulatied predictor 
+beta_ast <- lm(y ~ I(x+3))$coef[[2]] 
+# Manipulatied outcome 
+lm(I(y+3) ~ I(x))$coef[[2]] 
+```
+
+## Auswirkungen system. Störeinflüsse: Regressionsgewichte 
+
+\begin{block}{Szenario}
+Systematischer Störeinfluss auf einige (die ersten 50) Probanden  
+\end{block}
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+x <- rnorm(100) ; y <- rnorm(x)
+x[1:50] <- x[1:50] + 3
+beta <- lm(y ~ x)$coef[[2]] 
+# Manipulatied predictor 
+x[1:50] <- x[1:50] + 6
+# Manipulatied coefficient 
+lm(y ~ x)$coef[[2]] 
+```
+
+## Messmodelle (..to be continued!)
+ 
+\begin{alertblock}{Messmodelle \& Messäquivalenz}
+  Inwieweit messen wir mit unterschiedlichen Tests dasselbe Konstrukt?
+\end{alertblock}
+
+Anmerkung: unterschiedliche Messmodelle bedingen unterschiedliche
+Reliabilitätskoeffizienten.
+
+..Fortsetzung in der Übnung zur Reliabilität folgt.
+
+## Zusammenfassung 
+
+> "The classical test theory model is the theory of psychological testing that is
+most often used in empirical applications. The central concept in classical test
+theory is the true score. True scores are related to the observations through
+the use of the expectation operator: the true score is the expected value of the
+observed score. Thus, a researcher who sees intelligence as a true score on an
+intelligence test supposes that somebody’s level of intelligence is his expected
+score on an IQ-test."
+> ([Borseboom 2005, S. 3](https://doi.org/10.1017/CBO9780511490026))
+>
+
+## Abschließende Anmerkung
+
+> "However, although various authors have warned against it, the platonic true
+score interpretation is like an alien in a B-movie: no matter how hard you beat
+it up, it keeps coming back."
+>
+> ([Borseboom 2005, S. 32](https://doi.org/10.1017/CBO9780511490026))
+
+Probleme der Klassischen Test Theory
+
+- z.B.: die Grundgleichung bleibt empirisch ungeprüft ($\tau = X + \epsilon$)
+- z.B.: Annahme zu Messfehlern oft problematisch ($E(\epsilon)=0$)
+- z.B.: [Kohli et al. (2015)](https://doi.org/10.1177/0013164414559071) Nur
+moderne Erweiterungen der KTT (v.a. Underlying Normal Variable Approach) können
+annähernd mit modernen Item Response Theory Model (IRT) mithalten.
+
+$\Rightarrow$ Einblick in die IRT
