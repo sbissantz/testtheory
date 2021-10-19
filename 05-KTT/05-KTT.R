@@ -8,20 +8,18 @@
 # set.seed(123)
 # rm(list = ls())
 #
-# Ihr wahres Alter
+# Wahres Alter
 true_age <- 28 #<------------------------------------------ Verändere mich!
-# Sicherheitsfeature
+
 add_privacy <- function(true_age){
-  # heads or tails
   hot <- sample(c(0,1), 1, replace = TRUE)
   ifelse(hot==1, true_age+1, true_age-1)
 }
+
 # Anzahl der Testwiederholungen 
 M <- 10 #<------------------------------------------------ Verändere mich!
-# Wiederholung der Messung: M mal 
 reps <- replicate(M, add_privacy(true_age))
-# Erwartungswert von X: 
-# ..es sollte gelten: E(X) = T
+# Erwartungswert von X ; E(X) = T 
 (E_X <- mean(reps))
 
 # Übungsaufgabe 2 ---------------------------------------------------------
@@ -30,31 +28,34 @@ reps <- replicate(M, add_privacy(true_age))
 # set.seed(123)
 # rm(list = ls()) 
 #
-# unzählige Male
+# Anzahl der Testwiederholungen 
 M <- 1e4 #<-------------------------------------------------- Verändere mich!
-# True Score: i (z.B. Intelligenztest)
+# True Score
 T <- 100 
-# random error; Schwankungsbreite +/- 10
+# Messfehler: E(E) = 0
 E <- rnorm(M, 0, 10)
-# Measurements
+# Beobachtungswert 
 X <- T + E 
-# Imaginäre Wdh der Messung 
+# (Imaginäre) Wiederholung des Test 
 reps <- replicate(M, sample(X, 1))
 
 # Output(s)
 #
-# Intraindividuelle Merkmalsausprägung 
+# Intraindividuelle Merkmalsverteilung
 hist(reps, 
      main = "Intraindividuelle Merkmalsverteilung", 
-     xlab="Messwiederholungen", 
-     ylab="Häufigkeiten: Erwartungswerte")
-#
-# Ein zufällig gezogener Beobachtungswert 
-(X_i <- sample(X, 1))
-#
+     xlab = "Testwerte", 
+     ylab = "Häufigkeiten")
+#     
 # Erwartungswert des Individuums bei M Wiederholungen
-# ..es sollt gelten: T = 100 = E(X) 
+# E(X) = T = 100 (?)
 (E_X <- mean(reps))
+#
+# Ein zufällig gezogener Beobachtungswert
+# .. aus der intraindividuellen Merkmalsverteilung
+# .. ein Schätzer für den wahren Wert: 100
+(X_i <- sample(X, 1))
+cat("Beobachtungswert", X_i, "True Score", T)
 
 # Übungsaufgabe 3 ---------------------------------------------------------
 
@@ -75,34 +76,42 @@ X <- lapply(T, function(T) rnorm(M, T , 5)) ; names(X) <- T
 # Outputs
 #
 
-# "Verteilung der wahren aber unbekannten Intelligenzwerte in der Population
+# "Verteilung der wahren aber unbekannten Intelligenzwerte 
+# ...in der Population
+#
 hist(T, 
-     main = "Verteilung der True Scores", 
+     main = "Verteilung der True Scores (Intelligenz)", 
      xlab = "True Scores", 
-     ylab = "Häufigkeiten: True Scores"
+     ylab = "Häufigkeiten"
      )
 
 # Interindividuelle Merkmalsverteilung
+#
 hist(rapply(X, mean), 
      main = "Interindividuelle Merkmalsverteilung", 
-     xlab = "EW bei M Intelligenztests",
-     ylab = "Häufigkeiten: Erwartungswerte")
+     sub = paste(M, "Testwiederholgungen"),
+     xlab = "Erwartungswerte",
+     ylab = "Häufigkeiten")
 
 # Mittelwert unserer Population
-# ..zur Erinnerung T war 100
+# ..zur Erinnerung: T = 100
+#
 mean(rapply(X, mean)) 
 
 # Intraindividuelle Merkmalsverteilung 
-# ..ziehe zufällig ein Individuum aus der Population
-X_i <- sample(X, 1) 
+# ..ziehe zufällig ein (i=1) Individuum aus der Population
+#
+i <- 1 
+X_i <- sample(X, i)
 hist(X_i[[1]],
      main = "Intraindividuelle Merkmalsverteilung",
-     xlab = "EW bei M Intelligenztests",
-     ylab = "Häufigkeiten: Erwartungswerte")
+     sub = paste(M, "Testwiederholgungen"),
+     xlab = "Testwert",
+     ylab = "Häufigkeitsverteilung der Erwartungswerte")
 
 # Ziehe zufällig ein Testwert dieser Person 
 # ..aus der intraindividuellen Merkmalsverteilung
-X_ij <- sample(X_i[[1]], 1)
+(X_ij <- sample(X_i[[1]], 1)) #<--------------------------- mehfach Ausführen!
 cat("Observed Score:", X_ij, "True Score:", names(X_i))
 
 # Funktion 
@@ -122,7 +131,7 @@ rsample_i <- function(){
       abs(round(X_ij) - as.numeric(names(X_i))))}
 
 # Ziehe zufällig ein Individuum aus der Population
-rsample_i() #<-------------------------------------------------- Ausführen!
+rsample_i() #<------------------------------------------ mehfach Ausführen!
 
 # Übungsaufgabe 5 & 6 -----------------------------------------------------
 
@@ -147,4 +156,66 @@ reliab <- function(tau, epsilon){
   cat("Reliabilität der Messung:", rel)
 }
 
-reliab(tau, epsilon) #<--------------------------------------- Ausführen!
+reliab(tau, epsilon) #<------------------------------- mehfach Ausführen!
+
+# Exkurs ------------------------------------------------------------------
+
+# Auswkirungen system. Störeinflüsse
+# Korrelationen
+# ...über alle Fälle hinweg
+
+# Setup
+# set.seed(123)
+#
+n <- 100
+x <- rnorm(n)
+y <- rnorm(x)
+cor(x, y) ; cor(x+3, y) ; cor(x, y + 3) ; cor(x + 3, y + 3)
+
+# Auswikrungen system. Störeinflüsse
+# Korrelationen
+# ...auf einige (die ersten 50) Probanden  
+
+# Setup
+# set.seed(123)
+#
+x[1:50] <- x[1:50] + 3
+cor(x, y) 
+
+# Zusätzlicher MEssfehler
+x[1:50] <- x[1:50] + 6
+cor(x, y) 
+
+# Auswirkungen system. Störeinflüsse
+# Regressionsgewichte 
+# ...über alle Fälle hinweg
+
+# Setup
+# set.seed(123)
+#
+n <- 100
+x <- rnorm(n)
+y <- rnorm(x)
+# Original result
+lm(y ~ x)$coef[[2]] 
+# Veränderter Prediktor 
+beta_ast <- lm(y ~ I(x+3))$coef[[2]] 
+# Manipuliertes Ergebnis
+lm(I(y+3) ~ I(x))$coef[[2]] 
+
+# Auswirkungen system. Störeinflüsse
+# Regressionsgewichte 
+# ...auf einige (die ersten 50) Probanden  
+
+# Setup
+# set.seed(123)
+#
+n <- 100
+x <- rnorm(n)
+y <- rnorm(x)
+x[1:50] <- x[1:50] + 3
+beta <- lm(y ~ x)$coef[[2]] 
+# Veränderter Prediktor 
+x[1:50] <- x[1:50] + 6
+# Manipuliertes Ergebnis
+lm(y ~ x)$coef[[2]] 

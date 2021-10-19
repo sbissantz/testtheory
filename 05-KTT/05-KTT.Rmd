@@ -26,7 +26,7 @@ Intelligenz, Narzissmus, Ehre, Liebe, Depression...).
 
 $\longrightarrow$ "The burden of complex measurement"
 
-## The burden of complex measurment
+## Die Bürde der Messung komplexer Phänomene
 
 > "Psychological measurement can be a difficult task. We aim to measure not
 directly observable variables like cognitive abilities, personality traits,
@@ -36,7 +36,7 @@ weight (for which we have a measuring tape and a scale as measurement
 instruments). Obviously we cannot simply ask: “How depressed are you?” or “How
 intelligent are you?”. We need a measurement instrument such as a test or
 questionnaire to assess a participant’s location on the underlying latent
-variable." [Mair, 2018, S. 1](https://www.springer.com/gp/book/9783319931753)
+variable." ([Mair, 2018, S. 1](https://www.springer.com/gp/book/9783319931753))
 
 ## Die Bürde der Messung komplexer Phänomene
 
@@ -49,17 +49,28 @@ constructs.
 Messfehlers (Messfehlertheorie).
 
 - Beispieltheorie: Klassische Test Theorie (KTT)
-- Erklärung: True Score $\sim$ Observed Score $\sim$ Measurement Error.
+- Erklärung: Wahrer Wert $\sim$ Beobachtungswert $\sim$ Messfehler 
+- (..demnächst: Item Response Theory (IRT))
 
-## Lösungsvorschlag: Das True Score Approach 
+## Das True Score Approach 
+
+Formal: Die Bürde der Messung komplexer Phänomene 
 
 \begin{equation}
-\Large \tau = X + \epsilon \Leftrightarrow X = \tau - \epsilon  
+  X = \tau - \epsilon  
 \end{equation}
 
-- $X$: observed score (known)
-- $\tau$: true score (unknown)
-- $\epsilon$: error component (unknown)
+Daraus folgt logisch äquivalent..
+
+\begin{alertblock}{Definition: True Score}
+  \begin{equation}
+    \Large \tau = X + \epsilon 
+  \end{equation}
+\end{alertblock}
+
+- $X$: Beobachtungswert (bekannt)
+- $\tau$: Wahrer Wert (unbekannt)
+- $\epsilon$: Fehlerkomponente, Messfehler (unbekannt)
 
 <!-- ## Lantent variable logic & inference  -->
 
@@ -89,8 +100,9 @@ mtext("systematische Fehlerkomponente")
 
 ## Warum "unsystematisch"?
 
+[McElreath, 2020, S. 73](https://xcelab.net/rm/statistical-rethinking/):
 \begin{alertblock}{Fluktuationsphänomen}
-..Adding small fluctuations tend to dampen one another!
+"Adding small fluctuations tend to dampen one another!"
 \end{alertblock}
 
 <p>&nbsp;</p>
@@ -109,14 +121,14 @@ mtext("systematische Fehlerkomponente")
 set.seed(123)
 ```
 ```{r echo=TRUE}
-true_age <- 28 # Verändere mich
+true_age <- 28 
 add_privacy <- function(true_age){
   # heads or tails
   hot <- sample(c(0,1), 1, replace = TRUE)
   ifelse(hot==1, true_age+1, true_age-1)
 }
-M <- 10 # Verändere mich!
-# Messung duzende (M) Male wiederholen
+# ANzahl der Messwiederholungen
+M <- 10 
 reps <- replicate(M, add_privacy(true_age))
 mean(reps)
 ```
@@ -134,9 +146,9 @@ ihr eigenes Alter ein und verändern Sie den Wert für \texttt{n}. (siehe:
 Übungsaufgabe 1)
 \end{example}
 
-Anmerkung: Sie sollen die Konzepte nicht jede Zeile des Codes verstehen!
+Anmerkung: Sie sollen die Konzepte *nicht* jede Zeile des Codes verstehen!
 
-## Die True Score Logik: ein Gedankenexperiment
+## True Score Logik: Gedankenexperiment
 
 \begin{block}{Gedankenexperiment}
 Hätten wir die Möglichkeit eine Person i unzählige Male zu unter den gleichen
@@ -150,19 +162,21 @@ dem wahren Wert der Person entsprechen
 E(X_{j=1, \dots, M}) = \tau  \quad | \quad  \epsilon \sim Normal(0, \sigma)
 \end{equation}
 
+<!-- Herleitung -->
+
 ## Let's do it! (..in R) 
 
 ```{r echo=TRUE}
 set.seed(123)
-# unzählige Male
-M <- 1e4 # Verändere mich!
-# True Score: i (z.B. Intelligenztest)
+# Anzahl der Messwiederholungen
+M <- 1e4 
+# True Score(s) (z.B. Intelligenztest)
 T <- 100 
-# random error; Schwankungsbreite +/- 10
+# Zufallsfehler; Schwankungsbreite +/- 10
 E <- rnorm(M, 0, 10)
-# Measurements
+# Beobachtungswerte
 X <- T + E 
-# Imaginäre Wdh des Messung 
+# (Imaginäre() Wiederholung der Testung 
 reps <- replicate(M, sample(X, 1))
 ```
 
@@ -170,15 +184,16 @@ reps <- replicate(M, sample(X, 1))
 
 ```{r}
 # Intraindividuelle Merkmalsverteilung 
-hist(reps, main = NULL, xlab="Messwiederholungen", ylab="Häufigkeiten: Erwartungswerte")
-mtext("Intraindividuelle Merkmalsverteilung")
+hist(reps, main = NULL, xlab="Testwert", 
+     ylab="Häufigkeiten")
+mtext("Intraindividuelle Merkmalsverteilung (M = 10.000)")
 ```
 
 ## Ergebnisse: Beobachtungs- & Erwartungswert  
 
 ```{r echo=TRUE}
 set.seed(123)
-# Ein tatsächlicher Beobachtungswert (Zufallszug)
+# Ein zufällig gezogener Beobachtungswert
 (X_i <- sample(X, 1))
 # Erwartungswert des Individuums: T = E(X) 
 (E_X <- mean(reps))
@@ -209,7 +224,7 @@ set.seed(123)
 
 ```{r, out.width="80%", results='hide', fig.align='center'}
 set.seed(123)
-# True Score: i
+# True Score
 T <- 100
 generator <- function(M, T){
 # Faster implementation
@@ -255,14 +270,14 @@ N=10.000 Personen mit den True Scores ($\tau$)
 set.seed(123)
 ```
 ```{r echo=TRUE}
-# Populationsgröße (N)
-N <- 1e4 # (1e4): Verändere mich!
+# Populationsgröße 
+N <- 1e4 
 # Generierung der True Scores
 # 100: Mittlere Intelligenz in der Population
 # 30: Abweichungen vom Populationnsmittelwert
 T <- round(rnorm(N, 100, 30), digits = 0)
-# Anzahl der (sonst imaginären) Testwiederholungen
-M <- 5000 # (5000): Verändere mich!
+# Anzahl der (imaginären) Testwiederholungen
+M <- 5000 
 X <- lapply(T, function(T) rnorm(M, T , 5))
 names(X) <- T
 ```
@@ -272,8 +287,8 @@ names(X) <- T
 ...die uns unbekannten True Scores sind gemäß der Simulation wie folgt verteilt
 
 ```{r, out.width="80%", results='hide', fig.align='center'}
-hist(T, main = NULL, xlab = "True Scores")
-mtext("Verteilung der wahren Intelligenzwerte in der Population")
+hist(T, main = NULL, xlab = "True Scores", ylab = "Häufigkeiten")
+mtext("Verteilung der wahren Intelligenzwerte in der Population (M = 10.000)")
 ```
 
 ## Interindividuelle Merkmalsverteilung
@@ -283,8 +298,9 @@ für jede Person ($i = 1,\dots,10000$) und plotten diese, dann erhalten wir die
 interindividuelle Merkmalsverteilung ($E(X) \approx T$)
 
 ```{r, out.width="80%", results='hide', fig.align='center'}
-hist(rapply(X, mean), main = NULL, xlab="Erwartungswert der M Intelligenztests")
-mtext("Veteilung der Erwartungswerte in der Population")
+hist(rapply(X, mean), main = NULL, xlab="intraindiviueller Erwartungswert",
+     ylab = "Häufigkeiten")
+mtext("Veteilung der erwarteten Intelligenzwerte in der Population (M = 10.000)")
 ```
 
 ## Intraindividuelle Merkmalsverteilungen  
@@ -300,7 +316,7 @@ set.seed(123)
 rnd_smpl <- sample(X, 4)
 old.par <- par(no.readonly = TRUE)
 par(mfrow=c(2,2))
-lapply(rnd_smpl, hist, main=NULL, xlab="Testwerte der Person")
+lapply(rnd_smpl, hist, main=NULL, xlab="Testwert")
 par(old.par)
 ```
 
@@ -315,8 +331,9 @@ der wegen des Messfehlers unter oder über dem Messwert liegt.
 set.seed(123)
 ```
 ```{r echo=TRUE}
+# Zufallszug eines Individuums aus der Population
 X_i <- sample(X, 1) 
-# Sample randomly a testvalue
+# Zufallszug eines Testwertes der Person 
 (X_ij <- sample(X_i[[1]], 1)) ; names(X_i)
 ```
 
@@ -340,15 +357,15 @@ set.seed(123)
 ```
 ```{r echo=TRUE}
 rsample_i <- function(){
-  # Sample (randomly) an individual 
-  (X_i <- sample(X, 1)) 
-  # Sample randomly a testvalue
-  (X_ij <- sample(X_i[[1]], 1))
+  # Zufallszug eines Individuums 
+  X_i <- sample(X, 1) 
+  # Zufallszug eines Testwertes 
+  X_ij <- sample(X_i[[1]], 1)
   cat(" True Score (T):", names(X_i), "\n", 
       "Testwert (X):", round(X_ij), "\n", 
       "Messfehler (E):", 
       abs(round(X_ij) - as.numeric(names(X_i))))}
-# Sample an individual randomly!
+# Automatisierung 
 rsample_i()
 ```
 
