@@ -80,8 +80,10 @@ Daraus folgt logisch äquivalent..
 
 ## CTT als Messfehlertheorie
 
-\begin{block}{Grundannahme}
-$E(\epsilon) = 0$ (die Fehler sind unsystematisch)
+\begin{block}{Grundannahme: unsystematische Fehlerkomponente}
+ \begin{equation}
+    E(\epsilon) = 0
+ \end{equation}
 \end{block}
 
 ```{r, out.width="80%", results='hide', fig.align='center'}
@@ -127,7 +129,7 @@ add_privacy <- function(true_age){
   hot <- sample(c(0,1), 1, replace = TRUE)
   ifelse(hot==1, true_age+1, true_age-1)
 }
-# ANzahl der Messwiederholungen
+# Anzahl der Messwiederholungen
 M <- 10 
 reps <- replicate(M, add_privacy(true_age))
 mean(reps)
@@ -288,7 +290,7 @@ names(X) <- T
 
 ```{r, out.width="80%", results='hide', fig.align='center'}
 hist(T, main = NULL, xlab = "True Scores", ylab = "Häufigkeiten")
-mtext("Verteilung der wahren Intelligenzwerte in der Population (M = 10.000)")
+mtext("Verteilung der wahren Intelligenzwerte in der Population (N = 10000, M = 5000)")
 ```
 
 ## Interindividuelle Merkmalsverteilung
@@ -300,7 +302,7 @@ interindividuelle Merkmalsverteilung ($E(X) \approx T$)
 ```{r, out.width="80%", results='hide', fig.align='center'}
 hist(rapply(X, mean), main = NULL, xlab="intraindiviueller Erwartungswert",
      ylab = "Häufigkeiten")
-mtext("Veteilung der erwarteten Intelligenzwerte in der Population (M = 10.000)")
+mtext("Veteilung der erwarteten Intelligenzwerte in der Population (M = 5000)")
 ```
 
 ## Intraindividuelle Merkmalsverteilungen  
@@ -316,7 +318,7 @@ set.seed(123)
 rnd_smpl <- sample(X, 4)
 old.par <- par(no.readonly = TRUE)
 par(mfrow=c(2,2))
-lapply(rnd_smpl, hist, main=NULL, xlab="Testwert")
+lapply(rnd_smpl, hist, main=NULL, xlab="Testwert", sub=paste0("(M=", M,")"))
 par(old.par)
 ```
 

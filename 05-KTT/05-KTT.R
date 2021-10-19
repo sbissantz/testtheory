@@ -43,7 +43,7 @@ reps <- replicate(M, sample(X, 1))
 #
 # Intraindividuelle Merkmalsverteilung
 hist(reps, 
-     main = "Intraindividuelle Merkmalsverteilung", 
+     main = "Intraindividuelle Merkmalsverteilung (M = 10.000)", 
      xlab = "Testwerte", 
      ylab = "Häufigkeiten")
 #     
@@ -70,7 +70,7 @@ N <- 1e4 #<-------------------------------------------------- Verändere mich!
 # 30: Abweichungen vom Populationnsmittelwert
 T <- round(rnorm(N, 100, 30), digits = 0)
 # Anzahl der Testwiederholungen
-M <- 5000 #<-------------------------------------------------- Verändere mich!
+M <- 5e3 #<-------------------------------------------------- Verändere mich!
 X <- lapply(T, function(T) rnorm(M, T , 5)) ; names(X) <- T
 
 # Outputs
@@ -80,7 +80,8 @@ X <- lapply(T, function(T) rnorm(M, T , 5)) ; names(X) <- T
 # ...in der Population
 #
 hist(T, 
-     main = "Verteilung der True Scores (Intelligenz)", 
+     main = "Verteilung der True Scores", 
+     sub =  paste("(N =", N, ")"),
      xlab = "True Scores", 
      ylab = "Häufigkeiten"
      )
@@ -89,7 +90,7 @@ hist(T,
 #
 hist(rapply(X, mean), 
      main = "Interindividuelle Merkmalsverteilung", 
-     sub = paste(M, "Testwiederholgungen"),
+     sub = paste0("(N=", N, ", M=", M, ")"), 
      xlab = "Erwartungswerte",
      ylab = "Häufigkeiten")
 
@@ -105,7 +106,7 @@ i <- 1
 X_i <- sample(X, i)
 hist(X_i[[1]],
      main = "Intraindividuelle Merkmalsverteilung",
-     sub = paste(M, "Testwiederholgungen"),
+     sub = paste0("(M=", M, ")"), 
      xlab = "Testwert",
      ylab = "Häufigkeitsverteilung der Erwartungswerte")
 
