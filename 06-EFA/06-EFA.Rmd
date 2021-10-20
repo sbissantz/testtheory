@@ -1,0 +1,333 @@
+---
+title: "Explorative Faktorenanalyse"
+output: 
+  beamer_presentation:
+    theme: "Boadilla"
+    fonttheme: "default"
+    slide_level: 2
+author: Jalynskij et al. 
+incremental: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Einstieg
+
+<https://openpsychometrics.org/tests/IPIP-BFFM/1.php>
+
+## Die "Large Data Set Challenge"
+
+\begin{example}
+Stellen Sie sich vor, die von Ihnen soeben beantworteten Fragen ergäben die
+Korrelationsmatrix $R$ auf der nächsten Folie. Die "Large Data Set Challenge"
+lautet: Erkennen Sie eine Struktur in den Daten? D.h., wenn ja weiter; welche
+Items könnten man Ihrer Meinung nach zu Itemgruppen zusammenfassen?
+\end{example}
+
+<p>&nbsp;</p>
+
+Anmerkung: Nein, das sind (wirklich) nicht ihre Antworten; $\texttt{V1 - V30}$
+sind Zufallsvariablen!
+
+## Struktur erkennen & Itemgruppen finden: Übungsaufgabe 1 
+
+```{r, out.width="70%", results='hide', fig.align='center'}
+set.seed(123)
+N <- 50
+# Faktorladungen (zufällig)
+seq <- seq(-0.7, 0.7, length.out=100)
+rnd <- sample(seq, N, replace = TRUE)
+fx <- matrix(rnd, ncol = 2)
+# Hauptdiagonale 
+phi <- diag(rep(1, 2))
+# Zwischenfaktorkorrelation 
+phi[1, 2] <- phi[2, 1] <- 0.2
+par(mfrow=c(1,2))
+# Korrelationsmatrix
+R <- psych::sim.structure(fx, phi)$model
+corrplot::corrplot(R, method = 'color', tl.cex = 0.6) 
+```
+
+## Die "Large Data Set Challenge"
+
+\begin{alertblock}{Large Data Set Challenge}
+Mit zunehmender Itemzahl nimmt die wird die Anzahl der Korrelationen, die für
+eine Analyse zu berücksichtigen sind schnell zu. Die "Challenge" ist eine
+mögliche Struktur zu erkennen!
+\end{alertblock}
+
+In a Nutshell:
+
+- Problem: Anzahl der Korrelationen 
+- z.B.: $25$ Items $\widehat{=}$ $2^{25} = 625$ Korrelationen
+- Krux: Struktur erkennen 
+- $\Leftrightarrow$ finde: hoch korrelierende Itemgruppen
+
+## Explorative Faktorenanalyse: in a Nutshell
+
+- (ein) Hilfsmittel: .. (explorative) **Faktorenanalyse**
+
+<p>&nbsp;</p>
+
+\begin{block}{Faktorenanalyse}
+"The basic idea is to find latent variables (factors) based on the correlation
+structure of the manifest input variables (indicators)." (Mair 2018, S. 23)
+\end{block}
+
+<!-- Having ordinal data, tetrachoric/polychoric correlations can be used. This -->
+<!-- strategy is sometimes called the underlying variable approach since we assume -->
+<!-- that the ordinal variable comes from an underlying normal distribution. -->
+
+- andere Helferlein zur *Datenreduktion* (eine Auswahl):
+
+  - Hauptkomponentenanalyse
+  - Clusteranalyse 
+  - Explorative Likertskalierung
+  - (Non-) Metric Data Scaling (Voraus.: Distanzmatrizen)
+
+<!-- Wichtig: Warum Faktorenanalyse -->
+<!-- Wichtig: Sozialwissenschaften: Compression in meningful ways -->
+<!-- Wichtig: compressing meaningfully vs. fully -->
+<!-- Wichtig: Unabhängigkeit latenter Dimensionsn -->
+
+Wichtig: "meaningful compression" vs. "full compression"
+
+## Stategie & Vorgehen: Simulieren & Evaluieren 
+
+1. Man erschaffe $\geq 1$ eine latente Variable (LV)
+2. ...lasse die LV Antwortmuster produzieren
+3. ...wandel sie in eine Korrelationsmatrix um
+4. ...und versucht die Struktur mit der Faktorenanalyse aufzufinden
+
+<p>&nbsp;</p>
+
+\begin{block}{Vom generativen Prozess zur Korrelationsmatrix}
+Der generative Prozess, d.h. wie genau ein Konstrukt die Antworten auf den Items
+erzeugt, bleibt meist verborgen. Wir untersuchen meistens lediglich
+Verhaltensspuren des Konstruktes, die sich in den Items ausdrückt, d.h. in der
+Struktur der Korrelationsmatrix niederschlägt. Strukturen zu simulieren ist
+hilfreich, weil wir dort "die Wahrheit" kennen und das Verfahren damit besser
+beurteilen können ($\sim$ fake data analysis)
+\end{block}
+
+## "Playing Creator": Zwei latente Variable erschaffen 
+
+```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
+# Anzahl der Items
+N <- 8
+# Faktorladungen
+load_F1 <- c(0.6, -0.3, 0.5, 0.7, 0.1, 0.2, 0.2, 0.3)
+load_F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7)
+fx <- cbind(load_F1, load_F2)
+# Zwischenfaktorkorrelation 
+phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
+# Korrelationsmatrix
+R <- psych::sim.structure(fx, phi)$model
+```
+
+## Vom generativen Prozess zur Korrelationsmatrix
+
+```{r}
+old.par <- par(mfrow=c(1,1))
+par(mfrow=c(1,2))
+psych::structure.diagram(fx, phi, cut = FALSE)
+corrplot::corrplot.mixed(R, number.cex=.7)
+par(old.par)
+```
+
+## Prognose & Selbstexperiment: Übungsaufgabe 2
+
+\begin{example}
+Versuchen Sie es selbst! Verändern sie systematisch $\texttt{F1; F2}$  und
+$\texttt{phi}$.
+1. Wie verändert sich die Korrelationsmatrix, in Abhängigkeiten
+Ihrer Veränderungen? 
+2. Können Sie eine eindeutige Struktur konstruieren? 
+3. Wenn ja, mit welchen Werten von $\texttt{F1; F2}$  und $\texttt{phi}$ haben Sie ihr Ziel
+erreicht?
+\end{example}
+
+\begin{example}
+Haben Sie ein Strukturmodell gefunden, dass ihnen gefällt? Ja, dann überlegen
+Sie sich für welche Konstrukte diese Struktur Sinn macht (z.B.: extraversion
+$\sim$ openness to experience)
+\end{example}
+
+## Logik latenter Variablen (..reversed)
+
+\begin{block}{Von der Korrelationsmatrix zur LV} Die Faktoranalyse
+ist ein strukturentdeckendes Verfahren. D.h. den generativen Prozess, d.h. wie
+ein Konstrukt die Antworten auf den Items verursacht hat anhand der Struktur die
+sich in der vorgegebenen Korrelationsmatrix zu \textit{modellieren}.
+\end{block}
+
+- Modell: *Common Factor Model* (CFM)
+
+\begin{alertblock}{Eingangsgleichung}
+  \begin{equation}
+    x = \Lambda \xi + \epsilon
+  \end{equation}
+\end{alertblock}
+
+<p>&nbsp;</p>
+
+> "In other words EFA tries to find $p$ latent variables on the basis of the
+correlation structure of the $m$ manifest variables." (ebd.)
+  
+## Das Common Factor Model (CFM)
+
+Anmerkung: Für die Reformulierung von Gleichung (1) zu (2): siehe [McCallum
+(2009)](http://dx.doi.org/10.4135/9780857020994.n6)
+
+\begin{alertblock}{Fudnamentaltheorem}
+  \begin{equation}
+    P = \Lambda \Phi \Lambda^{t} + \Psi
+  \end{equation}
+\end{alertblock}
+
+- $P$: Modell-implizierte Korrelationsmatrix
+- $\Lambda$: Ladungsmatrix
+- $\Phi$: Matrix der Zwischenfaktorkorrelationen
+- $\Psi$: Uniqueness
+
+\begin{block}{Zusammenhang: Modell \& Struktur}
+Die von ihnen konstruierte Struktur versuchen wir nun mit der Faktorenanalyse
+unter Einsatz des CFM zu rekonstruieren. Das CFM ist also Ihr Tool im
+bevorstehenden Rekonstruktionsprozess!
+\end{block}
+
+## Fakotrenanalyse: "A hurdle race"
+
+>"Unfortunately, factor analysis is frequently misunderstood and often misused.
+Some researchers appear to use factor analysis as a kind of divining rod, hoping
+to find gold hidden underneath tons of dirt. But there is nothing magical about
+the technique. [$\dots$] Factor analysis will yield meaningful results only when
+the research was meaningful to begin with.” [Gregory (2014, p.
+165)](https://www.pearson.com/us/higher-education/program/Gregory-Psychological-Testing-History-Principles-and-Applications-7th-Edition/PGM332874.html)
+
+<p>&nbsp;</p>
+
+1. Hürde: Extraktionsproblem
+2. Hürde: Rotationsproblem
+3. Hürde: Problem der Anzahl zu extrahierender Faktoren
+
+## Extraktionsproblem
+
+\begin{alertblock}{Extraktionsproblem}
+  Wie berechnen wir die Faktoren in Anbetracht eines unterbestimmten Modells (2
+  Unbekannte)
+\end{alertblock}
+
+## Hauptkomponentenmethode
+
+psych::fa()
+
+## PCA
+
+
+## PAF
+
+```{r}
+grep_commu <- function(noi) {
+  psych::fa(R, fm="pa", nfactors = 2, max.iter = noi)$communality
+}
+iters <- 1:4
+commus <- lapply(iters, grep_commu)
+calc_cormat <- function(commu, R){
+  diag(R) <- commu ; round(R, digits = 2) 
+}
+Rs <- lapply(commus, calc_cormat, R=R) ; 
+names(Rs) <- paste0("iteration ", seq(iters))
+Rs
+```
+
+
+```{r message=FALSE, warning=FALSE}
+find_RSS <- function(noi){
+resid <- psych::fa(R, fm="pa", nfactors = 2, rotate = "none", 
+                   residuals = TRUE, max.iter=noi)$residual
+sum(resid[upper.tri(resid, diag = FALSE)])^2
+}
+seq <- 1:10 
+(RSS <- sapply(seq, find_RSS))
+plot(NULL, xlim=c(-0.1, 11), ylim= c(0, 0.025), 
+     ylab="Residuenquadratsumme", xlab="Anzahl der Iterationen")
+points(x=seq, y=RSS, type = "b")
+```
+
+It is a useful exercise to run fa using the principal axis factor method (fm=
+“pa”) and specifying the number of iterations (e.g., max.iter=2). Then examine
+the size of the residuals as the number of iterations increases. When this is
+done, the solution gets progressively better, in that the size of the residuals
+in the off diagonal matrix become progressively smaller.
+
+## Maximum Likelihood
+
+With the data at hand, the robot tries to estimate the most plausible (i. e.,
+the most likely) values that are capable to optimally reproduce the common
+information in the (reduced) correlation matrix.
+
+
+## Rotationsproblem
+
+
+## Orthogonale Rotation
+
+
+## Oblique Rotation
+
+
+
+
+## Problem der Anzahl zu extrahierender Faktoren
+
+
+
+
+
+
+## Später
+
+Findet die Faktorenanalyse ihre Struktur?
+
+Vanishing effekt -- Simulation?
+Korrelationsmatrix (grafisch: Vanishing effect)
+(1) Faktorenanalyse mit zunehmender Zwischenfaktorkorrelation
+(2) Faktorenanalyse mit abnehmenden Ladungen  
+
+## Fakotrscores
+
+Man könnte versuchen mit den Faktorscores die True Scores der Probanden
+vorherzusagen
+
+
+## Faktorenanalyse als Hürdenlauf
+
+
+
+## PAFA
+
+<!-- Principal components represents a $n \times n$ matrix in terms of the first k -->
+<!-- components. It attempts to reproduce all of the R matrix. Factor analysis on the -->
+<!-- other hand, attempts to model just the common part of the [correlation] matrix, -->
+<!-- which means all of the off-diagonal elements and the common part of the diagonal -->
+<!-- (the communalities ). The non-common part, the uniquenesses, are simply that -->
+<!-- which is left over. -->
+
+<!-- An easy to understand procedure is principal axes factor analysis. This is -->
+<!-- similar to principal components, except that it is done with a reduced matrix -->
+<!-- where the diagonals are the communalities. -->
+
+<!-- The communalities can either be (1) specified a priori, (2) estimated by such -->
+<!-- procedures as multiple linear regression, or (3) found by iteratively doing an -->
+<!-- eigenvalue decomposition and repeatedly replacing the original 1s on the -->
+<!-- diagonal with the the value of $1 - u^2$ where $U^2 = diag(R−FF')$. That is, -->
+<!-- starting with the original correlation or covariance matrix, R, find the k -->
+<!-- largest principal components, reproduce the matrix using those principal -->
+<!-- components. Find the resulting residual matrix, $R^*$and uniqueness matrix, $U^2$ by -->
+<!-- $R^∗= R−FF'$ and $U2 = diag(R∗) -->
+<!-- and then, for iteration i, find Ri by replacing the diagonal of the original R matrix with 1 - -->
+<!-- diag(U2) found on the previous step. Repeat this process until the change from one iteration -->
+<!-- to the next is arbitrarily small. T -->
