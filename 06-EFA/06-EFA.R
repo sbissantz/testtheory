@@ -14,14 +14,37 @@ F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7)
 phi <- diag(rep(1, 2))
 # Zwischenfaktorkorrelationen 
 phi[1, 2] <- phi[2, 1] <- 0.6
-# Korrelationsmatrix simulieren 
-R_zz <- psych::sim.structure(fx, phi)$model
+# Struktur simulieren
+S <- psych::sim.structure(fx, phi, n = 1000)
+# Korrelarionsmatrix
+R <- S$model
+# Datenmatrix
+X <- S$observed
 
 # Output
 #
-psych::structure.diagram(fx, phi, cut = FALSE) 
-corrplot::corrplot.mixed(R_zz, number.cex=.7)
 
+# Visuelle Darsetellung ihrer Kreatur
+psych::structure.diagram(fx, phi, cut = FALSE) 
+# Visuelle Darsetellung ihrer Korrelationsmatrix 
+corrplot::corrplot.mixed(R, number.cex=.7)
+
+# Übung 2 -----------------------------------------------------------------
+
+# Übung 3 -----------------------------------------------------------------
+
+# Old School!
+dino_pca <- princomp(X, cor=TRUE) ; summary(dino_pca, cor=TRUE)
+# New School
+pca_fit <- psych::principal(R, nfactors = 2, rotate = "none")
+## Komponentenladungen
+pca_fit$loadings
+## Uniqueness 
+pca_fit$uniquenesses
+## Kommunalitäten 
+pca_fit$communality
+
+# Übung 4 -----------------------------------------------------------------
 
 
 
