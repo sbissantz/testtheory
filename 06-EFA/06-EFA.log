@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Homebrew) (preloaded format=pdflatex 2021.9.30)  21 OCT 2021 12:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Homebrew) (preloaded format=pdflatex 2021.9.30)  21 OCT 2021 16:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1277,13 +1277,13 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 443.
+(Font)              <10> on input line 444.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 443.
+(Font)              <7> on input line 444.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 443.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 444.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 443.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 444.
 [14
 
 ]
@@ -1291,10 +1291,10 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
 
 (./06-EFA.vrb
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 15.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 10.
 
 LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 15.
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 10.
 
 ) [15
 
@@ -1303,65 +1303,7 @@ LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10.95> not available
 ]
 \openout4 = `06-EFA.vrb'.
 
-(./06-EFA.vrb
-Overfull \hbox (83.11092pt too wide) in paragraph at lines 16--16
-[]\T1/lmtt/m/n/10.95 ## Warning: factor.pa is deprecated. Please use the fa fun
-ction with fm=pa[] 
- []
-
-
-Overfull \hbox (19.87485pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ## Call: psych::factor.pa(r = R, nfactors = 2, rotate = "n
-one")[] 
- []
-
-
-Overfull \hbox (71.61345pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ## Unstandardized loadings (pattern matrix) based upon cov
-ariance matrix[] 
- []
-
-
-Overfull \hbox (175.09065pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ## The degrees of freedom for the null model are  28  and 
-the objective function was  1.96[] 
- []
-
-
-Overfull \hbox (123.35205pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ## The degrees of freedom for the model are 13  and the ob
-jective function was  0[] 
- []
-
-
-Overfull \hbox (19.87485pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ##                                                    PA1 
-  PA2[] 
- []
-
-
-Overfull \hbox (19.87485pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ## Correlation of (regression) scores with factors   0.94 
- 0.69[] 
- []
-
-
-Overfull \hbox (19.87485pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ## Multiple R square of scores with factors          0.89 
- 0.48[] 
- []
-
-
-Overfull \hbox (19.87485pt too wide) in paragraph at lines 71--71
-[]\T1/lmtt/m/n/10.95 ## Minimum correlation of possible factor scores     0.78 
--0.04[] 
- []
-
-)
-Overfull \vbox (553.62704pt too high) detected at line 556
- []
-
-[17
+(./06-EFA.vrb) [17
 
 ] [18
 
@@ -1369,89 +1311,25 @@ Overfull \vbox (553.62704pt too high) detected at line 556
 
 ] [20
 
-] [21
+]
+\openout4 = `06-EFA.vrb'.
+
+(./06-EFA.vrb) [21
 
 ] [22
 
-] [23
-
 ]
-\openout4 = `06-EFA.vrb'.
-
-(./06-EFA.vrb
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-61.
-(/usr/local/Cellar/texlive/58837/share/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
-Overfull \vbox (435.59364pt too high) detected at line 664
- []
-
-[24
-
-] [25
-
-] [26
-
-] [27
-
-] [28
-
-] [29
-
-] [30
-
-] [31
-
-]
-\openout4 = `06-EFA.vrb'.
-
-(./06-EFA.vrb
-Overfull \hbox (71.61345pt too wide) in paragraph at lines 8--8
-[]\T1/lmtt/m/n/10.95 ##  [1] 2.508165e-02 3.040011e-03 3.681981e-04 5.153387e-0
-5 9.036700e-06[] 
- []
-
-
-Overfull \hbox (71.61345pt too wide) in paragraph at lines 8--8
-[]\T1/lmtt/m/n/10.95 ##  [6] 1.994291e-06 5.300246e-07 1.605099e-07 1.605099e-0
-7 1.605099e-07[] 
- []
-
-<06-EFA_files/figure-beamer/unnamed-chunk-8-1.pdf, id=442, 689.57625pt x 429.60
-5pt>
-File: 06-EFA_files/figure-beamer/unnamed-chunk-8-1.pdf Graphic file (type pdf)
-<use 06-EFA_files/figure-beamer/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: 06-EFA_files/figure-beamer/unnamed-chunk-8-1.pdf  used
- on input line 10.
-(pdftex.def)             Requested size: 342.29353pt x 213.24837pt.
-)
-Overfull \vbox (31.95422pt too high) detected at line 722
- []
-
-[32
-
- <./06-EFA_files/figure-beamer/unnamed-chunk-8-1.pdf>] [33
-
-] [34
-
-]
-
-! Package inputenc Error: Unicode character − (U+2212)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.749 \end{frame}
+! Undefined control sequence.
+\beamer@doifinframe ...tion} \Lambda _r = \Lamdda 
+                                                  T \end {equation} \end {al...
+l.629 \end{frame}
                   
 Here is how much of TeX's memory you used:
- 23933 strings out of 478994
- 451665 string characters out of 5851139
- 770338 words of memory out of 5000000
- 40651 multiletter control sequences out of 15000+600000
- 479914 words of font info for 138 fonts, out of 8000000 for 9000
+ 23864 strings out of 478994
+ 450562 string characters out of 5851139
+ 756363 words of memory out of 5000000
+ 40626 multiletter control sequences out of 15000+600000
+ 479609 words of font info for 137 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  131i,15n,132p,511b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
 

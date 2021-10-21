@@ -391,7 +391,8 @@ meaningful to begin with.''
 (2014, S. 165)}
 \end{quote}
 
-Konklusion: Versuchen Sie ihr Modell zu verstehen!
+Konklusion: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium
+1-3)
 \end{frame}
 
 \begin{frame}{Extraktionsproblem}
@@ -444,11 +445,6 @@ Konklusion: Versuchen Sie ihr Modell zu verstehen!
 
 \begin{frame}[fragile]{Hauptkomponentenanalyse}
 \protect\hypertarget{hauptkomponentenanalyse}{}
-Ziel: Maximale (Gesamt-)Varianzaufklärung; d.h: minimaler
-Informationsverlust
-
-~
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Old School!}
@@ -484,79 +480,39 @@ angeht, dazu gleich mehr!
 
 \begin{frame}[fragile]{Principal Axis Factor Analysis}
 \protect\hypertarget{principal-axis-factor-analysis}{}
-\begin{itemize}
-\tightlist
-\item
-  Ziel: sukkzessive Varianzaufklärung der \emph{gemeinsamen} (nicht der
-  Gesamt-) Varianz
-\item
-  Basis: \emph{reduzierte} Korrelationsmatrix (\(R^*\)).
-\item
-  Verständnisprobleme? (siehe v.a: Selbststudium 3)
-\end{itemize}
-
-\begin{verbatim}
-## Warning: factor.pa is deprecated. Please use the fa function with fm=pa
-\end{verbatim}
-
-\begin{verbatim}
-## Factor Analysis using method =  pa
-## Call: psych::factor.pa(r = R, nfactors = 2, rotate = "none")
-## Unstandardized loadings (pattern matrix) based upon covariance matrix
-##      PA1   PA2    h2   u2    H2   U2
-## V1  0.43  0.34 0.298 0.70 0.299 0.70
-## V2 -0.17 -0.19 0.064 0.94 0.064 0.94
-## V3  0.53  0.21 0.320 0.68 0.320 0.68
-## V4  0.70  0.30 0.583 0.42 0.581 0.42
-## V5 -0.55  0.33 0.417 0.58 0.418 0.58
-## V6  0.63 -0.10 0.410 0.59 0.410 0.59
-## V7 -0.38  0.34 0.256 0.74 0.257 0.74
-## V8  0.90 -0.13 0.830 0.17 0.830 0.17
-## 
-##                        PA1  PA2
-## SS loadings           2.64 0.53
-## Proportion Var        0.33 0.07
-## Cumulative Var        0.33 0.40
-## Proportion Explained  0.83 0.17
-## Cumulative Proportion 0.83 1.00
-## 
-##  Standardized loadings (pattern matrix)
-##    item   PA1   PA2    h2   u2
-## V1    1  0.43  0.34 0.299 0.70
-## V2    2 -0.17 -0.19 0.064 0.94
-## V3    3  0.53  0.21 0.320 0.68
-## V4    4  0.70  0.30 0.581 0.42
-## V5    5 -0.55  0.33 0.418 0.58
-## V6    6  0.63 -0.10 0.410 0.59
-## V7    7 -0.38  0.34 0.257 0.74
-## V8    8  0.90 -0.13 0.830 0.17
-## 
-##                  PA1  PA2
-## SS loadings     2.64 0.54
-## Proportion Var  0.33 0.07
-## Cumulative Var  0.33 0.40
-## Cum. factor Var 0.83 1.00
-## 
-## Mean item complexity =  1.5
-## Test of the hypothesis that 2 factors are sufficient.
-## 
-## The degrees of freedom for the null model are  28  and the objective function was  1.96
-## The degrees of freedom for the model are 13  and the objective function was  0 
-## 
-## The root mean square of the residuals (RMSR) is  0 
-## The df corrected root mean square of the residuals is  0 
-## 
-## Fit based upon off diagonal values = 1
-## Measures of factor score adequacy             
-##                                                    PA1   PA2
-## Correlation of (regression) scores with factors   0.94  0.69
-## Multiple R square of scores with factors          0.89  0.48
-## Minimum correlation of possible factor scores     0.78 -0.04
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_paf }\OtherTok{\textless{}{-}}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{fa}\NormalTok{(R, }\AttributeTok{nfactors=}\DecValTok{2}\NormalTok{, }\AttributeTok{rotate=}\StringTok{"none"}\NormalTok{, }\AttributeTok{fm=}\StringTok{"pa"}\NormalTok{)}
+\CommentTok{\# Kommunalitäten}
+\NormalTok{fit\_paf}\SpecialCharTok{$}\NormalTok{communality}
+\CommentTok{\# Eigenwerte}
+\NormalTok{fit\_paf}\SpecialCharTok{$}\NormalTok{e.values}
+\CommentTok{\# Einzigartigkeit}
+\NormalTok{fit\_paf}\SpecialCharTok{$}\NormalTok{uniquenesses}
+\CommentTok{\# Quadrierte multiple Korrelation}
+\NormalTok{fit\_paf}\SpecialCharTok{$}\NormalTok{R2}
+\end{Highlighting}
+\end{Shaded}
 \end{frame}
 
-\begin{frame}{Übungsaufgabe 4: Kritische Reflexion}
-\protect\hypertarget{uxfcbungsaufgabe-4-kritische-reflexion}{}
+\begin{frame}{Übungsaufgabe 4: Selbstexperiment}
+\protect\hypertarget{uxfcbungsaufgabe-4-selbstexperiment}{}
+\begin{example}
+Versuchen Sie es nun selbst! Führen Sie eine Hauptachsenanalyse (PAF) durch.
+Interpretieren Sie die enstprechenden Kennwerte für ihr Model und präsentieren
+Sie diese mir oder ihrem Nachbarn. Verändern Sie auch einmal die Anzahl der zu
+extrahierenden Faktoren ($\texttt{nfactors}$). Wie verändert sich ihre Lösung
+wenn sie die Zahl vergößern, bzw. verkleinern? Wie wirken sich diese
+Veränderungen auf die Interpretation Ihrer Ergebnisse aus?
+\end{example}
+
+Zusatz: Vergleichen Sie die Ergebnisse der PAF mit denen der PCA.
+Bestehen Unterschiede zwischen den Ergebnissen? Haben Sie eine Vermutung
+wie diese zustande kommen?
+\end{frame}
+
+\begin{frame}{Übungsaufgabe 5: Kritische Reflexion}
+\protect\hypertarget{uxfcbungsaufgabe-5-kritische-reflexion}{}
 \begin{example}
 Eine Folge der Extraktion mittels mit der Hauptkomponentenmethode ist, dass die
 extrahierten Faktoren unabhängig voneinander sind. Glauben Sie dem Modell
@@ -569,48 +525,270 @@ Warnhinweis: Sollte ein Inferno entfachen, halten Sie bitte Fluchtwege
 sowie Zugänge zu den Feuerlöschern frei!
 \end{frame}
 
-\begin{frame}{Maximum Likelihood Factor Analysis}
-\protect\hypertarget{maximum-likelihood-factor-analysis}{}
+\begin{frame}{Maximum Likelihood Faktorenanalyse}
+\protect\hypertarget{maximum-likelihood-faktorenanalyse}{}
+\begin{alertblock}{Kommunalitätenproblem}
+Das CFM ($\Lambda \Phi \Lambda' + \Psi$) ist unbestimmt. D.h. es hat (deutlich)
+mehr unbekannte als bekannte Bestanndteile. Die Folge: Das Modell kann deshalb
+nicht einfach gelöst werden, sondern muss geschätzt werden.
+\end{alertblock}
+
+\begin{itemize}
+\tightlist
+\item
+  MLFA bietet nun als Lösung die plausibelsten (eng. ``most likely'')
+  Werte zur Reproduktion der Informationen in der Korrelationsmatrix an.
+\end{itemize}
+
 \begin{quote}
 ``Assuming that the residual variance reflects normally distributed
 random error, the most elegant statistical solution is that of maximum
 likelihood'' (Revelle, in prep. S. 156)
 \end{quote}
+\end{frame}
 
-\begin{alertblock}{KOmmunalitätenproblem}
-Das CFM ($\Lambda \Phi \Lambda' + \Psi$) ist unbestimmt. D.h. es hat (deutlich)
-mehr unbekannte 
+\begin{frame}[fragile]{Maximum Likelihood Factor Analysis}
+\protect\hypertarget{maximum-likelihood-factor-analysis}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_mlf }\OtherTok{\textless{}{-}}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{fa}\NormalTok{(R, }\AttributeTok{nfactors=}\DecValTok{2}\NormalTok{, }\AttributeTok{rotate=}\StringTok{"none"}\NormalTok{, }\AttributeTok{fm=}\StringTok{"ml"}\NormalTok{)}
+\CommentTok{\# Kommunalitäten}
+\NormalTok{fit\_mlf}\SpecialCharTok{$}\NormalTok{communality}
+\CommentTok{\# Eigenwerte}
+\NormalTok{fit\_mlf}\SpecialCharTok{$}\NormalTok{e.values}
+\CommentTok{\# Einzigartigkeit}
+\NormalTok{fit\_mlf}\SpecialCharTok{$}\NormalTok{uniquenesses}
+\CommentTok{\# Quadrierte multiple Korrelation}
+\NormalTok{fit\_mlf}\SpecialCharTok{$}\NormalTok{R2}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
 
-\end{alertblock}
+\begin{frame}{Übungsaufgabe 6: Selbstexperiment}
+\protect\hypertarget{uxfcbungsaufgabe-6-selbstexperiment}{}
+\begin{example}
+Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
+(MLF) durch. Interpretieren Sie die enstprechenden Kennwerte für ihr Model und
+präsentieren Sie diese mir oder ihrem Nachbarn. Verändern Sie erneut die Anzahl
+der zu extrahierenden Faktoren ($\texttt{nfactors}$). Wie verändert sich ihre
+Lösung wenn sie die Zahl vergößern, bzw. verkleinern? Wie wirken sich diese
+Veränderungen auf die Interpretation Ihrer Ergebnisse aus?
+\end{example}
+
+Zusatz: Vergleichen Sie die Ergebnisse der MLF mit denen der PAF.
+Bestehen Unterschiede zwischen den Ergebnissen? Haben Sie eine Vermutung
+warum diese zustande kommen?
 \end{frame}
 
 \begin{frame}{Rotationsproblem}
 \protect\hypertarget{rotationsproblem}{}
+\begin{alertblock}{Rotationsproblem}
+  Wie rotiert die erhaltene Ladungsmatrix ($\Lambda$) derart, dass eine
+  möglich einfach interpretierbare Lösung daraus hervorgeht?
+  \begin{equation}
+    \Lambda_r = \Lamdda T 
+  \end{equation}
+\end{alertblock}
+
+\begin{enumerate}
+\tightlist
+\item
+  Lösung: Orthogonale Rotation
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Ziel: Orthogonalität aufrechterhalten
+\item
+  d.h. Faktoren dürfen nicht korrelieren
+\item
+  Restriktion: \(TT' = I\), sodass \(\Phi=I\)
+\item
+  z.B.: Varimax, Promax..
+\end{itemize}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Lösung: Oblique Rotation
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Ziel: mögliche Orthogonalität auflösen
+\item
+  d.h. Faktoren dürfen korrelieren
+\item
+  Restriktion: \(TT' \neq I\), sodass \(\Phi\neq I\)
+\item
+  z.B.: Oblimin, Simplimax..
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Orthogonale Rotation}
-\protect\hypertarget{orthogonale-rotation}{}
+\begin{frame}[fragile]{Orthogonale Rotation: Varimax}
+\protect\hypertarget{orthogonale-rotation-varimax}{}
+\ldots maximiere die Varianz der quadrierten Ladungen
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_mlf\_vmax }\OtherTok{\textless{}{-}}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{fa}\NormalTok{(R, }\AttributeTok{nfactors=}\DecValTok{2}\NormalTok{, }\AttributeTok{rotate=}\StringTok{"varimax"}\NormalTok{, }\AttributeTok{fm=}\StringTok{"ml"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(fit\_mlf}\SpecialCharTok{$}\NormalTok{loadings, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}
+    \AttributeTok{xlab =} \StringTok{"Ladungen: Faktor 1"}\NormalTok{ , }\AttributeTok{ylab =} \StringTok{"Ladungen: Faktor 2"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(fit\_mlf\_vmax}\SpecialCharTok{$}\NormalTok{loadings, }\AttributeTok{pch=}\DecValTok{20}\NormalTok{)}
+\NormalTok{x1 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{1}\NormalTok{] ; y1 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{2}\NormalTok{]}
+\NormalTok{x2 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf\_vmax}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{1}\NormalTok{] ; y2 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf\_vmax}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{2}\NormalTok{]}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq}\NormalTok{(}\DecValTok{8}\NormalTok{)) }\FunctionTok{lines}\NormalTok{(}\FunctionTok{c}\NormalTok{(x1[i], x2[i]), }\FunctionTok{c}\NormalTok{(y1[i], y2[i]))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{) ; }\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{mtext}\NormalTok{(}\StringTok{"Faktorkoordinaten vor und nach Varimax Rotation"}\NormalTok{)}
+\NormalTok{i }\OtherTok{\textless{}{-}} \DecValTok{8}\NormalTok{ ; s }\OtherTok{\textless{}{-}} \FloatTok{0.04}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{c}\NormalTok{(x1[i]}\SpecialCharTok{+}\NormalTok{s, x2[i]}\SpecialCharTok{+}\NormalTok{s), }\FunctionTok{c}\NormalTok{(y1[i]}\SpecialCharTok{+}\NormalTok{s, y2[i]}\SpecialCharTok{+}\NormalTok{s), }\FunctionTok{c}\NormalTok{(}\StringTok{"i"}\NormalTok{, }\StringTok{"i\textquotesingle{}"}\NormalTok{))}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{legend=}\FunctionTok{c}\NormalTok{(}\StringTok{"unrotated"}\NormalTok{, }\StringTok{"rotated"}\NormalTok{), }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{20}\NormalTok{), }\AttributeTok{cex=}\FloatTok{0.8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-EFA_files/figure-beamer/unnamed-chunk-7-1} \end{center}
 \end{frame}
 
-\begin{frame}{Oblique Rotation}
-\protect\hypertarget{oblique-rotation}{}
+\begin{frame}[fragile]{Let's do it (..in R)}
+\protect\hypertarget{lets-do-it-..in-r}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(fit\_vmax }\OtherTok{\textless{}{-}}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{fa}\NormalTok{(R, }\AttributeTok{nfactors=}\DecValTok{2}\NormalTok{, }\AttributeTok{rotate=}\StringTok{"varimax"}\NormalTok{, }\AttributeTok{fm=}\StringTok{"ml"}\NormalTok{))}
+\CommentTok{\# Kommunalitäten}
+\NormalTok{fit\_vmax}\SpecialCharTok{$}\NormalTok{communality}
+\CommentTok{\# Eigenwerte}
+\NormalTok{fit\_vmax}\SpecialCharTok{$}\NormalTok{e.values}
+\CommentTok{\# Einzigartigkeit}
+\NormalTok{fit\_vmax}\SpecialCharTok{$}\NormalTok{uniquenesses}
+\CommentTok{\# Quadrierte multiple Korrelation}
+\NormalTok{fit\_vmax}\SpecialCharTok{$}\NormalTok{R2}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Übungsaufgabe 7: Selbstexperiment}
+\protect\hypertarget{uxfcbungsaufgabe-7-selbstexperiment}{}
+\begin{example}
+Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
+(MLF) durch. Rotieren Sie anschließend die Ergebnisse mit der Varimax
+rotationen. Interpretieren Sie die enstprechenden Kennwerte für ihr Model und
+präsentieren Sie diese mir oder ihrem Nachbarn. Wie verändert die Rotation
+ihre Interpretation Ihrer Ergebnisse aus? Vergleichen Sie die Lösung dazu mit
+der unrotierten Lösung ($\texttt{mlf_fit}$).
+\end{example}
+
+Zusatz: Sie kennen das ``richtige'' Ergebnis -- Sie haben die Antworten
+immerhin simuliert! Entspricht das soeben erhaltene Ergebnis dem
+``richtigen'' Ergebnis? Wenn ja, warum? Falls nein, warum nicht?
+\end{frame}
+
+\begin{frame}[fragile]{Oblique Rotation: Oblimin}
+\protect\hypertarget{oblique-rotation-oblimin}{}
+\ldots{}``oblique'' Alternative zu Varimax das erlaubt die
+Zwischenfaktorkorrelationen zu modellieren. Ist die
+Zwischenfaktorkorrelation 0 entsprechen sich beide Verfahren.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_mlf\_obl }\OtherTok{\textless{}{-}}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{fa}\NormalTok{(R, }\AttributeTok{nfactors=}\DecValTok{2}\NormalTok{, }\AttributeTok{rotate=}\StringTok{"oblimin"}\NormalTok{, }\AttributeTok{fm=}\StringTok{"ml"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required namespace: GPArotation
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(fit\_mlf}\SpecialCharTok{$}\NormalTok{loadings, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{), }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}
+    \AttributeTok{xlab =} \StringTok{"Ladungen: Faktor 1"}\NormalTok{ , }\AttributeTok{ylab =} \StringTok{"Ladungen: Faktor 2"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(fit\_mlf\_obl}\SpecialCharTok{$}\NormalTok{loadings, }\AttributeTok{pch=}\DecValTok{20}\NormalTok{)}
+\NormalTok{x1 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{1}\NormalTok{] ; y1 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{2}\NormalTok{]}
+\NormalTok{x2 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf\_obl}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{1}\NormalTok{] ; y2 }\OtherTok{\textless{}{-}}\NormalTok{ fit\_mlf\_obl}\SpecialCharTok{$}\NormalTok{loadings[,}\DecValTok{2}\NormalTok{]}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{seq}\NormalTok{(}\DecValTok{8}\NormalTok{)) }\FunctionTok{lines}\NormalTok{(}\FunctionTok{c}\NormalTok{(x1[i], x2[i]), }\FunctionTok{c}\NormalTok{(y1[i], y2[i]))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{) ; }\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{mtext}\NormalTok{(}\StringTok{"Faktorkoordinaten vor und nach Oblimin Rotation"}\NormalTok{)}
+\NormalTok{i }\OtherTok{\textless{}{-}} \DecValTok{8}\NormalTok{ ; s }\OtherTok{\textless{}{-}} \FloatTok{0.04}
+\FunctionTok{text}\NormalTok{(}\FunctionTok{c}\NormalTok{(x1[i]}\SpecialCharTok{+}\NormalTok{s, x2[i]}\SpecialCharTok{+}\NormalTok{s), }\FunctionTok{c}\NormalTok{(y1[i]}\SpecialCharTok{+}\NormalTok{s, y2[i]}\SpecialCharTok{+}\NormalTok{s), }\FunctionTok{c}\NormalTok{(}\StringTok{"i"}\NormalTok{, }\StringTok{"i\textquotesingle{}"}\NormalTok{))}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{legend=}\FunctionTok{c}\NormalTok{(}\StringTok{"unrotated"}\NormalTok{, }\StringTok{"rotated"}\NormalTok{), }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{20}\NormalTok{), }\AttributeTok{cex=}\FloatTok{0.8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{06-EFA_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Let's do it (..in R)}
+\protect\hypertarget{lets-do-it-..in-r-1}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(fit\_obl }\OtherTok{\textless{}{-}}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{fa}\NormalTok{(R, }\AttributeTok{nfactors=}\DecValTok{2}\NormalTok{, }\AttributeTok{rotate=}\StringTok{"oblimin"}\NormalTok{, }\AttributeTok{fm=}\StringTok{"ml"}\NormalTok{))}
+\CommentTok{\# Kommunalitäten}
+\NormalTok{fit\_obl}\SpecialCharTok{$}\NormalTok{communality}
+\CommentTok{\# Eigenwerte}
+\NormalTok{fit\_obl}\SpecialCharTok{$}\NormalTok{e.values}
+\CommentTok{\# Einzigartigkeit}
+\NormalTok{fit\_obl}\SpecialCharTok{$}\NormalTok{uniquenesses}
+\CommentTok{\# Quadrierte multiple Korrelation}
+\NormalTok{fit\_obl}\SpecialCharTok{$}\NormalTok{R2}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Übungsaufgabe 8: Selbstexperiment}
+\protect\hypertarget{uxfcbungsaufgabe-8-selbstexperiment}{}
+\begin{example}
+Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
+(MLF) durch. Rotieren Sie anschließend die Ergebnisse mit der Oblimin-Rotation.
+Interpretieren Sie erneut die enstprechenden Kennwerte für ihr Model und
+präsentieren Sie diese mir oder ihrem Nachbarn. Wie verändert die Rotation ihre
+Interpretation Ihrer Ergebnisse aus? Vergleichen Sie die Lösung dazu mit der
+Varimax ($\texttt{mlf_vmax}$) und der unrotierten Lösung ($\texttt{mlf_fit}$).
+\end{example}
+
+Zusatz: Sie kennen das ``richtige'' Ergebnis -- Sie haben die Antworten
+immerhin simuliert! Entspricht das soeben erhaltene Ergebnis dem
+``richtigen'' Ergebnis? Wenn ja, warum? Falls nein, warum nicht?
 \end{frame}
 
 \begin{frame}{Problem der Anzahl zu extrahierender Faktoren}
 \protect\hypertarget{problem-der-anzahl-zu-extrahierender-faktoren}{}
+\begin{alertblock}{Rotationsproblem}
+  Wie ermittle ich die Anazhl der zu extrahierenden Faktoren ohne sie zu kennen?
+\end{alertblock}
+
+\begin{enumerate}
+\tightlist
+\item
+  Lösung: Kaiser Kriterium
+\item
+  Lösung: Scree-Test
+\item
+  Lösung. Horns Parllel Analyse
+\end{enumerate}
+
+Anmerkung: Es gibt mittlerweile zahlreiche Weiterentwicklungen.
+Interessieren Sie sich dafür? (siehe:
+\href{https://sci-hub.se/10.1080/00273171.2011.564527}{Lorenzo-Seva et
+al., 2011} \&
+\href{https://doi.org/10.1002/9781118489772.ch11}{Timmerman et al.,
+2018})
+\end{frame}
+
+\begin{frame}{Kaiser Kriterium}
+\protect\hypertarget{kaiser-kriterium}{}
+\ldots Extrahiere so lange Hauptkomponenten bis diese weniger Varianz
+aufklären als eine einzelne Variable aus dem Datensatz.
+
+\includegraphics{06-EFA_files/figure-beamer/unnamed-chunk-11-1.pdf}
 \end{frame}
 
 \begin{frame}[fragile]{(Reduzierte) Korrelationsmatrix}
 \protect\hypertarget{reduzierte-korrelationsmatrix}{}
 \begin{verbatim}
 ## maximum iteration exceeded
-\end{verbatim}
-
-\begin{verbatim}
-## Loading required namespace: GPArotation
-\end{verbatim}
-
-\begin{verbatim}
 ## maximum iteration exceeded
 ## maximum iteration exceeded
 ## maximum iteration exceeded
@@ -682,6 +860,23 @@ mehr unbekannte
   loadings. Conversely, in order to estimate the loadings, we need the
   communalities." (Mair 2018, S. 24)
 \end{alertblock}
+
+Für wir die Faktoren in Anbetracht eines unterbestimmten Modells (2
+Unbekannte)
+
+It is a useful exercise to run fa using the principal axis factor method
+(fm= ``pa'') and specifying the number of iterations (e.g., max.iter=2).
+Then examine the size of the residuals as the number of iterations
+increases. When this is done, the solution gets progressively better, in
+that the size of the residuals in the off diagonal matrix become
+progressively smaller.
+\end{frame}
+
+\begin{frame}{Maximum Likelihood}
+\protect\hypertarget{maximum-likelihood}{}
+With the data at hand, the robot tries to estimate the most plausible
+(i. e., the most likely) values that are capable to optimally reproduce
+the common information in the (reduced) correlation matrix.
 \end{frame}
 
 \begin{frame}{Später}
@@ -718,7 +913,7 @@ eine Singulärwertzerlegung der Datenmatrix durchführt.
 ##  [6] 1.994291e-06 5.300246e-07 1.605099e-07 1.605099e-07 1.605099e-07
 \end{verbatim}
 
-\includegraphics{06-EFA_files/figure-beamer/unnamed-chunk-8-1.pdf}
+\includegraphics{06-EFA_files/figure-beamer/unnamed-chunk-13-1.pdf}
 \end{frame}
 
 \begin{frame}{Selbststudium 1: händische PCA -- Eigenwertzerlegung}
@@ -729,31 +924,11 @@ eine Singulärwertzerlegung der Datenmatrix durchführt.
 \protect\hypertarget{selbststudium-2-huxe4ndische-efa-singuluxe4rwertzerlegung}{}
 \end{frame}
 
-\begin{frame}{Selbststudium 3}
-\protect\hypertarget{selbststudium-3}{}
-\begin{quote}
-\ldots{[}P{]}rincipal axes factor analysis. This is similar to principal
-components, except that it is done with a reduced matrix where the
-diagonals are the communalities. The communalities can either be (1)
-specified a priori, (2) estimated by such procedures as multiple linear
-regression, or (3) found by iteratively doing an eigenvalue
-decomposition and repeatedly replacing the original 1s on the diagonal
-with the the value of \(1 - u^2\) where \(U^2 = diag(R−FF')\). That is,
-\end{quote}
-
-\begin{itemize}
-\tightlist
-\item
-  Hier: Sukkzessive Eigenwertzerlegung
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Wie sieht eine reduzierte Korrelationsmatrix
-aus?}
-\protect\hypertarget{wie-sieht-eine-reduzierte-korrelationsmatrix-aus}{}
+\begin{frame}[fragile]{Selbststudium 3: reduzierte Korrelationsmatrix}
+\protect\hypertarget{selbststudium-3-reduzierte-korrelationsmatrix}{}
 \ldots Der Output zeigt die erst 8 Iterationen einer PAFA. Vergleichen
 Sie diese mit ihre am Anfang konstruierte Korrelationsmatrix
-(\(\texttt{R}\)). Achten Sie auf die Hauptdiagonale!
+(\(\texttt{R}\)). Achten Sie auf die Hauptdiagonalen!
 
 \begin{verbatim}
 ## maximum iteration exceeded
@@ -855,6 +1030,19 @@ Sie diese mit ihre am Anfang konstruierte Korrelationsmatrix
 ## V7 -0.05  0.00 -0.13 -0.16  0.32 -0.27  0.26 -0.38
 ## V8  0.34 -0.13  0.45  0.59 -0.54  0.58 -0.38  0.83
 \end{verbatim}
+\end{frame}
+
+\begin{frame}{Selbststudium 3: Hintergrundwissen}
+\protect\hypertarget{selbststudium-3-hintergrundwissen}{}
+\begin{quote}
+\ldots{[}P{]}rincipal axes factor analysis. This is similar to principal
+components, except that it is done with a reduced matrix where the
+diagonals are the communalities. The communalities can either be (1)
+specified a priori, (2) estimated by such procedures as multiple linear
+regression, or (3) found by iteratively doing an eigenvalue
+decomposition and repeatedly replacing the original 1s on the diagonal
+with the the value of \(1 - u^2\) where \(U^2 = diag(R−FF')\).
+\end{quote}
 \end{frame}
 
 \end{document}

@@ -392,30 +392,163 @@ zustande kommen?
 
 ...maximiere die Varianz der quadrierten Ladungen
 
-```{r}
-fit_mlf <- psych::fa(R, nfactors=2, rotate="none", fm="ml")
+```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
 fit_mlf_vmax <- psych::fa(R, nfactors=2, rotate="varimax", fm="ml")
 plot(fit_mlf$loadings, ylim = c(-1,1), xlim = c(-1,1),
-    xlab = "Ladung: Faktor 1" , ylab = "Ladung: Faktor 2")
+    xlab = "Ladungen: Faktor 1" , ylab = "Ladungen: Faktor 2")
 points(fit_mlf_vmax$loadings, pch=20)
 x1 <- fit_mlf$loadings[,1] ; y1 <- fit_mlf$loadings[,2]
 x2 <- fit_mlf_vmax$loadings[,1] ; y2 <- fit_mlf_vmax$loadings[,2]
-lapply(seq(8), function(i) lines(c(x1[i], x2[i]), c(y1[i], y2[i])))
+for(i in seq(8)) lines(c(x1[i], x2[i]), c(y1[i], y2[i]))
 abline(h = 0, lty=2) ; abline(v = 0, lty=2)
-mtext("Faktorkoordinaten")
+mtext("Faktorkoordinaten vor und nach Varimax Rotation")
 i <- 8 ; s <- 0.04
 text(c(x1[i]+s, x2[i]+s), c(y1[i]+s, y2[i]+s), c("i", "i'"))
 legend(x = -1, 1, legend=c("unrotated", "rotated"), pch = c(1,20), cex=0.8)
 ```
 
+## Let's do it (..in R) 
 
+```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+(fit_vmax <- psych::fa(R, nfactors=2, rotate="varimax", fm="ml"))
+# Kommunalitäten
+fit_vmax$communality
+# Eigenwerte
+fit_vmax$e.values
+# Einzigartigkeit
+fit_vmax$uniquenesses
+# Quadrierte multiple Korrelation
+fit_vmax$R2
+```
+
+## Übungsaufgabe 7: Selbstexperiment
+
+\begin{example}
+Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
+(MLF) durch. Rotieren Sie anschließend die Ergebnisse mit der Varimax
+rotationen. Interpretieren Sie die enstprechenden Kennwerte für ihr Model und
+präsentieren Sie diese mir oder ihrem Nachbarn. Wie verändert die Rotation
+ihre Interpretation Ihrer Ergebnisse aus? Vergleichen Sie die Lösung dazu mit
+der unrotierten Lösung ($\texttt{mlf_fit}$).
+\end{example}
+
+Zusatz: Sie kennen das "richtige" Ergebnis -- Sie haben die Antworten immerhin
+simuliert! Entspricht das soeben erhaltene Ergebnis dem "richtigen" Ergebnis?
+Wenn ja, warum? Falls nein, warum nicht?
 
 ## Oblique Rotation: Oblimin
 
-...maximiere die Varianz der quadrierten Ladungen
+..."oblique" Alternative zu Varimax das erlaubt die Zwischenfaktorkorrelationen
+zu modellieren. Ist die Zwischenfaktorkorrelation 0 entsprechen sich beide
+Verfahren.
 
+```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
+fit_mlf_obl <- psych::fa(R, nfactors=2, rotate="oblimin", fm="ml")
+plot(fit_mlf$loadings, ylim = c(-1,1), xlim = c(-1,1),
+    xlab = "Ladungen: Faktor 1" , ylab = "Ladungen: Faktor 2")
+points(fit_mlf_obl$loadings, pch=20)
+x1 <- fit_mlf$loadings[,1] ; y1 <- fit_mlf$loadings[,2]
+x2 <- fit_mlf_obl$loadings[,1] ; y2 <- fit_mlf_obl$loadings[,2]
+for(i in seq(8)) lines(c(x1[i], x2[i]), c(y1[i], y2[i]))
+abline(h = 0, lty=2) ; abline(v = 0, lty=2)
+mtext("Faktorkoordinaten vor und nach Oblimin Rotation")
+i <- 8 ; s <- 0.04
+text(c(x1[i]+s, x2[i]+s), c(y1[i]+s, y2[i]+s), c("i", "i'"))
+legend(x = -1, 1, legend=c("unrotated", "rotated"), pch = c(1,20), cex=0.8)
+```
+
+## Let's do it (..in R) 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+(fit_obl <- psych::fa(R, nfactors=2, rotate="oblimin", fm="ml"))
+# Kommunalitäten
+fit_obl$communality
+# Eigenwerte
+fit_obl$e.values
+# Einzigartigkeit
+fit_obl$uniquenesses
+# Quadrierte multiple Korrelation
+fit_obl$R2
+```
+
+## Übungsaufgabe 8: Selbstexperiment
+
+\begin{example}
+Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
+(MLF) durch. Rotieren Sie anschließend die Ergebnisse mit der Oblimin-Rotation.
+Interpretieren Sie erneut die enstprechenden Kennwerte für ihr Model und
+präsentieren Sie diese mir oder ihrem Nachbarn. Wie verändert die Rotation ihre
+Interpretation Ihrer Ergebnisse aus? Vergleichen Sie die Lösung dazu mit der
+Varimax ($\texttt{mlf_vmax}$) und der unrotierten Lösung ($\texttt{mlf_fit}$).
+\end{example}
+
+Zusatz: Sie kennen das "richtige" Ergebnis -- Sie haben die Antworten immerhin
+simuliert! Entspricht das soeben erhaltene Ergebnis dem "richtigen" Ergebnis?
+Wenn ja, warum? Falls nein, warum nicht?
 
 ## Problem der Anzahl zu extrahierender Faktoren
+
+\begin{alertblock}{Rotationsproblem}
+  Wie ermittle ich die Anazhl der zu extrahierenden Faktoren ohne sie zu kennen?
+\end{alertblock}
+
+1. Lösung: Kaiser Kriterium 
+2. Lösung: Scree-Test 
+3. Lösung. Horns Parllel Analyse
+
+Anmerkung: Es gibt mittlerweile zahlreiche Weiterentwicklungen. Interessieren Sie sich dafür? (siehe: [Lorenzo-Seva et al., 2011](https://sci-hub.se/10.1080/00273171.2011.564527) & [Timmerman et al., 2018](https://doi.org/10.1002/9781118489772.ch11))
+
+## Kaiser Kriterium im Scree Plot
+
+\begin{block}{Kaiserkriterium}
+...Extrahiere so lange Hauptkomponenten bis diese weniger Varianz aufklären als
+eine einzelne Variable aus dem Datensatz. 
+\end{block}
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+# Barfuß 
+ev <- eigen(R)$values
+plot(ev, main="Scree Plot", xlab="Eigenwerte", 
+     ylab = "Komponentenzahl", type="b")
+abline(h=1, lty=2)
+
+# psych package 
+psych::scree(R, factors = FALSE)
+# psych::scree(R, factors = TRUE)
+```
+
+```{r}
+op <- par(mfrow=c(1,1))
+par(mfrow=c(1,2))
+# Händisch
+ev <- eigen(R)$values
+plot(ev, main="Scree Plot", xlab="Komponentenzahl", 
+     ylab = "Eigenwerte", type="b")
+abline(h=1, lty=2)
+text(6,1.1, "K1") ; text(3,2, "Rock") ; text(5,0.3, "Scree")
+# Implementiert 
+# psych::scree(R, factors = FALSE)
+X_scree <- replicate(8, rnorm(50))
+R_scree <- cor(X_scree)
+ev <- eigen(R_scree)$values
+plot(ev, main="Scree Plot", xlab="Komponentenzahl", 
+     ylab = "Eigenwerte", type="b")
+abline(h=1, lty=2)
+text(6,1.05, "K1") 
+par(op)
+```
+
+## Parallel Analyse
+
+```{r}
+# psych::fa.parallel(X, plot = TRUE)
+# psych::fa.parallel(Depnum, fa = "pc", cor = "poly",fm = "ml")
+paran::paran(X, quietly = TRUE, graph = TRUE)
+```
+ 
+
+
+
 
 
 
