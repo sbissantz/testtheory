@@ -31,9 +31,9 @@ Items könnten man Ihrer Meinung nach zu Itemgruppen zusammenfassen?
 Anmerkung: Nein, das sind (wirklich) nicht ihre Antworten; $\texttt{V1 - V30}$
 sind Zufallsvariablen!
 
-## Struktur erkennen & Itemgruppen finden: Übungsaufgabe 1 
+## Übungsaufgabe 1: Struktur erkennen & Itemgruppen finden
 
-```{r, out.width="70%", results='hide', fig.align='center'}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="70%", paged.print=FALSE, results='hide'}
 set.seed(123)
 N <- 50
 # Faktorladungen (zufällig)
@@ -66,9 +66,9 @@ In a Nutshell:
 - Krux: Struktur erkennen 
 - $\Leftrightarrow$ finde: hoch korrelierende Itemgruppen
 
-## Explorative Faktorenanalyse: in a Nutshell
+## Explorative Faktorenanalyse
 
-- (ein) Hilfsmittel: .. (explorative) **Faktorenanalyse**
+- (ein) Hilfsmittel: .. (explorative) *Faktorenanalyse*
 
 <p>&nbsp;</p>
 
@@ -88,18 +88,18 @@ structure of the manifest input variables (indicators)." (Mair 2018, S. 23)
   - Explorative Likertskalierung
   - (Non-) Metric Data Scaling (Voraus.: Distanzmatrizen)
 
+Wichtig: "meaningful compression" (Faktotren) vs. "full compression" (Komponenten)
+
 <!-- Wichtig: Warum Faktorenanalyse -->
 <!-- Wichtig: Sozialwissenschaften: Compression in meningful ways -->
 <!-- Wichtig: compressing meaningfully vs. fully -->
 <!-- Wichtig: Unabhängigkeit latenter Dimensionsn -->
 
-Wichtig: "meaningful compression" vs. "full compression"
-
-## Stategie & Vorgehen: Simulieren & Evaluieren 
+## Stategie & Vorgehen: Simulation & Evaluation 
 
 1. Man erschaffe $\geq 1$ eine latente Variable (LV)
 2. ...lasse die LV Antwortmuster produzieren
-3. ...wandel sie in eine Korrelationsmatrix um
+3. ...wandel sie in eine Korrelationsmatrix (R) um
 4. ...und versucht die Struktur mit der Faktorenanalyse aufzufinden
 
 <p>&nbsp;</p>
@@ -113,12 +113,12 @@ hilfreich, weil wir dort "die Wahrheit" kennen und das Verfahren damit besser
 beurteilen können ($\sim$ fake data analysis)
 \end{block}
 
-## "Playing Creator": Zwei latente Variable erschaffen 
+## Let's do it! (..in R)
+
+"Playing Creator": zwei latente Variable erschaffen 
 
 ```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
-# Anzahl der Items
-N <- 8
-# Faktorladungen
+# Faktorladungen; 8 items
 load_F1 <- c(0.6, -0.3, 0.5, 0.7, 0.1, 0.2, 0.2, 0.3)
 load_F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7)
 fx <- cbind(load_F1, load_F2)
@@ -130,7 +130,7 @@ S <- psych::sim.structure(fx, phi, n=1000)
 R <- S$model ; X <- S$observed  # R <- cor(X)
 ```
 
-## Vom generativen Prozess zur Korrelationsmatrix
+## Output (grafisch): zwei latente Variablen
 
 ```{r}
 old.par <- par(mfrow=c(1,1))
@@ -140,27 +140,23 @@ corrplot::corrplot.mixed(R, number.cex=.7)
 par(old.par)
 ```
 
-## Prognose & Selbstexperiment: Übungsaufgabe 2
+## Übungsaufgabe 2: Selbstexperiment
 
 \begin{example}
 Versuchen Sie es selbst! Verändern sie systematisch $\texttt{F1; F2}$  und
-$\texttt{phi}$.
-1. Wie verändert sich die Korrelationsmatrix, in Abhängigkeiten
-Ihrer Veränderungen? 
-2. Können Sie eine eindeutige Struktur konstruieren? 
-3. Wenn ja, mit welchen Werten von $\texttt{F1; F2}$  und $\texttt{phi}$ haben Sie ihr Ziel
+$\texttt{phi}$. Wie verändert sich die Korrelationsmatrix, in Abhängigkeiten
+Ihrer Veränderungen? Können Sie eine eindeutige Struktur konstruieren? Wenn ja,
+mit welchen Werten von $\texttt{F1; F2}$  und $\texttt{phi}$ haben Sie ihr Ziel
 erreicht?
 \end{example}
 
-\begin{example}
-Haben Sie ein Strukturmodell gefunden, dass ihnen gefällt? Ja, dann überlegen
-Sie sich jetzt für welche Konstrukte diese Struktur Sinn macht (z.B.:
+Zusatz: Haben Sie ein Strukturmodell gefunden, dass ihnen gefällt? Ja, dann
+überlegen Sie sich jetzt für welche Konstrukte diese Struktur Sinn macht (z.B.:
 extraversion $\sim$ openness to experience)
-\end{example}
 
 ## Logik latenter Variablen (..reversed)
 
-\begin{block}{Von der Korrelationsmatrix zur LV} Die Faktoranalyse
+\begin{block}{Von der Korrelationsmatrix zur latenten Variable} Die Faktoranalyse
 ist ein strukturentdeckendes Verfahren. D.h. den generativen Prozess, d.h. wie
 ein Konstrukt die Antworten auf den Items verursacht hat anhand der Struktur die
 sich in der vorgegebenen Korrelationsmatrix zu \textit{modellieren}.
@@ -237,23 +233,28 @@ Konklusion: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium 1-3)
     - Modellgleichung: $R \leftarrow P = \Lambda \Phi \Lambda^{t} + \Psi$
     - Note(s): Reduzierte Matrix, itterativer Prozess (convergence issues)
  
-## Hauptkomponentenanalyse
+## Let's do it! (..in R): PCA
 
+Hauptkomponentenanalyse
 <!-- Ziel: Maximale (Gesamt-)Varianzaufklärung; d.h: minimaler Informationsverlust -->
 <!-- <p>&nbsp;</p> -->
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
 # Old School!
-(dino_pca <- princomp(X, cor=TRUE))
+# (dino_pca <- princomp(X, cor=TRUE))
 # New School
-pca_fit <- psych::principal(R, nfactors = 2, 
-                            rotate = "none")
+(pca_fit <- psych::principal(R, nfactors = 2, 
+                            rotate = "none"))
 ## Komponentenladungen
 pca_fit$loadings
 ## Kommunalitäten 
 pca_fit$communality
-## Uniqueness 
+## Einzigartigkeit 
 pca_fit$uniquenesses
+## Eigenwerte
+pca_fit$values
+# Quadrierte multiple Korrelation
+pca_fit$R2
 ```
 
 ## Übungsaufgabe 3: Selbstexperiment
@@ -271,10 +272,10 @@ Anmerkung: Denken Sie daran, normalerweise kennen Sie die Anzahl der zu
 extrahierenden Komponenten/Faktoren nicht. Wie man dieses Problem angeht, dazu
 gleich mehr!
 
-## Principal Axis Factor Analysis
+## Let's do it! (..in R): Hauptachsenanalyse (PAF)
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
-fit_paf <- psych::fa(R, nfactors=2, rotate="none", fm="pa")
+(fit_paf <- psych::fa(R, nfactors=2, rotate="none", fm="pa"))
 # Kommunalitäten
 fit_paf$communality
 # Eigenwerte
@@ -289,22 +290,17 @@ fit_paf$R2
 
 \begin{example}
 Versuchen Sie es nun selbst! Führen Sie eine Hauptachsenanalyse (PAF) durch.
-Interpretieren Sie die enstprechenden Kennwerte für ihr Model und präsentieren
-Sie diese mir oder ihrem Nachbarn. Verändern Sie auch einmal die Anzahl der zu
-extrahierenden Faktoren ($\texttt{nfactors}$). Wie verändert sich ihre Lösung
-wenn sie die Zahl vergößern, bzw. verkleinern? Wie wirken sich diese
-Veränderungen auf die Interpretation Ihrer Ergebnisse aus?
+Vergleichen Sie die Ergebnisse der PAF mit denen der PCA. Bestehen Unterschiede
+zwischen den Ergebnissen? 
 \end{example}
 
-Zusatz: Vergleichen Sie die Ergebnisse der PAF mit denen der PCA. Bestehen
-Unterschiede zwischen den Ergebnissen? Haben Sie eine Vermutung wie diese
-zustande kommen?
+Zusatz: Haben Sie eine Vermutung wie mögliche Unterschiede zustande kommen?
 
-<!-- PAFA ist vereinfacht gesagt eine iterative PCA der reduzierten -->
-<!-- Korrelationsmatrix mit dem Ziel die gemeinsame Varianz aufzuklären. (siehe v.a.: -->
-<!-- Selbststudium 3) -->
+<!-- Phi. Lambda -->
+<!-- Reduzierte Korrelationsmatrix -->
+<!-- Gesamtvarianz versus gemeinsame Varianz -->
 
-## Übungsaufgabe 5: Kritische Reflexion
+## Übungsaufgabe 5: Kritische Reflexion & Diskussion
 
 \begin{example}
 Eine Folge der Extraktion mittels mit der Hauptkomponentenmethode ist, dass die
@@ -317,14 +313,15 @@ wie plausibel halten Sie diese Annahme? Diskutieren Sie (heftig)!
 Warnhinweis: Sollte ein Inferno entfachen, halten Sie bitte Fluchtwege sowie
 Zugänge zu den Feuerlöschern frei!
 
-<!-- Tafelbild Unabhängigkeit durch Leftsinguläre Matrix -->
+<!-- Spritzenbeispiel -->
+<!-- Tafelbild: Unabhängigkeit durch Leftsinguläre Matrix -->
 
 ## Maximum Likelihood Faktorenanalyse 
 
 \begin{alertblock}{Kommunalitätenproblem}
 Das CFM ($\Lambda \Phi \Lambda' + \Psi$) ist unbestimmt. D.h. es hat (deutlich)
 mehr unbekannte als bekannte Bestanndteile. Die Folge: Das Modell kann deshalb
-nicht einfach gelöst werden, sondern muss geschätzt werden.
+nicht einfach "gelöst" werden, sondern muss geschätzt werden.
 \end{alertblock}
 
 - MLFA bietet nun als Lösung die plausibelsten (eng. "most likely") Werte zur
@@ -334,10 +331,14 @@ Reproduktion der Informationen in der Korrelationsmatrix an.
 error, the most elegant statistical solution is that of maximum likelihood"
 (Revelle, in prep. S. 156)
 
-## Maximum Likelihood Factor Analysis
+<!-- "The problem is that in order to estimate the communalities, we need the -->
+<!-- loadings. Conversely, in order to estimate the loadings, we need the -->
+<!-- communalities." (Mair 2018, S. 24) -->
+
+## Let's do it (..in R): Maximum Likelihood Faktorenanalyse (MLF)
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
-fit_mlf <- psych::fa(R, nfactors=2, rotate="none", fm="ml")
+(fit_mlf <- psych::fa(R, nfactors=2, rotate="none", fm="ml"))
 # Kommunalitäten
 fit_mlf$communality
 # Eigenwerte
@@ -352,45 +353,36 @@ fit_mlf$R2
 
 \begin{example}
 Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
-(MLF) durch. Interpretieren Sie die enstprechenden Kennwerte für ihr Model und
-präsentieren Sie diese mir oder ihrem Nachbarn. Verändern Sie erneut die Anzahl
-der zu extrahierenden Faktoren ($\texttt{nfactors}$). Wie verändert sich ihre
-Lösung wenn sie die Zahl vergößern, bzw. verkleinern? Wie wirken sich diese
-Veränderungen auf die Interpretation Ihrer Ergebnisse aus?
+(MLF) durch. Vergleichen Sie die Ergebnisse mit den anderen Methoden und prüfen
+Sie die Validität der Ergebnisse in Bezug auf Ihr Beispiel.
 \end{example}
 
-Zusatz: Vergleichen Sie die Ergebnisse der MLF mit denen der PAF. Bestehen
-Unterschiede zwischen den Ergebnissen? Haben Sie eine Vermutung warum diese
-zustande kommen?
+Zusatz:  Haben Sie eine Vermutung wie mögliche Unterschiede zwischen den
+Verfahren zustande kommen?
 
 ## Rotationsproblem
 
 \begin{alertblock}{Rotationsproblem}
   Wie rotiert die erhaltene Ladungsmatrix ($\Lambda$) derart, dass eine
   möglich einfach interpretierbare Lösung daraus hervorgeht?
-  \begin{equation}
-    \Lambda_r = \Lamdda T 
-  \end{equation}
 \end{alertblock}
 
-1. Lösung: Orthogonale Rotation
+1. Lösung: Orthogonale Rotation (z.B. Varimax)
   - Ziel: Orthogonalität aufrechterhalten
   - d.h. Faktoren dürfen nicht korrelieren 
-  - Restriktion: $TT' = I$, sodass $\Phi=I$
   - z.B.: Varimax, Promax..
-2. Lösung: Oblique Rotation
+2. Lösung: Oblique Rotation (z.B. Oblimin)
   - Ziel: mögliche Orthogonalität auflösen
   - d.h. Faktoren dürfen korrelieren 
-  - Restriktion: $TT' \neq I$, sodass $\Phi\neq I$
   - z.B.: Oblimin, Simplimax.. 
 
-<!-- Hinweis: Die Entscheidung zur orthogonalen Rotation ist in den -->
-<!-- Sozialwissenschaften deutlich entscheidender als die Wahl eines bestimmten -->
-<!-- Rotationskriterium! -->
+<!-- Tafelbild: \Lambda_r = \Lamdda T  -->
+<!-- - Restriktion: $TT' = I$, sodass $\Phi=I$ -->
+<!-- - Restriktion: $TT' \neq I$, sodass $\Phi\neq I$ -->
 
-## Orthogonale Rotation: Varimax
+<!-- Sozialwissenschaften: orthogonal|oblique >> Oblimin|Simplimax -->
 
-...maximiere die Varianz der quadrierten Ladungen
+## Graphik: Orthogonale Rotation mit Varimax
 
 ```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
 fit_mlf_vmax <- psych::fa(R, nfactors=2, rotate="varimax", fm="ml")
@@ -407,42 +399,12 @@ text(c(x1[i]+s, x2[i]+s), c(y1[i]+s, y2[i]+s), c("i", "i'"))
 legend(x = -1, 1, legend=c("unrotated", "rotated"), pch = c(1,20), cex=0.8)
 ```
 
-## Let's do it (..in R) 
+<!-- Idee ...maximiere die Varianz der quadrierten Ladungen -->
+<!-- Gedankenbild: "Spin the axes" -->
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
-(fit_vmax <- psych::fa(R, nfactors=2, rotate="varimax", fm="ml"))
-# Kommunalitäten
-fit_vmax$communality
-# Eigenwerte
-fit_vmax$e.values
-# Einzigartigkeit
-fit_vmax$uniquenesses
-# Quadrierte multiple Korrelation
-fit_vmax$R2
-```
+## Graphik: Oblique Rotation mit Oblimin
 
-## Übungsaufgabe 7: Selbstexperiment
-
-\begin{example}
-Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
-(MLF) durch. Rotieren Sie anschließend die Ergebnisse mit der Varimax
-rotationen. Interpretieren Sie die enstprechenden Kennwerte für ihr Model und
-präsentieren Sie diese mir oder ihrem Nachbarn. Wie verändert die Rotation
-ihre Interpretation Ihrer Ergebnisse aus? Vergleichen Sie die Lösung dazu mit
-der unrotierten Lösung ($\texttt{mlf_fit}$).
-\end{example}
-
-Zusatz: Sie kennen das "richtige" Ergebnis -- Sie haben die Antworten immerhin
-simuliert! Entspricht das soeben erhaltene Ergebnis dem "richtigen" Ergebnis?
-Wenn ja, warum? Falls nein, warum nicht?
-
-## Oblique Rotation: Oblimin
-
-..."oblique" Alternative zu Varimax das erlaubt die Zwischenfaktorkorrelationen
-zu modellieren. Ist die Zwischenfaktorkorrelation 0 entsprechen sich beide
-Verfahren.
-
-```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
+```{r echo=TRUE, fig.align='center', message=FALSE, warning=FALSE, out.width="70%", paged.print=FALSE, results='hide'}
 fit_mlf_obl <- psych::fa(R, nfactors=2, rotate="oblimin", fm="ml")
 plot(fit_mlf$loadings, ylim = c(-1,1), xlim = c(-1,1),
     xlab = "Ladungen: Faktor 1" , ylab = "Ladungen: Faktor 2")
@@ -457,7 +419,28 @@ text(c(x1[i]+s, x2[i]+s), c(y1[i]+s, y2[i]+s), c("i", "i'"))
 legend(x = -1, 1, legend=c("unrotated", "rotated"), pch = c(1,20), cex=0.8)
 ```
 
-## Let's do it (..in R) 
+
+<!-- ..."oblique" Alternative zu Varimax das erlaubt die Zwischenfaktorkorrelationen -->
+<!-- zu modellieren. Ist die Zwischenfaktorkorrelation 0 entsprechen sich beide -->
+<!-- Verfahren. -->
+
+<!-- Gedankenbild: Faktorenuhr -->
+
+## Let's do it (..in R): Orthogonale Rotation (Varimax)
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+(fit_vmax <- psych::fa(R, nfactors=2, rotate="varimax", fm="ml"))
+# Kommunalitäten
+fit_vmax$communality
+# Eigenwerte
+fit_vmax$e.values
+# Einzigartigkeit
+fit_vmax$uniquenesses
+# Quadrierte multiple Korrelation
+fit_vmax$R2
+```
+
+## Let's do it (..in R): Oblique Rotation (Oblimin)
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
 (fit_obl <- psych::fa(R, nfactors=2, rotate="oblimin", fm="ml"))
@@ -471,20 +454,20 @@ fit_obl$uniquenesses
 fit_obl$R2
 ```
 
-## Übungsaufgabe 8: Selbstexperiment
+## Übungsaufgabe 7: Selbstexperiment
 
-\begin{example}
-Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse
-(MLF) durch. Rotieren Sie anschließend die Ergebnisse mit der Oblimin-Rotation.
-Interpretieren Sie erneut die enstprechenden Kennwerte für ihr Model und
-präsentieren Sie diese mir oder ihrem Nachbarn. Wie verändert die Rotation ihre
-Interpretation Ihrer Ergebnisse aus? Vergleichen Sie die Lösung dazu mit der
-Varimax ($\texttt{mlf_vmax}$) und der unrotierten Lösung ($\texttt{mlf_fit}$).
-\end{example}
+<!-- \begin{example} -->
+<!-- Versuchen Sie es nun selbst! Führen Sie eine Maximum Likelihood Faktorenanalyse -->
+<!-- (MLF) durch. Rotieren Sie anschließend die Ergebnisse mit der Varimax und mit -->
+<!-- Oblimin. Wie verändert die Rotation ihre Interpretation Ihrer Ergebnisse? -->
+<!-- Vergleichen Sie die Lösung dazu jeweils mit der unrotierten Lösung -->
+<!-- (mlf_fit). Vergleichen Sie auch jeweils die Unterschiede zwischen den -->
+<!-- Rotationsmethoden. -->
+<!-- \end{example} -->
 
 Zusatz: Sie kennen das "richtige" Ergebnis -- Sie haben die Antworten immerhin
-simuliert! Entspricht das soeben erhaltene Ergebnis dem "richtigen" Ergebnis?
-Wenn ja, warum? Falls nein, warum nicht?
+simuliert! Welche Kombination kommt dem "richtigen" Ergebnis am nähsten? Haben
+Sie eine Idee warum?
 
 ## Problem der Anzahl zu extrahierender Faktoren
 
@@ -492,240 +475,333 @@ Wenn ja, warum? Falls nein, warum nicht?
   Wie ermittle ich die Anazhl der zu extrahierenden Faktoren ohne sie zu kennen?
 \end{alertblock}
 
-1. Lösung: Kaiser Kriterium 
-2. Lösung: Scree-Test 
-3. Lösung. Horns Parllel Analyse
+1. Lösung: Kaiser Kriterium
+2. Lösung: Scree-Test
+3. Lösung. Horns Parallel Analyse
 
 Anmerkung: Es gibt mittlerweile zahlreiche Weiterentwicklungen. Interessieren Sie sich dafür? (siehe: [Lorenzo-Seva et al., 2011](https://sci-hub.se/10.1080/00273171.2011.564527) & [Timmerman et al., 2018](https://doi.org/10.1002/9781118489772.ch11))
 
-## Kaiser Kriterium im Scree Plot
+## Eigenwerteplots (Kaiser Kriterium & Scree Test)
 
-\begin{block}{Kaiserkriterium}
-...Extrahiere so lange Hauptkomponenten bis diese weniger Varianz aufklären als
-eine einzelne Variable aus dem Datensatz. 
+\begin{block}{Kaiserkriterium \& Scree Test}
+Zerlege die Korrelationsmatrix in ihre Eigenwerte (SVD/EVD) und plotte diese
+gegen einen Index. (1) Kaiserkriterium: Ist das Varianzaufklärungspotential
+eines Faktors kleiner als eines Items beende deine Suche ($\widetilde{=}EW >
+1$). (2) Scree-Test: Finde den "ellbow" der den "rock" vom "scree"
+unterscheidet.
 \end{block}
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
-# Barfuß 
+## Grafiks: Eigenwertplot
+
+```{r echo=FALSE}
+op <- par(mfrow=c(1,1))
+par(mfrow=c(1,2))
 ev <- eigen(R)$values
-plot(ev, main="Scree Plot", xlab="Eigenwerte", 
+plot(ev, main="Eigenwerteplot", xlab="Komponentenzahl",
+     ylab = "Eigenwerte", type="b")
+abline(h=1, lty=2)
+text(6,1.1, "K1") ; text(3,2, "Rock") ; text(5,0.3, "Scree")
+X_scree <- replicate(8, rnorm(50))
+R_scree <- cor(X_scree)
+ev <- eigen(R_scree)$values
+plot(ev, main="Eigenwerteplot", xlab="Komponentenzahl",
+     ylab = "Eigenwerte", type="b")
+abline(h=1, lty=2)
+text(6,1.05, "K1")
+par(op)
+```
+
+## Let's do it (..in R)
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
+# Barfuß
+ev <- eigen(R)$values
+plot(ev, main="Eigenwerteplot", xlab="Eigenwerte",
      ylab = "Komponentenzahl", type="b")
 abline(h=1, lty=2)
 
-# psych package 
+# psych package
 psych::scree(R, factors = FALSE)
 # psych::scree(R, factors = TRUE)
 ```
 
+## Parallel Analyse
+
+\begin{alertblock}{Parallel Analyse}
+In parallel analysis, the criterion to be used in order to determine the number
+of factors is the following A factor is considered as "significant" if its
+eigenvalue is larger than the 95% quantile [...] of those obtained from
+random or resampled data. (Mair 2018, S.31)
+\end{alertblock}
+
+Anmerkung: Im Orginal wurde die PA für Komponenten konstruiert. Mittlerweile gibt es
+sie auch für das CFM.
+
+## Grafik: Parallel Analyse
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+opa <- par(mfrow=c(1,1))
+par(mfrow = c(1,2))
+# psych::fa.parallel(X, fa = "pc", fm = "ml")
+paran::paran(X, quietly=TRUE, graph=TRUE)
+paran::paran(X, cfa=TRUE, quietly=TRUE, graph=TRUE)
+par(opa)
+```
+Anmerkung: Die Grafiken wurden mit $\texttt{paran}$ nicht $\texttt{psych}$ erstellt.
+
+<!-- Although other parallel analysis functions use SMC s as estimates of the -->
+<!-- communalties (e.g., the paran in the paran package), simulations using the -->
+<!-- sim.parallel function suggest that the fa.parallel solution is a more accurate -->
+<!-- estimate of the number of major factors in the presence of many small, minor -->
+<!-- factors. (Revelle in prep. S. 176)-->
+
+## Let's do it (..in R): Parallel Analyse
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
+# Run time issue!
+# psych::fa.parallel(X, fa = "pc", fm = "ml")
+
+# Alternative
+# Für Komponenten
+# paran::paran(X)
+# Für Faktoren
+# paran::paran(X, cfa=TRUE)
+```
+
+## Übungsaufgabe 8: Selbstexperiment
+
+\begin{example}
+Versuchen Sie es nun selbst! Finden Sie die Anzahl zu extrahierender Faktoren in
+ihrem Beispiel mit den drei genannten Möglichkeiten. Welches der drei Verfahren
+"errät" ihre Anzahl zu extrahierender Faktoren richtig? Welches nicht? Haben Sie
+eine Idee warum? Vergleichen Sie auch die Ergebnisse mit ihrem Nachbarn oder den
+Folien. Warum sind die Ergebnisse anders? Warum vielleicht auch nicht ? (Tipp:
+vergleichen Sie v.a. $\Lambda, \Phi$)
+\end{example}
+
+Anmerkung: Sie haben den Luxus, das richtige Ergebnis zu kennen. Normalerweise
+ist das nicht der Fall! Darum sind Simulationen wichtig. So können wir das
+Verhalten einzelner Kriterien unter verschiedenen Umständen testen. Versuchen
+Sie es daheim mal mit anderen Werten (\texttt{N, F1, F2} & \texttt{phi})!
+
+## (Minimal-)Voraussetzungen: Bartlett-Test
+
+\begin{block}{Bartlett-Test}
+Ist die zu faktorisierende Korrelationsmatrix signifikant von einer
+Identitätsmatrix verschieden? Eine Minimalvoraussetzung
+für Faktorisierung.
+\end{block}
+
+\begin{equation}
+  H_0: verwefen \; \Leftrightarrow R = I
+\end{equation}
+
+## Output: Identitätsmatrix
+
+```{r echo=TRUE}
+(I <- diag(8))
+```
+
+## Grafik: I vs. R
+
 ```{r}
+I <- diag(8) ; attributes(I)$dimnames <- attributes(R)$dimnames
 op <- par(mfrow=c(1,1))
 par(mfrow=c(1,2))
-# Händisch
-ev <- eigen(R)$values
-plot(ev, main="Scree Plot", xlab="Komponentenzahl", 
-     ylab = "Eigenwerte", type="b")
-abline(h=1, lty=2)
-text(6,1.1, "K1") ; text(3,2, "Rock") ; text(5,0.3, "Scree")
-# Implementiert 
-# psych::scree(R, factors = FALSE)
-X_scree <- replicate(8, rnorm(50))
-R_scree <- cor(X_scree)
-ev <- eigen(R_scree)$values
-plot(ev, main="Scree Plot", xlab="Komponentenzahl", 
-     ylab = "Eigenwerte", type="b")
-abline(h=1, lty=2)
-text(6,1.05, "K1") 
+corrplot::corrplot(I, method = 'number', number.cex=.7, main="I")
+corrplot::corrplot(R, method = 'number', number.cex=.7, main="R")
 par(op)
 ```
 
-## Parallel Analyse
+## Let's do it (..in R): Bartlett-Test
 
-```{r}
-# psych::fa.parallel(X, plot = TRUE)
-# psych::fa.parallel(Depnum, fa = "pc", cor = "poly",fm = "ml")
-paran::paran(X, quietly = TRUE, graph = TRUE)
-```
- 
-
-
-
-
-
-
-## (Reduzierte) Korrelationsmatrix
-
-```{r}
-grep_commu <- function(noi) {
-  psych::fa(R, fm="pa", nfactors = 2, max.iter = noi)$communality
-}
-iters <- 1:4
-commus <- lapply(iters, grep_commu)
-calc_cormat <- function(commu, R){
-  diag(R) <- commu ; round(R, digits = 2) 
-}
-Rs <- lapply(commus, calc_cormat, R=R) ; 
-names(Rs) <- paste0("iteration ", seq(iters))
-Rs
+```{r echo=TRUE}
+# Datenmatrix (X)
+# psych::cortest.bartlett(X)
+# Korrelationsmatrix (R)
+psych::cortest.bartlett(R, n=nrow(X))
 ```
 
-## PCA
+## (Minimal-) Voraussetzungen: Kaiser-Meyer-Olkin Kriterium
 
-## PAFA
+\begin{block}{KMO}
+Welchen Anteil an der Gesamtvarianz der Items ist auf gemeinsame Varianz
+rückführbar?
 
-## Exkurs
+Anmerkung: Der gemeinsame Varianzanteil ist es letztlich, was die Faktoren
+aufgreifen können.
 
-## MLFA
+\begin{equation}
+KMO= \frac{\underset {j\neq k}{\sum \sum} r_{jk}^{2}}{\underset {j\neq k}{\sum \sum} r_{jk}^{2} + \underset {j\neq k}{\sum \sum} p_{jk}^{2}} \in [0,1]
+\end{equation}
 
-\begin{alertblock}{Kommunalitätenproblem}
-  "The problem is that in order to estimate the communalities, we need the
-  loadings. Conversely, in order to estimate the loadings, we need the
-  communalities." (Mair 2018, S. 24)
+$r_{jk}$ : Korrelation zwischen zwei Items
+$p_{jk}$ : Partielle Korrelation
+
+<!-- ..Measure of Sampling Adequacy bzw Kaiser-Meyer-Olkin-Kriterium -->
+
+<!-- - >0,90: sehr gut -->
+<!-- - 0,80-0,90	gut -->
+<!-- - ... -->
+<!-- - <0,50: nicht akzeptabel	 -->
+
+<!-- If there are large partial correlations compared to the sum of correlations. In -->
+<!-- other words, there are widespread correlations which would be a large problem -->
+<!-- for factor analysis. The concept is that the partial correlations should not be -->
+<!-- very large if one is to expect distinct(!!!) factors to emerge from factor analysis -->
+
+## Übungsaufgabe 9: Selbstexperiment
+
+\begin{example}
+Versuchen Sie es nun selbst! Führen Sie einen Bartlett-Test durch und wendenen
+Sie das KMO-Kriterium auf ihre Korrelations- oder Datenmatrix an. Wie beurteilen
+Sie die Ergebnisse? Sind ihre Matritzen zur analysie geeignet?
+\end{example}
+
+## Übungsaufgabe 10: Evaluation
+
+\begin{example}
+Welches Verfahren hat ihre anfängliche Struktur am besten aufgefunden? Haben Sie
+eine Idee warum?
+\end{example}
+
+Anmerkung: Wiederholen Sie die Übung im Selbststudium mit anderen Werten.
+Verändern Sie diese systematisch und prognostizieren Sie, was geschehen wird und
+warum. So lernen Sie jedes Verfahren, jeden Algorithmus und jedes Kriterium
+verstehen.
+
+## The Power of Simulation!
+
+Wenn Sie wissen wollen, wie sich ein bestimmtes Kriterium unter spezifischen
+Voraussetzungen verhält, dann simulieren Sie!
+
+\begin{alertblock}{The Power of Simulation}
+Sie besitzen nun die Power der Simulation! Simulieren Sie sich bestimmte
+Strukturen (wie in diesem Kurs getan) und testen Sie die Kriterien, Kennwerte,
+usw. auf Herz und Nieren! Nur so lernen Sie ihre Grenzen kennen.
 \end{alertblock}
 
-Für  wir die Faktoren in Anbetracht eines unterbestimmten Modells (2 Unbekannte)
+Anmerkung: Gute Klausurübung! Schnappen Sie sich ihre Kolleginnen/Kollegen,
+simulieren Sie mögliche Welten und üben, üben, üben Sie!
 
+## Selbststudium 1: die Relevanz von Iterationen
 
-It is a useful exercise to run fa using the principal axis factor method (fm=
+> It is a useful exercise to run fa using the principal axis factor method (fm=
 “pa”) and specifying the number of iterations (e.g., max.iter=2). Then examine
 the size of the residuals as the number of iterations increases. When this is
 done, the solution gets progressively better, in that the size of the residuals
-in the off diagonal matrix become progressively smaller.
+in the off diagonal matrix become progressively smaller. (Revelle, in prep., S.
+152)
 
-## Maximum Likelihood
+## Selbststudium 1: die Relevanz von Iterationen
 
-With the data at hand, the robot tries to estimate the most plausible (i. e.,
-the most likely) values that are capable to optimally reproduce the common
-information in the (reduced) correlation matrix.
-
-
-
-
-
-
-
-
-## Später
-
-Findet die Faktorenanalyse ihre Struktur?
-
-Vanishing effekt -- Simulation?
-Korrelationsmatrix (grafisch: Vanishing effect)
-(1) Faktorenanalyse mit zunehmender Zwischenfaktorkorrelation
-(2) Faktorenanalyse mit abnehmenden Ladungen  
-
-## Fakotrscores
-
-Man könnte versuchen mit den Faktorscores die True Scores der Probanden
-vorherzusagen
-
-## Zusatzmaterial: PCA versus EFA
-
-<!-- EFA concentrates on explaining the off-diagonal elements of Σ, whereas PCA -->
-<!-- concentrates on the diagonal elements of Σ. Thus, EFA tries to explain -->
-<!-- covariance in the data, and PCA tries to explain variance in the data (although -->
-<!-- it is not totally blind to the covariances) (Mair, 2018, S. 186) -->
-
-<!-- Principal components represents a $n \times n$ matrix in terms of the first k -->
-<!-- components. It attempts to reproduce all of the R matrix. Factor analysis on the -->
-<!-- other hand, attempts to model just the common part of the [correlation] matrix, -->
-<!-- which means all of the off-diagonal elements and the common part of the diagonal -->
-<!-- (the communalities ). The non-common part, the uniquenesses, are simply that -->
-<!-- which is left over. -->
-
-\begin{block}{EFA = PCA}
- EFA und PCA entsprechen sich, genau dann wenn man beim berechnen der Kennwerte
- die Korrelationsmatrix, nicht die reduzierte Korrelationsmatrix verwendet wird
- und man als Extraktionsmethode eine Eigenwertzerlegung der Korrelationsmatrix
- bzw. eine Singulärwertzerlegung der Datenmatrix durchführt.
-\end{alertblock}
-
-## Zusatzmaterial: die Relevanz von Iterationen
-
-...bei der Anpassungsgüte des Modells in der PAFA
-
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 find_RSS <- function(noi){
-resid <- psych::fa(R, fm="pa", nfactors = 2, rotate = "none", 
+resid <- psych::fa(R, fm="pa", nfactors = 2, rotate = "none",
                    residuals = TRUE, max.iter=noi)$residual
 sum(resid[upper.tri(resid, diag = FALSE)])^2
 }
-seq <- 1:10 
+seq <- 1:10
 (RSS <- sapply(seq, find_RSS))
-plot(NULL, xlim=c(-0.1, 11), ylim= c(0, 0.025), 
+plot(NULL, xlim=c(-0.1, 11), ylim= c(0, 0.025),
      ylab="Residuenquadratsumme", xlab="Anzahl der Iterationen")
 points(x=seq, y=RSS, type = "b")
 ```
 
-## Selbststudium 1: händische PCA -- Eigenwertzerlegung
+## Selbststudium 2: händische PCA -- Eigenwertzerlegung
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
-# Black Box 
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
+# Black Box
 pca_fit <- princomp(X, cor = TRUE)
 
-# Handarbeit
+# Barfuß
 R_EVD <- cor(X)
 # EVD von R ; Eigenvektoren ; Eigenwerte
-EVD_R <- eigen(R_EVD) 
+EVD_R <- eigen(R_EVD)
 # Komponentenladungen
 loadings <- EVD_R$vectors
 # Gleich?
 pca_fit$loadings ; print(loadings, digits=3)
 ```
 
-## Selbststudium 2: händische EFA -- Singulärwertzerlegung
+## Selbststudium 3: händische EFA -- Singulärwertzerlegung
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
 # Black Box
 pca_fit <- prcomp(X, scale. = TRUE)
 
-# Handarbeit
+# Barfuß
 n <- nrow(X)
 SVD_X <- svd(scale(X)/sqrt(n-1))
-U <- SVD_X$u ; D <- SVD_X$d 
+U <- SVD_X$u ; D <- SVD_X$d
 loadings <- U %*% diag(D) * sqrt(n-1)
 # Gleich?
-pca_fit$x ; loadings 
+pca_fit$x ; loadings
 ```
 
-## Selbststudium 3: reduzierte Korrelationsmatrix
+## Selbststudium 4: reduzierte Korrelationsmatrix
 
 ...Der Output zeigt die erst 8 Iterationen einer PAFA. Vergleichen Sie diese mit
-ihre am Anfang konstruierte Korrelationsmatrix ($\texttt{R}$). Achten Sie auf die
+ihre am Anfang konstruierte Korrelationsmatrix $\texttt{R}). Achten Sie auf die
 Hauptdiagonalen!
 
-```{r}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
 grep_commu <- function(noi) {
   psych::fa(R, fm="pa", nfactors = 2, max.iter = noi)$communality
 }
 iters <- 1:8
 commus <- lapply(iters, grep_commu)
 calc_cormat <- function(commu, R){
-  diag(R) <- commu ; round(R, digits = 2) 
+  diag(R) <- commu ; round(R, digits = 2)
 }
-Rs <- lapply(commus, calc_cormat, R=R) ; 
+Rs <- lapply(commus, calc_cormat, R=R) ;
 names(Rs) <- paste0("iteration ", seq(iters))
 Rs
 ```
 
-## Selbststudium 3: Hintergrundwissen
+## Selbststudium 5: PAF
 
->...[P]rincipal axes factor analysis. This is similar to principal components,
+> [P]rincipal axes factor analysis. This is similar to principal components,
 except that it is done with a reduced matrix where the diagonals are the
 communalities. The communalities can either be (1) specified a priori, (2)
 estimated by such procedures as multiple linear regression, or (3) found by
 iteratively doing an eigenvalue decomposition and repeatedly replacing the
-original 1s on the diagonal with the the value of $1 - u^2$ where $U^2 =
-diag(R−FF')$. 
+original 1s on the diagonal with the value of $1-u^2$ where U^2 = diag(R-FF').
+(Revelle, in prep., S.156)
 
+## Selbststudium 5: PAFA Basis algorithmus
 
+```{r echo=TRUE, results='hide'}
+# EVD of R
+EVD_R <- eigen(R)
+# Loadings
+F <- EVD_R$vectors
+# Residual matrix
+R_ast <- R - F %*% t(F)
+# Squared uniqness matrix
+U2 <- diag(R_ast)
+# Replace on diagonals
+(diag(R) <- 1 - U2)
+R
+```
 
+## Selbststudium 5: PAFA -- jeweils 1 iteration
 
-<!-- eigenvalue decomposition and repeatedly replacing the original 1s on the -->
-<!-- diagonal with the the value of $1 - u^2$ where $U^2 = diag(R−FF')$. That is, -->
-<!-- starting with the original correlation or covariance matrix, R, find the k -->
-<!-- largest principal components, reproduce the matrix using those principal -->
-<!-- components. Find the resulting residual matrix, $R^*$and uniqueness matrix, $U^2$ by -->
-<!-- $R^∗= R−FF'$ and $U2 = diag(R∗) -->
-<!-- and then, for iteration i, find Ri by replacing the diagonal of the original R matrix with 1 - -->
-<!-- diag(U2) found on the previous step. Repeat this process until the change from one iteration -->
-<!-- to the next is arbitrarily small. T -->
+```{r echo=TRUE, results='hide'}
+EVD_R <- eigen(R) # EVD of R
+F <- EVD_R$vectors # Loadings
+k <- 7 # k largest PC
+# Pre reproduction
+Fk <- F[,seq(k)] ; Fk <- cbind(Fk, 0)
+# Residual matrix
+R_ast <- R - Fk %*% t(Fk)
+# Squared uniqness matrix
+U2 <- diag(R_ast)
+# Replace on diagonals
+diag(R) <- 1 - U2
+#...Repeat
+round(R, digits = 3)
+```
+
+Anmerkung: Da 7 Hauptkomponenten zur Reproduktion genutzt werden, dauert es eine
+ganze Weile bis etwas passiert!
