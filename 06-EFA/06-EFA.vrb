@@ -1,12 +1,14 @@
-\frametitle{Selbststudium 5: PAFA -- jeweils 1 iteration}
-\protect\hypertarget{selbststudium-5-pafa-jeweils-1-iteration}{}
+\frametitle{Selbststudium 5: händische PAF (1 Iteration)}
+\protect\hypertarget{selbststudium-5-huxe4ndische-paf-1-iteration}{}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{EVD\_R }\OtherTok{\textless{}{-}} \FunctionTok{eigen}\NormalTok{(R) }\CommentTok{\# EVD of R}
 \NormalTok{F }\OtherTok{\textless{}{-}}\NormalTok{ EVD\_R}\SpecialCharTok{$}\NormalTok{vectors }\CommentTok{\# Loadings}
-\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{7} \CommentTok{\# k largest PC}
+\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{5} \CommentTok{\# k largest PC}
 \CommentTok{\# Pre reproduction}
-\NormalTok{Fk }\OtherTok{\textless{}{-}}\NormalTok{ F[,}\FunctionTok{seq}\NormalTok{(k)] ; Fk }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(Fk, }\DecValTok{0}\NormalTok{)}
+\NormalTok{Fk }\OtherTok{\textless{}{-}}\NormalTok{ F[,}\FunctionTok{seq}\NormalTok{(k)] }
+\NormalTok{Z }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\AttributeTok{ncol =} \FunctionTok{ncol}\NormalTok{(F) }\SpecialCharTok{{-}}\NormalTok{ k,  }\FunctionTok{nrow}\NormalTok{(F))}
+\NormalTok{Fk }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(Fk, Z)}
 \CommentTok{\# Residual matrix}
 \NormalTok{R\_ast }\OtherTok{\textless{}{-}}\NormalTok{ R }\SpecialCharTok{{-}}\NormalTok{ Fk }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Fk)}
 \CommentTok{\# Squared uniqness matrix}
@@ -18,5 +20,5 @@
 \end{Highlighting}
 \end{Shaded}
 
-Anmerkung: Da 7 Hauptkomponenten zur Reproduktion genutzt werden, dauert
-es eine ganze Weile bis etwas passiert!
+Anmerkung: Führen Sie die Ergebnisse solange durch, bis sich die
+Verändeurngen in der Hauptdiagonale stabilisieren
