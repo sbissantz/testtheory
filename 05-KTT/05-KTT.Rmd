@@ -7,15 +7,26 @@ output:
     slide_level: 2
 author: Jalynskij et al. 
 incremental: true
+toc: true
+bibliography: ./references.bib
+nocite: |   
+    @R-bibtex, @R-paran, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-graphs, @R-stats, @R-psych
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+pkgs <- c("psych", "paran", "rmarkdown", "bibtex", "base", "stats", "graph")
+lapply(pkgs, library, character.only=TRUE)
+knitr::write_bib(pkgs, file = "./references.bib")
+refs <- bibtex::read.bib("references.bib")
+keys <- names(refs)
 ```
 
-<!-- INHALTSVERZEICHNIS FEHLT -->
-
-## Einstieg
+# Einstieg: the Scientists wishlist {-}
 
 Stellen Sie sich vor, Sie dürfen völlig frei ein Thema für eine Forschungsarbeit
 wählen. Was würden Sie untersuchen?
@@ -28,7 +39,7 @@ Intelligenz, Narzissmus, Ehre, Liebe, Depression...).
 
 $\longrightarrow$ "The burden of complex measurement"
 
-## Die Bürde der Messung komplexer Phänomene
+# Die Bürde der Messung komplexer Phänomene
 
 > "Psychological measurement can be a difficult task. We aim to measure not
 directly observable variables like cognitive abilities, personality traits,
@@ -54,7 +65,7 @@ Messfehlers (Messfehlertheorie).
 - Erklärung: Wahrer Wert $\sim$ Beobachtungswert $\sim$ Messfehler 
 - (..demnächst: Item Response Theory (IRT))
 
-## Das True Score Approach 
+# Das True Score Approach 
 
 Formal: Die Bürde der Messung komplexer Phänomene 
 
@@ -152,7 +163,7 @@ ihr eigenes Alter ein und verändern Sie den Wert für \texttt{n}. (siehe:
 
 Anmerkung: Sie sollen die Konzepte *nicht* jede Zeile des Codes verstehen!
 
-## True Score Logik: Gedankenexperiment
+# True Score Logik: Gedankenexperiment
 
 \begin{block}{Gedankenexperiment}
 Hätten wir die Möglichkeit eine Person i unzählige Male zu unter den gleichen
@@ -243,7 +254,7 @@ text(c(3,T+.3), labels = "True Score")
 mtext("Approximation von T bei imaginären Wiederholungszahlen des Tests")
 ```
 
-## True Score Logik
+# True Score Logik
 
 Um die True Score Logik zu verinnerlichen, wollen wir die einzelnen Konzepte in
 R umsetzen und mit den Kennwerten "spielen" um eine Intuition für sie zu
@@ -389,7 +400,7 @@ eigenen Populationen und variieren Sie systematisch die Werte $M$ und $N$.
 (siehe: Übungsaufgabe 4)
 \end{example}
 
-## Lokale Unabhängigkeit
+# Lokale Unabhängigkeit
 
 \begin{alertblock}{Lokale Unabhängigkeit}
 Lokale Unabhängigkeit $\Leftrightarrow$ die Itemantworten sind unter Kontrolle
@@ -470,7 +481,7 @@ Korrelationsmatrix wie folgt aus. Zu welchen Schluss kommen Sie bezüglich der
 Annahme lokal statistischer Unabhängigkeit? Warum?
 \end{example}
 
-## Reliabilität
+# Reliabilität
 
 ..von der additive Varianzzerlegung zu Definition der Reliabilität
 
@@ -531,9 +542,50 @@ abline(h=c(0,1), lty=2)
 text(x= 7, y= 0.1, "Minimum") ; text(x= 35, y= 0.9, "Maximum")
 ```
 
-...Die Reliabilität ist also ein Maß für die Messfehlerfreiheit einer Messung 
+Die Reliabilität ist also ein Maß für die Messfehlerfreiheit einer Messung!
 
-## Exkurs: Zum Problem(?) systematischer Störeinflüsse
+# Messmodelle (..to be continued!)
+ 
+\begin{alertblock}{Messmodelle \& Messäquivalenz}
+  Inwieweit messen wir mit unterschiedlichen Tests dasselbe Konstrukt?
+\end{alertblock}
+
+Anmerkung: unterschiedliche Messmodelle bedingen unterschiedliche
+Reliabilitätskoeffizienten.
+
+..Fortsetzung in der Übnung zur Reliabilität folgt.
+
+## Zusammenfassung 
+
+> "The classical test theory model is the theory of psychological testing that is
+most often used in empirical applications. The central concept in classical test
+theory is the true score. True scores are related to the observations through
+the use of the expectation operator: the true score is the expected value of the
+observed score. Thus, a researcher who sees intelligence as a true score on an
+intelligence test supposes that somebody’s level of intelligence is his expected
+score on an IQ-test."
+> ([Borseboom 2005, S. 3](https://doi.org/10.1017/CBO9780511490026))
+>
+
+## Abschließende Anmerkung
+
+> "However, although various authors have warned against it, the platonic true
+score interpretation is like an alien in a B-movie: no matter how hard you beat
+it up, it keeps coming back."
+>
+> ([Borseboom 2005, S. 32](https://doi.org/10.1017/CBO9780511490026))
+
+Probleme der True Score Logik
+
+- z.B.: die Grundgleichung bleibt empirisch ungeprüft ($\tau = X + \epsilon$)
+- z.B.: Annahme zu Messfehlern oft problematisch ($E(\epsilon)=0$)
+- z.B.: [Kohli et al. (2015)](https://doi.org/10.1177/0013164414559071) Nur
+moderne Erweiterungen der KTT (v.a. Underlying Normal Variable Approach) können
+annähernd mit modernen Item Response Theory Model (IRT) mithalten.
+
+$\Rightarrow$ Einblick in die IRT
+
+# Exkurs: Zum Problem(?) systematischer Störeinflüsse
 
 \begin{block}{Ausganssituation}
 Da die KTT nur unsystamtische Störeinflüsse berücksichtigt,
@@ -616,43 +668,5 @@ x[1:50] <- x[1:50] + 6
 lm(y ~ x)$coef[[2]] 
 ```
 
-## Messmodelle (..to be continued!)
- 
-\begin{alertblock}{Messmodelle \& Messäquivalenz}
-  Inwieweit messen wir mit unterschiedlichen Tests dasselbe Konstrukt?
-\end{alertblock}
+## Literaturverzeichnis {.allowframebreaks} 
 
-Anmerkung: unterschiedliche Messmodelle bedingen unterschiedliche
-Reliabilitätskoeffizienten.
-
-..Fortsetzung in der Übnung zur Reliabilität folgt.
-
-## Zusammenfassung 
-
-> "The classical test theory model is the theory of psychological testing that is
-most often used in empirical applications. The central concept in classical test
-theory is the true score. True scores are related to the observations through
-the use of the expectation operator: the true score is the expected value of the
-observed score. Thus, a researcher who sees intelligence as a true score on an
-intelligence test supposes that somebody’s level of intelligence is his expected
-score on an IQ-test."
-> ([Borseboom 2005, S. 3](https://doi.org/10.1017/CBO9780511490026))
->
-
-## Abschließende Anmerkung
-
-> "However, although various authors have warned against it, the platonic true
-score interpretation is like an alien in a B-movie: no matter how hard you beat
-it up, it keeps coming back."
->
-> ([Borseboom 2005, S. 32](https://doi.org/10.1017/CBO9780511490026))
-
-Probleme der Klassischen Test Theory
-
-- z.B.: die Grundgleichung bleibt empirisch ungeprüft ($\tau = X + \epsilon$)
-- z.B.: Annahme zu Messfehlern oft problematisch ($E(\epsilon)=0$)
-- z.B.: [Kohli et al. (2015)](https://doi.org/10.1177/0013164414559071) Nur
-moderne Erweiterungen der KTT (v.a. Underlying Normal Variable Approach) können
-annähernd mit modernen Item Response Theory Model (IRT) mithalten.
-
-$\Rightarrow$ Einblick in die IRT
