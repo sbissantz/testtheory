@@ -1,4 +1,10 @@
-# Übungsaufgabe 1 ---------------------------------------------------------
+
+###################################
+# R Skript zum Übungskurs: 06 EFA #
+##################################ä
+
+# Replikation der Ergebnisse:
+# set.seed(123)
 
 # Übungsaufgabe 2 ---------------------------------------------------------
 
@@ -51,7 +57,6 @@ fit_paf$uniquenesses
 # Quadrierte multiple Korrelation
 fit_paf$R2
 
-# Übungsaufgabe 5 ---------------------------------------------------------
 # Übungsaufgabe 6 ---------------------------------------------------------
 
 (fit_mlf <- psych::fa(R, nfactors=2,  rotate="none",  fm="ml"))
@@ -198,8 +203,3 @@ U2 <- diag(R_ast)
 diag(R) <- 1 - U2
 #...Repeat
 round(R, digits = 3)
-
-
-
-
-

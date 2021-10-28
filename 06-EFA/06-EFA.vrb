@@ -19,6 +19,3 @@
 \FunctionTok{round}\NormalTok{(R, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-Anmerkung: Führen Sie die Ergebnisse solange durch, bis sich die
-Verändeurngen in der Hauptdiagonale stabilisieren

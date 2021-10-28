@@ -6,8 +6,11 @@ output:
     fonttheme: "default"
     slide_level: 2
 author: Jalynskij et al. 
-toc: true
 incremental: true
+toc: true
+bibliography: ./references.bib
+nocite: |   
+    @R-bibtex, @R-paran, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-graphs, @R-stat, @R-psych, @lorenzo2011, @timmerman2018
 ---
 
 ```{r setup, include=FALSE}
@@ -183,7 +186,7 @@ sich in der vorgegebenen Korrelationsmatrix zu \textit{modellieren}.
 <p>&nbsp;</p>
 
 > "In other words EFA tries to find $p$ latent variables on the basis of the
-correlation structure of the $m$ manifest variables." (ebd.)
+correlation structure of the $m$ manifest variables." (Ebd.)
   
 # Das Common Factor Model (CFM)
 
@@ -222,7 +225,7 @@ the technique. [$\dots$] Factor analysis will yield meaningful results only when
 the research was meaningful to begin with.” [Gregory (2014, S.
 165)](https://www.pearson.com/us/higher-education/program/Gregory-Psychological-Testing-History-Principles-and-Applications-7th-Edition/PGM332874.html)
 
-Konklusion: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium 1-3)
+Konkl.: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium)
 
 # Extraktionsproblem
 
@@ -230,19 +233,22 @@ Konklusion: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium 1-3)
   Wie extrahieren wir die Faktoren/Komponenten?
 \end{alertblock}
 
-1. Lösung: Bestimmung der "Principal Components" 
-    - Verfahren: PCA (Principal Component Analysis/Method)
-    - Modellgleichung: $R \leftarrow P = CC^{t}$
-    - Note: Eigenwert-, Singulärwertzerlegung (closed form solution)
-2. Lösung: Iterative Bestimmung der "Principal Components" 
-    - Verfahren: PAFA (Principal Axis Factor Analysis)
-    - Modellgleichung: $R^* \leftarrow P = FF^{t}$
-    - Note(s): Reduzierte Matrix, iterativer Prozess (convergence issues)
-2. Lösung: Finde die plausibelsten ("most likely") Werte zur Repro
-    - Verfahren: MLFA (Maximum Likelihood Factor Analysis)
-    - Modellgleichung: $R \leftarrow P = \Lambda \Phi \Lambda^{t} + \Psi$
-    - Note(s): Reduzierte Matrix, itterativer Prozess (convergence issues)
- 
+1. Lösung: Bestimmung der "Principal Components" (PCA)
+2. Lösung: Iterative Bestimmung der "Principal Components" (PAF)
+2. Lösung: Finde die plausibelsten ("most likely") Werte zur Repro (MLF)
+
+<!-- - Verfahren: PCA (Principal Component Analysis/Method) -->
+<!-- - Modellgleichung: $R \leftarrow P = CC^{t}$ -->
+<!-- - Note: Eigenwert-, Singulärwertzerlegung (closed form solution) -->
+
+<!-- - Verfahren: PAFA (Principal Axis Factor Analysis) -->
+<!-- - Modellgleichung: $R^* \leftarrow P = FF^{t}$ -->
+<!-- - Note(s): Reduzierte Matrix, iterativer Prozess (convergence issues) -->
+
+<!-- - Verfahren: MLFA (Maximum Likelihood Factor Analysis) -->
+<!-- - Modellgleichung: $R \leftarrow P = \Lambda \Phi \Lambda^{t} + \Psi$ -->
+<!-- - Note(s): Reduzierte Matrix, itterativer Prozess (convergence issues) -->
+
 ## Let's do it! (..in R): PCA
 
 <!-- Ziel: Maximale (Gesamt-)Varianzaufklärung; d.h: minimaler Informationsverlust -->
@@ -381,18 +387,20 @@ Verfahren zustande kommen?
 \end{alertblock}
 
 1. Lösung: orthogonale Rotation 
-  - Ziel: Orthogonalität aufrechterhalten
-  - d.h. Faktoren dürfen nicht korrelieren
-  - z.B.: Varimax, Promax..
 2. Lösung: oblique Rotation 
-  - Ziel: mögliche Orthogonalität auflösen
-  - d.h. Faktoren dürfen korrelieren 
-  - z.B.: Oblimin, Simplimax.. 
 
 <!-- Tafelbild: \Lambda_r = \Lamdda T  -->
 <!-- - Restriktion: $TT' = I$, sodass $\Phi=I$ -->
 <!-- - Restriktion: $TT' \neq I$, sodass $\Phi\neq I$ -->
 <!-- Sozialwissenschaften: orthogonal|oblique >> Oblimin|Simplimax -->
+
+<!-- - Ziel: Orthogonalität aufrechterhalten -->
+<!-- - d.h. Faktoren dürfen nicht korrelieren -->
+<!-- - z.B.: Varimax, Promax.. -->
+
+<!-- - Ziel: mögliche Orthogonalität auflösen -->
+<!-- - d.h. Faktoren dürfen korrelieren  -->
+<!-- - z.B.: Oblimin, Simplimax..  -->
 
 ## Graphik: Orthogonale Rotation mit Varimax
 
@@ -856,5 +864,14 @@ diag(R) <- 1 - U2
 round(R, digits = 3)
 ```
 
-Anmerkung: Führen Sie die Ergebnisse solange durch, bis sich die Verändeurngen
-in der Hauptdiagonale stabilisieren
+## Selbststudium 5: händische PAF ($\geq$ 1 Iteration) 
+
+Anmerkung: Führen Sie das Code Snippet solange immer wieder aus, bis sich die
+Verändeurngen in der Hauptdiagonale stabilisieren. Jede Wiederholung des Codes
+stellt eine Iteration in der Maschinerie der PAF dar. Nichts anderes passiert
+innerhalb des Algorithmuses den Sie in konventionellen Packages finden. ..nur
+das die Algorithmen deutlich performanter und effizienter implementiert sind.
+
+## Literaturverzeichnis {.allowframebreaks} 
+
+<p>&nbsp;</p>
