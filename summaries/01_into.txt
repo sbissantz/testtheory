@@ -97,7 +97,7 @@ Retrospektive Validität := Grad indem das Kriterium die Messung vorhersagt
 cor(Kriterium: t1, Testwert: t2) -- Zeitpunkte: unterschiedlich
 - z.B. cor(IQ: Studiums,  Abiturnote)
 
-Übereinstimmungsvalidität := Messung und Kriterium werden zeitgleich erhoben 
+Übereinstimmungsvalidität := Messung und Kriterium werden zeitglech erhoben 
 konkurrente Validität
 cor(Testwert: t1,  Testwert: t1) -- Zeitpunkte: gleich
 - z.B. cor(Erstgespräch <- Diagnostikinterview)
@@ -346,3 +346,4 @@ Ergebniss liefert, muss das nicht in der eigenen Stichprobe so sein.
 (ÜBUNG: Simuliere kongnerische Daten und tau-äquivalente Daten und variere, um
 die Differenz zwischen Alpha und Omega abzubilden)
 
+i
