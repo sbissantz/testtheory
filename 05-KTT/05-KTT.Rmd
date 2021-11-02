@@ -1,5 +1,5 @@
 ---
-title: "Klassische Test Theory"
+title: "Klassische Test Theorie"
 output: 
   beamer_presentation:
     theme: "Boadilla"
@@ -10,7 +10,7 @@ incremental: true
 toc: true
 bibliography: ./references.bib
 nocite: |   
-    @R-bibtex, @R-paran, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-graphs, @R-stats, @R-psych
+    @R-bibtex, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-graphs, @R-stats, @R-psych
 ---
 
 ```{r setup, include=FALSE}
@@ -26,7 +26,7 @@ refs <- bibtex::read.bib("references.bib")
 keys <- names(refs)
 ```
 
-# Einstieg: the Scientists wishlist {-}
+# Einstieg: Forschungsthemen-Wunschliste {-}
 
 Stellen Sie sich vor, Sie dürfen völlig frei ein Thema für eine Forschungsarbeit
 wählen. Was würden Sie untersuchen?
@@ -37,7 +37,7 @@ Viele Sozialwissenschaftlern/innen gemeint ist, ist ein aufgeprägtes Interesse
 an komplexen (oft unbeobachtbaren) sozialwissenschaftlichen Konstrukten (z.B.
 Intelligenz, Narzissmus, Ehre, Liebe, Depression...).
 
-$\longrightarrow$ "The burden of complex measurement"
+$\longrightarrow$ die Bürde der Messung komplexer Phänomene
 
 # Die Bürde der Messung komplexer Phänomene
 
@@ -54,8 +54,8 @@ variable." ([Mair, 2018, S. 1](https://www.springer.com/gp/book/9783319931753))
 ## Die Bürde der Messung komplexer Phänomene
 
 \begin{block}{Die Bürde der Messung komplexer Phänomene}
-...being (almost always) doomed to measure with error when accessing latent
-constructs.
+d.h. man ist häufig dazu "verdammt", latente Konstrukte mit Messfehler zu
+erfassen.
 \end{block}
 
 ...zur Kontrolle benötigen wir eine Theorie über die Entstehung des
@@ -113,11 +113,10 @@ abline(h=0, lty=2)
 mtext("systematische Fehlerkomponente")
 ```
 
-## Warum "unsystematisch"?
+## Warum unsystematische Einflüsse?
 
-[McElreath, 2020, S. 73](https://xcelab.net/rm/statistical-rethinking/):
 \begin{alertblock}{Fluktuationsphänomen}
-"Adding small fluctuations tend to dampen one another!"
+"Adding small fluctuations tend to dampen one another!" (McElreath, 2020, S.73)
 \end{alertblock}
 
 <p>&nbsp;</p>
@@ -148,22 +147,43 @@ reps <- replicate(M, add_privacy(true_age))
 mean(reps)
 ```
 
-## Prognose & Selbstexperiment
+## Die verflixte Waage
 
-- Wie verändert sich der Wert mit steigender Wiederholungszahl?
-- Ab wann sind die Veränderungen konstant?
+```{r include=FALSE}
+set.seed(123)
+```
+```{r echo=TRUE}
+true_weight <- 67
+crazy_scale <- function(true_weight){
+  # 5kg +/- 
+  rnorm(1, true_weight, 5)
+}
+# Anzahl der Messwiederholungen
+M <- 1e5
+reps <- replicate(M, crazy_scale(true_weight))
+mean(reps)
+```
 
-<p>&nbsp;</p>
+## Grafik: Die verflixte Waage
+
+```{r, out.width="80%", results='hide', fig.align='center'}
+hist(reps, main=NA, xlab = "Messergebnis(se)", ylab = "Häufigkeiten")
+abline(v=67, lty=2)
+mtext("Verteilung der Messergebnisse")
+```
+
+## Übungsaufgabe1: Prognose & Selbstexperiment
 
 \begin{example}
-Versuchen Sie es selbst! Nutzen Sie den Code auf der vorherigen Folie. Geben Sie
-ihr eigenes Alter ein und verändern Sie den Wert für \texttt{n}. (siehe:
-Übungsaufgabe 1)
+Versuchen Sie es selbst! Nutzen Sie den Code auf den vorherigen Folie. Geben Sie
+ihr eigenes Alter/Gewicht ein und verändern Sie den Wert für \texttt{n}. Wie
+verändert sich der Wert mit steigender Wiederholungszahl? Ab wann sind die
+Veränderungen konstant?
 \end{example}
 
-Anmerkung: Sie sollen die Konzepte *nicht* jede Zeile des Codes verstehen!
+Anmerkungen: Sie sollen die Konzepte *nicht* jede Zeile des Codes verstehen!
 
-# True Score Logik: Gedankenexperiment
+## True Score Logik: Gedankenexperiment
 
 \begin{block}{Gedankenexperiment}
 Hätten wir die Möglichkeit eine Person i unzählige Male zu unter den gleichen
@@ -583,9 +603,9 @@ Probleme der True Score Logik
 moderne Erweiterungen der KTT (v.a. Underlying Normal Variable Approach) können
 annähernd mit modernen Item Response Theory Model (IRT) mithalten.
 
-$\Rightarrow$ Einblick in die IRT
+$\Rightarrow$ Moderne Ansätze zur Verebsserung (..to be continued!) 
 
-# Exkurs: Zum Problem(?) systematischer Störeinflüsse
+# Selbststudium: Zum Problem(?) systematischer Störeinflüsse
 
 \begin{block}{Ausganssituation}
 Da die KTT nur unsystamtische Störeinflüsse berücksichtigt,

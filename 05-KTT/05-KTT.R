@@ -4,6 +4,9 @@
 
 # Übungsaufgabe 1 ---------------------------------------------------------
 
+# Alter
+#
+
 # Setup
 # set.seed(123)
 # rm(list = ls())
@@ -21,6 +24,23 @@ M <- 10 #<------------------------------------------------ Verändere mich!
 reps <- replicate(M, add_privacy(true_age))
 # Erwartungswert von X ; E(X) = T 
 (E_X <- mean(reps))
+
+# Waage
+#
+
+# Setup
+# set.seed(123)
+# rm(list = ls())
+#
+true_weight <- 67 #<---------------------------------------- Verändere mich!
+crazy_scale <- function(true_weight){
+  # 5kg +/- 
+  rnorm(1, true_weight, 5)
+}
+# Anzahl der Messwiederholungen
+M <- 10 #<------------------------------------------ Verändere mich!
+reps <- replicate(M, crazy_scale(true_weight))
+mean(reps)
 
 # Übungsaufgabe 2 ---------------------------------------------------------
 
