@@ -1,5 +1,5 @@
 ---
-title: "Klassische Test Theorie"
+title: "Klassische Testtheorie"
 output: 
   beamer_presentation:
     theme: "Boadilla"
@@ -26,14 +26,14 @@ refs <- bibtex::read.bib("references.bib")
 keys <- names(refs)
 ```
 
-# Einstieg: Forschungsthemen-Wunschliste {-}
+# Einstieg: Forschungsthemen-Wunschliste
 
 Stellen Sie sich vor, Sie dürfen völlig frei ein Thema für eine Forschungsarbeit
 wählen. Was würden Sie untersuchen?
 
 ## Auflösung
 
-Viele Sozialwissenschaftlern/innen gemeint ist, ist ein aufgeprägtes Interesse
+Viele Sozialwissenschaftler/innen haben ein ausgeprägtes Interesse
 an komplexen (oft unbeobachtbaren) sozialwissenschaftlichen Konstrukten (z.B.
 Intelligenz, Narzissmus, Ehre, Liebe, Depression...).
 
@@ -61,13 +61,13 @@ erfassen.
 ...zur Kontrolle benötigen wir eine Theorie über die Entstehung des
 Messfehlers (Messfehlertheorie).
 
-- Beispieltheorie: Klassische Test Theorie (KTT)
-- Erklärung: Wahrer Wert $\sim$ Beobachtungswert $\sim$ Messfehler 
-- (..demnächst: Item Response Theory (IRT))
+- Beispieltheorie: Klassische Testtheorie (KTT)
+  - Erklärung: Wahrer Wert = Beobachtungswert + Messfehler 
+- (...demnächst: Item Response Theory (IRT))
 
 # Das True Score Approach 
 
-Formal: Die Bürde der Messung komplexer Phänomene 
+Formale Darstellung der Bürde der Messung komplexer Phänomene..
 
 \begin{equation}
   X = \tau - \epsilon  
@@ -77,7 +77,7 @@ Daraus folgt logisch äquivalent..
 
 \begin{alertblock}{Definition: True Score}
   \begin{equation}
-    \Large \tau = X + \epsilon 
+    \tau = X + \epsilon 
   \end{equation}
 \end{alertblock}
 
@@ -91,7 +91,7 @@ Daraus folgt logisch äquivalent..
 <!--        LV (Konstrukt) -> OV (Verhalten, Item)  -->
 <!--        LV (Konstrukt) <- Testtheorie — OV (Verhalten, Item)  -->
 
-## CTT als Messfehlertheorie
+## KTT als Messfehlertheorie
 
 \begin{block}{Grundannahme: unsystematische Fehlerkomponente}
  \begin{equation}
@@ -159,7 +159,7 @@ crazy_scale <- function(true_weight){
   rnorm(1, true_weight, 5)
 }
 # Anzahl der Messwiederholungen
-M <- 1e5
+M <- 100000
 reps <- replicate(M, crazy_scale(true_weight))
 mean(reps)
 ```
@@ -169,17 +169,16 @@ mean(reps)
 ```{r, out.width="80%", results='hide', fig.align='center'}
 hist(reps, main=NA, xlab = "Messergebnis(se)", ylab = "Häufigkeiten")
 abline(v=67, lty=2)
-mtext("Verteilung der Messergebnisse")
+mtext("Verteilung der Messergebnisse (M=100.0000)")
 ```
 
 ## Übungsaufgabe 1: Prognose & Selbstexperiment
- 
-- Wie verändert sich die Ergebniss mit steigender Wiederholungszahl? 
-- Ab wann sind die Veränderungen konstant?
 
 \begin{example}
-Versuchen Sie es selbst! Nutzen Sie den Code auf den vorherigen Folien. Geben Sie
-ihr eigenes Alter/Gewicht ein und verändern Sie den Wert für \texttt{n}.
+Versuchen Sie es selbst! Nutzen Sie den Code auf den vorherigen Folie. Geben Sie
+ihr eigenes Alter/Gewicht ein und verändern Sie den Wert für \texttt{n}. Wie
+verändert sich der Wert mit steigender Wiederholungszahl? Ab wann sind die
+Veränderungen konstant?
 \end{example}
 
 Anmerkungen: Sie sollen die Konzepte *nicht* jede Zeile des Codes verstehen!
@@ -205,7 +204,7 @@ E(X_{j=1, \dots, M}) = \tau  \quad | \quad  \epsilon \sim Normal(0, \sigma)
 ```{r echo=TRUE}
 set.seed(123)
 # Anzahl der Messwiederholungen
-M <- 1e4 
+M <- 10000
 # True Score(s) (z.B. Intelligenztest)
 T <- 100 
 # Zufallsfehler; Schwankungsbreite +/- 10
@@ -235,18 +234,18 @@ set.seed(123)
 (E_X <- mean(reps))
 ```
 
-## Übungsaufgabe 2: Prognose & Selbstexperiment
+## Prognose & Selbstexperiment
+
+- Wie verändert sich der Wert mit steigender Wiederholungszahl?
+- Ab wann sind die Veränderungen konstant?
+
+<p>&nbsp;</p>
 
 \begin{example}
 Versuchen Sie es selbst! Nutzen Sie den Code auf der vorherigen Folie. Verändern
 Sie den Wert für \texttt{M} und überprüfen Sie Ihre Prognose. (siehe:
 Übungsaufgabe 2)
 \end{example}
-
-<p>&nbsp;</p>
-
-- Wie verändert sich der Wert mit steigender Wiederholungszahl?
-- Ab wann sind die Veränderungen konstant?
 
 Anmerkungen: Wollen Sie unsere Ergebnisse exakt reproduzieren setzen Sie
 folgendes Snippet vor jedes Codebeispiel
@@ -275,7 +274,7 @@ text(c(3,T+.3), labels = "True Score")
 mtext("Approximation von T bei imaginären Wiederholungszahlen des Tests")
 ```
 
-# True Score Logik
+## True Score Logik (..once more)
 
 Um die True Score Logik zu verinnerlichen, wollen wir die einzelnen Konzepte in
 R umsetzen und mit den Kennwerten "spielen" um eine Intuition für sie zu
@@ -283,7 +282,7 @@ bekommen; v.a.:
 
 - Interindividuelle Merkmalsverteilung
 - Intrainduviduelle Merkmalsverteilung
-- True, Observed & Error Score -- $\tau. X, \epsilon$
+- True, Observed & Error Score -- $\tau, X, \epsilon$
 
 ## Zur Verortung: Kernkonzepte
 
@@ -307,7 +306,7 @@ set.seed(123)
 ```
 ```{r echo=TRUE}
 # Populationsgröße 
-N <- 1e4 
+N <- 10000
 # Generierung der True Scores
 # 100: Mittlere Intelligenz in der Population
 # 30: Abweichungen vom Populationnsmittelwert
@@ -373,7 +372,7 @@ X_i <- sample(X, 1)
 (X_ij <- sample(X_i[[1]], 1)) ; names(X_i)
 ```
 
-## Übungsaufgabe 3: Prognose & Selbsttests
+## Prognose & Selbsttests
 
 \begin{example}
 Versuchen Sie es selbst! Nutzen Sie nachfolgende Funktion und führen sie sie
@@ -382,7 +381,9 @@ neue Probanden. Achten sie darauf, wie sich True Score, Observed Score und
 Messfehler verändern. (siehe: Übungsaufgabe 3)
 \end{example}
 
-Anmerkung: Um unsere Ergebnisse zu reproduzieren -- \texttt{set.seed(123)}
+- Funktion einlesen: Makieren + Str/Ctrl/Cmd-Enter
+- Mehrfach ausführen: Makieren + Str/Ctrl/Cmd-Enter
+- Ergebnis auf Folie wiederholen:
 
 ## Zufallsziehung 
 
@@ -403,7 +404,7 @@ rsample_i <- function(){
 rsample_i()
 ```
 
-## Übungsaufgabe 4: Prognose & Selbsttest
+## Prognose & Selbsttest
 
 - Wie wirken sich Veränderungen in der Wiederholungszahl des Tests ($M$) aus?
 - Was geschieht bei Veränderungen der Populationsgröße ($N$)? 
@@ -512,7 +513,7 @@ Annahme lokal statistischer Unabhängigkeit? Warum?
 Die Reliabilität wird definiert als Anteil ($Var(\tau_j)$) der wahren Varianz an
 der Gesamtvarianz ($Var(Y_j)$).
 
-## Übubngsaufgabe 5: Prognose & Selbsttest
+## Prognose & Selbsttest
 
 Wie wirken sich eine steigende Varianz im Fehlerterm auf die Reliabilität der
 Messung aus? (Tipp: $Rel(Y_j) = \frac{Var(\tau_j)}{Var(\tau_j) + Var(\epsilon_j)}$)

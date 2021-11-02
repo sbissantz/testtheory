@@ -1,5 +1,5 @@
 ###################################
-# R Skript zum Übungskurs: 05 KTT #
+# R Skript zum Übungskurs: 04 KTT # 
 ##################################ä
 
 # Übungsaufgabe 1 ---------------------------------------------------------
@@ -49,7 +49,7 @@ mean(reps)
 # rm(list = ls()) 
 #
 # Anzahl der Testwiederholungen 
-M <- 1e4 #<-------------------------------------------------- verändere mich!
+M <- 10000 #<---------------------------------- verändere mich!
 # True Score
 T <- 100 
 # Messfehler: E(E) = 0
@@ -84,13 +84,13 @@ cat("Beobachtungswert", X_i, "True Score", T)
 # rm(list = ls())
 #
 # Populationsgröße 
-N <- 1e4 #<-------------------------------------------------- verändere mich!
+N <- 10000 #<----------------------------------------------- verändere mich!
 # Generierung der True Scores
 # 100: Mittlere Intelligenz in der Population
 # 30: Abweichungen vom Populationnsmittelwert
 T <- round(rnorm(N, 100, 30), digits = 0)
 # Anzahl der Testwiederholungen
-M <- 5e3 #<-------------------------------------------------- verändere mich!
+M <- 5000 #<-------------------------------------------------- verändere mich!
 X <- lapply(T, function(T) rnorm(M, T , 5)) ; names(X) <- T
 
 # Outputs
@@ -161,7 +161,7 @@ rsample_i() #<------------------------------------------ mehrfach ausführen!
 # rm(list = ls())
 #
 # Populaitonsgröße
-N <- 1e4
+N <- 10000
 tau <- rnorm(N, mean = 100, 30)
 var_epsilon <- 25 # <-------------------------------------- verändere mich!
 epsilon <- rnorm(N, 0, var_epsilon) 
@@ -199,7 +199,7 @@ cor(x, y) ; cor(x+3, y) ; cor(x, y + 3) ; cor(x + 3, y + 3)
 x[1:50] <- x[1:50] + 3
 cor(x, y) 
 
-# Zusätzlicher MEssfehler
+# Zusätzlicher Messfehler
 x[1:50] <- x[1:50] + 6
 cor(x, y) 
 
