@@ -12,7 +12,7 @@
 # rm(list = ls())
 #
 # Wahres Alter
-true_age <- 28 #<------------------------------------------ Verändere mich!
+true_age <- 28 #<------------------------------------------ verändere mich!
 
 add_privacy <- function(true_age){
   hot <- sample(c(0,1), 1, replace = TRUE)
@@ -20,7 +20,7 @@ add_privacy <- function(true_age){
 }
 
 # Anzahl der Testwiederholungen 
-M <- 10 #<------------------------------------------------ Verändere mich!
+M <- 10 #<------------------------------------------------ verändere mich!
 reps <- replicate(M, add_privacy(true_age))
 # Erwartungswert von X ; E(X) = T 
 (E_X <- mean(reps))
@@ -32,13 +32,13 @@ reps <- replicate(M, add_privacy(true_age))
 # set.seed(123)
 # rm(list = ls())
 #
-true_weight <- 67 #<---------------------------------------- Verändere mich!
+true_weight <- 67 #<---------------------------------------- verändere mich!
 crazy_scale <- function(true_weight){
   # 5kg +/- 
   rnorm(1, true_weight, 5)
 }
 # Anzahl der Messwiederholungen
-M <- 10 #<------------------------------------------ Verändere mich!
+M <- 10 #<------------------------------------------ verändere mich!
 reps <- replicate(M, crazy_scale(true_weight))
 mean(reps)
 
@@ -49,7 +49,7 @@ mean(reps)
 # rm(list = ls()) 
 #
 # Anzahl der Testwiederholungen 
-M <- 1e4 #<-------------------------------------------------- Verändere mich!
+M <- 1e4 #<-------------------------------------------------- verändere mich!
 # True Score
 T <- 100 
 # Messfehler: E(E) = 0
@@ -84,13 +84,13 @@ cat("Beobachtungswert", X_i, "True Score", T)
 # rm(list = ls())
 #
 # Populationsgröße 
-N <- 1e4 #<-------------------------------------------------- Verändere mich!
+N <- 1e4 #<-------------------------------------------------- verändere mich!
 # Generierung der True Scores
 # 100: Mittlere Intelligenz in der Population
 # 30: Abweichungen vom Populationnsmittelwert
 T <- round(rnorm(N, 100, 30), digits = 0)
 # Anzahl der Testwiederholungen
-M <- 5e3 #<-------------------------------------------------- Verändere mich!
+M <- 5e3 #<-------------------------------------------------- verändere mich!
 X <- lapply(T, function(T) rnorm(M, T , 5)) ; names(X) <- T
 
 # Outputs
@@ -132,7 +132,7 @@ hist(X_i[[1]],
 
 # Ziehe zufällig ein Testwert dieser Person 
 # ..aus der intraindividuellen Merkmalsverteilung
-(X_ij <- sample(X_i[[1]], 1)) #<--------------------------- mehfach Ausführen!
+(X_ij <- sample(X_i[[1]], 1)) #<--------------------------- mehrfach ausführen!
 cat("Observed Score:", X_ij, "True Score:", names(X_i))
 
 # Funktion 
@@ -152,13 +152,9 @@ rsample_i <- function(){
       abs(round(X_ij) - as.numeric(names(X_i))))}
 
 # Ziehe zufällig ein Individuum aus der Population
-rsample_i() #<------------------------------------------ mehfach Ausführen!
+rsample_i() #<------------------------------------------ mehrfach ausführen!
 
-# Übungsaufgabe 5 & 6 -----------------------------------------------------
-
-## empty
-
-# Übungsaufgabe 7 ---------------------------------------------------------
+# Übungsaufgabe 5 ---------------------------------------------------------
 
 # Setup
 # set.seed(123)
@@ -167,7 +163,7 @@ rsample_i() #<------------------------------------------ mehfach Ausführen!
 # Populaitonsgröße
 N <- 1e4
 tau <- rnorm(N, mean = 100, 30)
-var_epsilon <- 25 # <-------------------------------------- Verändere mich!
+var_epsilon <- 25 # <-------------------------------------- verändere mich!
 epsilon <- rnorm(N, 0, var_epsilon) 
 
 # Funktion
@@ -177,7 +173,7 @@ reliab <- function(tau, epsilon){
   cat("Reliabilität der Messung:", rel)
 }
 
-reliab(tau, epsilon) #<------------------------------- mehfach Ausführen!
+reliab(tau, epsilon) #<------------------------------- mehrfach ausführen!
 
 # Exkurs ------------------------------------------------------------------
 

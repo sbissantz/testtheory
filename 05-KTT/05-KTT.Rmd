@@ -147,7 +147,7 @@ reps <- replicate(M, add_privacy(true_age))
 mean(reps)
 ```
 
-## Die verflixte Waage
+## Die verflixte Waage (..in R)
 
 ```{r include=FALSE}
 set.seed(123)
@@ -172,13 +172,14 @@ abline(v=67, lty=2)
 mtext("Verteilung der Messergebnisse")
 ```
 
-## Übungsaufgabe1: Prognose & Selbstexperiment
+## Übungsaufgabe 1: Prognose & Selbstexperiment
+ 
+- Wie verändert sich die Ergebniss mit steigender Wiederholungszahl? 
+- Ab wann sind die Veränderungen konstant?
 
 \begin{example}
-Versuchen Sie es selbst! Nutzen Sie den Code auf den vorherigen Folie. Geben Sie
-ihr eigenes Alter/Gewicht ein und verändern Sie den Wert für \texttt{n}. Wie
-verändert sich der Wert mit steigender Wiederholungszahl? Ab wann sind die
-Veränderungen konstant?
+Versuchen Sie es selbst! Nutzen Sie den Code auf den vorherigen Folien. Geben Sie
+ihr eigenes Alter/Gewicht ein und verändern Sie den Wert für \texttt{n}.
 \end{example}
 
 Anmerkungen: Sie sollen die Konzepte *nicht* jede Zeile des Codes verstehen!
@@ -234,18 +235,18 @@ set.seed(123)
 (E_X <- mean(reps))
 ```
 
-## Prognose & Selbstexperiment
-
-- Wie verändert sich der Wert mit steigender Wiederholungszahl?
-- Ab wann sind die Veränderungen konstant?
-
-<p>&nbsp;</p>
+## Übungsaufgabe 2: Prognose & Selbstexperiment
 
 \begin{example}
 Versuchen Sie es selbst! Nutzen Sie den Code auf der vorherigen Folie. Verändern
 Sie den Wert für \texttt{M} und überprüfen Sie Ihre Prognose. (siehe:
 Übungsaufgabe 2)
 \end{example}
+
+<p>&nbsp;</p>
+
+- Wie verändert sich der Wert mit steigender Wiederholungszahl?
+- Ab wann sind die Veränderungen konstant?
 
 Anmerkungen: Wollen Sie unsere Ergebnisse exakt reproduzieren setzen Sie
 folgendes Snippet vor jedes Codebeispiel
@@ -372,7 +373,7 @@ X_i <- sample(X, 1)
 (X_ij <- sample(X_i[[1]], 1)) ; names(X_i)
 ```
 
-## Prognose & Selbsttests
+## Übungsaufgabe 3: Prognose & Selbsttests
 
 \begin{example}
 Versuchen Sie es selbst! Nutzen Sie nachfolgende Funktion und führen sie sie
@@ -381,9 +382,7 @@ neue Probanden. Achten sie darauf, wie sich True Score, Observed Score und
 Messfehler verändern. (siehe: Übungsaufgabe 3)
 \end{example}
 
-- Funktion einlesen: Makieren + Str/Ctrl/Cmd-Enter
-- Mehrfach ausführen: Makieren + Str/Ctrl/Cmd-Enter
-- Ergebnis auf Folie wiederholen:
+Anmerkung: Um unsere Ergebnisse zu reproduzieren -- \texttt{set.seed(123)}
 
 ## Zufallsziehung 
 
@@ -404,7 +403,7 @@ rsample_i <- function(){
 rsample_i()
 ```
 
-## Prognose & Selbsttest
+## Übungsaufgabe 4: Prognose & Selbsttest
 
 - Wie wirken sich Veränderungen in der Wiederholungszahl des Tests ($M$) aus?
 - Was geschieht bei Veränderungen der Populationsgröße ($N$)? 
@@ -484,7 +483,6 @@ Korrelationmatritzen an. Zu welchem Ergebnis kommen Sie?
 
 ## Lokale Unabhängigkeit $\sim$ Korrelationsmatrizen II
 
-
 ```{r include=FALSE}
 set.seed(123)
 ```
@@ -514,7 +512,7 @@ Annahme lokal statistischer Unabhängigkeit? Warum?
 Die Reliabilität wird definiert als Anteil ($Var(\tau_j)$) der wahren Varianz an
 der Gesamtvarianz ($Var(Y_j)$).
 
-## Prognose & Selbsttest
+## Übubngsaufgabe 5: Prognose & Selbsttest
 
 Wie wirken sich eine steigende Varianz im Fehlerterm auf die Reliabilität der
 Messung aus? (Tipp: $Rel(Y_j) = \frac{Var(\tau_j)}{Var(\tau_j) + Var(\epsilon_j)}$)
