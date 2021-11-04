@@ -103,16 +103,14 @@ Grad indem der Test das Konstrukt erfasst, das er messen soll
 - Formal: cor(Testwerte, Außenkriterium)
 - z.B. Außenkriterium: Religiösität, Kirchganshäufigkeit
 
-Note: Hohe Validität: Generalisierung des in der Testsituation beobachtbaren
-Verhaltens. Warum? Weil das Verfahren eine richtige Prognose in Bezug auf ein
-best. Kriterium (Verhalten in der Zukunft) gewährleistet. 
+- Note: Hohe Validität: Generalisierung des in der Testsituation beobachtbaren Verhaltens.  
+- Warum? Weil das Verfahren eine richtige Prognose in Bezug auf ein best. Kriterium (Verhalten in der Zukunft) gewährleistet. 
 
 ---
 
 ### Konstruktvalidität 
 
-Grad indem der Test das Konstrukt nach bestehender Konstruktdefinition und
-Theorie misst.
+Grad indem der Test das Konstrukt nach bestehender Konstruktdefinition und Theorie misst.
 
 ---
 
@@ -120,9 +118,8 @@ Theorie misst.
 
 Grad indem 2 Test dasselbe Konstrukt übereinstimmend messen 
 
-cor(Test_1, Test_2) >> 0 -> Hinweis: konvergente Valdität
-
-z.B.: cor(IQ-Test, IQ-Test') -> 1
+- cor(Test_1, Test_2) >> 0 -> Hinweis: konvergente Valdität
+- z.B.: cor(IQ-Test, IQ-Test') -> 1
 
 ---
 
@@ -130,9 +127,8 @@ z.B.: cor(IQ-Test, IQ-Test') -> 1
 
 Grad indem sich 2 Test die unterschiedliche Konstrukte messen widersprechen
 
-cor(Test_1, Test_2) = 0 -> Hinweis: diskriminante Valdität
-
-z.B.: cor(IQ-Test, Geschmacksempfinden) -> 0
+- cor(Test_1, Test_2) = 0 -> Hinweis: diskriminante Valdität
+- z.B.: cor(IQ-Test, Geschmacksempfinden) -> 0
 
 ---
 
@@ -140,9 +136,8 @@ z.B.: cor(IQ-Test, Geschmacksempfinden) -> 0
 
 Grad, indem sich die Struktur (mit gleichen Verfahren) reproduzieren lässt
 
-FA(T1) = 5 Fkt. & FA(T2) = 5 Fkt. -> Hinweis: faktorielle Validität
-
-Notes: Strukturerhaltend
+- FA(T1) = 5 Fkt. & FA(T2) = 5 Fkt. -> Hinweis: faktorielle Validität
+- Notes: Strukturerhaltend
 
 ---
 
@@ -150,9 +145,8 @@ Notes: Strukturerhaltend
 
 Grad, indem die Test-Items das zu erfassende Merkmal "repräsentativ" erfassen 
 
-repräsentativ <=> "repräsentative" Stichprobe aus dem Item-Universum (welche zur Messung des Konstruktes geeignet sind)
-
-Formal: eig. keine!  „logischer & fachlicher“ Überlegungen (z.B. Expertenbefragungen) 
+- repräsentativ <=> "repräsentative" Stichprobe aus dem Item-Universum (welche zur Messung des Konstruktes geeignet sind)
+- Formal: eig. keine!  „logischer & fachlicher“ Überlegungen (z.B. Expertenbefragungen) 
 
 ---
 
@@ -160,11 +154,9 @@ Formal: eig. keine!  „logischer & fachlicher“ Überlegungen (z.B. Expertenbe
 
 praktische Anwendbarkeit eines Tests für die Vorhersage
 
-Verhalten in einer Testsituation (Testwert) ~  Verhalten außerhalb der Testsituation (Kriterium) 
-
-Maß: cor(Testwert, Außenkriterium)
-
-z.B. Religiösität, Kirchganshäufigkeit
+- Verhalten in einer Testsituation (Testwert) ~  Verhalten außerhalb der Testsituation (Kriterium) 
+- Maß: cor(Testwert, Außenkriterium)
+- z.B. Religiösität, Kirchganshäufigkeit
 
 ---
 
@@ -172,8 +164,7 @@ z.B. Religiösität, Kirchganshäufigkeit
 
 Grad indem die Messung das Kriterium vorhersagt
 
-cor(Testwertes: t1,  Kriterium: t2) -- Zeitpunkte: unterschiedlich
-
+- cor(Testwertes: t1,  Kriterium: t2) -- Zeitpunkte: unterschiedlich
 - z.B. cor(IQ: Beginn des Studiums -> B.A. Note)
 
 ---
@@ -182,8 +173,7 @@ cor(Testwertes: t1,  Kriterium: t2) -- Zeitpunkte: unterschiedlich
 
 Grad indem das Kriterium die Messung vorhersagt
 
-cor(Kriterium: t1, Testwert: t2) -- Zeitpunkte: unterschiedlich
-
+- cor(Kriterium: t1, Testwert: t2) -- Zeitpunkte: unterschiedlich
 - z.B. cor(IQ: Studiums,  Abiturnote)
 
 ---
@@ -192,8 +182,7 @@ cor(Kriterium: t1, Testwert: t2) -- Zeitpunkte: unterschiedlich
 
 Messung und Kriterium werden zeitglech erhoben 
 
-cor(Testwert: t1,  Testwert: t1) -- Zeitpunkte: gleich
-
+- cor(Testwert: t1,  Testwert: t1) -- Zeitpunkte: gleich
 - z.B. cor(Erstgespräch, Diagnostikinterview)
 
 ---
@@ -202,19 +191,17 @@ cor(Testwert: t1,  Testwert: t1) -- Zeitpunkte: gleich
 
 Inwiweit verbessert der Test die Vorhersage des Krtieriums zusätzlich
 
-- z.B. zusätzliches Varianzaufklärungspotentiel von 'Gewissenhaftigkeit' im
-  Berufserfolg zusätzlich/inkrementell zum IQ?
+- z.B. zusätzliches Varianzaufklärungspotentiel von 'Gewissenhaftigkeit' im Berufserfolg zusätzlich/inkrementell zum IQ?
 
 ---
 
 ### Augenscheinvalidität 
 
 Ausmaß in dem der Laie den Zusammenhang zw. Items und  herstellen kann
-(+): Akzeptanz des Tests (-): Wissenschaft: faking
-
+- (+): Akzeptanz des Tests 
+- (-): Wissenschaft: faking
 
 ---
-
 
 ### Objektivität (D)(I)(VA)
 
@@ -230,9 +217,8 @@ Durchführung, Verrechnung und Interpretation: Testergebnisse $\perp \!\!\! \per
 
 Testleiterunabhängigkeit (Vorgabegleichheit) 
 
-Vorgabe/ Instruktionen | Testergebnis $\perp \!\!\! \perp$ Durchführenden 
-
-z.B.: "Test so schnell wie möglich " vs "Test ohne Fehler durchführen"
+- Vorgabe/ Instruktionen | Testergebnis $\perp \!\!\! \perp$ Durchführenden 
+- z.B.: "Test so schnell wie möglich " vs "Test ohne Fehler durchführen"
 
 ---
 
@@ -240,9 +226,8 @@ z.B.: "Test so schnell wie möglich " vs "Test ohne Fehler durchführen"
 
 Verrechnungssichertheit 
 
-Verrechnungsregel | Testergebnis $\perp \!\!\! \perp$ Testauswerter 
-
-z.B. "Inter Rater Reliability": Ratingskalen vs offene Antwortformate 
+- Verrechnungsregel | Testergebnis $\perp \!\!\! \perp$ Testauswerter 
+- z.B. "Inter Rater Reliability": Ratingskalen vs offene Antwortformate 
 
 ##### Inter Rater Reliability 
 
@@ -257,9 +242,8 @@ unterschiedlichen Beobachtern (hier: Testauswerter)
 
 Interpretationseindeutigkeit
 
-Schlussfolgerungen | Testergebnis $\perp \!\!\! \perp$ Interpretierenden 
-
-Normtabellen zur Einordnung: über-/unterdurchschnittl. im Vgl zu Referenzgruppe
+- Schlussfolgerungen | Testergebnis $\perp \!\!\! \perp$ Interpretierenden 
+- Normtabellen zur Einordnung: über-/unterdurchschnittl. im Vgl zu Referenzgruppe
 
 ---
 
@@ -272,9 +256,8 @@ Normtabellen zur Einordnung: über-/unterdurchschnittl. im Vgl zu Referenzgruppe
 
 Beständigkeit bei Reproduktion der Ergebnisse
 
-Messpräzision (Genauigkeit) <=/=> Messfehlerfreiheit: [0;1] 
-
-Def.: Anteil wahrer Varianz an der Gesamtvarianz der beobachteten Testwerte
+- Messpräzision (Genauigkeit) <=/=> Messfehlerfreiheit: [0;1] 
+- Def.: Anteil wahrer Varianz an der Gesamtvarianz der beobachteten Testwerte
 
 ---
 
@@ -282,13 +265,11 @@ Def.: Anteil wahrer Varianz an der Gesamtvarianz der beobachteten Testwerte
 
 Grad indem vergleichbare Tests gleiche Ergebnisse liefern
 
-Vorgehen: Dieselben(!) Personen; 2 einander stark ähnelnde Tests oder Parallelformen (zu t1, t2) 
-
-Maß: cor(X_t1, X'_t2)
+- Vorgehen: Dieselben(!) Personen; 2 einander stark ähnelnde Tests oder Parallelformen (zu t1, t2) 
+- Maß: cor(X_t1, X'_t2)
 
 Parallelform := (logisch) äquivalente Tests (Itemzwillinge)
-
-z.B. Paralellform: 3 + 4 = ? & 2 + 5 = ?
+- z.B. Paralellform: 3 + 4 = ? & 2 + 5 = ?
 
 ---
 
@@ -296,11 +277,9 @@ z.B. Paralellform: 3 + 4 = ? & 2 + 5 = ?
 
 Grad indem gleiche Testhäften gleiche Ergebnisse liefern
 
-Vorgehen: Gleicher Test, zwei "gleiche" Hälften -- Hälfte 1 Paralleltest zur Hälfte 2
-
-Maß: cor(X/2_t1, X/2_t2)
-
-Note: Spearman-Brown-Korrektur, Odd-Even-Zuteilung
+- Vorgehen: Gleicher Test, zwei "gleiche" Hälften -- Hälfte 1 Paralleltest zur Hälfte 2
+- Maß: cor(X/2_t1, X/2_t2)
+- Note: Spearman-Brown-Korrektur, Odd-Even-Zuteilung
 
 Spearman Brown Formel := Korrekturfakotr um verminderte Split-Half-Reliabilität
 auf die ursprüngliche Testlänge hochzurechnen 
@@ -311,15 +290,11 @@ auf die ursprüngliche Testlänge hochzurechnen
 
 Grad indem Testwiederholungen gleichen Ergebnisse liefern
 
-Vorgehen: Gleicher Test; gleiche Stichporbe;  unterschiedliche Zeitpunkte
-
-Annahmne: Konstrukt zw. Zeitpunkten unverändert 
-
-z.B. Intelligenztests
-
-Maß: cor(X_t1, X_t2)
-
-Problem: Übungs- & Erinnerungseffekte, Merkmalsveränderungen 
+- Vorgehen: Gleicher Test; gleiche Stichporbe;  unterschiedliche Zeitpunkte
+- Annahmne: Konstrukt zw. Zeitpunkten unverändert 
+- z.B. Intelligenztests
+- Maß: cor(X_t1, X_t2)
+- Problem: Übungs- & Erinnerungseffekte, Merkmalsveränderungen 
 
 ---
 
@@ -327,21 +302,17 @@ Problem: Übungs- & Erinnerungseffekte, Merkmalsveränderungen
 
 Grad, idem Paralleltests=Items miteinander zusammenhängen
 
-Vorgehen: Jedes Item ist ein Paralleltest für alle anderen. Korrelation der
-Testteile (Items) unter der Berücksichtigung der Testlänge je stärker die
-Korrelation, desto höher die interne Konsistenz (Cronbachs Alpha)
+- Vorgehen: Jedes Item ist ein Paralleltest für alle anderen 
+- Korrelation der Testteile (Items) unter der Berücksichtigung der Testlänge je stärker die Korrelation, desto höher die interne Konsistenz
 
 Maße:
  - Kuder-Richardson-Formel (dichotom); 
  - Cronbachs-Alpha (intervall; tau-äquivalent)
  - McDonalds-Omega (intervall; kongenerisch)
 
-Hinweis: Da das kongenerische Modell eine Verallgemeinerung des
-tau-äquivalenten Falles ist, ist Omega die allgemeinere Variante.
-
+- Hinweis: Da das kongenerische Modell eine Verallgemeinerung des tau-äquivalenten Falles ist, ist Omega die allgemeinere Variante.
 
 ---
-
 
 ## Nebengütekriterium (< Hauptgütekriterien)
 
@@ -357,9 +328,8 @@ tau-äquivalenten Falles ist, ist Omega die allgemeinere Variante.
 
 Grad indem Personen mit höhren Konstruktwerten auch höhere Testwerte erhalten
 
-$\zeta_i > \zeta$ -> $X_i > X_j$ 
-
-Notes: Ordnungserhaltend, v.a. ab Intervallskalenniveau
+- $\zeta_i > \zeta$ -> $X_i > X_j$ 
+- Notes: Ordnungserhaltend, v.a. ab Intervallskalenniveau
 
 ---
 
@@ -367,15 +337,12 @@ Notes: Ordnungserhaltend, v.a. ab Intervallskalenniveau
 
 Grad indem man Testwerte einer Person in ein aktuelles(!) Bezugssystem (z.B. Referenzgruppe) eingeordnet kann.
 
-Bezugsgrößen: Soziodemographika (Alter, Geschlecht, Schuldbildung)
+- Bezugsgrößen: Soziodemographika (Alter, Geschlecht, Schuldbildung)
+- Normstichprobe (groß und repräsentativ) -> Normtabelle: Ergebnisse der Testeichung
+- Wiederholung der Eichung: nach DIN 33430 ca. alle 8 Jahre
+- Note: nicht bei Krtieriumsorientiert: VERA, PISA (Kompetenzstufen) <=> Vergleichgruppen: unverändert. 
 
-Normstichprobe (groß und repräsentativ) -> Normtabelle: Ergebnisse der Testeichung
-
-Wiederholung der Eichung: nach DIN 33430 ca. alle 8 Jahre
-Note: nicht bei Krtieriumsorientiert: VERA, PISA (Kompetenzstufen) <=> Vergleichgruppen: unverändert. 
-
-kriteriumsorientiertes Testen := Vergleich eines Testwertes mit inhaltlichen
-Kritern (z.B. Kompetenzstufen)
+Kriteriumsorientiertes Testen := Vergleich eines Testwertes mit inhaltlichen Kritern (z.B. Kompetenzstufen)
 
 ---
 
@@ -383,9 +350,8 @@ Kritern (z.B. Kompetenzstufen)
 
 Testökonomie: digan. Erkenntnisgewinn << finanzielle, zeitliche Kosten
 
-z.B. Kosten: Testpersonen, Auftraggebern u. Testleitern 
-
-Note: Validität >> Ökonomie
+- z.B. Kosten: Testpersonen, Auftraggebern u. Testleitern 
+- Note: Validität >> Ökonomie
 
 Adaptives Testen := (computerbasierte) Tests, bei denen Probanden nicht alle,
 sondern nur Niveau-enstsprechende Aufgaben gestellt bekommen.
@@ -394,17 +360,16 @@ sondern nur Niveau-enstsprechende Aufgaben gestellt bekommen.
 
 ### Nützlichkeit
 
-praktische Relevanz des Tests: gegeben
-(1) praktischer Bedarf besteht, d.h. (2) es gibt kein
-"(Güterkriteriums-)"gleiches Verfahren, dass das Merkmal gleich gut erfasst
+praktische Relevanz des Tests: gegeben, d.h.
+1. praktischer Bedarf besteht,
+2. es gibt kein "(Güterkriteriums-)"gleiches Verfahren, dass das Merkmal gleich gut erfasst
 
 ---
 
 ### Zumutbarkeit: 
 
 abs./rel. Nutzen: Anwendung > Gebühr: Testperson 
-
-z.B. Gebühr: in zeitlich, psychisch, körperlicher Hinsicht
+- z.B. Gebühr: in zeitlich, psychisch, körperlicher Hinsicht
 
 ---
 
@@ -412,31 +377,28 @@ z.B. Gebühr: in zeitlich, psychisch, körperlicher Hinsicht
 
 gezieltes Testverhalten =/=> "steuerbaren" Testwerten 
 
-z.B.: Soziale Erwünschtheit, politische Korrektheit 
+- z.B.: Soziale Erwünschtheit, politische Korrektheit 
 - Faking wenn Personen Messprinzip erkennen
-~ Augenscheinvalidität hoch, faking hoch
+- Augenscheinvalidität hoch, faking hoch
 
 ---
 
 ### Fairness
 
 Testprozedur (Instruktion, Handhabung) =/=> system. Benachteiligung: Hintergrunds
-z.B.: Hintergrund: Ethnizität, Soziokulturalität, Geschlecht, Alter
-z.B.: computergestützte Diagnostik: jung vs. alt
-Solution: Berechnung der Item-Schwierigkeit | Gruppe
+- z.B.: Hintergrund: Ethnizität, Soziokulturalität, Geschlecht, Alter
+- z.B.: computergestützte Diagnostik: jung vs. alt
+- Solution: Berechnung der Item-Schwierigkeit | Gruppe
 
-Culture-Fair-Tests := Instruktionen, sodass Aufgaben-Verständnig & Lösung keine
-hohen sprachlichen Fähigkeiten brauchen; 
-z.B.: VERA: Mathe-Textaufgaben: Deutschkenntnisse -(-)-> Matheleistung 
+Culture-Fair-Tests := Instruktionen, sodass Aufgaben-Verständnig & Lösung keine hohen sprachlichen Fähigkeiten brauchen; 
+- z.B.: VERA: Mathe-Textaufgaben: Deutschkenntnisse -(-)-> Matheleistung 
 
 ---
 
 Interpretation der Gütekriterien
--	Gütekriterien sind keine Eigenschaft des Tests sondern der Testwerte!
--	Z.B. nicht: Test: valide; sondern: Schlussfolgerungen | Kennwerte: Stichprobenabhängig
--	Z.B. „die über Cronbach's alpha ermittelte Reliabilität für Summenscores
-    in der Normstichprobe auf den Big Five waren in der Eichstichprobe .93 für
-    Neurotizismus, .89 für Extraversion“
+- Gütekriterien sind keine Eigenschaft des Tests sondern der Testwerte!
+- Z.B. nicht: Test: valide; sondern: Schlussfolgerungen | Kennwerte: Stichprobenabhängig
+- Z.B. „die über Cronbach's alpha ermittelte Reliabilität für Summenscores in der Normstichprobe auf den Big Five waren in der Eichstichprobe .93 für Neurotizismus, .89 für Extraversion“
 
 Gütekriterien sind stichprobenabhängig. Nur weil die Normstichprobe ein gutes 
 Ergebniss liefert, muss das nicht in der eigenen Stichprobe so sein.
