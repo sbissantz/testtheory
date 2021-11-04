@@ -15,12 +15,11 @@ Latente Variable (..unbeobachtbar)
 Qualitätsanforderung an einen Test
 
 
-
 ## Tests (Arten)
 
-1. Leistungstests
-2. Psychometrischer Persönlichkeitstest
-3. Projektive Verfahren
+- Leistungstests
+- Psychometrischer Persönlichkeitstest
+- Projektive Verfahren
 
 ### Leistungstests
 
@@ -65,47 +64,47 @@ Querschnittstests : v.a. Lokalisierung & Zwischenkonstrukt-Vergleiche (Individue
 
 Längsschnitt: Intra-Zeit-Veränderungen
 
--	Merkmalsveränderungen über die Zeit (Verlauf)
+-Merkmalsveränderungen über die Zeit (Verlauf)
 z.B.: Veränderung des dt. Nationalgefühls (1900-2000)
 
+---
 
-## Hauptgütekriterien VORS(ICHT) 
+## Hauptgütekriterien: VORS(ICHT) 
 
 (1) Validität, 
 (2) Objektivität, 
 (3) Reliabilität, 
 (4) Skalierung
 
-
-
+---
 
 ### Validität (K)(I)(K)(A)
 
 Reliabilität & Objektivität =(+)=> Validität
 
 1. Konstruktvalidität
-  1. Konvergente Validität
-  2. Diskriminante Validität
-  3. Faktorielle/Strukturelle Validität
+  - Konvergente Validität
+  - Diskriminante Validität
+  - Faktorielle/Strukturelle Validität
+  
 2. Inhaltsvalidität
+
 3. Kriteriumsvalidität
-  1. Vorhersagevalidität
-  2. Retrospektive Validität
-  3. Übereinstimmunsvalidität
-  4. Inkrementelle Validität
+  - Vorhersagevalidität
+  - Retrospektive Validität
+  - Übereinstimmunsvalidität
+  - Inkrementelle Validität
+  
 4. Augescheinvalidität
 
 Grad indem der Test das Konstrukt erfasst, das er messen soll 
 
-Formal: cor(Testwerte, Außenkriterium)
-
-z.B. Außenkriterium: Religiösität, Kirchganshäufigkeit
+- Formal: cor(Testwerte, Außenkriterium)
+- z.B. Außenkriterium: Religiösität, Kirchganshäufigkeit
 
 Note: Hohe Validität: Generalisierung des in der Testsituation beobachtbaren
 Verhaltens. Warum? Weil das Verfahren eine richtige Prognose in Bezug auf ein
 best. Kriterium (Verhalten in der Zukunft) gewährleistet. 
-
-4 Aspekte der Validität: 
 
 ### Konstruktvalidität 
 
@@ -193,6 +192,8 @@ Inwiweit verbessert der Test die Vorhersage des Krtieriums zusätzlich
 Ausmaß in dem der Laie den Zusammenhang zw. Items und  herstellen kann
 (+): Akzeptanz des Tests (-): Wissenschaft: faking
 
+
+---
 
 
 ### Objektivität (D)(I)(VA)
@@ -305,15 +306,18 @@ Hinweis: Da das kongenerische Modell eine Verallgemeinerung des
 tau-äquivalenten Falles ist, ist Omega die allgemeinere Variante.
 
 
-
-
-Important note: Latent-trait theory is a data story, it narrates how the latent
-construct produced the responses on the items.
-
-
+---
 
 
 ## Nebengütekriterium (< Hauptgütekriterien)
+
+(1) Skalierung 
+(2) Ökonomo
+(3) Zumutbarkeit
+(4) Unverfälschbarkeit
+(5) Fairness
+
+---
 
 ### Skalierung
 
@@ -337,6 +341,8 @@ Note: nicht bei Krtieriumsorientiert: VERA, PISA (Kompetenzstufen) <=> Vergleich
 kriteriumsorientiertes Testen := Vergleich eines Testwertes mit inhaltlichen
 Kritern (z.B. Kompetenzstufen)
 
+---
+
 ### Ökonomie
 
 Testökonomie: digan. Erkenntnisgewinn << finanzielle, zeitliche Kosten
@@ -347,6 +353,8 @@ Note: Validität >> Ökonomie
 
 Adaptives Testen := (computerbasierte) Tests, bei denen Probanden nicht alle,
 sondern nur Niveau-enstsprechende Aufgaben gestellt bekommen.
+
+---
 
 ### Nützlichkeit
 
@@ -368,6 +376,8 @@ z.B.: Soziale Erwünschtheit, politische Korrektheit
 - Faking wenn Personen Messprinzip erkennen
 ~ Augenscheinvalidität hoch, faking hoch
 
+---
+
 ### Fairness
 
 Testprozedur (Instruktion, Handhabung) =/=> system. Benachteiligung: Hintergrunds
@@ -379,6 +389,7 @@ Culture-Fair-Tests := Instruktionen, sodass Aufgaben-Verständnig & Lösung kein
 hohen sprachlichen Fähigkeiten brauchen; 
 z.B.: VERA: Mathe-Textaufgaben: Deutschkenntnisse -(-)-> Matheleistung 
 
+---
 
 Interpretation der Gütekriterien
 -	Gütekriterien sind keine Eigenschaft des Tests sondern der Testwerte!
@@ -390,11 +401,13 @@ Interpretation der Gütekriterien
 Gütekriterien sind stichprobenabhängig. Nur weil die Normstichprobe ein gutes 
 Ergebniss liefert, muss das nicht in der eigenen Stichprobe so sein.
 
-#
-# Additionals
-#
+---
 
-(ÜBUNG: Simuliere kongnerische Daten und tau-äquivalente Daten und variere, um
-die Differenz zwischen Alpha und Omega abzubilden)
+# Note to self 
 
-i Note: Dein Big 5 Fragebogen erlaubt nur die Auswertung auf der Struktur- nicht aber der Facettenebene der Big 5
+- Simuliere: kongnerische Daten und tau-äquivalente Daten und variiere, um die Differenz zwischen Alpha und Omega abzubilden
+- Note: Dein Big 5 Fragebogen erlaubt nur die Auswertung auf der Struktur- nicht aber der Facettenebene der Big 5
+- Important note: Latent-trait theory is a data story, it narrates how the latent
+- construct produced the responses on the items.
+
+
