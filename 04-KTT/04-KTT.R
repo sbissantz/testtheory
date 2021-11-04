@@ -4,7 +4,7 @@
 
 # Übungsaufgabe 1 ---------------------------------------------------------
 
-# Alter
+# Revelle's Münzwurf 
 #
 
 # Setup
@@ -24,8 +24,9 @@ M <- 10 #<------------------------------------------------ verändere mich!
 reps <- replicate(M, add_privacy(true_age))
 # Erwartungswert von X ; E(X) = T 
 (E_X <- mean(reps))
+hist(reps)
 
-# Waage
+# Die verlfixte Waage
 #
 
 # Setup
@@ -40,7 +41,8 @@ crazy_scale <- function(true_weight){
 # Anzahl der Messwiederholungen
 M <- 10 #<------------------------------------------ verändere mich!
 reps <- replicate(M, crazy_scale(true_weight))
-mean(reps)
+(E_x <- mean(reps))
+hist(reps)
 
 # Übungsaufgabe 2 ---------------------------------------------------------
 
@@ -175,7 +177,7 @@ reliab <- function(tau, epsilon){
 
 reliab(tau, epsilon) #<------------------------------- mehrfach ausführen!
 
-# Exkurs ------------------------------------------------------------------
+# Selbststudium -----------------------------------------------------------
 
 # Auswkirungen system. Störeinflüsse
 # Korrelationen
