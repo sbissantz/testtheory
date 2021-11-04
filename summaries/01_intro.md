@@ -47,7 +47,8 @@ Feststellung von Projektionen für Rückschlüsse auf Einstellungen, Motive, Wü
 
 ### Ziele 
 
-Querschnittstests : v.a. Lokalisierung & Zwischenkonstrukt-Vergleiche (Individuen, Gruppen)
+Querschnittstests : 
+- v.a. Lokalisierung & Zwischenkonstrukt-Vergleiche (Individuen, Gruppen)
 
 1. Positionierung: ..des Individuums auf einem Kontinuum/innerhalb einer Gruppe 
     - Kontinuum: Bsp.: Wie rassistisch ist Klaus (80/100) 
@@ -64,7 +65,7 @@ Querschnittstests : v.a. Lokalisierung & Zwischenkonstrukt-Vergleiche (Individue
 
 Längsschnitt: Intra-Zeit-Veränderungen
 
--Merkmalsveränderungen über die Zeit (Verlauf)
+- Merkmalsveränderungen über die Zeit (Verlauf)
 z.B.: Veränderung des dt. Nationalgefühls (1900-2000)
 
 ---
@@ -106,10 +107,14 @@ Note: Hohe Validität: Generalisierung des in der Testsituation beobachtbaren
 Verhaltens. Warum? Weil das Verfahren eine richtige Prognose in Bezug auf ein
 best. Kriterium (Verhalten in der Zukunft) gewährleistet. 
 
+---
+
 ### Konstruktvalidität 
 
 Grad indem der Test das Konstrukt nach bestehender Konstruktdefinition und
 Theorie misst.
+
+---
 
 #### Konvergente Validität
 
@@ -119,6 +124,8 @@ cor(Test_1, Test_2) >> 0 -> Hinweis: konvergente Valdität
 
 z.B.: cor(IQ-Test, IQ-Test') -> 1
 
+---
+
 #### Diskriminante Validität 
 
 Grad indem sich 2 Test die unterschiedliche Konstrukte messen widersprechen
@@ -126,6 +133,8 @@ Grad indem sich 2 Test die unterschiedliche Konstrukte messen widersprechen
 cor(Test_1, Test_2) = 0 -> Hinweis: diskriminante Valdität
 
 z.B.: cor(IQ-Test, Geschmacksempfinden) -> 0
+
+---
 
 #### Faktorielle/strukturelle Validität 
 
@@ -135,7 +144,7 @@ FA(T1) = 5 Fkt. & FA(T2) = 5 Fkt. -> Hinweis: faktorielle Validität
 
 Notes: Strukturerhaltend
 
-
+---
 
 ### Inhaltsvalidität 
 
@@ -144,6 +153,8 @@ Grad, indem die Test-Items das zu erfassende Merkmal "repräsentativ" erfassen
 repräsentativ <=> "repräsentative" Stichprobe aus dem Item-Universum (welche zur Messung des Konstruktes geeignet sind)
 
 Formal: eig. keine!  „logischer & fachlicher“ Überlegungen (z.B. Expertenbefragungen) 
+
+---
 
 ### Kriteriumsvalidität 
 
@@ -155,6 +166,8 @@ Maß: cor(Testwert, Außenkriterium)
 
 z.B. Religiösität, Kirchganshäufigkeit
 
+---
+
 #### Vorhersagevalidität
 
 Grad indem die Messung das Kriterium vorhersagt
@@ -162,6 +175,8 @@ Grad indem die Messung das Kriterium vorhersagt
 cor(Testwertes: t1,  Kriterium: t2) -- Zeitpunkte: unterschiedlich
 
 - z.B. cor(IQ: Beginn des Studiums -> B.A. Note)
+
+---
 
 #### Retrospektive Validität 
 
@@ -171,6 +186,7 @@ cor(Kriterium: t1, Testwert: t2) -- Zeitpunkte: unterschiedlich
 
 - z.B. cor(IQ: Studiums,  Abiturnote)
 
+---
 
 #### Übereinstimmungsvalidität (aka. konkurrente Validität)
 
@@ -180,12 +196,16 @@ cor(Testwert: t1,  Testwert: t1) -- Zeitpunkte: gleich
 
 - z.B. cor(Erstgespräch, Diagnostikinterview)
 
+---
+
 #### Inkrementelle Validität 
 
 Inwiweit verbessert der Test die Vorhersage des Krtieriums zusätzlich
 
 - z.B. zusätzliches Varianzaufklärungspotentiel von 'Gewissenhaftigkeit' im
   Berufserfolg zusätzlich/inkrementell zum IQ?
+
+---
 
 ### Augenscheinvalidität 
 
@@ -204,6 +224,8 @@ Ausmaß in dem der Laie den Zusammenhang zw. Items und  herstellen kann
 
 Durchführung, Verrechnung und Interpretation: Testergebnisse $\perp \!\!\! \perp$ Testleiter 
 
+---
+
 #### Durchführungsobjektivität 
 
 Testleiterunabhängigkeit (Vorgabegleichheit) 
@@ -211,6 +233,8 @@ Testleiterunabhängigkeit (Vorgabegleichheit)
 Vorgabe/ Instruktionen | Testergebnis $\perp \!\!\! \perp$ Durchführenden 
 
 z.B.: "Test so schnell wie möglich " vs "Test ohne Fehler durchführen"
+
+---
 
 #### Auswertungsobjektivität 
 
@@ -227,6 +251,7 @@ unterschiedlichen Beobachtern (hier: Testauswerter)
 
 - Kennzahl: Konkordanzkoeffizient W nach Kendall (1962)
 
+---
 
 #### Interpreationsobjektivität 
 
@@ -235,6 +260,8 @@ Interpretationseindeutigkeit
 Schlussfolgerungen | Testergebnis $\perp \!\!\! \perp$ Interpretierenden 
 
 Normtabellen zur Einordnung: über-/unterdurchschnittl. im Vgl zu Referenzgruppe
+
+---
 
 ### Reliabilität (P)(R)(I)(TS)ift 
 
@@ -249,6 +276,8 @@ Messpräzision (Genauigkeit) <=/=> Messfehlerfreiheit: [0;1]
 
 Def.: Anteil wahrer Varianz an der Gesamtvarianz der beobachteten Testwerte
 
+---
+
 #### Paralleltest-Reliabilität 
 
 Grad indem vergleichbare Tests gleiche Ergebnisse liefern
@@ -261,6 +290,7 @@ Parallelform := (logisch) äquivalente Tests (Itemzwillinge)
 
 z.B. Paralellform: 3 + 4 = ? & 2 + 5 = ?
 
+---
 
 #### Testhalbierungs-Reliabilität (aka. Split-Half-Reliabilität)
 
@@ -275,6 +305,8 @@ Note: Spearman-Brown-Korrektur, Odd-Even-Zuteilung
 Spearman Brown Formel := Korrekturfakotr um verminderte Split-Half-Reliabilität
 auf die ursprüngliche Testlänge hochzurechnen 
 
+---
+
 #### Retest-Reliabilität 
 
 Grad indem Testwiederholungen gleichen Ergebnisse liefern
@@ -288,6 +320,8 @@ z.B. Intelligenztests
 Maß: cor(X_t1, X_t2)
 
 Problem: Übungs- & Erinnerungseffekte, Merkmalsveränderungen 
+
+---
 
 #### Interne Konsistenz
 
@@ -327,6 +361,8 @@ $\zeta_i > \zeta$ -> $X_i > X_j$
 
 Notes: Ordnungserhaltend, v.a. ab Intervallskalenniveau
 
+---
+
 ### Eichung (aka. Normierung) 
 
 Grad indem man Testwerte einer Person in ein aktuelles(!) Bezugssystem (z.B. Referenzgruppe) eingeordnet kann.
@@ -362,11 +398,15 @@ praktische Relevanz des Tests: gegeben
 (1) praktischer Bedarf besteht, d.h. (2) es gibt kein
 "(Güterkriteriums-)"gleiches Verfahren, dass das Merkmal gleich gut erfasst
 
+---
+
 ### Zumutbarkeit: 
 
 abs./rel. Nutzen: Anwendung > Gebühr: Testperson 
 
 z.B. Gebühr: in zeitlich, psychisch, körperlicher Hinsicht
+
+---
 
 ### Unverfälschbar
 
