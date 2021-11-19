@@ -11,7 +11,7 @@ incremental: true
 toc: true
 bibliography: ./references.bib
 nocite: |   
-    @R-bibtex, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-graphs, @R-stats, @R-psych
+    @R-bibtex, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-stats, @R-psych
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 	message = FALSE,
 	warning = FALSE
 )
-pkgs <- c("psych", "paran", "rmarkdown", "bibtex", "base", "stats", "graph")
+pkgs <- c("psych", "paran", "rmarkdown", "bibtex", "base", "stats")
 lapply(pkgs, library, character.only=TRUE)
 knitr::write_bib(pkgs, file = "./references.bib")
 refs <- bibtex::read.bib("references.bib")
@@ -82,14 +82,14 @@ $\Rightarrow$ *Theorie über die Entstehung des Messfehlers* (Messfehlertheorie)
 Aus der formalen Darstellung der Bürde der Messung komplexer Phänomene..
 
 \begin{equation}
-  X = \tau - \epsilon  
+  X = \tau + \epsilon  
 \end{equation}
 
 ..folgt logisch äquivalent..
 
 \begin{alertblock}{Definition: True Score}
   \begin{equation}
-    \tau = X + \epsilon 
+    \tau = X - \epsilon 
   \end{equation}
 \end{alertblock}
 
@@ -178,7 +178,7 @@ set.seed(123)
 true_weight <- 67
 crazy_scale <- function(true_weight){
   # 5kg +/- 
-  rnorm(1, true_weight, 5)
+  rnorm(1, mean=true_weight, sd=5)
 }
 # Anzahl der Messwiederholungen
 M <- 100000
@@ -315,7 +315,7 @@ bekommen; v.a.:
 ## Anwendungsbeispiel: Intelligenztest
 
 \begin{block}{Gedankenexperiment}
-Stellen Sie sich vor wir würden mit 10.000 Probanden einen Intelligenztest
+Stellen Sie sich vor, wir würden mit 10.000 Probanden einen Intelligenztest
 durchführen, indem jeder Proband 5000 mal den gleichen Intelligenztest
 wiederholt.
 \end{block}
@@ -334,7 +334,7 @@ N <- 10000
 # Generierung der True Scores
 # 100: Mittlere Intelligenz in der Population
 # 30: Abweichungen vom Populationnsmittelwert
-T <- round(rnorm(N, 100, 30), digits = 0)
+T <- round(rnorm(N, mean=100, sd=30), digits = 0)
 # Anzahl der (imaginären) Testwiederholungen
 M <- 5000 
 X <- lapply(T, function(T) rnorm(M, T , 5))
@@ -381,7 +381,7 @@ par(old.par)
 
 ## Intraindividuelle Merkmalsverteilungen
 
-..da wir nur ein einzes Mal messen, ziehen wir (zufällig) einen Wert aus der
+..da wir nur ein einziges Mal messen, ziehen wir (zufällig) einen Wert aus der
 (Normal-)verteilung der intraindividuellen Messwerte. Dieser intraindividuelle
 Messwert ($X_{ij}$) ist ein *Schätzer* für den True Score ($\tau_{i}$) der Person
 der wegen des Messfehlers unter oder über dem Messwert liegt. Sehen Sie selbst...
@@ -497,7 +497,7 @@ set.seed(123)
 ```
 ```{r echo=TRUE}
 N <- 1000 # Verändere mich
-tau <- rnorm(N, mean = 100, 30)
+tau <- rnorm(N, mean=100, sd=30)
 var_epsilon <- 25 # (25): Verändere mich!
 epsilon <- rnorm(N, 0, var_epsilon) 
 reliab <- function(tau, epsilon){
@@ -528,7 +528,7 @@ Messung aus? (Tipp: $Rel(Y_j) = \frac{Var(\tau_j)}{Var(\tau_j) + Var(\epsilon_j)
 set.seed(123)
 reliab <- function(var_epsilon){
   N <- 1000
-  tau <- rnorm(N, mean = 100, 30)
+  tau <- rnorm(N, mean=100, sd=30)
   epsilon <- rnorm(N, 0, var_epsilon) 
   var(tau) / var(tau + epsilon)
 }
@@ -604,7 +604,7 @@ der Traitausprägung unabhängig voneinander
   cor(j, k) | \zeta = 0
 \end{equation}
 
-- $\zeta$: Konstrutk (latente Variable)
+- $\zeta$: Konstrukt (latente Variable)
 - $j,k$: Items in einem Test (beobachtete Variablen)
 - $M$: Anzahl der Items in einem Test 
 
