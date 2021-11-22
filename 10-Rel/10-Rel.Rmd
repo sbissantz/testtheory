@@ -1,0 +1,154 @@
+---
+title: "Reliabilität"
+output: 
+  beamer_presentation:
+    theme: "Boadilla"
+    fonttheme: "default"
+    slide_level: 2
+author: BF3 Testtheorie
+subtitle: Bißantz, Jalynskij, Kupffer & Prestele 
+incremental: true
+toc: true
+bibliography: ./references.bib
+nocite: |   
+    @R-bibtex, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-stats, @R-psych
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Reliabilität als Konzept (20 min)
+
+Einheit: Was ist Reliabilität?
+
+Inhaltliche Schwerpunkte der Einheit:
+
+1. Reliabilität als Konzept
+2. Definition der Reliabilität
+3. Das Reliabilitätsproblem
+
+Ziel: Wiederholung der Konzepte (re-fresher) & Problematisierung
+
+Mittel: Gruppenübung (15 min) & Input (5min)
+
+## Reliabilität als Konzept (20 min)
+
+Gruppenübung: 6 Gruppen (a 3-4 Leute)
+Mosburger & Kelava, S. 307 - 309
+
+- Reliabilität als Maß der Messgenauigkeit
+
+- Reliabilität, Wahrer Wert und Messfehler
+
+- Testwertvariable als Summe der Itemvariable
+
+- Definition: Reliabilität einer Testvariable
+
+- Definition: Reliabilität einer Itemvariable 
+
+- Reliabilität, Wertebreich und dessen Bedeutung
+
+- Reliabilität und Objektivittät 
+
+- Reliabilität und Validität
+
+Posten der Ergebnisse im Olat-Forum
+
+## Auflösung: Reliabilität als Konzept
+
+Messinstrument mit hoher Messgenauigkeit, Messergebnisse mit geringem Messfehler
+
+Perfekte Reliabilität: Abwesenheit von zufälligem Messfehlern
+$E(\epsilon) \rightarrow 0 : E(X) = \tau$
+
+Testwert ist der Summenscore über alle Itemvariablen ($\in$ Itemuniverse)
+$X = \sum_{i=1}^n X_i$
+
+Reliabilität einer Testwertvariablen ($Y$)$: 
+$Rel(y) = \frac{Var(T)}{Var(X)} = \frac{Var(T)}{Var(T) + Var(E)}$
+
+Reliabilität einer Itemvariable  ($Y$)$: 
+$Rel(x_i) = \frac{Var(\tau_i)}{Var(x_i)} = \frac{Var(\tau_i)}{Var(\tau_i) + Var(\epsilon_i)}$
+
+$Rel \in [0,1]$, wobei $Rel=1$ Abwesenheit von Mesfehlern; d.h. vollständig
+reliable Messung (vice versa)
+
+Objektivität -> Reliabilität
+(via: Messbedingungen standardisieren)
+
+Reliabilität -> Validität
+(v.a.: Beständigkeit gleicher Testergebnisse bei wiederholter Messung)
+
+## Das Reliabilitätsproblem 
+
+Problem: Wir kennen die True-Score- und Fehlervarianz nicht. Die Messwerte bei
+einer einzigen Messung sind lediglich *Schätzer* der wahren Werte, die
+*approximativ* dem wahren Wert entsprechen:
+
+\begin{equation}
+  \tau = E(X) | E(\epsilon) = 0
+\end{equation}
+
+Damit lässt sich mit einer *Einzelmessung* die Reliabilität nicht eindeutig
+*bestimmten*! (siehe auch: Moosburger & Kelava, 2021 : 210). Wir müssen sie
+*schätzen*.
+
+## Methoden der Reliabilitätsschätzung (20 min)
+
+Einheit: Methoden der Reliabilitätsschätzung
+
+Inhaltliche Schwerpunkte der Einheit:
+
+0. Lösungsansatz zum Reliabilitätsproblem 
+1. Retest-Reliabilität
+2. Paralleltest-Reliabilität
+3. *Testhalbierungsreliabilität*
+4. *Interne Konsistenz*
+
+Ziel: Wiederholung und Vertiefung der Konzepte, Umsetzung in R 
+
+(?) Mittel: Input (10 min) & R-Übung (5min)
+
+## Lösungansatz zum Reliabilitätsproblem
+
+> "Aber auch ohne die wahren Werte einzelner Personen zu kennen, kann das Varianzverhältnis als Maß für die Messgenauigkeit geschätzt werden, wenn man die Ebene der einzelnen Personen und einzelnen Items verlässt und stattdessen **alle Items, aus denen sich ein Test zusammensetzt**, sowie die **Messungen mehrerer Personen betrachtet**: Wird ein latentes Merkmal anhand mehrerer Items gemessen, so liegen **Mehrfachmessungen desselben Merkmals mit unterschiedlichen aber ähnlichen Messinstrumenten/Items** vor, die **zu einer Testwertvariablen aufsummiert werden können**, sofern sie zumindest die Bedingung der Eindimensionalität[^1] erfüllen." (Mosburger & Kelava, 2020: 310 -- Hervorherbungen nicht im Original)
+
+[^1]: Die Bedingung der Eindimensionalität können und sollten Sie überprüfen
+(Hilsmittel: CFA). Die Unkorreliertheit der Messfehler ($Cov(\epsilon_i,
+\epsilon_i') = 0$) ist dabei eine Basisvoraussetzung, für die Erfüllung
+der Bedingung. (Siehe: ebd., 14.2.2)
+
+## Lösungansatz zum Reliabilitätsproblem 
+
+\begin{block}{Lösungsansatz in a Nuthshell: Mehrfachmessungen}
+Reliabilität(-sschätzung) $\Rrightarrow$ Mehrfachmessungen! D.h. Alle Methoden
+zur Reliabilitätsschätzung setzen eine Mehrfachmessung des Konstruktes voraus!
+\end{block}
+
+Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
+
+1. Wiederholte Messung anhand derselben/verschiedener Testdurchläufe[^2]
+  - Test/Test Reliabilität(en)
+2. Verschiedene Items innerhalb eines Tests[^3]
+  - Interne Konsistenz (Cronbach's alpha)
+
+[^2]: Erinnerung: Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
+[^3]: Erinnerung: "Item-Universum" & "Cronbach's Alpha"
+
+##
+
+
+
+
+
+
+
+## Einflussfaktoren auf die Höhe der Reliabilität
+
+
+
+
+## Anwendung: Konfidenzintervalle
+
+
