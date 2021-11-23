@@ -136,13 +136,19 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 [^2]: Erinnerung: Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
 [^3]: Erinnerung: "Item-Universum" & "Cronbach's Alpha"
 
-##
+## Voraussetzungen: Test-Test Reliabilitäten 
 
+- Messung einer einzigen latenten Variable: Eindimensionalität 
+(d.h., keine Fehlerkovarianzen -- Voraussetzung für die Eindimensionalität[^1])
 
+- Essentiell $\tau$-parallel
+(d.h. gleiche Reliabilität in beiden Messungen)
 
+Problem der Test-Test Reliabilität(en): Mit empirischen Daten wird selten ein
+zufriedenstellende Anpassung an die
 
-
-
+[^1]: Prüfung der Annahme "Eindimensionalität" bitte anhand einer CFA. Siehe
+dafür z.B. Moosburger & Kelava (2020), Kap. 14)
 
 ## Einflussfaktoren auf die Höhe der Reliabilität
 
@@ -152,3 +158,127 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 ## Anwendung: Konfidenzintervalle
 
 
+## Selbststudium
+
+Normalverteilte Datenmatrizen simulieren (zum Üben)
+
+```{r}
+# Gen. process
+#
+set.seed(123)
+M <- 4
+mu <- rep(0,M)
+# covariances
+sigma <- rep(0.7, M^2)
+# Covariance matrix 
+Sigma <- matrix(sigma, M)
+diag(Sigma) <- 1
+N <- 100
+X1 <- MASS::mvrnorm(N, mu, Sigma)
+X2 <- MASS::mvrnorm(N, mu, Sigma)
+```
+
+## Paralleles Messmodell
+
+```{r}
+M <- 4
+mu <- rep(5,M)
+# Covariance Matrix
+Sigma <- matrix(  
+  c(.8, .5, .5, .5,  
+    .5, .8, .5, .5, 
+    .5, .5, .8, .5, 
+    .5, .5, .5, .8), 
+  M,M)
+N <- 1e5
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+
+# Spaltenmittelwerte (gerundet)
+round(colMeans(X), digits = 1)
+# Kovarianzmatrix
+round(cov(X), digits = 1) 
+```
+
+## Essenziell paralleles Messmodell 
+
+```{r}
+M <- 4
+mu <- c(5,4,3,4) 
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(.8, .5, .5, .5,  
+    .5, .8, .5, .5, 
+    .5, .5, .8, .5, 
+    .5, .5, .5, .8), 
+  M,M)
+N <- 1e5
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+
+# Spaltenmittelwerte (gerundet)
+round(colMeans(X), digits = 1)
+# Kovarianzmatrix
+round(cov(X), digits = 1) 
+```
+
+## Tau-äquivalentes Messmodell
+
+```{r}
+M <- 4
+mu <- rep(5,M)
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(.7, .5, .5, .5,  
+    .5, .8, .5, .5, 
+    .5, .5, .7, .5, 
+    .5, .5, .5, .6), 
+  M,M)
+N <- 1e5
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+
+# Spaltenmittelwerte (gerundet)
+round(colMeans(X), digits = 1)
+# Kovarianzmatrix
+round(cov(X), digits = 1) 
+```
+
+## Essenziell tau-äquivales Messmodell
+
+```{r}
+M <- 4
+mu <- c(5,4,3,4) 
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(.7, .5, .5, .5,  
+    .5, .8, .5, .5, 
+    .5, .5, .7, .5, 
+    .5, .5, .5, .6), 
+  M,M)
+N <- 1e5
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+
+# Spaltenmittelwerte (gerundet)
+round(colMeans(X), digits = 1)
+# Kovarianzmatrix
+round(cov(X), digits = 1) 
+```
+
+## Tau-kongenerisches Messmodell
+
+```{r}
+M <- 4
+mu <- c(5,4,3,4) 
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(.7, .5, .6, .7,  
+    .5, .8, .5, .6, 
+    .6, .5, .7, .5, 
+    .7, .6, .5, .8), 
+  M,M)
+N <- 1e5
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+
+# Spaltenmittelwerte (gerundet)
+round(colMeans(X), digits = 1)
+# Kovarianzmatrix
+round(cov(X), digits = 1) 
+```
