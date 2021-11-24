@@ -18,7 +18,7 @@ nocite: |
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Reliabilität als Konzept (20 min)
+# Reliabilität als Konzept (20 min)
 
 Einheit: Was ist Reliabilität?
 
@@ -94,7 +94,7 @@ Damit lässt sich mit einer *Einzelmessung* die Reliabilität nicht eindeutig
 *bestimmten*! (siehe auch: Moosburger & Kelava, 2021 : 210). Wir müssen sie
 *schätzen*.
 
-## Methoden der Reliabilitätsschätzung (20 min)
+# Methoden der Reliabilitätsschätzung (20 min)
 
 Einheit: Methoden der Reliabilitätsschätzung
 
@@ -136,10 +136,22 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 [^2]: Erinnerung: Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
 [^3]: Erinnerung: "Item-Universum" & "Cronbach's Alpha"
 
-## Voraussetzungen: Test-Test Reliabilitäten 
+## Retest & Paralleltest-Reliabilität (Wiederholung)
+
+Übung in OLAT
+
+## Testhalbierungsreliabilität 
+
+- Zusätzlich: Wichtig, dass Sie SPF mit der Hand ausrechnen können. 
+1. Aufgabe: Ausrechnen
+2. Mit R überprüfen
+3. An der Tafel zeigen
+
+
+### Voraussetzungen: Test-Test Reliabilitäten 
 
 - Messung einer einzigen latenten Variable: Eindimensionalität 
-(d.h., keine Fehlerkovarianzen -- Voraussetzung für die Eindimensionalität[^1])
+(d.h., keine Fehlerkovarianzen -- Voraussetzung für die Eindimensionalität[^4])
 
 - Essentiell $\tau$-parallel
 (d.h. gleiche Reliabilität in beiden Messungen)
@@ -147,38 +159,51 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 Problem der Test-Test Reliabilität(en): Mit empirischen Daten wird selten ein
 zufriedenstellende Anpassung an die
 
-[^1]: Prüfung der Annahme "Eindimensionalität" bitte anhand einer CFA. Siehe
+[^4]: Prüfung der Annahme "Eindimensionalität" bitte anhand einer CFA. Siehe
 dafür z.B. Moosburger & Kelava (2020), Kap. 14)
 
-## Einflussfaktoren auf die Höhe der Reliabilität
+
+
+
+# Einflussfaktoren auf die Höhe der Reliabilität
 
 
 
 
-## Anwendung: Konfidenzintervalle
 
 
-## Selbststudium
 
-Normalverteilte Datenmatrizen simulieren (zum Üben)
+# Anwendung: Konfidenzintervalle
+
+
+# Selbststudium
+
+Nachfolgend haben Sie die Möglichkeit Datenmatrizen aus einer multivariaten
+Normalverteilung zu simulieren. Dazu benötigen Sie allerdings das Package
+`MASS`. Wenn Sie es nicht selbst installieren wollen, kopieren Sie den Code auf
+der nächsten Folie. Der Code-Schnipsel klärt, ob Sie das Package bereits
+installiert haben und bietet Ihnen gegebenenfalls an, es zu installieren. Nach
+erfolgreicher Installation, testen Sie mit der gleichen Funktion, ob alles
+passt.
+
+## Preparation
 
 ```{r}
-# Gen. process
-#
-set.seed(123)
-M <- 4
-mu <- rep(0,M)
-# covariances
-sigma <- rep(0.7, M^2)
-# Covariance matrix 
-Sigma <- matrix(sigma, M)
-diag(Sigma) <- 1
-N <- 100
-X1 <- MASS::mvrnorm(N, mu, Sigma)
-X2 <- MASS::mvrnorm(N, mu, Sigma)
+if(!requireNamespace("MASS", quietly = TRUE)) {
+  msg <- "'MASS' is not installed, want to install it? Type 'yes' or 'no'."
+  answer <- readline(prompt = message(msg))
+  no_msg <- "Did not install the package `MASS`."
+  switch(answer,
+         yes = install.packages("MASS"),
+         no = stop(no_msg, call. = FALSE),
+         stop("Please answer 'yes' or 'no'." ))
+} else {
+ message("`MASS is already installed!") ; Sys.sleep(1)
+ message("Time to rock!\n(*weird guitar sound*)")
+}
 ```
 
-## Paralleles Messmodell
+### Paralleles Messmodell
 
 ```{r}
 M <- 4
@@ -199,7 +224,7 @@ round(colMeans(X), digits = 1)
 round(cov(X), digits = 1) 
 ```
 
-## Essenziell paralleles Messmodell 
+### Essenziell paralleles Messmodell 
 
 ```{r}
 M <- 4
@@ -220,7 +245,7 @@ round(colMeans(X), digits = 1)
 round(cov(X), digits = 1) 
 ```
 
-## Tau-äquivalentes Messmodell
+### Tau-äquivalentes Messmodell
 
 ```{r}
 M <- 4
@@ -241,7 +266,7 @@ round(colMeans(X), digits = 1)
 round(cov(X), digits = 1) 
 ```
 
-## Essenziell tau-äquivales Messmodell
+### Essenziell tau-äquivales Messmodell
 
 ```{r}
 M <- 4
@@ -262,7 +287,7 @@ round(colMeans(X), digits = 1)
 round(cov(X), digits = 1) 
 ```
 
-## Tau-kongenerisches Messmodell
+### Tau-kongenerisches Messmodell
 
 ```{r}
 M <- 4
