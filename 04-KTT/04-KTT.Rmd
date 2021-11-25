@@ -667,90 +667,90 @@ R <- psych::sim.congeneric(loads=loads,N=50)
 corrplot::corrplot.mixed(R, number.cex=.7)
 ```
 
-# Selbststudium
+<!-- # Selbststudium -->
 
-## Zum Problem(?) systematischer Störeinflüsse
+<!-- ## Zum Problem(?) systematischer Störeinflüsse -->
 
-\begin{block}{Ausganssituation}
-Da die KTT nur unsystamtische Störeinflüsse berücksichtigt,
-bleiben systematische Einflüsse unberücksichtigt.
-\end{block}
+<!-- \begin{block}{Ausganssituation} -->
+<!-- Da die KTT nur unsystamtische Störeinflüsse berücksichtigt, -->
+<!-- bleiben systematische Einflüsse unberücksichtigt. -->
+<!-- \end{block} -->
 
-z.B.: soziale Erwünschtheit, politische Korrektheit
+<!-- z.B.: soziale Erwünschtheit, politische Korrektheit -->
 
-Frage: Wie wirken sich systematische Störeinflüsse aus? 
+<!-- Frage: Wie wirken sich systematische Störeinflüsse aus?  -->
 
-- z.B. auf Korrelationen?
-- z.B. auf Regressionsgewichte?
+<!-- - z.B. auf Korrelationen? -->
+<!-- - z.B. auf Regressionsgewichte? -->
 
-## Auswkirungen system. Störeinflüsse: Korrelationen
+<!-- ## Auswkirungen system. Störeinflüsse: Korrelationen -->
 
-\begin{block}{Szenario}
-Systematischer Einfluss über alle Fälle hinweg
-\end{block}
+<!-- \begin{block}{Szenario} -->
+<!-- Systematischer Einfluss über alle Fälle hinweg -->
+<!-- \end{block} -->
 
-```{r include=FALSE}
-set.seed(123)
-```
-```{r echo=TRUE}
-n <- 100
-x <- rnorm(n)
-y <- rnorm(x)
-cor(x, y) ; cor(x+3, y) ; cor(x, y + 3) ; cor(x + 3, y + 3)
-```
+<!-- ```{r include=FALSE} -->
+<!-- set.seed(123) -->
+<!-- ``` -->
+<!-- ```{r echo=TRUE} -->
+<!-- n <- 100 -->
+<!-- x <- rnorm(n) -->
+<!-- y <- rnorm(x) -->
+<!-- cor(x, y) ; cor(x+3, y) ; cor(x, y + 3) ; cor(x + 3, y + 3) -->
+<!-- ``` -->
 
-## Auswikrungen system. Störeinflüsse: Korrelationen
+<!-- ## Auswikrungen system. Störeinflüsse: Korrelationen -->
 
-\begin{block}{Szenario}
-Systematischer Störeinfluss auf einige (die ersten 50) Probanden  
-\end{block}
+<!-- \begin{block}{Szenario} -->
+<!-- Systematischer Störeinfluss auf einige (die ersten 50) Probanden   -->
+<!-- \end{block} -->
 
-```{r echo=TRUE}
-x[1:50] <- x[1:50] + 3
-cor(x, y) 
+<!-- ```{r echo=TRUE} -->
+<!-- x[1:50] <- x[1:50] + 3 -->
+<!-- cor(x, y)  -->
 
-# Additional increase MME
-x[1:50] <- x[1:50] + 6
-cor(x, y) 
-```
+<!-- # Additional increase MME -->
+<!-- x[1:50] <- x[1:50] + 6 -->
+<!-- cor(x, y)  -->
+<!-- ``` -->
 
-## Auswirkungen system. Störeinflüsse: Regressionsgewichte 
+<!-- ## Auswirkungen system. Störeinflüsse: Regressionsgewichte  -->
 
-\begin{block}{Szenario}
-Systematischer Einfluss über alle Fälle hinweg
-\end{block}
+<!-- \begin{block}{Szenario} -->
+<!-- Systematischer Einfluss über alle Fälle hinweg -->
+<!-- \end{block} -->
 
-```{r include=FALSE}
-set.seed(123)
-```
-```{r echo=TRUE}
-x <- rnorm(100) ; y <- rnorm(x)
-# Original result
-lm(y ~ x)$coef[[2]] 
-# Manipulatied predictor 
-beta_ast <- lm(y ~ I(x+3))$coef[[2]] 
-# Manipulatied outcome 
-lm(I(y+3) ~ I(x))$coef[[2]] 
-```
+<!-- ```{r include=FALSE} -->
+<!-- set.seed(123) -->
+<!-- ``` -->
+<!-- ```{r echo=TRUE} -->
+<!-- x <- rnorm(100) ; y <- rnorm(x) -->
+<!-- # Original result -->
+<!-- lm(y ~ x)$coef[[2]]  -->
+<!-- # Manipulatied predictor  -->
+<!-- beta_ast <- lm(y ~ I(x+3))$coef[[2]]  -->
+<!-- # Manipulatied outcome  -->
+<!-- lm(I(y+3) ~ I(x))$coef[[2]]  -->
+<!-- ``` -->
 
-## Auswirkungen system. Störeinflüsse: Regressionsgewichte 
+<!-- ## Auswirkungen system. Störeinflüsse: Regressionsgewichte  -->
 
-\begin{block}{Szenario}
-Systematischer Störeinfluss auf einige (die ersten 50) Probanden  
-\end{block}
+<!-- \begin{block}{Szenario} -->
+<!-- Systematischer Störeinfluss auf einige (die ersten 50) Probanden   -->
+<!-- \end{block} -->
 
-```{r include=FALSE}
-set.seed(123)
-```
-```{r echo=TRUE}
-x <- rnorm(100) ; y <- rnorm(x)
-x[1:50] <- x[1:50] + 3
-beta <- lm(y ~ x)$coef[[2]] 
-# Manipulatied predictor 
-x[1:50] <- x[1:50] + 6
-# Manipulatied coefficient 
-lm(y ~ x)$coef[[2]] 
-```
+<!-- ```{r include=FALSE} -->
+<!-- set.seed(123) -->
+<!-- ``` -->
+<!-- ```{r echo=TRUE} -->
+<!-- x <- rnorm(100) ; y <- rnorm(x) -->
+<!-- x[1:50] <- x[1:50] + 3 -->
+<!-- beta <- lm(y ~ x)$coef[[2]]  -->
+<!-- # Manipulatied predictor  -->
+<!-- x[1:50] <- x[1:50] + 6 -->
+<!-- # Manipulatied coefficient  -->
+<!-- lm(y ~ x)$coef[[2]]  -->
+<!-- ``` -->
 
 ## Literaturverzeichnis {.allowframebreaks} 
 

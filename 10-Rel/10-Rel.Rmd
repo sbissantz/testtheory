@@ -94,7 +94,7 @@ Damit lässt sich mit einer *Einzelmessung* die Reliabilität nicht eindeutig
 *bestimmten*! (siehe auch: Moosburger & Kelava, 2021 : 210). Wir müssen sie
 *schätzen*.
 
-# Methoden der Reliabilitätsschätzung (20 min)
+# Methoden der Reliabilitätsschätzung (30 min)
 
 Einheit: Methoden der Reliabilitätsschätzung
 
@@ -136,36 +136,217 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 [^2]: Erinnerung: Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
 [^3]: Erinnerung: "Item-Universum" & "Cronbach's Alpha"
 
-## Retest & Paralleltest-Reliabilität (Wiederholung)
+## Übungsaufgabe 1: Selbstexperiment
 
-Übung in OLAT
+Retest & Paralleltest-Reliabilität (Wiederholung)
 
-## Testhalbierungsreliabilität 
+Beim Restest wird der Test an der gleichen Stichprobe zu zwei verschiedenen
+Zeitpunkten durchgeführt. Die Restest-Reliabilität berechnet sich dann als
+Korrelation der Testwerte. Die Retest-Reliabilität setzt (a) konstante wahre
+Werte und (b) konstante Messfehlereinflüsse voraus. Unter diesem Annahmen
+entspricht die Korrelation der Testwerte dem Anteil der wahren Varianz an der
+Varianz der Testwerte.
 
-- Zusätzlich: Wichtig, dass Sie SPF mit der Hand ausrechnen können. 
-1. Aufgabe: Ausrechnen
-2. Mit R überprüfen
-3. An der Tafel zeigen
+Beim Paralleltest werden derselben Stichprobe parallele Testformen vorgegeben.
+Die Paralleltest-Reliabilität berechnet sich dann als Korrelation der
+resultierenden Testwerte. Bei welcher Testart wird dieses Verfahren häufig
+eingesetzt? Nun, viel spricht für den Leistungstest. Ein Problem mit parallelen
+Testformen sind Übungseffekte und Transfereffekte. Zur Überprüfung der
+Parallelität von Testformen setzem wir die konfirmatorische Faktorenanalyse ein.
+
+## Testhalbierungsreliabilität (Split-half)
+
+\begin{block}{Kochrezept: Testhalbierungsreliabilität}
+Zubereitungszeit: 5-10 min
+
+Schwierigkeit: mittel
+\end{block}
+
+Zutaten: 
+
+- (Simultierter) Test voll mit Items
+- Partitionierungsmethode[^7]
+- Korrelationskoeffizient 
+- Spearman-Brown 
+
+Den Test voll mit Items mit der Partitionierungsmethode in zwei parallele
+Testhälften aufteilen. Anschließend die Halbtestreliabilität mit der
+*Spearman-Brown-Korrektur* zur vollständigen Reliabilität aufwerten.
+
+[^7]: zum Beispiel: *Odd-Even Aufteilung*, Zeitpartitionierungsmethode, Selektion
+von Itemzwillinge oder *Zufallsaufteilung*
+
+## Simulation: Test voll mit Items (..in R)
+
+```{r}
+# Tau-parallel
+set.seed(123)
+M <- 8
+mu <- c(5,4,3,4,5,3,5,4) 
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(.8, .5, .5, .5, .5, .5, .5, .5,
+    .5, .8, .5, .5, .5, .5, .5, .5,
+    .5, .5, .8, .5, .5, .5, .5, .5,
+    .5, .5, .5, .8, .5, .5, .5, .5,
+    .5, .5, .5, .5, .8, .5, .5, .5,
+    .5, .5, .5, .5, .5, .8, .5, .5,
+    .5, .5, .5, .5, .5, .5, .8, .5,
+    .5, .5, .5, .5, .5, .5, .5, .8),
+  M,M)
+N <- 1e3
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+```
+
+## Partiotionierung & Halbtestreliabilität (..in R)
+
+Partitionierungsmethode: Odds-Even Aufteilung
+
+```{r}
+set.seed(123)
+even <- seq(1,8, by=2)
+uneven <- seq(2,8, by=2)
+rsx_even <- rowSums(X[,even])
+rsx_uneven <- rowSums(X[,uneven])
+# Halbtestreliabilität
+(Rel_halb <- cor(rsx_even, rsx_uneven))
+```
+
+$\Rightarrow$ Mit der Halbtestreliabilität soll nun die vollständige
+Reliabilität geschätzt werden.
+
+## Vollständige Reliabilität (..händisch)
+
+\begin{example}
+  \begin{equation*}
+    \begin{split}
+      Rel(X_{voll.}) & = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} \\
+      & = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}} \\
+      & \approx \frac{2 \cdot 0.89}{1 + 0.89} \\
+      & \approx \frac{2 \cdot 0.89}{1 + 0.89} \\
+      & \approx \frac{1.78}{1.89} \\
+      & \approx \frac{1.78}{1.89} \\
+      & \approx 0.94 \\
+    \end{split}
+  \end{equation*}
+\end{example}
+
+## Spearman-Brown Korrektur (..in R) 
+
+\begin{alertblock}{Spearman-Brown Formel}
+  \begin{equation}
+    Rel(X_{voll.}) = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}}     
+  \end{equation}
+\end{alertblock}
+
+<p>&nbsp;</p>
+
+...in R-isch:
+
+```{r}
+Rel_SBK <- function(X_p, X_q) {
+  rs_p <- rowSums(X_p)
+  rs_q <- rowSums(X_q) 
+  r <- cor(rs_p, rs_q) 
+  2 * r / (1+r)
+}
+```
+
+## Vollständige Reliabilität (..in R)
+
+Bei der Überprüfung der händischen Berechnung kommt nun `Rel_SBK()` zum Einsatz.
+Die Aufteilung ist nach wie vor "Odds-Even".
+
+<p>&nbsp;</p>
+
+```{r}
+set.seed(123)
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+even <- seq(1,8, by=2)
+uneven <- seq(2,8, by=2)
+X_p <- X[, even]
+X_q <- X[, uneven]
+Rel_SBK(X_p, X_q)
+```
+
+## Übungsaufgabe 2: Selbsttest
+
+\begin{example}
+Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie eine
+Halbtestreliabilität vorgegeben. Berechnen Sie diese zunächst händisch. Im
+Anschluss daran nutzen Sie den Code zur Übungsaufgabe 1 in \texttt{10-Rel.R} und
+überprüfen ihr Ergebnis. 
+\end{example}
+
+- Zeit: 10 Minuten
+- Replikation: `set.seed(123)`
+- Tipp: `Rel_SBK(X_p, X_q)`
+- Anmerkung: Konzepte verstehen $\gg$ Codes verstehen!
+
+## Übungsaufgabe 2: Material
+
+Nach untenstehender Zufallsaufteilung der Items ist folgende
+Halbwertsreliabilität geben:
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r}
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+m <- length(X) ; seq <- seq(m)
+rseq <- sample(seq, m, replace=FALSE)
+X_p <- X[,rseq[1:4]]
+X_q <- X[,rseq[5:8]]
+rsx_p <- rowSums(X_p)
+rsx_q <- rowSums(X_q)
+(Rel_halb <- cor(rsx_p, rsx_q))
+```
+
+## Übungsaufgabe 2: Lösungsvorschlag (..händisch & R)
+
+\begin{equation*}
+ \begin{split}
+  Rel(X_{voll.}) & = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} \\
+  & = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}} \\
+  & \approx \frac{2 \cdot 0.86}{1 + 0.86} \\
+  & \approx \frac{2 \cdot 0.86}{1 + 0.86} \\
+  & \approx \frac{1.72}{1.86} \\
+  & \approx \frac{1.72}{1.86} \\
+  & \approx 0.92 \\
+ \end{split}
+\end{equation*}
+
+## Übungsaufgabe 2: Lösungsvorschlag (..in R)
+
+```{r}
+Rel_SBK(X_p, X_q)
+```
+
+## Interne Konsistenz
 
 
-### Voraussetzungen: Test-Test Reliabilitäten 
 
-- Messung einer einzigen latenten Variable: Eindimensionalität 
-(d.h., keine Fehlerkovarianzen -- Voraussetzung für die Eindimensionalität[^4])
 
-- Essentiell $\tau$-parallel
-(d.h. gleiche Reliabilität in beiden Messungen)
 
-Problem der Test-Test Reliabilität(en): Mit empirischen Daten wird selten ein
-zufriedenstellende Anpassung an die
 
-[^4]: Prüfung der Annahme "Eindimensionalität" bitte anhand einer CFA. Siehe
-dafür z.B. Moosburger & Kelava (2020), Kap. 14)
+
+
+
 
 
 
 
 # Einflussfaktoren auf die Höhe der Reliabilität
+
+## Spearman Brown Formel 2
+
+> Mit der Spearman-Brown-Formel lässt sich auch berechnen,  um wie viele
+parallele Items ein bestehender Test verlängert  werden muss, um eine bestimmte
+Reliabilität zu erreichen (VL: 10-Rel, F.14)
+
+$Rel(X_{voll.}) = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}}$
+
+$Rel(X_{voll.}) = \frac{n \cdot Rel_{halb}}{1 + (n-1) Rel_{halb}}$
 
 
 
@@ -209,11 +390,11 @@ if(!requireNamespace("MASS", quietly = TRUE)) {
 M <- 4
 mu <- rep(5,M)
 # Covariance Matrix
-Sigma <- matrix(  
-  c(.8, .5, .5, .5,  
-    .5, .8, .5, .5, 
-    .5, .5, .8, .5, 
-    .5, .5, .5, .8), 
+Sigma <- matrix(
+  c(.8, .5, .5, .5,
+    .5, .8, .5, .5,
+    .5, .5, .8, .5,
+    .5, .5, .5, .8),
   M,M)
 N <- 1e5
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
@@ -221,20 +402,20 @@ X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 # Spaltenmittelwerte (gerundet)
 round(colMeans(X), digits = 1)
 # Kovarianzmatrix
-round(cov(X), digits = 1) 
+round(cov(X), digits = 1)
 ```
 
-### Essenziell paralleles Messmodell 
+### Essenziell paralleles Messmodell
 
 ```{r}
 M <- 4
-mu <- c(5,4,3,4) 
+mu <- c(5,4,3,4)
 # Kovarianzmatrix
-Sigma <- matrix(  
-  c(.8, .5, .5, .5,  
-    .5, .8, .5, .5, 
-    .5, .5, .8, .5, 
-    .5, .5, .5, .8), 
+Sigma <- matrix(
+  c(.8, .5, .5, .5,
+    .5, .8, .5, .5,
+    .5, .5, .8, .5,
+    .5, .5, .5, .8),
   M,M)
 N <- 1e5
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
@@ -242,7 +423,7 @@ X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 # Spaltenmittelwerte (gerundet)
 round(colMeans(X), digits = 1)
 # Kovarianzmatrix
-round(cov(X), digits = 1) 
+round(cov(X), digits = 1)
 ```
 
 ### Tau-äquivalentes Messmodell
@@ -251,11 +432,11 @@ round(cov(X), digits = 1)
 M <- 4
 mu <- rep(5,M)
 # Kovarianzmatrix
-Sigma <- matrix(  
-  c(.7, .5, .5, .5,  
-    .5, .8, .5, .5, 
-    .5, .5, .7, .5, 
-    .5, .5, .5, .6), 
+Sigma <- matrix(
+  c(.7, .5, .5, .5,
+    .5, .8, .5, .5,
+    .5, .5, .7, .5,
+    .5, .5, .5, .6),
   M,M)
 N <- 1e5
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
@@ -263,20 +444,20 @@ X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 # Spaltenmittelwerte (gerundet)
 round(colMeans(X), digits = 1)
 # Kovarianzmatrix
-round(cov(X), digits = 1) 
+round(cov(X), digits = 1)
 ```
 
 ### Essenziell tau-äquivales Messmodell
 
 ```{r}
 M <- 4
-mu <- c(5,4,3,4) 
+mu <- c(5,4,3,4)
 # Kovarianzmatrix
-Sigma <- matrix(  
-  c(.7, .5, .5, .5,  
-    .5, .8, .5, .5, 
-    .5, .5, .7, .5, 
-    .5, .5, .5, .6), 
+Sigma <- matrix(
+  c(.7, .5, .5, .5,
+    .5, .8, .5, .5,
+    .5, .5, .7, .5,
+    .5, .5, .5, .6),
   M,M)
 N <- 1e5
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
@@ -284,20 +465,20 @@ X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 # Spaltenmittelwerte (gerundet)
 round(colMeans(X), digits = 1)
 # Kovarianzmatrix
-round(cov(X), digits = 1) 
+round(cov(X), digits = 1)
 ```
 
 ### Tau-kongenerisches Messmodell
 
 ```{r}
 M <- 4
-mu <- c(5,4,3,4) 
+mu <- c(5,4,3,4)
 # Kovarianzmatrix
-Sigma <- matrix(  
-  c(.7, .5, .6, .7,  
-    .5, .8, .5, .6, 
-    .6, .5, .7, .5, 
-    .7, .6, .5, .8), 
+Sigma <- matrix(
+  c(.7, .5, .6, .7,
+    .5, .8, .5, .6,
+    .6, .5, .7, .5,
+    .7, .6, .5, .8),
   M,M)
 N <- 1e5
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
@@ -305,5 +486,5 @@ X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 # Spaltenmittelwerte (gerundet)
 round(colMeans(X), digits = 1)
 # Kovarianzmatrix
-round(cov(X), digits = 1) 
+round(cov(X), digits = 1)
 ```
