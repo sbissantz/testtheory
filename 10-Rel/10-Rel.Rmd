@@ -112,7 +112,16 @@ Ziel: Wiederholung und Vertiefung der Konzepte, Umsetzung in R
 
 ## Lösungansatz zum Reliabilitätsproblem
 
-> "Aber auch ohne die wahren Werte einzelner Personen zu kennen, kann das Varianzverhältnis als Maß für die Messgenauigkeit geschätzt werden, wenn man die Ebene der einzelnen Personen und einzelnen Items verlässt und stattdessen **alle Items, aus denen sich ein Test zusammensetzt**, sowie die **Messungen mehrerer Personen betrachtet**: Wird ein latentes Merkmal anhand mehrerer Items gemessen, so liegen **Mehrfachmessungen desselben Merkmals mit unterschiedlichen aber ähnlichen Messinstrumenten/Items** vor, die **zu einer Testwertvariablen aufsummiert werden können**, sofern sie zumindest die Bedingung der Eindimensionalität[^1] erfüllen." (Mosburger & Kelava, 2020: 310 -- Hervorherbungen nicht im Original)
+> "Aber auch ohne die wahren Werte einzelner Personen zu kennen, kann das
+Varianzverhältnis als Maß für die Messgenauigkeit geschätzt werden, wenn man die
+Ebene der einzelnen Personen und einzelnen Items verlässt und stattdessen **alle
+Items, aus denen sich ein Test zusammensetzt**, sowie die **Messungen mehrerer
+Personen betrachtet**: Wird ein latentes Merkmal anhand mehrerer Items gemessen,
+so liegen **Mehrfachmessungen desselben Merkmals mit unterschiedlichen aber
+ähnlichen Messinstrumenten/Items** vor, die **zu einer Testwertvariablen
+aufsummiert werden können**, sofern sie zumindest die Bedingung der
+Eindimensionalität[^1] erfüllen." (Mosburger & Kelava, 2020: 310 --
+Hervorherbungen nicht im Original)
 
 [^1]: Die Bedingung der Eindimensionalität können und sollten Sie überprüfen
 (Hilsmittel: CFA). Die Unkorreliertheit der Messfehler ($Cov(\epsilon_i,
@@ -136,7 +145,7 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 [^2]: Erinnerung: Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
 [^3]: Erinnerung: "Item-Universum" & "Cronbach's Alpha"
 
-## Übungsaufgabe 1: Selbstexperiment
+## Übung 1: Selbstexperiment
 
 Retest & Paralleltest-Reliabilität (Wiederholung)
 
@@ -178,9 +187,12 @@ von Itemzwillinge oder *Zufallsaufteilung*
 
 ## Simulation: Test voll mit Items (..in R)
 
+```{r include=FALSE}
+set.seed(123)
+```
+
 ```{r}
 # Tau-parallel
-set.seed(123)
 M <- 8
 mu <- c(5,4,3,4,5,3,5,4) 
 # Kovarianzmatrix
@@ -195,7 +207,8 @@ Sigma <- matrix(
     .5, .5, .5, .5, .5, .5, .5, .8),
   M,M)
 N <- 1e3
-X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+# Multivariate Half-Normal Distribution
+X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
 
 ## Partiotionierung & Halbtestreliabilität (..in R)
@@ -261,6 +274,7 @@ Die Aufteilung ist nach wie vor "Odds-Even".
 
 ```{r}
 set.seed(123)
+N <- 1e3
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 even <- seq(1,8, by=2)
 uneven <- seq(2,8, by=2)
@@ -269,7 +283,7 @@ X_q <- X[, uneven]
 Rel_SBK(X_p, X_q)
 ```
 
-## Übungsaufgabe 2: Selbsttest
+## Übung 2: Selbsttest
 
 \begin{example}
 Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie eine
@@ -283,7 +297,7 @@ Anschluss daran nutzen Sie den Code zur Übungsaufgabe 1 in \texttt{10-Rel.R} un
 - Tipp: `Rel_SBK(X_p, X_q)`
 - Anmerkung: Konzepte verstehen $\gg$ Codes verstehen!
 
-## Übungsaufgabe 2: Material
+## Übung 2: Selbsttest
 
 Nach untenstehender Zufallsaufteilung der Items ist folgende
 Halbwertsreliabilität geben:
@@ -292,6 +306,7 @@ Halbwertsreliabilität geben:
 set.seed(123)
 ```
 ```{r}
+N <- 1e3
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 m <- length(X) ; seq <- seq(m)
 rseq <- sample(seq, m, replace=FALSE)
@@ -302,7 +317,7 @@ rsx_q <- rowSums(X_q)
 (Rel_halb <- cor(rsx_p, rsx_q))
 ```
 
-## Übungsaufgabe 2: Lösungsvorschlag (..händisch & R)
+## Übung 2: Lösungsvorschlag (..händisch & R)
 
 \begin{equation*}
  \begin{split}
@@ -316,45 +331,413 @@ rsx_q <- rowSums(X_q)
  \end{split}
 \end{equation*}
 
-## Übungsaufgabe 2: Lösungsvorschlag (..in R)
+## Übung 2: Lösungsvorschlag (..in R)
 
 ```{r}
 Rel_SBK(X_p, X_q)
 ```
 
-## Interne Konsistenz
+## Interne Konsistenz & Cronbach's Alpha
 
+Eine in der Forschung häufig genutzte Variante zur Schätzung der Reliabilität
+ist die *Beurteilung der internen Konsistenz* von Items mittels Cronbach's
+Alpha[^8] ($\alpha$).
 
+\begin{alertblock}{Definition: Cronbach's Alpha}
+\begin{equation}
+  Rel: \alpha = \frac{m}{m-1} \cdot \left[ 1 - \frac{\sum_{i=1}^m Var(x_i)}{Var(x)} \right]
+\end{equation}
+\end{alertblock}
 
+Notes: Eine Verallgemeinerung der Testhalbierungsreliabilität auf beliebig viele
+($m$) Testteile, Items (aus einem *Itemuniversum*).
 
+[^8]: Eine Verallgemeinerung von Cronbach's Alpha ist McDonald's $\mathbf{\omega}$.
 
+## Simulation: Test voll mit Items (..in R)
 
+```{r include=FALSE}
+set.seed(123)
+```
 
+```{r}
+# Essenziell Tau-Äquivalent
+M <- 8
+mu <- c(5,4,3,4,5,3,5,4) 
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(1.8, .5, .5, .5, .5, .5, .5, .5,
+    .5, 1.7, .5, .5, .5, .5, .5, .5,
+    .5, .5, 1.8, .5, .5, .5, .5, .5,
+    .5, .5, .5, 1.6, .5, .5, .5, .5,
+    .5, .5, .5, .5, 1.6, .5, .5, .5,
+    .5, .5, .5, .5, .5, 1.7, .5, .5,
+    .5, .5, .5, .5, .5, .5, 1.8, .5,
+    .5, .5, .5, .5, .5, .5, .5, 1.8),
+  M,M)
+N <- 1e3
+# Multivariate Half-Normal Distribution
+X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
+```
 
+## Reliabilität: Interne Konsistenz
 
+```{r}
+VCOV <- cov(X)
+V_items <- diag(VCOV)
+V_X <- sum(VCOV)  
+list("Gesamtvarianz" = round(V_X, 2), 
+     "Itemvarianz" = round(V_items,2))
+```
 
+$\Rightarrow$ nun wollen wir die interne Konsistenz unserers Itembündels ermitteln
 
+## Reliabilität: Interne Konsistenz (..händisch)
 
+\begin{equation}
+  \begin{split}
+    Rel: \alpha & = \frac{m}{m-1} \cdot \left[ 1 - \frac{\sum_{i=1}^m Var(x_i)}{Var(x)} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(1.79 + \dots + 1.79)}{40.23} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{13.45}{40.23} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - 0.33 \right] \\
+    & \approx \frac{8}{7} \cdot 0.67 \\
+    & \approx 0.76 \\
+  \end{split}
+\end{equation}
+
+## Cronbachs Alpha (..in R) 
+
+\begin{alertblock}{Definition: Cronbach's Alpha}
+\begin{equation}
+  Rel: \alpha = \frac{m}{m-1} \cdot \left[ 1 - \frac{\sum_{i=1}^m Var(x_i)}{Var(x)} \right]
+\end{equation}
+\end{alertblock}
+
+<p>&nbsp;</p>
+
+...in R-isch:
+
+```{r}
+alpha <- function(X) {
+  VCOV <- cov(X) ; m <- length(X) 
+  V_x <- sum(VCOV) ; V_xi <- sum(diag(VCOV)) 
+  m/(m-1) * (1-(V_xi/V_x))
+}
+```
+
+## Reliabilität: Interne Konsistenz (..in R)
+
+Bei der Überprüfung der händischen Berechnung kommt nun `alpha()` zum Einsatz.
+
+<p>&nbsp;</p>
+
+```{r}
+set.seed(123)
+N <- 1e3
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+alpha(X)
+```
+
+## Übung 3: Selbsttest
+
+\begin{example}
+Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie 
+die Itemvarianzen sowie die Gesamtvarianz vorgegeben. Berechnen Sie Cronbach's
+alpha zunächst händisch. Im Anschluss daran nutzen Sie den Code zur
+Übungsaufgabe 3 in \texttt{10-Rel.R} und überprüfen ihr Ergebnis.
+
+NUTZEN SIE EBENFALLS DIE FUNKTION PSYCH::ALPHA(
+NUTZEN SIE EBENFALLS DIE FUNKTION PSYCH::ALPHA())
+NUTZEN SIE EBENFALLS DIE FUNKTION PSYCH::ALPHA())
+\end{example}
+
+- Zeit: 10 Minuten
+- Replikation: `set.seed(123)`
+- Tipp: `Rel_SBK(X_p, X_q)`
+- Anmerkung: Konzepte verstehen $\gg$ Codes verstehen!
+
+## Übung 2: Selbsttest
+
+```{r include=FALSE}
+set.seed(123)
+```
+```{r}
+N <- 1e2
+X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+VCOV <- cov(X)
+V_items <- diag(VCOV)
+V_X <- sum(VCOV)  
+list("Gesamtvarianz" = round(V_X, 2), 
+     "Itemvarianz" = round(V_items,2))
+```
+
+## Übung 3: Lösungsvorschlag (..händisch & R)
+
+\begin{equation}
+  \begin{split}
+    Rel: \alpha & = \frac{m}{m-1} \cdot \left[ 1 - \frac{\sum_{i=1}^m Var(x_i)}{Var(x)} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(1.44 + \dots + 2.43)}{34.95} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{12.74}{34.95} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - 0.36 \right] \\
+    & \approx \frac{8}{7} \cdot 0.64 \\
+    & \approx 0.73 \\
+  \end{split}
+\end{equation}
+
+```{r}
+alpha(X)
+```
 
 # Einflussfaktoren auf die Höhe der Reliabilität
 
-## Spearman Brown Formel 2
+- Homogenität oder Heterogenität der Items
+- Testlänge
+- Streuung der Testwerte
 
-> Mit der Spearman-Brown-Formel lässt sich auch berechnen,  um wie viele
+## Homogenität/Heterogenität der Items
+
+> Tests mit homogenen Items haben meistens eine hohe Reliabilität, da die Items
+sehr ähnlich sind und daher hoch positiv miteinander korrelieren.
+
+\begin{alertblock}{Definition: Korrelation}
+  \begin{equation}
+    cor(X,Y) = \frac{cov(x,y)}{\sqrt{var(x){var(y)}}}
+  \end{equation}
+\end{alertblock}
+
+Knobelfrage: Wie wirkt sich ein Zuwachs in den Kovarianzen auf Cronbach's alpha
+aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $alpha$ bleibt gleich
+
+## Simulation: Zuwachs in den Kovarianzen 
+
+```{r}
+# Essenziell Tau-Äquivalent
+M <- 6
+mu <- c(5,4,3,4,5,3)
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(.8, .1, .1, .1, .1, .1, 
+    .1, .7, .1, .1, .1, .1, 
+    .1, .1, .8, .1, .1, .1, 
+    .1, .1, .1, .7, .1, .1, 
+    .1, .1, .1, .1, .8, .1, 
+    .1, .1, .1, .1, .1, .7),
+  M,M)
+N <- 1e3
+# Multivariate Half-Normal Distribution
+X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
+```
+
+## Zuwachs in den Kovarianzen
+
+```{r fig.align='center', message=FALSE, warning=FALSE, out.width="80%", paged.print=FALSE, results='hide'}
+sigmas <- seq(0.1, 0.7, by=0.01)
+sim_alpha <- function(sigma){
+  M <- 6
+  mu <- c(5,4,3,4,5,3)
+  Sigma <- matrix(rep(sigma, M^2), M)
+  diag(Sigma) <- rep(c(.8,.7), 3)
+  N <- 1e3
+  X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
+  alpha(X)
+}
+alphas <- lapply(sigmas, sim_alpha)
+plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha", 
+     type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Kovarianz")
+mtext("m = 6; step-size = + 0.01")
+```
+
+*Konklusion*: Je homogener die Items, desto größer Cronbachs alpha (vice versa)!
+
+## Testlänge
+
+> Mit der Spearman-Brown-Formel lässt sich auch berechnen, um wie viele
 parallele Items ein bestehender Test verlängert  werden muss, um eine bestimmte
 Reliabilität zu erreichen (VL: 10-Rel, F.14)
 
-$Rel(X_{voll.}) = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}}$
+\begin{alertblock}{Definition: Spearman-Brown-Formel}
+  \begin{equation}
+    Rel_k^* = \frac{k \cdot Rel}{1 + (k-1) Rel}
+  \end{equation}
+\end{alertblock}
 
-$Rel(X_{voll.}) = \frac{n \cdot Rel_{halb}}{1 + (n-1) Rel_{halb}}$
+\begin{alertblock}{Reformulierung: Spearman-Brown-Formel}
+  \begin{equation}
+  k = \frac{Rel^* \cdot (1-Rel)}{Rel \cdot (1-Rel*)}
+  \end{equation}
+\end{alertblock}
+
+## Daten simulieren
+```{r}
+set.seed(123)
+```
+
+```{r}
+# Essenziell Tau-Äquivalent
+M <- 6
+mu <- c(5,4,3,4,5,3)
+# Kovarianzmatrix
+Sigma <- matrix(  
+  c(.8, .4, .4, .4, .4, .4, 
+    .4, .7, .4, .4, .4, .4, 
+    .4, .4, .8, .4, .4, .4, 
+    .4, .4, .4, .7, .4, .4, 
+    .4, .4, .4, .4, .8, .4, 
+    .4, .4, .4, .4, .4, .7),
+  M,M)
+N <- 1e3
+# Multivariate Half-Normal Distribution
+X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
+```
+
+## Reliabilität (via Cronbach's alpha)
+
+```{r}
+alpha(X)
+```
+
+Ziel: Reliabilität von 0.99 zu erreichen
+\begin{equation}
+  \begin{split}
+    k & = \frac{Rel^* \cdot (1-Rel)}{Rel \cdot (1-Rel*)} \\
+    k & \approx \frac{0.99 \cdot (1-0.87)}{0.87 \cdot (1-0.99)} \\
+    k & \approx \frac{0.99 \cdot 0.13}{0.87 \cdot 0.01} \\
+    k & \approx 15 \\
+  \end{split}
+\end{equation}
+
+## ..in R
+
+\begin{alertblock}{Reformulierung: Spearman-Brown-Formel}
+  \begin{equation}
+    k = \frac{Rel^* \cdot (1-Rel)}{Rel \cdot (1-Rel*)}
+  \end{equation}
+\end{alertblock}
+
+```{r}
+calc_k <- function(Rel_ast, Rel) {
+ (Rel_ast * (1-Rel)) / (Rel * (1 -Rel_ast))
+}
+Rel_ast <- 0.99
+Rel <- 0.87
+calc_k(Rel_ast, Rel)
+```
+
+## Graph
+
+\begin{alertblock}{Definition: Spearman-Brown-Formel}
+  \begin{equation}
+    Rel_k^* = \frac{k \cdot Rel}{1 + (k-1) Rel}
+  \end{equation}
+\end{alertblock}
+
+```{r}
+calc_Rel_ast <- function(k, Rel) {
+  (k * Rel) / (1 + (k-1) * Rel)
+}
+
+(Rels <- seq(0.4, 1, by=.1))
+(Rel_asts <- lapply(Rels, calc_Rel_ast, k=2))
+plot(c(1,5), c(0.6,1), type = "n",
+     xlab="Verlängerung des Tests um k Items",
+     ylab="Reliabilitätskoeffizien (R*)t")
+points(0:6, lapply(Rels, calc_Rel_ast, k=2), type="b")
+points(0:6, lapply(Rels, calc_Rel_ast, k=3), type="b")
+points(0:6, lapply(Rels, calc_Rel_ast, k=4), type="b")
+
+```
 
 
 
+
+
+
+
+
+<!-- ```{r} -->
+<!-- sigmas <- seq(0.1, 0.8, by=0.1) -->
+<!-- sim_alpha <- function(m, sigma){ -->
+<!--   mu <- rep(5, m) -->
+<!--   Sigma <- matrix(rep(sigma, m^2), m) -->
+<!--   diag(Sigma) <- rep(.9, m) -->
+<!--   N <- 1e5 -->
+<!--   X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma))) -->
+<!--   alpha(X) -->
+<!-- } -->
+<!-- plot(x=c(2,8), y=c(0.2,1), type="n", xlab="Anzahl der Items",  -->
+<!--      ylab="Inter-Item Kovarianz") -->
+<!-- lapply(sigmas, -->
+<!--        function(s) points(mapply(sim_alpha, m=2:10, s), type="b", pch=s*10)) -->
+
+
+<!-- alphas <- lapply(sigmas, sim_alpha) -->
+<!-- plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha",  -->
+<!--      type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Kovarianz") -->
+<!-- mtext("m = 6; step-size = + 0.01") -->
+<!-- ``` -->
 
 
 
 
 # Anwendung: Konfidenzintervalle
+
+<!-- ```{r} -->
+<!-- sigmas <- seq(0.1, 0.8, by=0.1) -->
+<!-- sim_alpha <- function(m, sigma){ -->
+<!--   mu <- rep(5, m) -->
+<!--   Sigma <- matrix(rep(sigma, m^2), m) -->
+<!--   diag(Sigma) <- rep(.9, m) -->
+<!--   N <- 1e5 -->
+<!--   X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma))) -->
+<!--   alpha(X) -->
+<!-- } -->
+<!-- plot(x=c(2,8), y=c(0.2,1), type="n", xlab="Anzahl der Items",  -->
+<!--      ylab="Inter-Item Kovarianz") -->
+<!-- lapply(sigmas, -->
+<!--        function(s) points(mapply(sim_alpha, m=2:10, s), type="b", pch=s*10)) -->
+
+
+<!-- alphas <- lapply(sigmas, sim_alpha) -->
+<!-- plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha",  -->
+<!--      type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Kovarianz") -->
+<!-- mtext("m = 6; step-size = + 0.01") -->
+<!-- ``` -->
+
+
+
+
+
+## Streuung der Testwerte
+
+> Eine hohe Streuung geht meist mit einer hohen Reliabilität  einher, während
+bei geringer Streuung eine hohe Reliabilität unwahrscheinlich ist
+
+\begin{alertblock}{Definition: Streuung der Testwerte}
+  \begin{equation}
+  Rel(y) = \frac{Var(T)}{Var(X)}
+  \end{equation}
+\end{alertblock}
+
+Knobelfrage: Wie wirkt sich ein Zuwachs in den Kovarianzen auf Cronbach's alpha
+aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $alpha$ bleibt gleich
+
+
+```{r fig.align='center', message=FALSE, warning=FALSE, out.width="80%", paged.print=FALSE, results='hide'}
+sigmas_sq <- seq(0.1, 0.7, by=0.01)
+
+sim_alpha <- function(sigma){
+  M <- 6
+  mu <- c(5,4,3,4,5,3)
+  Sigma <- matrix(rep(0.1, M^2), M)
+  diag(Sigma) <- rep(1.5, M)
+  N <- 1e3
+  X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
+  alpha(X)
+}
+alphas <- lapply(sigmas, sim_alpha)
+plot(sigmas, alphas, xlab="Kovarianz in X (+0.01)", ylab = "Cronbach's alpha", 
+     type="b", pch=20)
+```
 
 
 # Selbststudium
