@@ -72,7 +72,7 @@ latente Konstrukte mit \textit{Messfehler} zu erfassen.
 $\Rightarrow$ *Theorie über die Entstehung des Messfehlers* (Messfehlertheorie).
 
 - Beispieltheorie: Klassische Testtheorie (KTT)
-  - Erklärung: Wahrer Wert = Beobachtungswert + Messfehler 
+  - Erklärung: Wahrer Wert = Beobachtungswert - Messfehler 
 - (...demnächst: Item Response Theory (IRT))
 
 # Messfehler & True Scores in der KTT
@@ -267,8 +267,8 @@ set.seed(123)
 
 \begin{example}
 Versuchen Sie es selbst! Nutzen Sie den Code zur Übungsaufgabe 2 in
-\texttt{04-KTT.R}. Geben Sie ihr eigenes Alter/Gewicht ein und verändern Sie den
-Wert für \texttt{M}.
+\texttt{04-KTT.R}. Verändern Sie die Anzahl der Testwiederholungen (\texttt{M})
+und betrachten Sie die Veränderung im Erwartungswert.
 \end{example}
 
 1. Wie verändert sich der Wert mit steigender Wiederholungszahl? 
@@ -366,7 +366,7 @@ mtext("Veteilung der erwarteten Intelligenzwerte in der Population (M = 5000)")
 
 ...aus dieser Population (interindividueller Merkmalsverteilung) ziehen wir
 zufällig 4 Probanden/Probandinnen und betrachten ihre intraindividuellen
-Merkmalsverteilung über die 1000 Testwiederholungen.
+Merkmalsverteilung.
 
 ```{r include=FALSE}
 set.seed(123)
@@ -375,7 +375,7 @@ set.seed(123)
 rnd_smpl <- sample(X, 4)
 old.par <- par(no.readonly = TRUE)
 par(mfrow=c(2,2))
-lapply(rnd_smpl, hist, main=NULL, xlab="Testwert", sub=paste0("(M=", M,")"))
+lapply(rnd_smpl, hist, xlab="Testwert", main=paste0("(M=", M,")"))
 par(old.par)
 ```
 
@@ -442,7 +442,7 @@ systematisch die Werte $M$ und $N$. (siehe: Übungsaufgabe 4)
 
 1. Wie äußern sich Veränderungen in der Wiederholungszahl ($M$) ?& Populationsgröße ($N$)
 2. Wie wirken sich die Veränderungen auf den Zusammenhang zwischen Wahrem Wert,
-Beobachtungswert und Messfehler aus (Tipp: $\tau = X + \epsilon$)
+Beobachtungswert und Messfehler aus (Tipp: $\tau = X - \epsilon$)
 
 - Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
@@ -477,7 +477,7 @@ Wie hängen Reliabilität und Messfehler zusammen?
 
 ## Was ist Reliabilität?
 
-Die Reliabilität (=Besätndigkeit/Genauigkeit) wird definiert als Anteil
+Die Reliabilität (=Beständigkeit/Genauigkeit) wird definiert als Anteil
 ($Var(\tau_j)$) der wahren Varianz an der Gesamtvarianz ($Var(Y_j)$).
 
 \begin{alertblock}{Definition: Reliabilität}
@@ -575,13 +575,13 @@ it up, it keeps coming back."
 
 Probleme der True Score Logik
 
-- z.B.: die Grundgleichung bleibt empirisch ungeprüft ($\tau = X + \epsilon$)
+- z.B.: die Grundgleichung bleibt empirisch ungeprüft ($\tau = X - \epsilon$)
 - z.B.: Annahme zu Messfehlern oft problematisch ($E(\epsilon)=0$)
 - z.B.: [Kohli et al. (2015)](https://doi.org/10.1177/0013164414559071) Nur
 moderne Erweiterungen der KTT (v.a. Underlying Normal Variable Approach) können
 annähernd mit modernen Item Response Theory Model (IRT) mithalten.
 
-$\Rightarrow$ Moderne Ansätze zur Verebsserung (..to be continued!) 
+$\Rightarrow$ Moderne Ansätze zur Verbesserung (..to be continued!) 
 
 # Bonusmaterial: Lokale Unabhängigkeit
 

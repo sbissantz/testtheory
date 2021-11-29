@@ -32,55 +32,58 @@ Ziel: Wiederholung der Konzepte (re-fresher) & Problematisierung
 
 Mittel: Gruppenübung (15 min) & Input (5min)
 
-## Reliabilität als Konzept (20 min)
+## Reliabilität als Konzept 
 
-Gruppenübung: 6 Gruppen (a 3-4 Leute)
-Mosburger & Kelava, S. 307 - 309
-
-- Reliabilität als Maß der Messgenauigkeit
-
-- Reliabilität, Wahrer Wert und Messfehler
-
-- Testwertvariable als Summe der Itemvariable
-
-- Definition: Reliabilität einer Testvariable
-
-- Definition: Reliabilität einer Itemvariable 
-
-- Reliabilität, Wertebreich und dessen Bedeutung
-
-- Reliabilität und Objektivittät 
-
-- Reliabilität und Validität
-
-Posten der Ergebnisse im Olat-Forum
-
-## Auflösung: Reliabilität als Konzept
-
+\begin{block}{Reliabilität als Maß der Messgenauigkeit}
 Messinstrument mit hoher Messgenauigkeit, Messergebnisse mit geringem Messfehler
+\end{block}
 
-Perfekte Reliabilität: Abwesenheit von zufälligem Messfehlern
+\begin{block}{Reliabilität, Wahrer Wert und Messfehler}
+Perfekte Reliabilität entspricht der Abwesenheit von zufälligem Messfehlern:
 $E(\epsilon) \rightarrow 0 : E(X) = \tau$
+\end{block}
 
-Testwert ist der Summenscore über alle Itemvariablen ($\in$ Itemuniverse)
+\begin{block}{Testwertvariable als Summe der Itemvariable}
+Der Testwert ist der Summenscore über alle Itemvariablen ($\in$ Itemuniverse):
 $X = \sum_{i=1}^n X_i$
+\end{block}
 
-Reliabilität einer Testwertvariablen ($Y$)$: 
-$Rel(y) = \frac{Var(T)}{Var(X)} = \frac{Var(T)}{Var(T) + Var(E)}$
+## Reliabilität: Definitionen
 
-Reliabilität einer Itemvariable  ($Y$)$: 
-$Rel(x_i) = \frac{Var(\tau_i)}{Var(x_i)} = \frac{Var(\tau_i)}{Var(\tau_i) + Var(\epsilon_i)}$
+\begin{alertblock}{Definition: Reliabilität einer Testvariable}
+Die Reliabilität einer Testwertvariablen ($Y$) lässt sich bestimmen als:
+  \begin{equation}
+    Rel(y) = \frac{Var(T)}{Var(X)} = \frac{Var(T)}{Var(T) + Var(E)}
+  \end{equation}
+\end{alertblock}
 
-$Rel \in [0,1]$, wobei $Rel=1$ Abwesenheit von Mesfehlern; d.h. vollständig
-reliable Messung (vice versa)
+\begin{alertblock}{Definition: Reliabilität einer Itemvariable}
+Reliabilität einer Itemvariable ($y$) lässt sich bestimmen als:
+  \begin{equation}
+    Rel(x_i) = \frac{Var(\tau_i)}{Var(x_i)} = \frac{Var(\tau_i)}{Var(\tau_i) + Var(\epsilon_i)}
+  \end{equation}
+\end{alertblock}
 
-Objektivität -> Reliabilität
+\begin{block}{Reliabilität, Wertebreich \& Bedeutung}
+$Rel \in [0,1]$, wobei $Rel=1$: Abwesenheit von (zufälligen) Messfehlern; das
+entspricht einer vollständig reliablen Messung (vice versa).
+\end{block}
+
+## Reliabilität, Validität, Objektivität
+
+\begin{block}{Reliabilität \& Objektivität}
+Objektivität $\Rightarrow$ Reliabilität
+
 (via: Messbedingungen standardisieren)
+\end{block}
 
-Reliabilität -> Validität
+\begin{block}{Reliabilität \& Validität}
+Reliabilität $\Rightarrow$ Validität
+
 (v.a.: Beständigkeit gleicher Testergebnisse bei wiederholter Messung)
+\end{block}
 
-## Das Reliabilitätsproblem 
+## Das Reliabilitätsproblem
 
 Problem: Wir kennen die True-Score- und Fehlervarianz nicht. Die Messwerte bei
 einer einzigen Messung sind lediglich *Schätzer* der wahren Werte, die
@@ -100,13 +103,13 @@ Einheit: Methoden der Reliabilitätsschätzung
 
 Inhaltliche Schwerpunkte der Einheit:
 
-0. Lösungsansatz zum Reliabilitätsproblem 
+0. Lösungsansatz zum Reliabilitätsproblem
 1. Retest-Reliabilität
 2. Paralleltest-Reliabilität
 3. *Testhalbierungsreliabilität*
 4. *Interne Konsistenz*
 
-Ziel: Wiederholung und Vertiefung der Konzepte, Umsetzung in R 
+Ziel: Wiederholung und Vertiefung der Konzepte, Umsetzung in R
 
 (?) Mittel: Input (10 min) & R-Übung (5min)
 
@@ -128,7 +131,7 @@ Hervorherbungen nicht im Original)
 \epsilon_i') = 0$) ist dabei eine Basisvoraussetzung, für die Erfüllung
 der Bedingung. (Siehe: ebd., 14.2.2)
 
-## Lösungansatz zum Reliabilitätsproblem 
+## Lösungansatz zum Reliabilitätsproblem
 
 \begin{block}{Lösungsansatz in a Nuthshell: Mehrfachmessungen}
 Reliabilität(-sschätzung) $\Rrightarrow$ Mehrfachmessungen! D.h. Alle Methoden
@@ -142,8 +145,8 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 2. Verschiedene Items innerhalb eines Tests[^3]
   - Interne Konsistenz (Cronbach's alpha)
 
-[^2]: Erinnerung: Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
-[^3]: Erinnerung: "Item-Universum" & "Cronbach's Alpha"
+[^2]: Erinnerung an Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
+[^3]: Erinnerung an das Konzept des "Item-Universums"
 
 ## Übung 1: Selbstexperiment
 
@@ -171,12 +174,12 @@ Zubereitungszeit: 5-10 min
 Schwierigkeit: mittel
 \end{block}
 
-Zutaten: 
+Zutaten:
 
 - (Simultierter) Test voll mit Items
 - Partitionierungsmethode[^7]
-- Korrelationskoeffizient 
-- Spearman-Brown 
+- Korrelationskoeffizient
+- Spearman-Brown
 
 Den Test voll mit Items mit der Partitionierungsmethode in zwei parallele
 Testhälften aufteilen. Anschließend die Halbtestreliabilität mit der
@@ -194,9 +197,9 @@ set.seed(123)
 ```{r}
 # Tau-parallel
 M <- 8
-mu <- c(5,4,3,4,5,3,5,4) 
+mu <- c(5,4,3,4,5,3,5,4)
 # Kovarianzmatrix
-Sigma <- matrix(  
+Sigma <- matrix(
   c(.8, .5, .5, .5, .5, .5, .5, .5,
     .5, .8, .5, .5, .5, .5, .5, .5,
     .5, .5, .8, .5, .5, .5, .5, .5,
@@ -244,11 +247,11 @@ Reliabilität geschätzt werden.
   \end{equation*}
 \end{example}
 
-## Spearman-Brown Korrektur (..in R) 
+## Spearman-Brown Korrektur (..in R)
 
 \begin{alertblock}{Spearman-Brown Formel}
   \begin{equation}
-    Rel(X_{voll.}) = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}}     
+    Rel(X_{voll.}) = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}}
   \end{equation}
 \end{alertblock}
 
@@ -259,8 +262,8 @@ Reliabilität geschätzt werden.
 ```{r}
 Rel_SBK <- function(X_p, X_q) {
   rs_p <- rowSums(X_p)
-  rs_q <- rowSums(X_q) 
-  r <- cor(rs_p, rs_q) 
+  rs_q <- rowSums(X_q)
+  r <- cor(rs_p, rs_q)
   2 * r / (1+r)
 }
 ```
@@ -289,7 +292,7 @@ Rel_SBK(X_p, X_q)
 Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie eine
 Halbtestreliabilität vorgegeben. Berechnen Sie diese zunächst händisch. Im
 Anschluss daran nutzen Sie den Code zur Übungsaufgabe 1 in \texttt{10-Rel.R} und
-überprüfen ihr Ergebnis. 
+überprüfen ihr Ergebnis.
 \end{example}
 
 - Zeit: 10 Minuten
@@ -349,8 +352,8 @@ Alpha[^8] ($\alpha$).
 \end{equation}
 \end{alertblock}
 
-Notes: Eine Verallgemeinerung der Testhalbierungsreliabilität auf beliebig viele
-($m$) Testteile, Items (aus einem *Itemuniversum*).
+Notes: Alpha is eine verallgemeinerung der Testhalbierungsreliabilität auf
+beliebig viele ($m$) Testteile, Items (aus einem *Itemuniversum*).
 
 [^8]: Eine Verallgemeinerung von Cronbach's Alpha ist McDonald's $\mathbf{\omega}$.
 
@@ -363,9 +366,9 @@ set.seed(123)
 ```{r}
 # Essenziell Tau-Äquivalent
 M <- 8
-mu <- c(5,4,3,4,5,3,5,4) 
+mu <- c(5,4,3,4,5,3,5,4)
 # Kovarianzmatrix
-Sigma <- matrix(  
+Sigma <- matrix(
   c(1.8, .5, .5, .5, .5, .5, .5, .5,
     .5, 1.7, .5, .5, .5, .5, .5, .5,
     .5, .5, 1.8, .5, .5, .5, .5, .5,
@@ -385,8 +388,8 @@ X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```{r}
 VCOV <- cov(X)
 V_items <- diag(VCOV)
-V_X <- sum(VCOV)  
-list("Gesamtvarianz" = round(V_X, 2), 
+V_X <- sum(VCOV)
+list("Gesamtvarianz" = round(V_X, 2),
      "Itemvarianz" = round(V_items,2))
 ```
 
@@ -405,7 +408,7 @@ $\Rightarrow$ nun wollen wir die interne Konsistenz unserers Itembündels ermitt
   \end{split}
 \end{equation}
 
-## Cronbachs Alpha (..in R) 
+## Cronbachs Alpha (..in R)
 
 \begin{alertblock}{Definition: Cronbach's Alpha}
 \begin{equation}
@@ -419,8 +422,8 @@ $\Rightarrow$ nun wollen wir die interne Konsistenz unserers Itembündels ermitt
 
 ```{r}
 alpha <- function(X) {
-  VCOV <- cov(X) ; m <- length(X) 
-  V_x <- sum(VCOV) ; V_xi <- sum(diag(VCOV)) 
+  VCOV <- cov(X) ; m <- length(X)
+  V_x <- sum(VCOV) ; V_xi <- sum(diag(VCOV))
   m/(m-1) * (1-(V_xi/V_x))
 }
 ```
@@ -441,15 +444,14 @@ alpha(X)
 ## Übung 3: Selbsttest
 
 \begin{example}
-Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie 
+Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie
 die Itemvarianzen sowie die Gesamtvarianz vorgegeben. Berechnen Sie Cronbach's
 alpha zunächst händisch. Im Anschluss daran nutzen Sie den Code zur
 Übungsaufgabe 3 in \texttt{10-Rel.R} und überprüfen ihr Ergebnis.
-
-NUTZEN SIE EBENFALLS DIE FUNKTION PSYCH::ALPHA(
-NUTZEN SIE EBENFALLS DIE FUNKTION PSYCH::ALPHA())
-NUTZEN SIE EBENFALLS DIE FUNKTION PSYCH::ALPHA())
 \end{example}
+
+Zusatz: Nutzen Sie im Anschluss die R Funktion `psych::alpha()` mit ihrem
+Datensatz. Finden Sie ihr Ergebnis im Outoput der Funktion wieder?
 
 - Zeit: 10 Minuten
 - Replikation: `set.seed(123)`
@@ -466,8 +468,8 @@ N <- 1e2
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 VCOV <- cov(X)
 V_items <- diag(VCOV)
-V_X <- sum(VCOV)  
-list("Gesamtvarianz" = round(V_X, 2), 
+V_X <- sum(VCOV)
+list("Gesamtvarianz" = round(V_X, 2),
      "Itemvarianz" = round(V_items,2))
 ```
 
@@ -508,19 +510,19 @@ sehr ähnlich sind und daher hoch positiv miteinander korrelieren.
 Knobelfrage: Wie wirkt sich ein Zuwachs in den Kovarianzen auf Cronbach's alpha
 aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $alpha$ bleibt gleich
 
-## Simulation: Zuwachs in den Kovarianzen 
+## Simulation: Zuwachs in den Kovarianzen
 
 ```{r}
 # Essenziell Tau-Äquivalent
 M <- 6
 mu <- c(5,4,3,4,5,3)
 # Kovarianzmatrix
-Sigma <- matrix(  
-  c(.8, .1, .1, .1, .1, .1, 
-    .1, .7, .1, .1, .1, .1, 
-    .1, .1, .8, .1, .1, .1, 
-    .1, .1, .1, .7, .1, .1, 
-    .1, .1, .1, .1, .8, .1, 
+Sigma <- matrix(
+  c(.8, .1, .1, .1, .1, .1,
+    .1, .7, .1, .1, .1, .1,
+    .1, .1, .8, .1, .1, .1,
+    .1, .1, .1, .7, .1, .1,
+    .1, .1, .1, .1, .8, .1,
     .1, .1, .1, .1, .1, .7),
   M,M)
 N <- 1e3
@@ -542,7 +544,7 @@ sim_alpha <- function(sigma){
   alpha(X)
 }
 alphas <- lapply(sigmas, sim_alpha)
-plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha", 
+plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha",
      type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Kovarianz")
 mtext("m = 6; step-size = + 0.01")
 ```
@@ -577,12 +579,12 @@ set.seed(123)
 M <- 6
 mu <- c(5,4,3,4,5,3)
 # Kovarianzmatrix
-Sigma <- matrix(  
-  c(.8, .4, .4, .4, .4, .4, 
-    .4, .7, .4, .4, .4, .4, 
-    .4, .4, .8, .4, .4, .4, 
-    .4, .4, .4, .7, .4, .4, 
-    .4, .4, .4, .4, .8, .4, 
+Sigma <- matrix(
+  c(.8, .4, .4, .4, .4, .4,
+    .4, .7, .4, .4, .4, .4,
+    .4, .4, .8, .4, .4, .4,
+    .4, .4, .4, .7, .4, .4,
+    .4, .4, .4, .4, .8, .4,
     .4, .4, .4, .4, .4, .7),
   M,M)
 N <- 1e3
@@ -623,93 +625,30 @@ Rel <- 0.87
 calc_k(Rel_ast, Rel)
 ```
 
-## Graph
+## Graph: Zusammen
 
-\begin{alertblock}{Definition: Spearman-Brown-Formel}
-  \begin{equation}
-    Rel_k^* = \frac{k \cdot Rel}{1 + (k-1) Rel}
-  \end{equation}
-\end{alertblock}
-
-```{r}
+```{r fig.align='center', message=FALSE, warning=FALSE, out.width="80%", paged.print=FALSE, results='hide'}
 calc_Rel_ast <- function(k, Rel) {
   (k * Rel) / (1 + (k-1) * Rel)
 }
-
-(Rels <- seq(0.4, 1, by=.1))
-(Rel_asts <- lapply(Rels, calc_Rel_ast, k=2))
-plot(c(1,5), c(0.6,1), type = "n",
+ks <- 1:15
+plot(c(0,15), c(0.4,1), type = "n",
      xlab="Verlängerung des Tests um k Items",
-     ylab="Reliabilitätskoeffizien (R*)t")
-points(0:6, lapply(Rels, calc_Rel_ast, k=2), type="b")
-points(0:6, lapply(Rels, calc_Rel_ast, k=3), type="b")
-points(0:6, lapply(Rels, calc_Rel_ast, k=4), type="b")
-
+     ylab="Reliabilitätskoeffizien (Rel*)")
+axis(1, at = ks)
+rs <- seq(0.4, 0.9, by=0.1)
+lapply(rs, function(r) points(ks, lapply(ks, function(k) calc_Rel_ast(k, r)), 
+                              type = "b", pch=20))
+text(0.25, rs + 0.05, paste0("Rel:", rs))
+abline(v = ks, lty=2, lwd=.5)
 ```
+Abnehmender Grenznutzen zusätzlicher Items. Schnellere Abnahme bei bereits hoher Homogenität
 
-
-
-
-
-
-
-
-<!-- ```{r} -->
-<!-- sigmas <- seq(0.1, 0.8, by=0.1) -->
-<!-- sim_alpha <- function(m, sigma){ -->
-<!--   mu <- rep(5, m) -->
-<!--   Sigma <- matrix(rep(sigma, m^2), m) -->
-<!--   diag(Sigma) <- rep(.9, m) -->
-<!--   N <- 1e5 -->
-<!--   X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma))) -->
-<!--   alpha(X) -->
-<!-- } -->
-<!-- plot(x=c(2,8), y=c(0.2,1), type="n", xlab="Anzahl der Items",  -->
-<!--      ylab="Inter-Item Kovarianz") -->
-<!-- lapply(sigmas, -->
-<!--        function(s) points(mapply(sim_alpha, m=2:10, s), type="b", pch=s*10)) -->
-
-
-<!-- alphas <- lapply(sigmas, sim_alpha) -->
-<!-- plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha",  -->
-<!--      type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Kovarianz") -->
-<!-- mtext("m = 6; step-size = + 0.01") -->
-<!-- ``` -->
-
-
-
-
-# Anwendung: Konfidenzintervalle
-
-<!-- ```{r} -->
-<!-- sigmas <- seq(0.1, 0.8, by=0.1) -->
-<!-- sim_alpha <- function(m, sigma){ -->
-<!--   mu <- rep(5, m) -->
-<!--   Sigma <- matrix(rep(sigma, m^2), m) -->
-<!--   diag(Sigma) <- rep(.9, m) -->
-<!--   N <- 1e5 -->
-<!--   X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma))) -->
-<!--   alpha(X) -->
-<!-- } -->
-<!-- plot(x=c(2,8), y=c(0.2,1), type="n", xlab="Anzahl der Items",  -->
-<!--      ylab="Inter-Item Kovarianz") -->
-<!-- lapply(sigmas, -->
-<!--        function(s) points(mapply(sim_alpha, m=2:10, s), type="b", pch=s*10)) -->
-
-
-<!-- alphas <- lapply(sigmas, sim_alpha) -->
-<!-- plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha",  -->
-<!--      type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Kovarianz") -->
-<!-- mtext("m = 6; step-size = + 0.01") -->
-<!-- ``` -->
-
-
-
-
+## Varianzen
 
 ## Streuung der Testwerte
 
-> Eine hohe Streuung geht meist mit einer hohen Reliabilität  einher, während
+> Eine hohe Streuung geht meist mit einer hohen Reliabilität einher, während
 bei geringer Streuung eine hohe Reliabilität unwahrscheinlich ist
 
 \begin{alertblock}{Definition: Streuung der Testwerte}
@@ -718,25 +657,46 @@ bei geringer Streuung eine hohe Reliabilität unwahrscheinlich ist
   \end{equation}
 \end{alertblock}
 
-Knobelfrage: Wie wirkt sich ein Zuwachs in den Kovarianzen auf Cronbach's alpha
+Knobelfrage: Wie wirkt sich ein Zuwachs in den Inter-Item-Kovarianzen auf Cronbach's alpha
 aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $alpha$ bleibt gleich
 
+## Simulation: Zuwachs in den Varianzen (Ausgansmatrix) 
+
+```{r}
+# Essenziell Tau-Äquivalent
+M <- 6
+mu <- c(5,4,3,4,5,3)
+# Kovarianzmatrix
+Sigma <- matrix(
+  c(.2, .1, .1, .1, .1, .1,
+    .1, .2, .1, .1, .1, .1,
+    .1, .1, .2, .1, .1, .1,
+    .1, .1, .1, .2, .1, .1,
+    .1, .1, .1, .1, .2, .1,
+    .1, .1, .1, .1, .1, .2),
+  M,M)
+N <- 1e3
+# Multivariate Half-Normal Distribution
+X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
+```
+
+## Grafik: Auswirkungen einen Zuwachses in den Varianzen 
 
 ```{r fig.align='center', message=FALSE, warning=FALSE, out.width="80%", paged.print=FALSE, results='hide'}
-sigmas_sq <- seq(0.1, 0.7, by=0.01)
-
-sim_alpha <- function(sigma){
+sim_alpha <- function(sigma_sq){
   M <- 6
   mu <- c(5,4,3,4,5,3)
-  Sigma <- matrix(rep(0.1, M^2), M)
-  diag(Sigma) <- rep(1.5, M)
+  Sigma <- matrix(rep(0.3, M^2), M)
+  diag(Sigma) <- rep(sigma_sq, M)
   N <- 1e3
   X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
   alpha(X)
 }
-alphas <- lapply(sigmas, sim_alpha)
-plot(sigmas, alphas, xlab="Kovarianz in X (+0.01)", ylab = "Cronbach's alpha", 
-     type="b", pch=20)
+sigma_sqs <- seq(0.4, 0.9, by = 0.01)
+alphas <- lapply(sigma_sqs, sim_alpha)
+plot(sigma_sqs, alphas, xlab="Varianz in X", ylab = "Cronbach's alpha",
+     type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Varianz")
+mtext("m = 6; step-size = + 0.01")
 ```
 
 

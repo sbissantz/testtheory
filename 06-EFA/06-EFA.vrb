@@ -6,7 +6,7 @@
 \NormalTok{F }\OtherTok{\textless{}{-}}\NormalTok{ EVD\_R}\SpecialCharTok{$}\NormalTok{vectors }\CommentTok{\# Loadings}
 \NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{5} \CommentTok{\# k largest PC}
 \CommentTok{\# Pre reproduction}
-\NormalTok{Fk }\OtherTok{\textless{}{-}}\NormalTok{ F[,}\FunctionTok{seq}\NormalTok{(k)] }
+\NormalTok{Fk }\OtherTok{\textless{}{-}}\NormalTok{ F[,}\FunctionTok{seq}\NormalTok{(k)]}
 \NormalTok{Z }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\AttributeTok{ncol =} \FunctionTok{ncol}\NormalTok{(F) }\SpecialCharTok{{-}}\NormalTok{ k,  }\FunctionTok{nrow}\NormalTok{(F))}
 \NormalTok{Fk }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(Fk, Z)}
 \CommentTok{\# Residual matrix}

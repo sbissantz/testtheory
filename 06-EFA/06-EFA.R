@@ -2,6 +2,22 @@
 # R Skript zum Übungskurs: 06 EFA #
 ##################################ä
 
+# Notwendige Packages laden 
+# (uncomment with Cntrl + Shift + C)
+#
+# if(!requireNamespace("corrplot", quietly = TRUE)) {
+#   msg <- "'corrplot' is not installed, want to install it? Type 'yes' or 'no'."
+#   answer <- readline(prompt = message(msg))
+#   no_msg <- "Did not install the package `corrplot`."
+#   switch(answer,
+#          yes = install.packages("corrplot"),
+#          no = stop(no_msg, call. = FALSE),
+#          stop("Please answer 'yes' or 'no'." ))
+# } else {
+#   message("`corrplot` is already installed!") ; Sys.sleep(1)
+#   message("Time to rock!\n(*weird guitar sound*)")
+# }
+
 # Replikation der Ergebnisse:
 # set.seed(123)
 
@@ -22,13 +38,11 @@ R <- S$model ; X <- S$observed  # alternativ: R <- cor(X)
 
 ## Output (grafisch): zwei latente Variablen
 #
-old.par <- par(no.readonly=TRUE)
-par(mfrow=c(1,2))
-  # Visuelle Darsetellung ihrer Schöpfung
-  psych::structure.diagram(fx, phi, cut=FALSE)
-  # Visuelle Darsetellung ihrer Korrelationsmatrix 
-  corrplot::corrplot.mixed(R, number.cex=.7)
-par(old.par)
+# Visuelle Darsetellung ihrer Schöpfung
+psych::structure.diagram(fx, phi, cut=FALSE)
+# Visuelle Darsetellung ihrer Korrelationsmatrix 
+corrplot::corrplot.mixed(R, number.cex=.7)
+# psych::cor.plot(R)
 
 # Übungsaufgabe 3 ---------------------------------------------------------
 

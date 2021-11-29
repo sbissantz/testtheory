@@ -137,6 +137,8 @@ hist(X_i[[1]],
 (X_ij <- sample(X_i[[1]], 1)) #<--------------------------- mehrfach ausführen!
 cat("Observed Score:", X_ij, "True Score:", names(X_i))
 
+# Übungsaufgabe 4 ---------------------------------------------------------
+
 # Funktion 
 # set.seed(123)
 # rm(list = ls())
@@ -155,6 +157,7 @@ rsample_i <- function(){
 
 # Ziehe zufällig ein Individuum aus der Population
 rsample_i() #<------------------------------------------ mehrfach ausführen!
+
 
 # Übungsaufgabe 5 ---------------------------------------------------------
 
