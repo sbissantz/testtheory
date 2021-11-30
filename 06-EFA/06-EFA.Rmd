@@ -330,8 +330,10 @@ Konstrukte unabh채ngig voneinander sein m체ssten. Denken Sie an ihr Beispiel. F�
 wie plausibel halten Sie diese Annahme? Diskutieren Sie!
 \end{example}
 
-<!-- <!-- Spritzenbeispiel --> -->
-<!-- <!-- Tafelbild: Unabh채ngigkeit durch Leftsingul채re Matrix --> -->
+
+
+<!-- Spritzenbeispiel -->
+<!-- Tafelbild: Unabh채ngigkeit durch Leftsingul채re Matrix -->
 
 ## Primer: Maximum Likelihood Faktorenanalyse (MLF)
 

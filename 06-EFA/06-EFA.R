@@ -3,7 +3,7 @@
 ##################################ä
 
 # Notwendige Packages laden 
-# (uncomment with Cntrl + Shift + C)
+# (uncomment with Cntrl/Cmd + Shift + C)
 #
 # if(!requireNamespace("corrplot", quietly = TRUE)) {
 #   msg <- "'corrplot' is not installed, want to install it? Type 'yes' or 'no'."
