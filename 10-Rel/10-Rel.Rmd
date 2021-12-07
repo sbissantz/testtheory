@@ -32,7 +32,7 @@ Inhaltliche Schwerpunkte der Einheit:
 
 Ziel: Wiederholung der Konzepte (re-fresher) & Problematisierung
 
-(?) Input (5-10 min) 
+H2: Kurinput
 
 ## Reliabilität als Konzept 
 
@@ -116,7 +116,7 @@ Inhaltliche Schwerpunkte der Einheit:
 
 Ziel: Wiederholung und Vertiefung der Konzepte, Umsetzung in R
 
-(?) Input (15-20min), Olat-Übung (5min), Rechenbeispiele & R-Übungen (30min)
+How2: Kurzinput, Olat-Übung, Rechenbeispiele & R-Übungen
 
 ## Lösungansatz zum Reliabilitätsproblem
 
@@ -143,21 +143,27 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 
 ## Übung 1: Selbstexperiment
 
-Retest & Paralleltest-Reliabilität (Wiederholung)
+\begin{example}
+Jetzt sind Sie an der Reihe! Testen Sie ihr bereits vorhandenes Wissen zur
+Paralleltest- und Retestreliabilität mit der `Übung 1` auf OLAT. Danach knüpfen
+wir mit der Testhalbierungsreliabilität und der internen Konsistenz an.
+\end{example}
 
-Beim Restest wird der Test an der gleichen Stichprobe zu zwei verschiedenen
-Zeitpunkten durchgeführt. Die Restest-Reliabilität berechnet sich dann als
-Korrelation der Testwerte. Die Retest-Reliabilität setzt (a) konstante wahre
-Werte und (b) konstante Messfehlereinflüsse voraus. Unter diesem Annahmen
-entspricht die Korrelation der Testwerte dem Anteil der wahren Varianz an der
-Varianz der Testwerte.
+- Zeit: max. 10 Minuten
 
-Beim Paralleltest werden derselben Stichprobe parallele Testformen vorgegeben.
-Die Paralleltest-Reliabilität berechnet sich dann als Korrelation der
-resultierenden Testwerte. Bei welcher Testart wird dieses Verfahren häufig
-eingesetzt? Nun, viel spricht für den Leistungstest. Ein Problem mit parallelen
-Testformen sind Übungseffekte und Transfereffekte. Zur Überprüfung der
-Parallelität von Testformen setzem wir die konfirmatorische Faktorenanalyse ein.
+<!-- Beim Restest wird der Test an der gleichen Stichprobe zu zwei verschiedenen -->
+<!-- Zeitpunkten durchgeführt. Die Restest-Reliabilität berechnet sich dann als -->
+<!-- Korrelation der Testwerte. Die Retest-Reliabilität setzt (a) konstante wahre -->
+<!-- Werte und (b) konstante Messfehlereinflüsse voraus. Unter diesem Annahmen -->
+<!-- entspricht die Korrelation der Testwerte dem Anteil der wahren Varianz an der -->
+<!-- Varianz der Testwerte. -->
+
+<!-- Beim Paralleltest werden derselben Stichprobe parallele Testformen vorgegeben. -->
+<!-- Die Paralleltest-Reliabilität berechnet sich dann als Korrelation der -->
+<!-- resultierenden Testwerte. Bei welcher Testart wird dieses Verfahren häufig -->
+<!-- eingesetzt? Nun, viel spricht für den Leistungstest. Ein Problem mit parallelen -->
+<!-- Testformen sind Übungseffekte und Transfereffekte. Zur Überprüfung der -->
+<!-- Parallelität von Testformen setzem wir die konfirmatorische Faktorenanalyse ein. -->
 
 ## Testhalbierungsreliabilität (Split-half)
 
@@ -484,6 +490,10 @@ alpha(X)
 
 # Einflussfaktoren auf die Höhe der Reliabilität
 
+\begin{block}{Leitfrage}
+  Welche Fakotren können die Reliabilität beeinflussen?
+\end{block}
+
 Inhaltliche Schwerpunkte der Einheit:
 
 1. Testlänge
@@ -492,7 +502,7 @@ Inhaltliche Schwerpunkte der Einheit:
 
 Ziel: Verstehen, wie unterschiedliche Faktoren die Reliabilität beeinflussen. 
 
-Mittel: Input (5-10 min), Rechenbeispiel & R-Übung (15 min) 
+H2: Kurzinput, Rechenbeispiel & R-Übung
 
 ## Einflussfaktor: Testlänge
 
@@ -606,7 +616,7 @@ calc_k(Rel_ast=0.9, Rel=0.45)
 
 ## Grafik: Testverlängerung & Reliabilität 
 
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="80%", paged.print=FALSE, results='hide'}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="100%", paged.print=FALSE, results='hide'}
 calc_Rel_ast <- function(k, Rel) {
   (k * Rel) / (1 + (k-1) * Rel)
 }
@@ -621,7 +631,6 @@ lapply(rs, function(r) points(ks, lapply(ks, function(k) calc_Rel_ast(k, r)),
 text(0.25, rs + 0.05, paste0("Rel:", rs))
 abline(v = ks, lty=2, lwd=.5)
 ```
-$\Rightarrow$ Abnehmender Grenznutzen zusätzlicher Items. Schnellere Abnahme bei bereits hoher Homogenität zu Beginn.
 
 ## Homogenität/Heterogenität der Items
 
@@ -657,9 +666,9 @@ N <- 1e3
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
 
-## Zuwachs in den Kovarianzen
+## Grafik: simulierter Zuwachses in den Kovarianzen 
 
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="80%", paged.print=FALSE, results='hide'}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="100%", paged.print=FALSE, results='hide'}
 sigmas <- seq(0.1, 0.7, by=0.01)
 sim_alpha <- function(sigma){
   M <- 6
@@ -671,12 +680,10 @@ sim_alpha <- function(sigma){
   alpha(X)
 }
 alphas <- lapply(sigmas, sim_alpha)
-plot(sigmas, alphas, xlab="Kovarianz in X", ylab = "Cronbach's alpha",
-     type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Kovarianz")
+plot(sigmas, alphas, xlab="Inter-Item-Kovarianz in X", ylab = "Cronbach's alpha",
+     type="b", pch=20, main = "Alpha bei steigender Inter-Item-Kovarianz")
 mtext("m = 6; step-size = + 0.01")
 ```
-
-$\Rightarrow$ Mit steigender Inter-Item-Kovaitisnz werden die Items homogener. Das wirkt sich positiv auf die interne Konsistenz aus -- Alpha steigt. 
 
 ## Streuung der Testwerte
 
@@ -713,9 +720,9 @@ N <- 1e3
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
 
-## Grafik: Auswirkungen einen Zuwachses in den Varianzen 
+## Grafik: simulierter Zuwachses in den Varianzen 
 
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="80%", paged.print=FALSE, results='hide'}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="100%", paged.print=FALSE, results='hide'}
 sim_alpha <- function(sigma_sq){
   M <- 6
   mu <- c(5,4,3,4,5,3)
@@ -727,14 +734,15 @@ sim_alpha <- function(sigma_sq){
 }
 sigma_sqs <- seq(0.4, 0.9, by = 0.01)
 alphas <- lapply(sigma_sqs, sim_alpha)
-plot(sigma_sqs, alphas, xlab="Inter-Item Varianz in X", ylab = "Cronbach's alpha", type="b", pch=20, main = "Veränderung in Cronbachs Alpha bei steigender Varianz")
+plot(sigma_sqs, alphas, xlab="Inter-Item Varianz in X", ylab = "Cronbach's alpha", type="b", pch=20, main = "Alpha bei steigender Inter-Item-Varianz")
 mtext("m = 6; step-size = +0.01")
 ```
 
 # Selbststudium
 
 Nachfolgend haben Sie die Möglichkeit Datenmatrizen aus einer multivariaten
-Halb-Normalverteilung zu simulieren. Die zurückliegenden Modelle sollten ihnen aus der Vorlesung zur KTT bekannt vorkommen. Untenstehende Simulationen sollen
+Halb-Normalverteilung zu simulieren. Die zurückliegenden Modelle sollten ihnen
+aus der Vorlesung zur KTT bekannt vorkommen. Untenstehende Simulationen sollen
 Ihnen bei der Klausurvorbereitung helfen.
 
 Hinweis: Für das Selbststudium benötigen Sie das Package `MASS`. Wenn Sie es

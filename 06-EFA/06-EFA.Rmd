@@ -85,14 +85,14 @@ In a Nutshell:
 - Krux: Struktur erkennen 
 - $\Leftrightarrow$ finde: hoch korrelierende Itemgruppen
 
-## Explorative Faktorenanalyse & LDC
+## Explorative Faktorenanalyse & Large Data Set Challenge
 
 - (ein) Hilfsmittel für die LDC: (explorative) *Faktorenanalyse*
 
-\begin{block}{Faktorenanalyse}
-"The basic idea is to find latent variables (factors) based on the correlation
-structure of the manifest input variables (indicators)." (Mair 2018, S. 23)
-\end{block}
+<!-- \begin{block}{Faktorenanalyse} -->
+<!-- "The basic idea is to find latent variables (factors) based on the correlation -->
+<!-- structure of the manifest input variables (indicators)." (Mair 2018, S. 23) -->
+<!-- \end{block} -->
 
 <!-- Having ordinal data, tetrachoric/polychoric correlations can be used. This -->
 <!-- strategy is sometimes called the underlying variable approach since we assume -->
@@ -107,92 +107,104 @@ structure of the manifest input variables (indicators)." (Mair 2018, S. 23)
 
 Wichtig: "meaningful" (Faktoren) vs. "full compression" (Komponenten)
 
+Fokus (heute): Common Factor Model (CFM)
+
 <!-- Wichtig: Warum Faktorenanalyse -->
 <!-- Wichtig: Sozialwissenschaften: Compression in meningful ways -->
 <!-- Wichtig: compressing meaningfully vs. fully -->
 <!-- Wichtig: Unabhängigkeit latenter Dimensionsn -->
 
-# Stategie & Vorgehen: Simulation & Evaluation{-} 
+<!-- # Stategie & Vorgehen: Simulation & Evaluation{-}  -->
 
-1. Man erschaffe $\geq 1$ eine latente Variable (LV)
-2. ...lasse die LV Antwortmuster produzieren
-3. ...wandel sie in eine Korrelationsmatrix (R) um
-4. ...und versucht die Struktur mit der Faktorenanalyse aufzufinden
+<!-- 1. Man erschaffe $\geq 1$ latente Variable (gen. Prozess) -->
+<!-- 2. ...lasse die LV Antwortmuster produzieren -->
+<!-- 3. ...wandel sie in eine Korrelationsmatrix (R) um -->
+<!-- 4. ...und versucht die Struktur mit der Faktorenanalyse aufzufinden -->
 
-<p>&nbsp;</p>
+<!-- <p>&nbsp;</p> -->
 
-\begin{block}{Vom generativen Prozess zur Korrelationsmatrix}
-Der generative Prozess, d.h. wie genau ein Konstrukt die Antworten auf den Items
-erzeugt, bleibt meist verborgen. Wir untersuchen meistens lediglich
-Verhaltensspuren des Konstruktes, die sich in den Items ausdrückt, d.h. in der
-Struktur der Korrelationsmatrix niederschlägt. Strukturen zu simulieren ist
-hilfreich, weil wir dort "die Wahrheit" kennen und das Verfahren damit besser
-beurteilen können ($\sim$ fake data analysis)
-\end{block}
+<!-- \begin{block}{Vom generativen Prozess zur Korrelationsmatrix} -->
+<!-- Der generative Prozess, d.h. wie genau ein Konstrukt die Antworten auf den Items -->
+<!-- erzeugt, bleibt meist verborgen. Wir untersuchen meistens lediglich -->
+<!-- Verhaltensspuren des Konstruktes, die sich in den Items ausdrückt, d.h. in der -->
+<!-- Struktur der Korrelationsmatrix niederschlägt. Strukturen zu simulieren ist -->
+<!-- hilfreich, weil wir dort "die Wahrheit" kennen und das Verfahren damit besser -->
+<!-- beurteilen können ($\sim$ fake data analysis) -->
+<!-- \end{block} -->
 
-## Let's do it! (..in R)
+<!-- ## Let's do it! (..in R) -->
 
-"Playing Creator": zwei latente Variable erschaffen[^2] 
+<!-- "Playing Creator": zwei latente Variable erschaffen[^2]  -->
 
-```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
-# Faktorladungen; 8 items
-load_F1 <- c(0.6, -0.3, 0.5, 0.7, 0.1, 0.2, 0.2, 0.3)
-load_F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7)
-fx <- cbind(load_F1, load_F2)
-# Zwischenfaktorkorrelation 
-phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
-# Struktur 
-S <- psych::sim.structure(fx, phi, n=1000)
-# Korrelations- und Datenmatrix
-R <- S$model ; X <- S$observed  # R <- cor(X)
-```
+<!-- ```{r fig.align='center', include=FALSE, out.width="70%", results='hide'} -->
+<!-- # Faktorladungen; 8 items -->
+<!-- load_F1 <- c(0.6, -0.3, 0.5, 0.7, 0.1, 0.2, 0.2, 0.3) -->
+<!-- load_F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7) -->
+<!-- fx <- cbind(load_F1, load_F2) -->
+<!-- # Zwischenfaktorkorrelation  -->
+<!-- phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6 -->
+<!-- # Struktur  -->
+<!-- S <- psych::sim.structure(fx, phi, n=1000) -->
+<!-- # Korrelations- und Datenmatrix -->
+<!-- R <- S$model ; X <- S$observed  # R <- cor(X) -->
+<!-- ``` -->
 
-[^2]: Das \texttt{psych} package bietet derzeit nicht die Möglichkeit eine
-Grafik des Prozesses in Rmarkdown einzubinden. Im R Skript zur folgenden Übung,
-können Sie die Grafik allerdings selbst erzeugen.
+<!-- [^2]: Das \texttt{psych} package bietet derzeit nicht die Möglichkeit eine -->
+<!-- Grafik des Prozesses in Rmarkdown einzubinden. Im R Skript zur folgenden Übung, -->
+<!-- können Sie die Grafik allerdings selbst erzeugen. -->
 
-## Übungsaufgabe 2: Selbstexperiment
+<!-- ## Übungsaufgabe 2: Selbstexperiment -->
 
-\begin{example}
-Versuchen Sie es selbst! Nutzen Sie den Code zur Übungsaufgabe 2 
-\texttt{06-EFA.R} und simulieren Sie ihr eigenes Beispiel. Verändern sie
-systematisch $\texttt{F1; F2}$ und $\texttt{phi}$. Wie verändert sich die
-Korrelationsmatrix, in Abhängigkeiten Ihrer Veränderungen? Können Sie eine
-eindeutige Struktur konstruieren? Wenn ja, mit welchen Werten von $\texttt{F1;
-F2}$  und $\texttt{phi}$ haben Sie ihr Ziel erreicht?
-\end{example}
+<!-- \begin{example} -->
+<!-- Versuchen Sie es selbst! Nutzen Sie den Code zur Übungsaufgabe 2  -->
+<!-- \texttt{06-EFA.R} und simulieren Sie ihr eigenes Beispiel. Verändern sie -->
+<!-- systematisch $\texttt{F1; F2}$ und $\texttt{phi}$. Wie verändert sich die -->
+<!-- Korrelationsmatrix, in Abhängigkeiten Ihrer Veränderungen? Können Sie eine -->
+<!-- eindeutige Struktur konstruieren? Wenn ja, mit welchen Werten von $\texttt{F1; -->
+<!-- F2}$  und $\texttt{phi}$ haben Sie ihr Ziel erreicht? -->
+<!-- \end{example} -->
 
-- Zeit: 5 Minuten
-- Replikation: \texttt{set.seed(123)} 
-- Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
+<!-- - Zeit: 10 Minuten -->
+<!-- - Replikation: \texttt{set.seed(123)}  -->
+<!-- - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen! -->
 
-Zusatz: Haben Sie ein Strukturmodell gefunden, dass ihnen gefällt? Ja, dann
-überlegen Sie sich jetzt für welche Konstrukte diese Struktur Sinn macht (z.B.:
-extraversion $\sim$ openness to experience)
+<!-- Zusatz: Haben Sie ein Strukturmodell gefunden, dass ihnen gefällt? Ja, dann -->
+<!-- überlegen Sie jetzt für welche Konstrukte diese Struktur Sinn macht (z.B.: -->
+<!-- Extraversion $\sim$ Offenheit für Erfahrungen). Zeit: 2 Minuten -->
 
-## Logik latenter Variablen (..reversed)
+<!-- ## Logik latenter Variablen (..reversed) -->
 
-\begin{block}{Von der Korrelationsmatrix zur latenten Variable} 
-Die Faktoranalyse ist ein strukturentdeckendes Verfahren. D.h. wir versuchen den
-generativen Prozess zu rekonstruieren; d.h. wie ein Konstrukt die Antworten auf
-den Items verursacht hat anhand der Struktur die sich in der vorgegebenen
-Korrelationsmatrix zu \textit{modellieren}.
-\end{block}
+<!-- \begin{block}{Von der Korrelationsmatrix zur latenten Variable}  -->
+<!-- Die Faktoranalyse ist ein \textit{strukturentdeckendes Verfahren}. D.h., wir -->
+<!-- versuchen den \textit{generativen Prozess} zu \textit{modellieren}. Damit erhalten wir -->
+<!-- (möglicherweise) einen Anhaltspunkt, welches Konstrukt die Antworten auf den -->
+<!-- Items verursacht haben könnte. Zur Rekonstruktion greifen wir auf die -->
+<!-- \textit{Struktur} in der \textit{Korrelationsmatrix} zurück. -->
+<!-- \end{block} -->
 
-- Modell: *Common Factor Model* (CFM)
+<!-- - Modell: *Common Factor Model* (CFM) -->
+
+# Das Common Factor Model (CFM)
+
+## Das Common Factor Model 
 
 \begin{alertblock}{Eingangsgleichung des CFM}
-  \begin{equation}
+\begin{equation}
     x = \Lambda \xi + \epsilon
-  \end{equation}
+\end{equation}
 \end{alertblock}
+  
+- $x$: $m \times p$ Datenmatrix
+- $\Lambda$: $m \times p$ Matrix der Item-Faktor Korrelationen (Ladung)
+- $\xi$: Faktoren ($p$ Stück)
+- $p, m$: Anzahl der latenten Variablen, Items
 
 <p>&nbsp;</p>
 
 > "In other words EFA tries to find $p$ latent variables on the basis of the
 correlation structure of the $m$ manifest variables." (Ebd.)
-  
-# Das Common Factor Model (CFM)
+
+## Das Common Factor Model 
 
 Anmerkung: Für die Reformulierung von Gleichung (1) zu (2): siehe [McCallum
 (2009)](http://dx.doi.org/10.4135/9780857020994.n6)
@@ -206,12 +218,12 @@ Anmerkung: Für die Reformulierung von Gleichung (1) zu (2): siehe [McCallum
 - $P$: Modell-implizierte Korrelationsmatrix
 - $\Lambda$: Ladungsmatrix
 - $\Phi$: Matrix der Zwischenfaktorkorrelationen
-- $\Psi$: Uniqueness
+- $\Psi$: Einzigartigkeit
 
 \begin{block}{Zusammenhang: Modell \& Struktur}
-Die von ihnen konstruierte Struktur versuchen wir nun mit der Faktorenanalyse
-unter Einsatz des CFM zu rekonstruieren. Das CFM ist also Ihr Tool im
-bevorstehenden Rekonstruktionsprozess!
+Die explorative Faktorenanalyse versucht als Struktur-entdeckendes Verfahren die
+(reduzierte) Korrelationsmatrix unter Einsatz des CFM zu rekonstruieren; d.h.
+ihre Struktur (zugrundeliegenden LVs) zu entschlüsseln.
 \end{block}
 
 # Fakotrenanalyse: "A hurdle race"
@@ -231,6 +243,27 @@ the research was meaningful to begin with.” [Gregory (2014, S.
 
 Konkl.: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium)
 
+## "Playing Creator": 2 LVs erschaffen[^2] 
+
+Bevor wir loslegen, wollen wir eine Datenmatrix $X$ und eine Korrelationsmatrix $R$
+simulieren.[^3] 
+
+```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
+# Faktorladungen; 8 items
+load_F1 <- c(0.6, -0.3, 0.5, 0.7, 0.1, 0.2, 0.2, 0.3)
+load_F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7)
+fx <- cbind(load_F1, load_F2)
+# Zwischenfaktorkorrelation 
+phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
+# Struktur 
+S <- psych::sim.structure(fx, phi, n=1000)
+# Korrelations- und Datenmatrix
+R <- S$model ; X <- S$observed  # R <- cor(X)
+```
+
+[^3]: Nur in simulierten Welten (in denen wir den richtigen Ausgang kennen),
+können wir prüfen, ob unsere Methoden das "korrekte" Ergebnis reproduzieren.
+
 # Extraktionsproblem
 
 \begin{alertblock}{Extraktionsproblem}
@@ -238,14 +271,14 @@ Konkl.: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium)
 \end{alertblock}
 
 1. Lösung: Bestimmung der "Principal Components" (*PCA*)
-- Modellgleichung: $R = CC^{t}$
-- Note: Eigenwert-, Singulärwertzerlegung (closed form solution)
+<!-- - Modellgleichung: $R = CC^{t}$ -->
+<!-- - Note: Eigenwert-, Singulärwertzerlegung (closed form solution) -->
 2. Lösung: Iterative Bestimmung der "Principal Components" (*PAF*)
-- Modellgleichung: $R^* = FF^{t}$
-- Note(s): Reduzierte Matrix, iterativer Prozess (convergence issues)
+<!-- - Modellgleichung: $R^* = FF^{t}$ -->
+<!-- - Note(s): Reduzierte Matrix, iterativer Prozess (convergence issues) -->
 3. Lösung: Finde die plausibelsten ("most likely") Werte (*MLF*)
-- Modellgleichung: $P = \Lambda \Phi \Lambda^{t} + \Psi$
-- Note(s): Reduzierte Matrix, itterativer Prozess (convergence issues)
+<!-- - Modellgleichung: $P = \Lambda \Phi \Lambda^{t} + \Psi$ -->
+<!-- - Note(s): Reduzierte Matrix, iterativer Prozess (convergence issues) -->
 
 ## Let's do it! (..in R): PCA
 
@@ -255,7 +288,7 @@ Konkl.: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium)
 ```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
 # Old School!
 # (dino_pca <- princomp(X, cor=TRUE))
-# New School
+# New School: Datenmatrix R -> X
 (pca_fit <- psych::principal(R, nfactors = 2, 
                             rotate = "none"))
 ## Komponentenladungen
@@ -275,11 +308,11 @@ pca_fit$R2
 \begin{example}
 Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 3
 \texttt{06-EFA.R} und führen eine PCA durch. Interpretieren Sie die
-enstprechenden Kennwerte für ihr Model und präsentieren Sie diese ihrem
+enstprechenden Kennwerte für ihr Modell und präsentieren Sie diese ihrem
 Nachbarn.
 \end{example}
 
-- Zeit: 5 Minuten
+- Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 
@@ -312,7 +345,7 @@ zwischen den Ergebnissen? Zusatz: Haben Sie eine Vermutung wie mögliche
 Unterschiede zustande kommen?
 \end{example}
 
-- Zeit: 5 Minuten
+- Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 
@@ -327,10 +360,10 @@ Eine Folge der Extraktion mittels mit der Hauptkomponentenmethode ist, dass die
 extrahierten Faktoren unabhängig voneinander sind. Glauben Sie dem Modell
 uneingeschränkt, nähmen sie damit implizit an, dass auch die zugrundeliegende
 Konstrukte unabhängig voneinander sein müssten. Denken Sie an ihr Beispiel. Für
-wie plausibel halten Sie diese Annahme? Diskutieren Sie!
+wie plausibel halten Sie diese Annahme? Diskutieren Sie miteinander!
 \end{example}
 
-
+- Zeit: 10 Minuten
 
 <!-- Spritzenbeispiel -->
 <!-- Tafelbild: Unabhängigkeit durch Leftsinguläre Matrix -->
@@ -345,6 +378,8 @@ nicht einfach "gelöst" werden. Wir müssen es schätzen.
 
 - MLFA bietet nun als Lösung die plausibelsten (eng. "most likely") Werte zur
 Reproduktion der Informationen in der Korrelationsmatrix an.
+
+<p>&nbsp;</p>
 
 >"Assuming that the residual variance reflects normally distributed random
 error, the most elegant statistical solution is that of maximum likelihood"
@@ -380,12 +415,9 @@ Validität der Ergebnisse in Bezug auf Ihr simuliertes Beispiel. Hat das
 Verfahren ihre simulierte Struktur entdeckt?
 \end{example}
 
-- Zeit: 5 Minuten
+- Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
-
-Zusatz: Haben Sie eine Vermutung wie mögliche Unterschiede zwischen den
-Verfahren zustande kommen?
 
 # Rotationsproblem
 
@@ -499,13 +531,12 @@ dazu (1) mit der unrotierten Lösung und vergleichen Sie (2) die Ergebnisse
 zwischend den Rotationsmethoden.
 \end{example}
 
-- Zeit: 5 Minuten
+- Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 
-Zusatz: Sie kennen das "richtige" Ergebnis. Sie haben die Antowrten immerhin
-simuliert. Welche Lösung kommt ihren Ergebnisen am nähesten? Haben Sie eine Idee
-warum? (Tipp: Denken Sie an $\Phi$)
+Zusatz: Sie kennen das "richtige" Ergebnis. Wir haben die Antowrten immerhin
+simuliert. Welche Lösung kommt ihren Ergebnissen am nächsten? 
 
 # Problem der Anzahl zu extrahierender Faktoren
 
@@ -568,10 +599,10 @@ Anmerkung: Der Code ist auskommentiert, dass er in RMD nicht durchläuft
 ## Parallel Analyse
 
 \begin{alertblock}{Parallel Analyse}
-In parallel analysis, the criterion to be used in order to determine the number
+"In parallel analysis, the criterion to be used in order to determine the number
 of factors is the following A factor is considered as "significant" if its
-eigenvalue is larger than the 95% quantile [...] of those obtained from
-random or resampled data. (Mair 2018, S.31)
+eigenvalue is larger than the 95\% quantile [...] of those obtained from
+random or resampled data." (Mair 2018, S.31)
 \end{alertblock}
 
 Anmerkung: Im Orginal wurde die PA für Komponenten konstruiert. Mittlerweile gibt es
@@ -624,13 +655,15 @@ Beispiel mit den drei genannten Möglichkeiten. Welches der drei Verfahren
 warum? (Tipp: $\Lambda, \Phi$)
 \end{example}
 
-- Zeit: 5 Minuten
+- Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 
 Anmerkung: Sie haben den Luxus, das richtige Ergebnis zu kennen. Normalerweise
 ist das nicht der Fall! Darum sind Simulationen wichtig. So können wir das
 Verhalten einzelner Kriterien unter verschiedenen Umständen testen.
+
+# Bonusmaterial: Bartlett-Test & KMO
 
 ## (Minimal-)Voraussetzungen: Faktorenanalyse
 
@@ -645,7 +678,7 @@ geeignet?
 ## (Minimal-)Voraussetzungen: Bartlett-Test
 
 \begin{block}{Bartlett-Test}
-Ist die zu faktorisierende Korrelationsmatrix signifikant von einer
+$H_0$: Ist die zu faktorisierende Korrelationsmatrix signifikant von einer
 Identitätsmatrix verschieden?
 \end{block}
 
@@ -724,7 +757,7 @@ das KMO-Kriterium auf ihre Korrelations- oder Datenmatrix an. Wie beurteilen Sie
 die Ergebnisse? Sind ihre Matritzen zur Analyse geeignet?
 \end{example}
 
-- Zeit: 5 Minuten
+- Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 

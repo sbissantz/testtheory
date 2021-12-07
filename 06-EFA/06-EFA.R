@@ -21,8 +21,6 @@
 # Replikation der Ergebnisse:
 # set.seed(123)
 
-# Übungsaufgabe 2 ---------------------------------------------------------
-
 # Setup
 #
 # Faktorladungen; 8 items
@@ -44,7 +42,7 @@ psych::structure.diagram(fx, phi, cut=FALSE)
 corrplot::corrplot.mixed(R, number.cex=.7)
 # psych::cor.plot(R)
 
-# Übungsaufgabe 3 ---------------------------------------------------------
+# Übungsaufgabe 2 ---------------------------------------------------------
 
 # Old School! (stats)
 # dino_pca <- princomp(X, cor=TRUE) ; summary(dino_pca, cor=TRUE)
@@ -58,7 +56,7 @@ fit_pca$uniquenesses
 ## Kommunalitäten 
 fit_pca$communality
 
-# Übungsaufgabe 4 ---------------------------------------------------------
+# Übungsaufgabe 3 ---------------------------------------------------------
 
 (fit_paf <- psych::fa(R, nfactors=2,  rotate="none",  fm="pa"))
 # Kommunalitäten
@@ -70,7 +68,7 @@ fit_paf$uniquenesses
 # Quadrierte multiple Korrelation
 fit_paf$R2
 
-# Übungsaufgabe 6 ---------------------------------------------------------
+# Übungsaufgabe 5 ---------------------------------------------------------
 
 (fit_mlf <- psych::fa(R, nfactors=2,  rotate="none",  fm="ml"))
 # Kommunalitäten
@@ -82,7 +80,7 @@ fit_mlf$uniquenesses
 # Quadrierte multiple Korrelation
 fit_mlf$R2
 
-# Übungsaufgabe 7 ---------------------------------------------------------
+# Übungsaufgabe 6 ---------------------------------------------------------
 
 (fit_vmax <- psych::fa(R, nfactors=2,  rotate="varimax",  fm="ml"))
 # Kommunalitäten
@@ -94,7 +92,7 @@ fit_vmax$uniquenesses
 # Quadrierte multiple Korrelation
 fit_vmax$R2
 
-# Übungsaufgabe 8 ---------------------------------------------------------
+# Übungsaufgabe 7 ---------------------------------------------------------
 
 # Scree Test und K1
 #
@@ -121,7 +119,7 @@ paran::paran(X)
 # Für Faktoren
 paran::paran(X, cfa=TRUE)
 
-# Übungsaufgabe 9 ---------------------------------------------------------
+# Übungsaufgabe 8 ---------------------------------------------------------
 
 # Datenmatrix (X)
 # psych::cortest.bartlett(X)
