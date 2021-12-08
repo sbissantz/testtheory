@@ -49,6 +49,8 @@ corrplot::corrplot.mixed(R, number.cex=.7)
 
 # New School
 (fit_pca <- psych::principal(R, nfactors = 2, rotate = "none"))
+# Mit Datenmatrix (X) anstatt Korrelationmatrix (R)
+# (fit_pca <- psych::principal(X, nfactors = 2, rotate = "none"))
 ## Komponentenladungen
 fit_pca$loadings
 ## Einzigartigkeit 
@@ -59,6 +61,8 @@ fit_pca$communality
 # Übungsaufgabe 3 ---------------------------------------------------------
 
 (fit_paf <- psych::fa(R, nfactors=2,  rotate="none",  fm="pa"))
+# Mit Datenmatrix (X) anstatt Korrelationmatrix (R)
+# (fit_paf <- psych::fa(X, nfactors=2,  rotate="none",  fm="pa"))
 # Kommunalitäten
 fit_paf$communality
 # Eigenwerte
@@ -71,6 +75,8 @@ fit_paf$R2
 # Übungsaufgabe 5 ---------------------------------------------------------
 
 (fit_mlf <- psych::fa(R, nfactors=2,  rotate="none",  fm="ml"))
+# Mit Datenmatrix (X) anstatt Korrelationmatrix (R)
+# (fit_mlf <- psych::fa(X, nfactors=2,  rotate="none",  fm="ml"))
 # Kommunalitäten
 fit_mlf$communality
 # Eigenwerte
@@ -118,6 +124,8 @@ psych::fa.parallel(X, fa = "pc", fm = "ml")
 paran::paran(X)
 # Für Faktoren
 paran::paran(X, cfa=TRUE)
+
+# Bonusmaterial -----------------------------------------------------------
 
 # Übungsaufgabe 8 ---------------------------------------------------------
 

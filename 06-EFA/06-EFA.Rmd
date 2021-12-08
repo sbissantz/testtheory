@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Einstieg{-} 
 
 \begin{example}
-Hinter untenstehendem Link verbirgt sich ein Fragebogen der Platform
+Hinter unterstehendem Link verbirgt sich ein Fragebogen der Platform
 \texttt{openpsychometrics} (eine gute Quelle um kostenlos Datensätze für
 Analysen zu ergattern). Schauen Sie sich den Big-Five-Fragebogen einmal an. Wenn
 Sie möchten, beantworten Sie Ihn kurz. Im Anschluss daran stellen wir uns auf
@@ -39,8 +39,9 @@ dieser Grundlage der Large Dataset Challenge!
 \begin{example}
 Stellen Sie sich vor, die von Ihnen soeben gesehenen/beantworteten Fragen
 ergäben die Korrelationsmatrix $R$ auf der nächsten Folie. Die "Large Data Set
-Challenge" (LDC) lautet: Erkennen Sie eine Struktur in den Daten? Besprechen Sie
-sich mit ihrem Nachbarn.
+Challenge" (LDC) lautet: Erkennen Sie eine Struktur in den Daten? Das heißt
+konkreter, finden Sie homogene Itemgruppen? Besprechen Sie sich mit ihrem
+Nachbarn.
 \end{example}
 
 Welche Items könnte man ihrer Meinung nach zu Itemgruppen zusammenfassen?
@@ -74,8 +75,9 @@ corrplot::corrplot(R, method = 'color', tl.cex = 0.6)
 
 \begin{alertblock}{Large Data Set Challenge}
 Mit zunehmender Itemzahl nimmt die Anzahl der Korrelationen, die für eine
-Analyse zu berücksichtigen sind schnell zu. Die "Challenge" ist eine mögliche
-Struktur zu entdecken!
+Analyse zu berücksichtigen sind schnell zu groß. Die "Challenge" ist eine
+mögliche Struktur zu entdecken! (..Wie sie eben in ihrer visuellen Zuordnungen
+selbst gemerkt haben)
 \end{alertblock}
 
 In a Nutshell:
@@ -107,7 +109,10 @@ In a Nutshell:
 
 Wichtig: "meaningful" (Faktoren) vs. "full compression" (Komponenten)
 
-Fokus (heute): Common Factor Model (CFM)
+Fokus (heute): **Common Factor Model (CFM)**[^5] 
+
+[^5]: Daneben lernen Sie bei der Extraktion auch insgesamt zwei Modelle zur
+Bestimmung der (a) Hauptkomponente(n) und (b) Hauptachse(n) kennen: PCA & PAF.
 
 <!-- Wichtig: Warum Faktorenanalyse -->
 <!-- Wichtig: Sozialwissenschaften: Compression in meningful ways -->
@@ -195,7 +200,7 @@ Fokus (heute): Common Factor Model (CFM)
 \end{alertblock}
   
 - $x$: $m \times p$ Datenmatrix
-- $\Lambda$: $m \times p$ Matrix der Item-Faktor Korrelationen (Ladung)
+- $\Lambda$: $m \times p$ Matrix der Item-Faktor Korrelationen (Ladungen)
 - $\xi$: Faktoren ($p$ Stück)
 - $p, m$: Anzahl der latenten Variablen, Items
 
@@ -243,7 +248,7 @@ the research was meaningful to begin with.” [Gregory (2014, S.
 
 Konkl.: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium)
 
-## "Playing Creator": 2 LVs erschaffen[^2] 
+## Vorbereitung: "Playing Creator" -- 2 LVs erschaffen
 
 Bevor wir loslegen, wollen wir eine Datenmatrix $X$ und eine Korrelationsmatrix $R$
 simulieren.[^3] 
@@ -262,7 +267,9 @@ R <- S$model ; X <- S$observed  # R <- cor(X)
 ```
 
 [^3]: Nur in simulierten Welten (in denen wir den richtigen Ausgang kennen),
-können wir prüfen, ob unsere Methoden das "korrekte" Ergebnis reproduzieren.
+können wir prüfen, ob unsere Methoden das "korrekte" Ergebnis reproduzieren. Sie
+können sich aber auch vorstellen, dass das Ihre Antworten auf den Fragebogen
+seien. Dann wären Sie der generative Prozess, den wir hier simulieren.
 
 # Extraktionsproblem
 
@@ -270,7 +277,7 @@ können wir prüfen, ob unsere Methoden das "korrekte" Ergebnis reproduzieren.
   Wie extrahieren wir die zur Reproduktion nötigen Faktoren/Komponenten?
 \end{alertblock}
 
-1. Lösung: Bestimmung der "Principal Components" (*PCA*)
+1. Lösung: Bestimmung der "Principal Components" (*PCA*)[^6] 
 <!-- - Modellgleichung: $R = CC^{t}$ -->
 <!-- - Note: Eigenwert-, Singulärwertzerlegung (closed form solution) -->
 2. Lösung: Iterative Bestimmung der "Principal Components" (*PAF*)
@@ -280,6 +287,14 @@ können wir prüfen, ob unsere Methoden das "korrekte" Ergebnis reproduzieren.
 <!-- - Modellgleichung: $P = \Lambda \Phi \Lambda^{t} + \Psi$ -->
 <!-- - Note(s): Reduzierte Matrix, iterativer Prozess (convergence issues) -->
 
+[^6]: Faktoren- und Hauptkomponentenanylse sind Verfahren mit unterschiedlichen
+Zielen! Beide Klassen nutzen unterschiedliche Modelle und machen
+unterschiedliche Basisannahmen. Dennoch werden sie häufig in der Literatur unter
+dem Deckmantel "explorative Faktorenanalyse" vereinheitlicht. Als Randnotiz die
+Modellgleichungen: $R = CC^{t}$ (PCA), $R^* = FF^{t}$ (PAF), $P = \Lambda
+\Phi \Lambda^{t} + \Psi$ (CFM). Für die psychologische Praxis scheint das CFM am
+wenigsten restriktiv.
+
 ## Let's do it! (..in R): PCA
 
 <!-- Ziel: Maximale (Gesamt-)Varianzaufklärung; d.h: minimaler Informationsverlust -->
@@ -288,27 +303,28 @@ können wir prüfen, ob unsere Methoden das "korrekte" Ergebnis reproduzieren.
 ```{r echo=TRUE, message=FALSE, warning=FALSE, results='hide'}
 # Old School!
 # (dino_pca <- princomp(X, cor=TRUE))
-# New School: Datenmatrix R -> X
-(pca_fit <- psych::principal(R, nfactors = 2, 
+# New School: Datenmatrix? R -> X
+(fit_pca <- psych::principal(R, nfactors = 2, 
                             rotate = "none"))
+
 ## Komponentenladungen
-pca_fit$loadings
+fit_pca$loadings
 ## Kommunalitäten 
-pca_fit$communality
+fit_pca$communality
 ## Einzigartigkeit 
-pca_fit$uniquenesses
+fit_pca$uniquenesses
 ## Eigenwerte
-pca_fit$values
+fit_pca$values
 # Quadrierte multiple Korrelation
-pca_fit$R2
+fit_pca$R2
 ```
 
-## Übungsaufgabe 3: Selbstexperiment
+## Übungsaufgabe 2: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 3
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 2
 \texttt{06-EFA.R} und führen eine PCA durch. Interpretieren Sie die
-enstprechenden Kennwerte für ihr Modell und präsentieren Sie diese ihrem
+entsprechenden Kennwerte für ihr Modell und präsentieren Sie diese ihrem
 Nachbarn.
 \end{example}
 
@@ -335,14 +351,13 @@ fit_paf$uniquenesses
 fit_paf$R2
 ```
 
-## Übungsaufgabe 4: Selbstexperiment
+## Übungsaufgabe 3: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 4
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 3
 \texttt{06-EFA.R} und führen Sie eine Hauptachsenanalyse (PAF) durch.
 Vergleichen Sie die Ergebnisse der PAF mit denen der PCA. Bestehen Unterschiede
-zwischen den Ergebnissen? Zusatz: Haben Sie eine Vermutung wie mögliche
-Unterschiede zustande kommen?
+zwischen den Ergebnissen? 
 \end{example}
 
 - Zeit: 10 Minuten
@@ -353,17 +368,17 @@ Unterschiede zustande kommen?
 <!-- Reduzierte Korrelationsmatrix -->
 <!-- Gesamtvarianz versus gemeinsame Varianz -->
 
-## Übungsaufgabe 5: Kritische Reflexion & Diskussion
+## Übungsaufgabe 4: Kritische Reflexion & Diskussion
 
 \begin{example}
 Eine Folge der Extraktion mittels mit der Hauptkomponentenmethode ist, dass die
 extrahierten Faktoren unabhängig voneinander sind. Glauben Sie dem Modell
 uneingeschränkt, nähmen sie damit implizit an, dass auch die zugrundeliegende
-Konstrukte unabhängig voneinander sein müssten. Denken Sie an ihr Beispiel. Für
-wie plausibel halten Sie diese Annahme? Diskutieren Sie miteinander!
+Konstrukte unabhängig voneinander sein müssten. Für wie plausibel halten Sie
+diese Annahme in der Psychologie? Diskutieren Sie miteinander!
 \end{example}
 
-- Zeit: 10 Minuten
+- Zeit: 2-3 Minuten
 
 <!-- Spritzenbeispiel -->
 <!-- Tafelbild: Unabhängigkeit durch Leftsinguläre Matrix -->
@@ -371,12 +386,11 @@ wie plausibel halten Sie diese Annahme? Diskutieren Sie miteinander!
 ## Primer: Maximum Likelihood Faktorenanalyse (MLF)
 
 \begin{alertblock}{Kommunalitätenproblem}
-Das CFM ($\Lambda \Phi \Lambda' + \Psi$) ist unbestimmt. D.h. es hat (deutlich)
-mehr unbekannte als bekannte Bestanndteile. Die Folge: Das Modell kann deshalb
+Das CFM ($P = \Lambda \Phi \Lambda' + \Psi$) ist unbestimmt. D.h. es hat mehr unbekannte als bekannte Bestanndteile. Die Folge: Das Modell kann deshalb
 nicht einfach "gelöst" werden. Wir müssen es schätzen.
 \end{alertblock}
 
-- MLFA bietet nun als Lösung die plausibelsten (eng. "most likely") Werte zur
+- MLF bietet nun als Lösung die plausibelsten (eng. "most likely") Werte zur
 Reproduktion der Informationen in der Korrelationsmatrix an.
 
 <p>&nbsp;</p>
@@ -405,14 +419,12 @@ fit_mlf$uniquenesses
 fit_mlf$R2
 ```
 
-## Übungsaufgabe 6: Selbstexperiment
+## Übungsaufgabe 5: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 6 in
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 5 in
 \texttt{06-EFA.R} und führen Sie eine Maximum Likelihood Faktorenanalyse (MLF)
-durch. Vergleichen Sie die Ergebnisse mit den anderen Methoden. Prüfen die
-Validität der Ergebnisse in Bezug auf Ihr simuliertes Beispiel. Hat das
-Verfahren ihre simulierte Struktur entdeckt?
+durch. Vergleichen Sie die Ergebnisse auch mit den anderen Methoden.
 \end{example}
 
 - Zeit: 10 Minuten
@@ -422,7 +434,7 @@ Verfahren ihre simulierte Struktur entdeckt?
 # Rotationsproblem
 
 \begin{alertblock}{Rotationsproblem}
-  Wie rotiert die erhaltene Ladungsmatrix ($\Lambda$) derart, dass eine
+  Wie rotiert die erhaltene Ladungsmatrix ($\hat\Lambda$) derart, dass eine
   möglich einfach interpretierbare Lösung daraus hervorgeht?
 \end{alertblock}
 
@@ -520,10 +532,10 @@ fit_obl$R2
 fit_obl$Phi
 ```
 
-## Übungsaufgabe 7: Selbstexperiment
+## Übungsaufgabe 6: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 7 in
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 6 in
 \texttt{06-EFA.R} und führen Sie eine MLF durch. Rotieren Sie anschließend die
 Ergebnisse mit der Varimax und Oblimin Rotation. Wie verändert die Rotation ihre
 Interpretation der Ergebnisse? Erleichtert sie sie? Vergleichen Sie die Lösung
@@ -535,9 +547,6 @@ zwischend den Rotationsmethoden.
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 
-Zusatz: Sie kennen das "richtige" Ergebnis. Wir haben die Antowrten immerhin
-simuliert. Welche Lösung kommt ihren Ergebnissen am nächsten? 
-
 # Problem der Anzahl zu extrahierender Faktoren
 
 \begin{alertblock}{Rotationsproblem}
@@ -546,18 +555,19 @@ simuliert. Welche Lösung kommt ihren Ergebnissen am nächsten?
 
 1. Lösung: Kaiser Kriterium
 2. Lösung: Scree-Test
-3. Lösung. Horns Parallel Analyse
+3. Lösung. Horns Parallel Analyse [^11]
 
-Anmerkung: Es gibt mittlerweile zahlreiche Weiterentwicklungen. Interessieren Sie sich dafür? (siehe: [Lorenzo-Seva et al., 2011](https://sci-hub.se/10.1080/00273171.2011.564527) & [Timmerman et al., 2018](https://doi.org/10.1002/9781118489772.ch11))
+[^11]: Es gibt mittlerweile zahlreiche Weiterentwicklungen. Interessieren Sie sich dafür? Dann schauen Sie in [Lorenzo-Seva et al. (2011)](https://sci-hub.se/10.1080/00273171.2011.564527) & [Timmerman et al. (2018)](https://doi.org/10.1002/9781118489772.ch11).
 
 ## Eigenwerteplots (Kaiser Kriterium & Scree Test)
 
 \begin{block}{Kaiserkriterium \& Scree Test}
 Zerlege die Korrelationsmatrix in ihre Eigenwerte (SVD/EVD) und plotte diese
-gegen einen Index. (1) Kaiserkriterium: Ist das Varianzaufklärungspotential
-eines Faktors kleiner als eines Items beende deine Suche ($\widetilde{=}EW >
-1$). (2) Scree-Test: Finde den "ellbow" der den "rock" vom "scree"
-unterscheidet.
+gegen einen Index.
+\begin{enumerate}
+  \item Kaiserkriterium: Ist das Varianzaufklärungspotential eines Faktors kleiner als das eines Items beende deine Suche ($\widetilde{=}EW > 1$). 
+  \item Scree-Test: Finde den "ellbow" der den "rock" vom "scree" unterscheidet.
+\end{enumerate}
 \end{block}
 
 ## Grafik: Eigenwertplot
@@ -634,34 +644,29 @@ Anmerkung: Die Grafik wurde mit $\texttt{paran}$ nicht $\texttt{psych}$ erstellt
 ## Let's do it (..in R): Parallel Analyse
 
 ```{r echo=TRUE, eval=FALSE}
-# Lange Laufzeit
+# Parallelanalyse (Komponenten-basiert)
 psych::fa.parallel(X, fa = "pc", fm = "ml")
 
 # Alternative
 #
 # Für Komponenten
-paran::paran(X)
+# paran::paran(X)
 # Für Faktoren
-paran::paran(X, cfa=TRUE)
+# paran::paran(X, cfa=TRUE)
 ```
 
-## Übungsaufgabe 8: Selbstexperiment
+## Übungsaufgabe 7: Selbstexperiment
 
 \begin{example}
 Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 8 in
 \texttt{06-EFA.R} und finden Sie die Anzahl zu extrahierender Faktoren in ihrem
 Beispiel mit den drei genannten Möglichkeiten. Welches der drei Verfahren
-"errät" ihre Anzahl zu extrahierender Faktoren richtig? Haben Sie eine Idee
-warum? (Tipp: $\Lambda, \Phi$)
+"errät" die Anzahl zu extrahierender Faktoren aus der Simulation (2 Faktoren)? 
 \end{example}
 
 - Zeit: 10 Minuten
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
-
-Anmerkung: Sie haben den Luxus, das richtige Ergebnis zu kennen. Normalerweise
-ist das nicht der Fall! Darum sind Simulationen wichtig. So können wir das
-Verhalten einzelner Kriterien unter verschiedenen Umständen testen.
 
 # Bonusmaterial: Bartlett-Test & KMO
 
@@ -678,8 +683,8 @@ geeignet?
 ## (Minimal-)Voraussetzungen: Bartlett-Test
 
 \begin{block}{Bartlett-Test}
-$H_0$: Ist die zu faktorisierende Korrelationsmatrix signifikant von einer
-Identitätsmatrix verschieden?
+$H_0$: Die zu faktorisierende Korrelationsmatrix ist signifikant von einer
+Identitätsmatrix verschieden.
 \end{block}
 
 \begin{equation}
@@ -748,10 +753,10 @@ $p_{jk}$ : Partielle Korrelation
 # kmo$MSA
 ```
 
-## Übungsaufgabe 9: Selbstexperiment
+## Übungsaufgabe 8: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 9 in
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 8 in
 \texttt{06-EFA.R} und führen Sie einen Bartlett-Test durch. Verwenden Sie auch
 das KMO-Kriterium auf ihre Korrelations- oder Datenmatrix an. Wie beurteilen Sie
 die Ergebnisse? Sind ihre Matritzen zur Analyse geeignet?
@@ -761,7 +766,7 @@ die Ergebnisse? Sind ihre Matritzen zur Analyse geeignet?
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 
-## Übungsaufgabe 10: Evaluation
+## Übungsaufgabe 9: Evaluation
 
 \begin{example}
 Welches Verfahren hat ihre anfängliche Struktur am besten aufgefunden? Haben Sie
@@ -821,7 +826,7 @@ points(x=seq, y=RSS, type = "b")
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
 # Black Box
-pca_fit <- princomp(X, cor = TRUE)
+fit_pca <- princomp(X, cor = TRUE)
 
 # Barfuß
 R_EVD <- cor(X)
@@ -830,14 +835,14 @@ EVD_R <- eigen(R_EVD)
 # Komponentenladungen
 loadings <- EVD_R$vectors
 # Gleich?
-pca_fit$loadings ; print(loadings, digits=3)
+fit_pca$loadings ; print(loadings, digits=3)
 ```
 
 ## Selbststudium 3: händische EFA -- Singulärwertzerlegung
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
 # Black Box
-pca_fit <- prcomp(X, scale. = TRUE)
+fit_pca <- prcomp(X, scale. = TRUE)
 
 # Barfuß
 n <- nrow(X)
@@ -845,12 +850,12 @@ SVD_X <- svd(scale(X)/sqrt(n-1))
 U <- SVD_X$u ; D <- SVD_X$d
 loadings <- U %*% diag(D) * sqrt(n-1)
 # Gleich?
-pca_fit$x ; loadings
+fit_pca$x ; loadings
 ```
 
 ## Selbststudium 4: reduzierte Korrelationsmatrix
 
-...Der Output zeigt die erst 8 Iterationen einer PAFA. Vergleichen Sie diese mit
+...Der Output zeigt die erst 8 Iterationen einer PAF. Vergleichen Sie diese mit
 ihre am Anfang konstruierte Korrelationsmatrix $\texttt{R}). Achten Sie auf die
 Hauptdiagonalen!
 
