@@ -48,7 +48,7 @@ Welche Items könnte man ihrer Meinung nach zu Itemgruppen zusammenfassen?
 
 - Zeit: 2-3 Minuten
 
-Anmerkung: Nein, das sind nicht ihre Antworten; $\texttt{V1 - V30}$ sind
+Anmerkung: Nein, das sind nicht ihre Antworten; $\texttt{V1 - V25}$ sind
 Zufallsvariablen!
 
 ## Übungsaufgabe 1: Struktur erkennen & Itemgruppen finden
@@ -83,7 +83,7 @@ selbst gemerkt haben)
 In a Nutshell:
 
 - Problem: Anzahl der Korrelationen 
-- z.B.: $25$ Items $\widehat{=}$ $2^{25} = 625$ Korrelationen
+- z.B.: $25$ Items $\widehat{=}$ 300 Korrelationen
 - Krux: Struktur erkennen 
 - $\Leftrightarrow$ finde: hoch korrelierende Itemgruppen
 
@@ -109,10 +109,11 @@ In a Nutshell:
 
 Wichtig: "meaningful" (Faktoren) vs. "full compression" (Komponenten)
 
-Fokus (heute): **Common Factor Model (CFM)**[^5] 
+Fokus (heute): Hauptkomponentenanalyse (PCA), Hauptachsenanalyse (PAF), Maximum Likelihood Faktorenanalyse (MLF)
 
-[^5]: Daneben lernen Sie bei der Extraktion auch insgesamt zwei Modelle zur
-Bestimmung der (a) Hauptkomponente(n) und (b) Hauptachse(n) kennen: PCA & PAF.
+<!-- Fokus (heute): **Common Factor Model (CFM)**[^5]  -->
+<!-- [^5]: Daneben lernen Sie bei der Extraktion auch insgesamt zwei Modelle zur -->
+<!-- Bestimmung der (a) Hauptkomponente(n) und (b) Hauptachse(n) kennen: PCA & PAF. -->
 
 <!-- Wichtig: Warum Faktorenanalyse -->
 <!-- Wichtig: Sozialwissenschaften: Compression in meningful ways -->
@@ -189,47 +190,47 @@ Bestimmung der (a) Hauptkomponente(n) und (b) Hauptachse(n) kennen: PCA & PAF.
 
 <!-- - Modell: *Common Factor Model* (CFM) -->
 
-# Das Common Factor Model (CFM)
+<!-- # Das Common Factor Model (CFM) -->
 
-## Das Common Factor Model 
+<!-- ## Das Common Factor Model  -->
 
-\begin{alertblock}{Eingangsgleichung des CFM}
-\begin{equation}
-    x = \Lambda \xi + \epsilon
-\end{equation}
-\end{alertblock}
-  
-- $x$: $m \times p$ Datenmatrix
-- $\Lambda$: $m \times p$ Matrix der Item-Faktor Korrelationen (Ladungen)
-- $\xi$: Faktoren ($p$ Stück)
-- $p, m$: Anzahl der latenten Variablen, Items
+<!-- \begin{alertblock}{Eingangsgleichung des CFM} -->
+<!-- \begin{equation} -->
+<!--     x = \Lambda \xi + \epsilon -->
+<!-- \end{equation} -->
+<!-- \end{alertblock} -->
 
-<p>&nbsp;</p>
+<!-- - $x$: $m \times p$ Datenmatrix -->
+<!-- - $\Lambda$: $m \times p$ Matrix der Item-Faktor Korrelationen (Ladungen) -->
+<!-- - $\xi$: Faktoren ($p$ Stück) -->
+<!-- - $p, m$: Anzahl der latenten Variablen, Items -->
 
-> "In other words EFA tries to find $p$ latent variables on the basis of the
-correlation structure of the $m$ manifest variables." (Ebd.)
+<!-- <p>&nbsp;</p> -->
 
-## Das Common Factor Model 
+<!-- > "In other words EFA tries to find $p$ latent variables on the basis of the -->
+<!-- correlation structure of the $m$ manifest variables." (Ebd.) -->
 
-Anmerkung: Für die Reformulierung von Gleichung (1) zu (2): siehe [McCallum
-(2009)](http://dx.doi.org/10.4135/9780857020994.n6)
+<!-- ## Das Common Factor Model  -->
 
-\begin{alertblock}{Fudnamentaltheorem}
-  \begin{equation}
-    P = \Lambda \Phi \Lambda^{t} + \Psi
-  \end{equation}
-\end{alertblock}
+<!-- Anmerkung: Für die Reformulierung von Gleichung (1) zu (2): siehe [McCallum -->
+<!-- (2009)](http://dx.doi.org/10.4135/9780857020994.n6) -->
 
-- $P$: Modell-implizierte Korrelationsmatrix
-- $\Lambda$: Ladungsmatrix
-- $\Phi$: Matrix der Zwischenfaktorkorrelationen
-- $\Psi$: Einzigartigkeit
+<!-- \begin{alertblock}{Fudnamentaltheorem} -->
+<!--   \begin{equation} -->
+<!--     P = \Lambda \Phi \Lambda^{t} + \Psi -->
+<!--   \end{equation} -->
+<!-- \end{alertblock} -->
 
-\begin{block}{Zusammenhang: Modell \& Struktur}
-Die explorative Faktorenanalyse versucht als Struktur-entdeckendes Verfahren die
-(reduzierte) Korrelationsmatrix unter Einsatz des CFM zu rekonstruieren; d.h.
-ihre Struktur (zugrundeliegenden LVs) zu entschlüsseln.
-\end{block}
+<!-- - $P$: Modell-implizierte Korrelationsmatrix -->
+<!-- - $\Lambda$: Ladungsmatrix -->
+<!-- - $\Phi$: Matrix der Zwischenfaktorkorrelationen -->
+<!-- - $\Psi$: Einzigartigkeit -->
+
+<!-- \begin{block}{Zusammenhang: Modell \& Struktur} -->
+<!-- Die explorative Faktorenanalyse versucht als Struktur-entdeckendes Verfahren die -->
+<!-- (reduzierte) Korrelationsmatrix unter Einsatz des CFM zu rekonstruieren; d.h. -->
+<!-- ihre Struktur (zugrundeliegenden LVs) zu entschlüsseln. -->
+<!-- \end{block} -->
 
 # Fakotrenanalyse: "A hurdle race"
 
@@ -289,11 +290,10 @@ seien. Dann wären Sie der generative Prozess, den wir hier simulieren.
 
 [^6]: Faktoren- und Hauptkomponentenanylse sind Verfahren mit unterschiedlichen
 Zielen! Beide Klassen nutzen unterschiedliche Modelle und machen
-unterschiedliche Basisannahmen. Dennoch werden sie häufig in der Literatur unter
-dem Deckmantel "explorative Faktorenanalyse" vereinheitlicht. Als Randnotiz die
-Modellgleichungen: $R = CC^{t}$ (PCA), $R^* = FF^{t}$ (PAF), $P = \Lambda
-\Phi \Lambda^{t} + \Psi$ (CFM). Für die psychologische Praxis scheint das CFM am
-wenigsten restriktiv.
+unterschiedliche Basisannahmen. Dennoch werden sie häufig in der Literatur unter dem Deckmantel "explorative Faktorenanalyse" vereinheitlicht.
+
+<!-- Modellgleichungen: $R = CC^{t}$ (PCA), $R^* = FF^{t}$ (PAF), $P = \Lambda -->
+<!-- \Phi \Lambda^{t} + \Psi$ (CFM).  -->
 
 ## Let's do it! (..in R): PCA
 
@@ -368,36 +368,38 @@ zwischen den Ergebnissen?
 <!-- Reduzierte Korrelationsmatrix -->
 <!-- Gesamtvarianz versus gemeinsame Varianz -->
 
-## Übungsaufgabe 4: Kritische Reflexion & Diskussion
-
-\begin{example}
-Eine Folge der Extraktion mittels mit der Hauptkomponentenmethode ist, dass die
-extrahierten Faktoren unabhängig voneinander sind. Glauben Sie dem Modell
-uneingeschränkt, nähmen sie damit implizit an, dass auch die zugrundeliegende
-Konstrukte unabhängig voneinander sein müssten. Für wie plausibel halten Sie
-diese Annahme in der Psychologie? Diskutieren Sie miteinander!
-\end{example}
-
-- Zeit: 2-3 Minuten
-
-<!-- Spritzenbeispiel -->
-<!-- Tafelbild: Unabhängigkeit durch Leftsinguläre Matrix -->
-
 ## Primer: Maximum Likelihood Faktorenanalyse (MLF)
 
-\begin{alertblock}{Kommunalitätenproblem}
-Das CFM ($P = \Lambda \Phi \Lambda' + \Psi$) ist unbestimmt. D.h. es hat mehr unbekannte als bekannte Bestanndteile. Die Folge: Das Modell kann deshalb
-nicht einfach "gelöst" werden. Wir müssen es schätzen.
-\end{alertblock}
+<!-- \begin{alertblock}{Kommunalitätenproblem} -->
+<!-- Das CFM ($P = \Lambda \Phi \Lambda' + \Psi$) ist unbestimmt. D.h. es hat mehr unbekannte als bekannte Bestanndteile. Die Folge: Das Modell kann deshalb -->
+<!-- nicht einfach "gelöst" werden. Wir müssen es schätzen. -->
+<!-- \end{alertblock} -->
 
-- MLF bietet nun als Lösung die plausibelsten (eng. "most likely") Werte zur
+MLF bietet als Lösung die plausibelsten (eng. "most likely")  Werte zur
 Reproduktion der Informationen in der Korrelationsmatrix an.
 
-<p>&nbsp;</p>
+\begin{equation}
+  X_i = \lambda_j*\xi_i + \epsilon_i
+\end{equation}
 
->"Assuming that the residual variance reflects normally distributed random
-error, the most elegant statistical solution is that of maximum likelihood"
-(Revelle, in prep. S. 156)
+\begin{equation}
+  R = \Lambda \Phi \Lambda' + \Psi
+\end{equation}
+
+- $R$: $n \times n$ Korrelationsmatrix 
+- $\Lambda$: Ladungsmatrix
+- $\Phi$: Matrix der Zwischenfaktorkorrelationen
+- $\Psi$: Einzigartigkeit
+- $x$: $m \times p$ Datenmatrix
+- $\Lambda$: $m \times p$ Matrix der Item-Faktor Ladungen 
+- $\xi$: Faktoren ($p$ Stück)
+- $p, m$: Anzahl der latenten Variablen, Items
+
+<!-- <p>&nbsp;</p> -->
+
+<!-- >"Assuming that the residual variance reflects normally distributed random -->
+<!-- error, the most elegant statistical solution is that of maximum likelihood" -->
+<!-- (Revelle, in prep. S. 156) -->
 
 <!-- "The problem is that in order to estimate the communalities, we need the -->
 <!-- loadings. Conversely, in order to estimate the loadings, we need the -->
@@ -532,7 +534,7 @@ fit_obl$R2
 fit_obl$Phi
 ```
 
-## Übungsaufgabe 6: Selbstexperiment
+## Übungsaufgabe 5: Selbstexperiment
 
 \begin{example}
 Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 6 in
@@ -547,10 +549,25 @@ zwischend den Rotationsmethoden.
 - Replikation: \texttt{set.seed(123)} 
 - Anmerkung: Konzepte & Output verstehen $\gg$ Codes verstehen!
 
+## Übungsaufgabe 6: Kritische Reflexion & Diskussion
+
+\begin{example}
+Eine Folge der orthogonalen Rotation ist, dass die extrahierten Faktoren
+unabhängig voneinander sind. Glauben Sie dem Modell uneingeschränkt, nähmen sie
+damit implizit an, dass auch die zugrundeliegende Konstrukte unabhängig
+voneinander sein müssten. Für wie plausibel halten Sie diese Annahme in der
+Psychologie? Diskutieren Sie miteinander!
+\end{example}
+
+- Zeit: 2-3 Minuten
+
+<!-- Spritzenbeispiel -->
+<!-- Tafelbild: Unabhängigkeit durch Leftsinguläre Matrix -->
+
 # Problem der Anzahl zu extrahierender Faktoren
 
 \begin{alertblock}{Rotationsproblem}
-  Wie ermittle ich die Anazhl der zu extrahierenden Faktoren ohne sie zu kennen?
+  Wie ermittle ich die Anzahl der zu extrahierenden Faktoren ohne sie zu kennen?
 \end{alertblock}
 
 1. Lösung: Kaiser Kriterium
@@ -600,11 +617,11 @@ par(op)
  abline(h=1, lty=2)
 
 # psych package
-# psych::scree(R, factors = FALSE)
+psych::scree(R, factors = FALSE)
 # psych::scree(R, factors = TRUE)
 ```
 
-Anmerkung: Der Code ist auskommentiert, dass er in RMD nicht durchläuft
+<!-- Anmerkung: Der Code ist auskommentiert, dass er in RMD nicht durchläuft -->
 
 ## Parallel Analyse
 

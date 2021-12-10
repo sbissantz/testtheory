@@ -24,11 +24,11 @@
 # Setup
 #
 # Faktorladungen; 8 items
-load_F1 <- c(0.6, -0.3, 0.5, 0.7, 0.1, 0.2, 0.2, 0.3) #<-------- Verändere mich!
-load_F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7) #<------ Verändere mich!
+load_F1 <- c(0.6, -0.3, 0.5, 0.7, 0.1, 0.2, 0.2, 0.3)
+load_F2 <- c(-0.1, 0.1, 0.1, 0.1, -0.7, 0.5, -0.6, 0.7) 
 fx <- cbind(load_F1, load_F2)
 # Zwischenfaktorkorrelation(en) 
-phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6 #<------- Verändere mich!
+phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6 
 # Struktur erstellen
 S <- psych::sim.structure(fx, phi, n=1000)
 # Korrelations- (R) und Datenmatrix (X)
