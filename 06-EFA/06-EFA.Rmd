@@ -375,25 +375,23 @@ zwischen den Ergebnissen?
 <!-- nicht einfach "gelöst" werden. Wir müssen es schätzen. -->
 <!-- \end{alertblock} -->
 
-MLF bietet als Lösung die plausibelsten (eng. "most likely")  Werte zur
-Reproduktion der Informationen in der Korrelationsmatrix an.
+MLF bietet als Lösung die plausibelsten (eng. "most likely") (Parameter-) Werte
+zur Reproduktion der Informationen in der Korrelationsmatrix an.
 
 \begin{equation}
   X_i = \lambda_j*\xi_i + \epsilon_i
 \end{equation}
 
 \begin{equation}
-  R = \Lambda \Phi \Lambda' + \Psi
+  R^* = \Lambda \Phi \Lambda' + \Psi
 \end{equation}
 
-- $R$: $n \times n$ Korrelationsmatrix 
-- $\Lambda$: Ladungsmatrix
-- $\Phi$: Matrix der Zwischenfaktorkorrelationen
+- $R$: Korrelationsmatrix 
+- $X_i$: Item $i$
+- $\lambda, \Lambda$: Ladung, Ladungsmatrix
+- $\xi$: Faktor
+- $\Phi$: Zwischenfaktorkorrelationsmatrix
 - $\Psi$: Einzigartigkeit
-- $x$: $m \times p$ Datenmatrix
-- $\Lambda$: $m \times p$ Matrix der Item-Faktor Ladungen 
-- $\xi$: Faktoren ($p$ Stück)
-- $p, m$: Anzahl der latenten Variablen, Items
 
 <!-- <p>&nbsp;</p> -->
 
@@ -421,10 +419,10 @@ fit_mlf$uniquenesses
 fit_mlf$R2
 ```
 
-## Übungsaufgabe 5: Selbstexperiment
+## Übungsaufgabe 4: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 5 in
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 4 in
 \texttt{06-EFA.R} und führen Sie eine Maximum Likelihood Faktorenanalyse (MLF)
 durch. Vergleichen Sie die Ergebnisse auch mit den anderen Methoden.
 \end{example}
@@ -537,7 +535,7 @@ fit_obl$Phi
 ## Übungsaufgabe 5: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 6 in
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 5 in
 \texttt{06-EFA.R} und führen Sie eine MLF durch. Rotieren Sie anschließend die
 Ergebnisse mit der Varimax und Oblimin Rotation. Wie verändert die Rotation ihre
 Interpretation der Ergebnisse? Erleichtert sie sie? Vergleichen Sie die Lösung
@@ -675,7 +673,7 @@ psych::fa.parallel(X, fa = "pc", fm = "ml")
 ## Übungsaufgabe 7: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 8 in
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 7 in
 \texttt{06-EFA.R} und finden Sie die Anzahl zu extrahierender Faktoren in ihrem
 Beispiel mit den drei genannten Möglichkeiten. Welches der drei Verfahren
 "errät" die Anzahl zu extrahierender Faktoren aus der Simulation (2 Faktoren)? 

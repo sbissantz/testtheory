@@ -72,7 +72,7 @@ fit_paf$uniquenesses
 # Quadrierte multiple Korrelation
 fit_paf$R2
 
-# Übungsaufgabe 5 ---------------------------------------------------------
+# Übungsaufgabe 4 ---------------------------------------------------------
 
 (fit_mlf <- psych::fa(R, nfactors=2,  rotate="none",  fm="ml"))
 # Mit Datenmatrix (X) anstatt Korrelationmatrix (R)
@@ -86,7 +86,7 @@ fit_mlf$uniquenesses
 # Quadrierte multiple Korrelation
 fit_mlf$R2
 
-# Übungsaufgabe 6 ---------------------------------------------------------
+# Übungsaufgabe 5 ---------------------------------------------------------
 
 (fit_vmax <- psych::fa(R, nfactors=2,  rotate="varimax",  fm="ml"))
 # Kommunalitäten
