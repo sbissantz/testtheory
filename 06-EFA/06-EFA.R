@@ -36,9 +36,9 @@ R <- S$r ; X <- S$observed  # alternativ: R <- cor(X)
 
 ## Output (grafisch): zwei latente Variablen
 #
-# Visuelle Darsetellung ihrer Schöpfung
+# Visuelle Darstellung Ihrer Schöpfung
 psych::structure.diagram(fx, phi, cut=FALSE)
-# Visuelle Darsetellung ihrer Korrelationsmatrix 
+# Visuelle Darsetellung Ihrer Korrelationsmatrix 
 corrplot::corrplot.mixed(R, number.cex=.7)
 # psych::cor.plot(R)
 
