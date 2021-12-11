@@ -32,7 +32,7 @@ phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
 # Struktur erstellen
 S <- psych::sim.structure(fx, phi, n=1000)
 # Korrelations- (R) und Datenmatrix (X)
-R <- S$model ; X <- S$observed  # alternativ: R <- cor(X)
+R <- S$r ; X <- S$observed  # alternativ: R <- cor(X)
 
 ## Output (grafisch): zwei latente Variablen
 #

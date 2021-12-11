@@ -67,7 +67,7 @@ phi[1, 2] <- phi[2, 1] <- 0.2
 par(mfrow=c(1,2))
 S <- psych::sim(fx, phi, n=1000)
 # Korrelations & Datenmatrix
-R <- S$model ; X <- S$observed
+R <- S$r ; X <- S$observed
 corrplot::corrplot(R, method = 'color', tl.cex = 0.6) 
 ```
 
@@ -264,7 +264,7 @@ phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
 # Struktur 
 S <- psych::sim.structure(fx, phi, n=1000)
 # Korrelations- und Datenmatrix
-R <- S$model ; X <- S$observed  # R <- cor(X)
+R <- S$r ; X <- S$observed  # R <- cor(X)
 ```
 
 [^3]: Nur in simulierten Welten (in denen wir den richtigen Ausgang kennen),
