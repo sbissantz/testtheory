@@ -32,13 +32,13 @@ phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
 # Struktur erstellen
 S <- psych::sim.structure(fx, phi, n=1000)
 # Korrelations- (R) und Datenmatrix (X)
-R <- S$r ; X <- S$observed  # alternativ: R <- cor(X)
+R <- S$model ; X <- S$observed  # alternativ: R <- cor(X)
 
 ## Output (grafisch): zwei latente Variablen
 #
-# Visuelle Darstellung Ihrer Schöpfung
+# Visuelle Darsetellung ihrer Schöpfung
 psych::structure.diagram(fx, phi, cut=FALSE)
-# Visuelle Darsetellung Ihrer Korrelationsmatrix 
+# Visuelle Darsetellung ihrer Korrelationsmatrix 
 corrplot::corrplot.mixed(R, number.cex=.7)
 # psych::cor.plot(R)
 
@@ -69,8 +69,8 @@ fit_paf$communality
 fit_paf$e.values
 # Einzigartigkeit
 fit_paf$uniquenesses
-# Quadrierte multiple Korrelation
-fit_paf$R2
+
+
 
 # Übungsaufgabe 4 ---------------------------------------------------------
 
@@ -83,8 +83,8 @@ fit_mlf$communality
 fit_mlf$e.values
 # Einzigartigkeit
 fit_mlf$uniquenesses
-# Quadrierte multiple Korrelation
-fit_mlf$R2
+
+
 
 # Übungsaufgabe 5 ---------------------------------------------------------
 
@@ -95,8 +95,8 @@ fit_vmax$communality
 fit_vmax$e.values
 # Einzigartigkeit
 fit_vmax$uniquenesses
-# Quadrierte multiple Korrelation
-fit_vmax$R2
+
+
 
 # Übungsaufgabe 7 ---------------------------------------------------------
 

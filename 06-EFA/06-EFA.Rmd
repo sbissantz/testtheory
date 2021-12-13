@@ -1,17 +1,18 @@
 ---
 title: "Explorative Faktorenanalyse"
-output: 
+author: "BF3 Testtheorie"
+output:
   beamer_presentation:
-    theme: "Boadilla"
-    fonttheme: "default"
+    theme: Boadilla
+    fonttheme: default
     slide_level: 2
-author: BF3 Testtheorie
-subtitle: Bißantz, Jalynskij, Kupffer & Prestele 
-incremental: true
-toc: true
+  slidy_presentation: default
+subtitle: Bißantz, Jalynskij, Kupffer & Prestele
+incremental: yes
+toc: yes
 bibliography: ./references.bib
-nocite: |   
-    @R-bibtex, @R-paran, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-graphs, @R-stat, @R-psych, @lorenzo2011, @timmerman2018
+nocite: |
+  @R-bibtex, @R-paran, @rmarkdown2020, @Revelle, @Mair2018, @R-base, @R-graphs, @R-stat, @R-psych, @lorenzo2011, @timmerman2018
 ---
 
 ```{r setup, include=FALSE}
@@ -40,15 +41,15 @@ dieser Grundlage der Large Dataset Challenge!
 Stellen Sie sich vor, die von Ihnen soeben gesehenen/beantworteten Fragen
 ergäben die Korrelationsmatrix $R$ auf der nächsten Folie. Die "Large Data Set
 Challenge" (LDC) lautet: Erkennen Sie eine Struktur in den Daten? Das heißt
-konkreter, finden Sie homogene Itemgruppen? Besprechen Sie sich mit ihrem
+konkreter, finden Sie homogene Itemgruppen? Besprechen Sie sich mit Ihrem
 Nachbarn.
 \end{example}
 
-Welche Items könnte man ihrer Meinung nach zu Itemgruppen zusammenfassen?
+Welche Items könnte man Ihrer Meinung nach zu Itemgruppen zusammenfassen?
 
 - Zeit: 2-3 Minuten
 
-Anmerkung: Nein, das sind nicht ihre Antworten; $\texttt{V1 - V25}$ sind
+Anmerkung: Nein, das sind nicht Ihre Antworten; $\texttt{V1 - V25}$ sind
 Zufallsvariablen!
 
 ## Übungsaufgabe 1: Struktur erkennen & Itemgruppen finden
@@ -67,7 +68,7 @@ phi[1, 2] <- phi[2, 1] <- 0.2
 par(mfrow=c(1,2))
 S <- psych::sim(fx, phi, n=1000)
 # Korrelations & Datenmatrix
-R <- S$r ; X <- S$observed
+R <- S$model ; X <- S$observed
 corrplot::corrplot(R, method = 'color', tl.cex = 0.6) 
 ```
 
@@ -75,7 +76,7 @@ corrplot::corrplot(R, method = 'color', tl.cex = 0.6)
 
 \begin{alertblock}{Large Data Set Challenge}
 Mit zunehmender Itemzahl nimmt die Anzahl der Korrelationen, die für eine
-Analyse zu berücksichtigen sind schnell zu groß. Die "Challenge" ist eine
+Analyse zu berücksichtigen sind, schnell zu. Die "Challenge" ist eine
 mögliche Struktur zu entdecken! (..Wie sie eben in ihrer visuellen Zuordnungen
 selbst gemerkt haben)
 \end{alertblock}
@@ -107,7 +108,7 @@ In a Nutshell:
   - Explorative Likertskalierung
   - (Non-) Metric Data Scaling (Distanzmatrizen!)
 
-Wichtig: "meaningful" (Faktoren) vs. "full compression" (Komponenten)
+Wichtige Unterscheidung: "meaningful" (Faktoren) vs. "full compression" (Komponenten)
 
 Fokus (heute): Hauptkomponentenanalyse (PCA), Hauptachsenanalyse (PAF), Maximum Likelihood Faktorenanalyse (MLF)
 
@@ -247,9 +248,9 @@ the technique. [$\dots$] Factor analysis will yield meaningful results only when
 the research was meaningful to begin with.” [Gregory (2014, S.
 165)](https://www.pearson.com/us/higher-education/program/Gregory-Psychological-Testing-History-Principles-and-Applications-7th-Edition/PGM332874.html)
 
-Konkl.: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium)
+<!-- Konkl.: Versuchen Sie ihr Modell zu verstehen! (siehe: Selbststudium) -->
 
-## Vorbereitung: "Playing Creator" -- 2 LVs erschaffen
+## Vorbereitung: "Playing Creator" -- 2 Latente Variablen erschaffen
 
 Bevor wir loslegen, wollen wir eine Datenmatrix $X$ und eine Korrelationsmatrix $R$
 simulieren.[^3] 
@@ -264,7 +265,7 @@ phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
 # Struktur 
 S <- psych::sim.structure(fx, phi, n=1000)
 # Korrelations- und Datenmatrix
-R <- S$r ; X <- S$observed  # R <- cor(X)
+R <- S$model ; X <- S$observed  # R <- cor(X)
 ```
 
 [^3]: Nur in simulierten Welten (in denen wir den richtigen Ausgang kennen),
@@ -315,8 +316,8 @@ fit_pca$communality
 fit_pca$uniquenesses
 ## Eigenwerte
 fit_pca$values
-# Quadrierte multiple Korrelation
-fit_pca$R2
+
+
 ```
 
 ## Übungsaufgabe 2: Selbstexperiment
@@ -324,7 +325,7 @@ fit_pca$R2
 \begin{example}
 Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 2
 \texttt{06-EFA.R} und führen eine PCA durch. Interpretieren Sie die
-entsprechenden Kennwerte für ihr Modell und präsentieren Sie diese ihrem
+entsprechenden Kennwerte für Ihr Modell und präsentieren Sie diese Ihrem
 Nachbarn.
 \end{example}
 
@@ -347,8 +348,8 @@ fit_paf$communality
 fit_paf$e.values
 # Einzigartigkeit
 fit_paf$uniquenesses
-# Quadrierte multiple Korrelation
-fit_paf$R2
+
+
 ```
 
 ## Übungsaufgabe 3: Selbstexperiment
@@ -415,8 +416,8 @@ fit_mlf$communality
 fit_mlf$e.values
 # Einzigartigkeit
 fit_mlf$uniquenesses
-# Quadrierte multiple Korrelation
-fit_mlf$R2
+
+
 ```
 
 ## Übungsaufgabe 4: Selbstexperiment
@@ -435,7 +436,7 @@ durch. Vergleichen Sie die Ergebnisse auch mit den anderen Methoden.
 
 \begin{alertblock}{Rotationsproblem}
   Wie rotiert die erhaltene Ladungsmatrix ($\hat\Lambda$) derart, dass eine
-  möglich einfach interpretierbare Lösung daraus hervorgeht?
+  möglich einfach interpretierbare Lösung daraus hervorgeht? (Einfachstruktur)
 \end{alertblock}
 
 1. Lösung: orthogonale Rotation
@@ -510,8 +511,8 @@ fit_vmax$communality
 fit_vmax$e.values
 # Einzigartigkeit
 fit_vmax$uniquenesses
-# Quadrierte multiple Korrelation
-fit_vmax$R2
+
+
 ```
 
 ## Let's do it (..in R): oblique Rotation (Oblimin)
@@ -526,10 +527,10 @@ fit_obl$communality
 fit_obl$e.values
 # Einzigartigkeit
 fit_obl$uniquenesses
-# Quadrierte multiple Korrelation
-fit_obl$R2
 # Wichtig: Phi
 fit_obl$Phi
+
+
 ```
 
 ## Übungsaufgabe 5: Selbstexperiment
@@ -537,7 +538,7 @@ fit_obl$Phi
 \begin{example}
 Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 5 in
 \texttt{06-EFA.R} und führen Sie eine MLF durch. Rotieren Sie anschließend die
-Ergebnisse mit der Varimax und Oblimin Rotation. Wie verändert die Rotation ihre
+Ergebnisse mit der Varimax und Oblimin Rotation. Wie verändert die Rotation Ihre
 Interpretation der Ergebnisse? Erleichtert sie sie? Vergleichen Sie die Lösung
 dazu (1) mit der unrotierten Lösung und vergleichen Sie (2) die Ergebnisse
 zwischend den Rotationsmethoden.
@@ -551,8 +552,8 @@ zwischend den Rotationsmethoden.
 
 \begin{example}
 Eine Folge der orthogonalen Rotation ist, dass die extrahierten Faktoren
-unabhängig voneinander sind. Glauben Sie dem Modell uneingeschränkt, nähmen sie
-damit implizit an, dass auch die zugrundeliegende Konstrukte unabhängig
+unabhängig voneinander sind. Glauben Sie dem Modell uneingeschränkt, nähmen Sie
+damit implizit an, dass auch die zugrundeliegenden Konstrukten unabhängig
 voneinander sein müssten. Für wie plausibel halten Sie diese Annahme in der
 Psychologie? Diskutieren Sie miteinander!
 \end{example}
@@ -580,7 +581,7 @@ Psychologie? Diskutieren Sie miteinander!
 Zerlege die Korrelationsmatrix in ihre Eigenwerte (SVD/EVD) und plotte diese
 gegen einen Index.
 \begin{enumerate}
-  \item Kaiserkriterium: Ist das Varianzaufklärungspotential eines Faktors kleiner als das eines Items beende deine Suche ($\widetilde{=}EW > 1$). 
+  \item Kaiserkriterium: Ist das Varianzaufklärungspotential eines Faktors kleiner als das eines Items, dann beende deine Suche ($\widetilde{=}EW > 1$). 
   \item Scree-Test: Finde den "ellbow" der den "rock" vom "scree" unterscheidet.
 \end{enumerate}
 \end{block}
@@ -625,13 +626,13 @@ psych::scree(R, factors = FALSE)
 
 \begin{alertblock}{Parallel Analyse}
 "In parallel analysis, the criterion to be used in order to determine the number
-of factors is the following A factor is considered as "significant" if its
+of factors is the following. A factor is considered as "significant" if its
 eigenvalue is larger than the 95\% quantile [...] of those obtained from
 random or resampled data." (Mair 2018, S.31)
 \end{alertblock}
 
 Anmerkung: Im Orginal wurde die PA für Komponenten konstruiert. Mittlerweile gibt es
-sie auch für das CFM.
+sie auch für Faktoren.
 
 ## Grafik: Parallel Analyse (PCA)
 
@@ -674,7 +675,7 @@ psych::fa.parallel(X, fa = "pc", fm = "ml")
 
 \begin{example}
 Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 7 in
-\texttt{06-EFA.R} und finden Sie die Anzahl zu extrahierender Faktoren in ihrem
+\texttt{06-EFA.R} und finden Sie die Anzahl zu extrahierender Faktoren in Ihrem
 Beispiel mit den drei genannten Möglichkeiten. Welches der drei Verfahren
 "errät" die Anzahl zu extrahierender Faktoren aus der Simulation (2 Faktoren)? 
 \end{example}
@@ -771,7 +772,7 @@ $p_{jk}$ : Partielle Korrelation
 ## Übungsaufgabe 8: Selbstexperiment
 
 \begin{example}
-Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 8 in
+Versuchen Sie es nun selbst! Nutzen Sie den Code zur Übungsaufgabe 7 in
 \texttt{06-EFA.R} und führen Sie einen Bartlett-Test durch. Verwenden Sie auch
 das KMO-Kriterium auf ihre Korrelations- oder Datenmatrix an. Wie beurteilen Sie
 die Ergebnisse? Sind ihre Matritzen zur Analyse geeignet?
@@ -785,7 +786,7 @@ die Ergebnisse? Sind ihre Matritzen zur Analyse geeignet?
 
 \begin{example}
 Welches Verfahren hat ihre anfängliche Struktur am besten aufgefunden? Haben Sie
-eine Idee warum? (Tipp: Denken Sie an $\Phi$)
+eine Idee, warum? (Tipp: Denken Sie an $\Phi$)
 \end{example}
 
 Anmerkung: Wiederholen Sie die Übung im Selbststudium mit anderen Werten.
@@ -808,7 +809,7 @@ usw. auf Herz und Nieren! Nur so lernen Sie ihre Grenzen kennen.
 
 <p>&nbsp;</p>
 
-Anmerkung: Gute Klausurübung! Schnappen Sie sich ihre Mitstudierenden
+Anmerkung: Gute Klausurübung! Schnappen Sie sich ihre Mitstudierenden,
 simulieren Sie mögliche Welten und üben, üben, üben Sie!
 
 # Selbststudium{-}
