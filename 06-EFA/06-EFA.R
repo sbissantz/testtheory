@@ -32,7 +32,7 @@ phi <- diag(rep(1, 2)) ; phi[1, 2] <- phi[2, 1] <- 0.6
 # Struktur erstellen
 S <- psych::sim.structure(fx, phi, n=1000)
 # Korrelations- (R) und Datenmatrix (X)
-R <- S$model ; X <- S$observed  # alternativ: R <- cor(X)
+R <- S$r ; X <- S$observed  # alternativ: R <- cor(X)
 
 ## Output (grafisch): zwei latente Variablen
 #
@@ -70,8 +70,6 @@ fit_paf$e.values
 # Einzigartigkeit
 fit_paf$uniquenesses
 
-
-
 # Übungsaufgabe 4 ---------------------------------------------------------
 
 (fit_mlf <- psych::fa(R, nfactors=2,  rotate="none",  fm="ml"))
@@ -84,8 +82,6 @@ fit_mlf$e.values
 # Einzigartigkeit
 fit_mlf$uniquenesses
 
-
-
 # Übungsaufgabe 5 ---------------------------------------------------------
 
 (fit_vmax <- psych::fa(R, nfactors=2,  rotate="varimax",  fm="ml"))
@@ -95,8 +91,6 @@ fit_vmax$communality
 fit_vmax$e.values
 # Einzigartigkeit
 fit_vmax$uniquenesses
-
-
 
 # Übungsaufgabe 7 ---------------------------------------------------------
 
