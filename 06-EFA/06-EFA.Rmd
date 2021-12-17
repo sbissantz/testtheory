@@ -68,7 +68,7 @@ phi[1, 2] <- phi[2, 1] <- 0.2
 par(mfrow=c(1,2))
 S <- psych::sim(fx, phi, n=1000)
 # Korrelations & Datenmatrix
-R <- S$r ; X <- S$observed
+R <- S$model 
 corrplot::corrplot(R, method = 'color', tl.cex = 0.6) 
 ```
 
@@ -254,6 +254,10 @@ the research was meaningful to begin with.” [Gregory (2014, S.
 
 Bevor wir loslegen, wollen wir eine Datenmatrix $X$ und eine Korrelationsmatrix $R$
 simulieren.[^3] 
+
+```{r include=FALSE}
+set.seed(123)
+```
 
 ```{r echo=TRUE, fig.align='center', out.width="70%", results='hide'}
 # Faktorladungen; 8 items

@@ -48,7 +48,7 @@ corrplot::corrplot.mixed(R, number.cex=.7)
 # dino_pca <- princomp(X, cor=TRUE) ; summary(dino_pca, cor=TRUE)
 
 # New School
-(fit_pca <- psych::principal(R, nfactors = 2, rotate = "none"))
+(fit_pca <- psych::principal(R, nfactors = 2, rotate = "oblimin"))
 # Mit Datenmatrix (X) anstatt Korrelationmatrix (R)
 # (fit_pca <- psych::principal(X, nfactors = 2, rotate = "none"))
 ## Komponentenladungen
@@ -91,6 +91,16 @@ fit_vmax$communality
 fit_vmax$e.values
 # Einzigartigkeit
 fit_vmax$uniquenesses
+
+(fit_obl <- psych::fa(R, nfactors=2,  rotate="oblimin",  fm="ml"))
+# Kommunalitäten
+fit_obl$communality
+# Eigenwerte
+fit_obl$e.values
+# Einzigartigkeit
+fit_obl$uniquenesses
+# Zwischenfaktorkorrelation 
+fit_obl$Phi
 
 # Übungsaufgabe 7 ---------------------------------------------------------
 
