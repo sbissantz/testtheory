@@ -2,7 +2,8 @@
 ## WiSe2021_22
 
 # Pakete installieren ####
-## Hinweis/Wiederholung: Pakete installieren brauchen Sie in der Regel nur einmal pro PC, danach sind sie installiert,
+## Hinweis/Wiederholung: Pakete installieren brauchen Sie in der Regel nur
+## einmal pro PC, danach sind sie installiert,
 ## und müssen nur noch geladen werden (s. nächster Punkt)
 
 # install.packages("psych")

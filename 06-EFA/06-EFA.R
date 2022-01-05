@@ -107,6 +107,12 @@ fit_obl$Phi
 # Scree Test und K1
 #
 # Barfuß
+R_ast <- cor(replicate(8, rnorm(1e3,5,6)))
+ev <- eigen(R_ast)$values
+plot(ev, main="Eigenwerteplot", xlab="Eigenwerte",
+     ylab = "Komponentenzahl", type="b")
+abline(h=1, lty=2)
+
 ev <- eigen(R)$values
 plot(ev, main="Eigenwerteplot", xlab="Eigenwerte",
      ylab = "Komponentenzahl", type="b")
@@ -125,9 +131,15 @@ psych::fa.parallel(X, fa = "pc", fm = "ml")
 # Alternative
 #
 # Für Komponenten
-paran::paran(X)
+paran::paran(X, graph = TRUE)
 # Für Faktoren
 paran::paran(X, cfa=TRUE)
+
+
+EFA.MRFA::hullEFA(data, maxQ=4, extr = "ML", 
+                  index_hull = "CAF", display = TRUE, 
+                  graph = TRUE, details = TRUE) # 1 Factor
+
 
 # Bonusmaterial -----------------------------------------------------------
 
