@@ -9,19 +9,20 @@ setwd("~/testtheory/08-IAIRT/")
 data <- foreign::read.spss("WichertsBakker2012.sav", to.data.frame = T)
 
 #Ueberblick verschaffen
-head(data) 
-# str(data)
+head(data, n = 3) 
+str(data)
 # View(data)
 
 #nur die Variablen: VP-Nummer, Geschlecht, Sprache, Ravens Matrizentest
 dat <- subset(data, select = c(subjnr, sex, language, rav1:rav36))
 head(dat)
-# str(dat)
+str(dat)
 # View(dat)
 
 ## Itemverteilung
 summary(dat)
-# lapply(dat, mean, na.rm=TRUE)
+lapply(dat, mean, na.rm=TRUE)
+lapply(dat, var, na.rm=TRUE)
 #Mittelwerte der Items plotten 
 x_axis <- 1:36 ; y_axis <- colMeans(dat[,4:39], na.rm = TRUE)
 plot(x_axis, y_axis, pch=19, ylim=c(-.1,1.1),  
@@ -32,6 +33,7 @@ lbl <- colnames(dat[,4:39]) ;
 text(x_axis, y_axis + 0.05, lbl, cex=.5)
 
 # Rasch-Modell schaetzen
+View(dat[,4:39])
 rm1 <- mirt::mirt(data = dat[,4:39], model = 1, itemtype = "Rasch")
 #! Fehlermeldung beachten !#
 
@@ -52,6 +54,7 @@ print(rm1)
 
 ## Itemschwierigkeit (1.Konzept)
 coef(object = rm1, simplify = TRUE, IRTpars = TRUE)$items
+
 # rav1: easiest -- rav35:hardest - occular inspection:
 itemplot(rm1, item = 1, type = "trace") #ICC
 itemplot(rm1, item = 35, type = "trace") #ICC
@@ -88,11 +91,11 @@ table(df$language) #Native Dutch Speaker?
 
 eRm::Waldtest(rm2, splitcr = df$language)
 # Visualize!
-# wald_test <- eRm::Waldtest(rm2, splitcr = df$language)
-# p_values <- wald_test$coef.table[,2]
-# plot(seq(p_values), p_values, xaxt="n",xlab="item", pch=20)
-# axis(side=1, at=seq(p_values), cex.axis=.7)
-# abline(h=0.05, col="red", lty=2)
-# lbl <- colnames(dat[,4:39])
-# text(seq(p_values), p_values + 0.04, lbl, cex=.5)
+wald_test <- eRm::Waldtest(rm2, splitcr = df$language)
+p_values <- wald_test$coef.table[,2]
+plot(seq(p_values), p_values, xaxt="n",xlab="item", pch=20)
+axis(side=1, at=seq(p_values), cex.axis=.7)
+abline(h=0.05, col="red", lty=2)
+lbl <- colnames(dat[,4:39])
+text(seq(p_values), p_values + 0.04, lbl, cex=.5)
 
