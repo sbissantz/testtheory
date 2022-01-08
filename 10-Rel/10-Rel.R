@@ -3,20 +3,20 @@
 ##################################ä
 
 # Notwendige Packages laden 
-# (Ein/Auskommentieren R-Studio: Strg + Shift + C)
+# (Ein/Auskommentieren R-Studio: Strg/Cmd + Shift + C)
 #
-# if(!requireNamespace("MASS", quietly = TRUE)) {
-#   msg <- "'MASS' is not installed, want to install it? Type 'yes' or 'no'."
-#   answer <- readline(prompt = message(msg))
-#   no_msg <- "Did not install the package `MASS`."
-#   switch(answer,
-#          yes = install.packages("MASS"),
-#          no = stop(no_msg, call. = FALSE),
-#          stop("Please answer 'yes' or 'no' (omit quotes!)" ))
-# } else {
-#   message("`MASS is already installed!") ; Sys.sleep(1)
-#   message("Time to rock!\n(*weird guitar sound*)")
-# }
+if(!requireNamespace("MASS", quietly = TRUE)) {
+  msg <- "'MASS' is not installed, want to install it? Type 'yes' or 'no'."
+  answer <- readline(prompt = message(msg))
+  no_msg <- "Did not install the package `MASS`."
+  switch(answer,
+         yes = install.packages("MASS"),
+         no = stop(no_msg, call. = FALSE),
+         stop("Please answer 'yes' or 'no' (omit quotes!)" ))
+} else {
+  message("`MASS is already installed!") ; Sys.sleep(1)
+  message("Time to rock! (*weird guitar sound*)")
+}
 
 # Übung 2 -----------------------------------------------------------------
 
@@ -131,7 +131,10 @@ alpha(X)
 
 # Psych Package
 #
-psych::alpha(X)
+item_stats <- psych::alpha(X)
+# Cronbach's alpha als Einzelergebnis
+item_stats$total[["raw_alpha"]]
+# alpha$total[1]
 
 # Übung 4 -----------------------------------------------------------------
 
@@ -276,5 +279,4 @@ calc_k <- function(Rel_ast, Rel) {
 }
 Rel_ast <- 0.99 ; Rel <- 0.87
 calc_k(Rel_ast, Rel)
-
 

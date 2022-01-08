@@ -32,7 +32,7 @@ Inhaltliche Schwerpunkte der Einheit:
 
 Ziel: Wiederholung der Konzepte (re-fresher) & Problematisierung
 
-H2: Kurinput
+How2: Kurinput
 
 ## Reliabilität als Konzept 
 
@@ -42,12 +42,32 @@ Messinstrument mit hoher Messgenauigkeit, Messergebnisse mit geringem Messfehler
 
 \begin{block}{Reliabilität, Wahrer Wert und Messfehler}
 Perfekte Reliabilität entspricht der Abwesenheit von zufälligem Messfehlern:
-$E(\epsilon) \rightarrow 0 : E(X) = \tau$
+  \begin{equation}
+    E(\epsilon) \rightarrow 0 : E(X) \rightarrow \tau
+  \end{equation}
 \end{block}
 
 \begin{block}{Testwertvariable als Summe der Itemvariable}
 Der Testwert ist der Summenscore über alle Itemvariablen ($\in$ Itemuniverse):
-$X = \sum_{i=1}^n X_i$
+  \begin{equation}
+    X = \sum_{i=1}^n X_i
+  \end{equation}
+\end{block}
+
+## Reliabilität, Validität, Objektivität
+
+Wie hängen die drei Hauptgütekriterien zusammen?
+
+\begin{block}{Reliabilität \& Objektivität}
+Objektivität $\Rightarrow$ Reliabilität
+
+(via: Messbedingungen standardisieren)
+\end{block}
+
+\begin{block}{Reliabilität \& Validität}
+Reliabilität $\Rightarrow$ Validität
+
+(v.a.: Beständigkeit gleicher Testergebnisse bei wiederholter Messung)
 \end{block}
 
 ## Reliabilität: Definitionen
@@ -71,20 +91,6 @@ $Rel \in [0,1]$, wobei $Rel=1$: Abwesenheit von (zufälligen) Messfehlern; das
 entspricht einer vollständig reliablen Messung (vice versa).
 \end{block}
 
-## Reliabilität, Validität, Objektivität
-
-\begin{block}{Reliabilität \& Objektivität}
-Objektivität $\Rightarrow$ Reliabilität
-
-(via: Messbedingungen standardisieren)
-\end{block}
-
-\begin{block}{Reliabilität \& Validität}
-Reliabilität $\Rightarrow$ Validität
-
-(v.a.: Beständigkeit gleicher Testergebnisse bei wiederholter Messung)
-\end{block}
-
 ## Das Reliabilitätsproblem
 
 Problem: Wir kennen die True-Score- und Fehlervarianz nicht. Die Messwerte bei
@@ -98,9 +104,9 @@ einer einzigen Messung sind lediglich *Schätzer* der wahren Werte, die
 Damit lässt sich mit einer *Einzelmessung* die Reliabilität nicht eindeutig
 *bestimmten*! (siehe auch: Moosburger & Kelava, 2021 : 210). 
 
-$\Rightarrow$ Wir müssen sie *schätzen*
+$\Rightarrow$ Wir müssen sie *schätzen*!
 
-# Methoden der Reliabilitätsschätzung (30 min)
+# Methoden der Reliabilitätsschätzung
 
 \begin{block}{Leitfrage}
   Wie schätze ich die Reliabilität?
@@ -116,7 +122,7 @@ Inhaltliche Schwerpunkte der Einheit:
 
 Ziel: Wiederholung und Vertiefung der Konzepte, Umsetzung in R
 
-How2: Kurzinput, Olat-Übung, Rechenbeispiele & R-Übungen
+How2: Kurzinput, (Olat-Übung), Rechenbeispiele & R-Übungen
 
 ## Lösungansatz zum Reliabilitätsproblem
 
@@ -141,7 +147,7 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 [^2]: Erinnerung an Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
 [^3]: Erinnerung an das Konzept des "Item-Universums"
 
-## Übung 1: Selbstexperiment
+## Übung 1: Selbstexperiment (..für daheim?)
 
 \begin{example}
 Jetzt sind Sie an der Reihe! Testen Sie ihr bereits vorhandenes Wissen zur
@@ -150,6 +156,9 @@ wir mit der Testhalbierungsreliabilität und der internen Konsistenz an.
 \end{example}
 
 - Zeit: max. 10 Minuten
+
+Notiz: Ist wieder so viel Stoff, dass Sie Übung lieber daheim machen sollen! In
+der OLAT-Übung bekommen Sie die Lösungen angezeigt (so wissen Sie was stimmt).
 
 <!-- Beim Restest wird der Test an der gleichen Stichprobe zu zwei verschiedenen -->
 <!-- Zeitpunkten durchgeführt. Die Restest-Reliabilität berechnet sich dann als -->
@@ -431,13 +440,18 @@ alpha <- function(X) {
 
 Bei der Überprüfung der händischen Berechnung kommt nun `alpha()` zum Einsatz.
 
-<p>&nbsp;</p>
-
 ```{r}
 set.seed(123)
 N <- 1e3
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 alpha(X)
+```
+
+Dafür gibt es natürlich auch schon Funktionen! Sie erinnern sich?
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+item_stats <- psych::alpha(X)
+item_stats$total[["raw_alpha"]]
 ```
 
 ## Übung 3: Selbsttest
@@ -666,7 +680,7 @@ N <- 1e3
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
 
-## Grafik: simulierter Zuwachses in den Kovarianzen 
+## Grafik: simulierter Zuwachses in den Kovarianzen (Ausgansmatrix)
 
 ```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="100%", paged.print=FALSE, results='hide'}
 sigmas <- seq(0.1, 0.7, by=0.01)
