@@ -75,14 +75,14 @@ Reliabilität $\Rightarrow$ Validität
 \begin{alertblock}{Definition: Reliabilität einer Testvariable}
 Die Reliabilität einer Testwertvariablen ($Y$) lässt sich bestimmen als:
   \begin{equation}
-    Rel(y) = \frac{Var(T)}{Var(X)} = \frac{Var(T)}{Var(T) + Var(E)}
+    Rel(Y) = \frac{Var(T)}{Var(Y)} = \frac{Var(T)}{Var(T) + Var(E)}
   \end{equation}
 \end{alertblock}
 
 \begin{alertblock}{Definition: Reliabilität einer Itemvariable}
 Reliabilität einer Itemvariable ($y$) lässt sich bestimmen als:
   \begin{equation}
-    Rel(x_i) = \frac{Var(\tau_i)}{Var(x_i)} = \frac{Var(\tau_i)}{Var(\tau_i) + Var(\epsilon_i)}
+    Rel(y_i) = \frac{Var(\tau_i)}{Var(y_i)} = \frac{Var(\tau_i)}{Var(\tau_i) + Var(\epsilon_i)}
   \end{equation}
 \end{alertblock}
 
@@ -102,7 +102,7 @@ einer einzigen Messung sind lediglich *Schätzer* der wahren Werte, die
 \end{equation}
 
 Damit lässt sich mit einer *Einzelmessung* die Reliabilität nicht eindeutig
-*bestimmten*! (siehe auch: Moosburger & Kelava, 2021 : 210). 
+*bestimmten*! (siehe auch: Moosbrugger & Kelava, 2021 : 210). 
 
 $\Rightarrow$ Wir müssen sie *schätzen*!
 
@@ -126,7 +126,7 @@ How2: Kurzinput, (Olat-Übung), Rechenbeispiele & R-Übungen
 
 ## Lösungansatz zum Reliabilitätsproblem
 
-> "Aber auch ohne die wahren Werte einzelner Personen zu kennen, kann das Varianzverhältnis als Maß für die Messgenauigkeit geschätzt werden, wenn man die Ebene der einzelnen Personen und einzelnen Items verlässt und stattdessen **alle Items, aus denen sich ein Test zusammensetzt**, sowie die **Messungen mehrerer Personen betrachtet**: Wird ein latentes Merkmal anhand mehrerer Items gemessen, so liegen **Mehrfachmessungen desselben Merkmals mit unterschiedlichen aber ähnlichen Messinstrumenten/Items** vor, die **zu einer Testwertvariablen aufsummiert werden können**, sofern sie zumindest die Bedingung der Eindimensionalität[^1] erfüllen." (Mosburger & Kelava, 2020: 310 -- Hervorherbungen nicht im Original)
+> "Aber auch ohne die wahren Werte einzelner Personen zu kennen, kann das Varianzverhältnis als Maß für die Messgenauigkeit geschätzt werden, wenn man die Ebene der einzelnen Personen und einzelnen Items verlässt und stattdessen **alle Items, aus denen sich ein Test zusammensetzt**, sowie die **Messungen mehrerer Personen betrachtet**: Wird ein latentes Merkmal anhand mehrerer Items gemessen, so liegen **Mehrfachmessungen desselben Merkmals mit unterschiedlichen aber ähnlichen Messinstrumenten/Items** vor, die **zu einer Testwertvariablen aufsummiert werden können**, sofern sie zumindest die Bedingung der Eindimensionalität[^1] erfüllen." (Moosbrugger & Kelava, 2020: 310 -- Hervorherbungen nicht im Original)
 
 [^1]: Die Bedingung der Eindimensionalität können und sollten Sie überprüfen (Hilsmittel: CFA). Die Unkorreliertheit der Messfehler ($Cov(\epsilon_i, \epsilon_i') = 0$) ist dabei eine Basisvoraussetzung, für die Erfüllung der Bedingung. (Siehe: ebd., 14.2.2)
 
@@ -331,11 +331,10 @@ rsx_q <- rowSums(X_q)
  \begin{split}
   Rel(X_{voll.}) & = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} \\
   & = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}} \\
-  & \approx \frac{2 \cdot 0.86}{1 + 0.86} \\
-  & \approx \frac{2 \cdot 0.86}{1 + 0.86} \\
-  & \approx \frac{1.72}{1.86} \\
-  & \approx \frac{1.72}{1.86} \\
-  & \approx 0.92 \\
+  & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
+  & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
+  & \approx \frac{1.74}{1.87} \\
+  & \approx 0.93 \\
  \end{split}
 \end{equation*}
 
@@ -408,8 +407,8 @@ Reliabilität unseres Itembündels ermitteln.
 \begin{equation}
   \begin{split}
     Rel: \alpha & = \frac{m}{m-1} \cdot \left[ 1 - \frac{\sum_{i=1}^m Var(x_i)}{Var(x)} \right] \\
-    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(1.79 + \dots + 1.79)}{40.23} \right] \\
-    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{13.45}{40.23} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(1.77 + \dots + 1.75)}{40.65} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{13.48}{40.65} \right] \\
     & \approx \frac{8}{7} \cdot \left[ 1 - 0.33 \right] \\
     & \approx \frac{8}{7} \cdot 0.67 \\
     & \approx 0.76 \\
@@ -490,8 +489,8 @@ list("Gesamtvarianz" = round(V_X, 2),
 \begin{equation}
   \begin{split}
     Rel: \alpha & = \frac{m}{m-1} \cdot \left[ 1 - \frac{\sum_{i=1}^m Var(x_i)}{Var(x)} \right] \\
-    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(1.44 + \dots + 2.43)}{34.95} \right] \\
-    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{12.74}{34.95} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(1.69 + \dots + 1.74)}{34.95} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{12.73}{34.95} \right] \\
     & \approx \frac{8}{7} \cdot \left[ 1 - 0.36 \right] \\
     & \approx \frac{8}{7} \cdot 0.64 \\
     & \approx 0.73 \\
@@ -516,7 +515,7 @@ Inhaltliche Schwerpunkte der Einheit:
 
 Ziel: Verstehen, wie unterschiedliche Faktoren die Reliabilität beeinflussen. 
 
-H2: Kurzinput, Rechenbeispiel & R-Übung
+How2: Kurzinput, Rechenbeispiel & R-Übung
 
 ## Einflussfaktor: Testlänge
 
@@ -648,17 +647,19 @@ abline(v = ks, lty=2, lwd=.5)
 
 ## Homogenität/Heterogenität der Items
 
+Aus der Vorlesung:
+
 > Tests mit homogenen Items haben meistens eine hohe Reliabilität, da die Items
 sehr ähnlich sind und daher hoch positiv miteinander korrelieren.
 
 \begin{alertblock}{Definition: Korrelation}
   \begin{equation}
-    cor(X,Y) = \frac{cov(x,y)}{\sqrt{var(x){var(y)}}}
+    Corr(X,Y) = \frac{Cov(x,y)}{\sqrt{Var(x){var(y)}}}
   \end{equation}
 \end{alertblock}
 
 Knobelfrage: Wie wirkt sich ein Zuwachs in den Kovarianzen auf Cronbach's alpha
-aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $alpha$ bleibt gleich
+aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $\alpha$ bleibt gleich
 
 ## Simulation: Zuwachs in den Kovarianzen
 
@@ -682,7 +683,7 @@ X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 
 ## Grafik: simulierter Zuwachses in den Kovarianzen (Ausgansmatrix)
 
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="100%", paged.print=FALSE, results='hide'}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="90%", paged.print=FALSE, results='hide'}
 sigmas <- seq(0.1, 0.7, by=0.01)
 sim_alpha <- function(sigma){
   M <- 6
@@ -701,12 +702,14 @@ mtext("m = 6; step-size = + 0.01")
 
 ## Streuung der Testwerte
 
-Eine hohe Streuung geht meist mit einer hohen Reliabilität einher, während
-bei geringer Streuung eine hohe Reliabilität unwahrscheinlich ist
+Aus der Vorlesung:
+
+> "Eine hohe Streuung geht meist mit einer hohen Reliabilität einher, während bei
+geringer Streuung eine hohe Reliabilität unwahrscheinlich ist."
 
 \begin{alertblock}{Definition: Reliabilität}
   \begin{equation}
-  Rel(y) = \frac{Var(T)}{Var(X)}
+  Rel(Y) = \frac{Var(T)}{Var(X)}
   \end{equation}
 \end{alertblock}
 
@@ -734,9 +737,9 @@ N <- 1e3
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
 
-## Grafik: simulierter Zuwachses in den Varianzen 
+## Grafik: simulierter Zuwachses in den Varianzen (Ausgangsmatrix)
 
-```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="100%", paged.print=FALSE, results='hide'}
+```{r echo=FALSE, fig.align='center', message=FALSE, warning=FALSE, out.width="90%", paged.print=FALSE, results='hide'}
 sim_alpha <- function(sigma_sq){
   M <- 6
   mu <- c(5,4,3,4,5,3)
