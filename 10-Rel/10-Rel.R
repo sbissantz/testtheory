@@ -70,8 +70,6 @@ Rel_SBK <- function(X_p, X_q) {
   2 * r / (1+r)
 }
 
-
-
 # Überprüfung
 #
 Rel_SBK(X_p, X_q)
@@ -174,6 +172,7 @@ Sigma <- matrix(
 N <- 1e3
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
+
 # Odds-Even Zuteilung
 even <- seq(1,8, by=2)
 uneven <- seq(2,8, by=2)

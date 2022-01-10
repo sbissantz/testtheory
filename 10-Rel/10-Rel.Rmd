@@ -32,7 +32,7 @@ Inhaltliche Schwerpunkte der Einheit:
 
 Ziel: Wiederholung der Konzepte (re-fresher) & Problematisierung
 
-How2: Kurinput
+How2: Kurzinput
 
 ## Reliabilität als Konzept 
 
@@ -189,7 +189,7 @@ Zutaten:
 - Korrelationskoeffizient
 - Spearman-Brown-Korrektur
 
-Zubereitung: Den Test voll mit Items mit der Partitionierungsmethode in zwei
+Zubereitung: Den Test voll mit Items mit einer Partitionierungsmethode in zwei
 parallele Testhälften aufteilen. Anschließend die Halbtestreliabilität mit der
 *Spearman-Brown-Korrektur* zur vollständigen Reliabilität aufwerten.
 
@@ -238,22 +238,6 @@ rsx_uneven <- rowSums(X[,uneven])
 $\Rightarrow$ Mit der Halbtestreliabilität soll nun die vollständige
 Reliabilität geschätzt werden.
 
-## Vollständige Reliabilität (..händisch)
-
-\begin{example}
-  \begin{equation*}
-    \begin{split}
-      Rel(X_{voll.}) & = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} \\
-      & = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}} \\
-      & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
-      & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
-      & \approx \frac{1.74}{1.87} \\
-      & \approx \frac{1.74}{1.87} \\
-      & \approx 0.93 \\
-    \end{split}
-  \end{equation*}
-\end{example}
-
 ## Spearman-Brown Korrektur (..in R)
 
 \begin{alertblock}{Spearman-Brown Formel}
@@ -274,6 +258,22 @@ Rel_SBK <- function(X_p, X_q) {
   2 * r / (1+r)
 }
 ```
+
+## Vollständige Reliabilität (..händisch)
+
+\begin{example}
+  \begin{equation*}
+    \begin{split}
+      Rel(X_{voll.}) & = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} \\
+      & = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}} \\
+      & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
+      & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
+      & \approx \frac{1.74}{1.87} \\
+      & \approx \frac{1.74}{1.87} \\
+      & \approx 0.93 \\
+    \end{split}
+  \end{equation*}
+\end{example}
 
 ## Vollständige Reliabilität (..in R)
 
@@ -504,7 +504,7 @@ alpha(X)
 # Einflussfaktoren auf die Höhe der Reliabilität
 
 \begin{block}{Leitfrage}
-  Welche Fakotren können die Reliabilität beeinflussen?
+  Welche Faktoren können die Reliabilität beeinflussen?
 \end{block}
 
 Inhaltliche Schwerpunkte der Einheit:
