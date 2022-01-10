@@ -280,3 +280,125 @@ calc_k <- function(Rel_ast, Rel) {
 Rel_ast <- 0.99 ; Rel <- 0.87
 calc_k(Rel_ast, Rel)
 
+# Messmodell Routlette ----------------------------------------------------
+
+messmodell_roulette <- function() {
+  ## Paralleles Messmodell 
+  parallel <- function() { 
+    M <- 4
+    mu <- rep(5,M)
+    Sigma <- matrix( 
+      c(.8, .5, .5, .5, 
+        .5, .8, .5, .5, 
+        .5, .5, .8, .5, 
+        .5, .5, .5, .8), 
+      M,M) 
+    N <- 1e5 
+    X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+    print(list( 
+      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Kovarianzmatrix" = round(cov(X), digits = 1) 
+    ))
+    invisible("a")
+    }
+  ## Essenziell paralleles Messmodell
+  essential_parallel <- function() {
+    M <- 4
+    mu <- c(5,4,3,4)
+    Sigma <- matrix( 
+      c(.8, .5, .5, .5,
+        .5, .8, .5, .5,
+        .5, .5, .8, .5,
+        .5, .5, .5, .8),
+      M,M)
+    N <- 1e5
+    X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+    print(list( 
+      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Kovarianzmatrix" = round(cov(X), digits = 1) 
+    ))
+    invisible("b")
+    }
+  ## Tau-äquivalentes Messmodell
+  tau_equivalent <- function() {
+    M <- 4
+    mu <- rep(5,M)
+    Sigma <- matrix(
+      c(.7, .5, .5, .5,
+        .5, .8, .5, .5,
+        .5, .5, .7, .5,
+        .5, .5, .5, .6),
+      M,M)
+    N <- 1e5
+    X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+    print(list( 
+      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Kovarianzmatrix" = round(cov(X), digits = 1) 
+    ))
+    invisible("c")
+    }
+    ## Essenziell tau-äquivales Messmodell
+    essential_tau_equivalent <- function() {
+    M <- 4
+    mu <- c(5,4,3,4)
+    Sigma <- matrix(
+      c(.7, .5, .5, .5,
+        .5, .8, .5, .5,
+        .5, .5, .7, .5,
+        .5, .5, .5, .6),
+      M,M)
+    N <- 1e5
+    X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+    print(list( 
+      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Kovarianzmatrix" = round(cov(X), digits = 1) 
+    ))
+    invisible("d")
+    }
+    tau_congeneric <- function() {
+    ## Tau-kongenerisches Messmodell
+    M <- 4
+    mu <- c(5,4,3,4)
+    # Kovarianzmatrix
+    Sigma <- matrix(
+      c(.7, .5, .6, .7,
+        .5, .8, .5, .6,
+        .6, .5, .7, .5,
+        .7, .6, .5, .8),
+      M,M)
+    N <- 1e5
+    X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+    print(list( 
+      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Kovarianzmatrix" = round(cov(X), digits = 1) 
+    ))
+    invisible("e")
+    }
+smpl <- sample(letters[1:5], 1)
+output <- switch(smpl,
+                 a = parallel(),
+                 b = essential_parallel(),
+                 c = tau_equivalent(),
+                 d = essential_tau_equivalent(),
+                 e = tau_congeneric(), 
+                 stop("Please answer 'yes' or 'no' (omit quotes!)"))
+prompt_msg <- paste0("Um welches Messmodell handelt es sich hier? Antwortalternativen: \n (a) parallel \n (b) essenziell-parallel \n (c) tau-aequivalent \n (d) essenziell-tau-aequivalent \n (e) tau-kongenerisch \n Tippen Sie in die Konsole bitte den entsprechenden Buchstaben ein; z.B.: a")
+input <- readline(prompt = message(prompt_msg))
+true_msg <- paste0("(", output, ") is die richtige Antwort! Klasse, weiter so!")
+false_msg <- paste0("Das war leider nicht korrekt. (", output, ") wäre richtig gewesen!")
+ifelse(input == output, true_msg, false_msg)
+}  
+  
+# Klausurübung
+#
+messmodell_roulette()
+
+
+
+
+
+
+
+
+
+

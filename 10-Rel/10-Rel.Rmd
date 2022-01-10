@@ -754,10 +754,23 @@ mtext("m = 6; step-size = +0.01")
 
 # Selbststudium
 
-Nachfolgend haben Sie die Möglichkeit Datenmatrizen aus einer multivariaten
-Halb-Normalverteilung zu simulieren. Die zurückliegenden Modelle sollten ihnen
-aus der Vorlesung zur KTT bekannt vorkommen. Untenstehende Simulationen sollen
-Ihnen bei der Klausurvorbereitung helfen.
+## Messmodell-Roulette
+
+Im R-Skript finden Sie die Funktion: `messmodell_roulette()`. Damit können Sie
+für die Klausur üben. Die Funktion simuliert ihnen aus einer
+Halbnormalverteilung zufällig ein Messmodell und zeigt ihnen die
+Spaltenmittelwerte und die Kovarianzmatrix. Können Sie erraten, um welches
+Messmodell es sich handelt? Versuchen Sie es! 
+
+Lesen Sie die Funktion -- wie in der Übung gezeigt -- ein und führen Sie 
+`messmodell_roulette()` aus.
+
+## Bestandteile der Funktion
+
+Grundlage der Funktion sind simulierte Datenmatrizen aus einer multivariaten
+Halb-Normalverteilung. Nachfolgend sehen Sie jede einzelne Funktion und wie sie
+implementiert ist. Keine Angst, das Wissen um die Implementation ist *nicht*
+Klausur-relevant!
 
 Hinweis: Für das Selbststudium benötigen Sie das Package `MASS`. Wenn Sie es
 nicht selbst installieren wollen, kopieren Sie den Code auf der nächsten Folie.
