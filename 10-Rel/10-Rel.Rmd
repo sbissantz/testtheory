@@ -48,9 +48,9 @@ Perfekte Reliabilität entspricht der Abwesenheit von zufälligem Messfehlern:
 \end{block}
 
 \begin{block}{Testwertvariable als Summe der Itemvariable}
-Der Testwert ist der Summenscore über alle Itemvariablen ($\in$ Itemuniverse):
+Der Testwert ist der Summenwert oder Mittelwert über alle Itemvariablen ($\in$ Itemuniverse):
   \begin{equation}
-    X = \sum_{i=1}^n X_i
+    X = \sum_{i=1}^n X_i  \hspace{1.5cm}   \bar{X} = \frac{1}{n} \sum_{i=1}^n X_i
   \end{equation}
 \end{block}
 
@@ -60,29 +60,33 @@ Wie hängen die drei Hauptgütekriterien zusammen?
 
 \begin{block}{Reliabilität \& Objektivität}
 Objektivität $\Rightarrow$ Reliabilität
-
-(via: Messbedingungen standardisieren)
 \end{block}
+
+* via: Messbedingungen standardisieren
 
 \begin{block}{Reliabilität \& Validität}
 Reliabilität $\Rightarrow$ Validität
-
-(v.a.: Beständigkeit gleicher Testergebnisse bei wiederholter Messung)
 \end{block}
+
+* v.a.: Beständigkeit gleicher Testergebnisse bei wiederholter Messung[^44]
+
+[^44]: Hinweis: über den genauen Zusammenhang zwischen den drei
+Hauptgütekriterien lässt sich diskutieren! Das würde allerdings den Rahmen
+dieser Übung sprengen.
 
 ## Reliabilität: Definitionen
 
 \begin{alertblock}{Definition: Reliabilität einer Testvariable}
 Die Reliabilität einer Testwertvariablen ($Y$) lässt sich bestimmen als:
   \begin{equation}
-    Rel(Y) = \frac{Var(T)}{Var(Y)} = \frac{Var(T)}{Var(T) + Var(E)}
+    Rel(X) = \frac{Var(T)}{Var(X)} = \frac{Var(T)}{Var(T) + Var(E)}
   \end{equation}
 \end{alertblock}
 
 \begin{alertblock}{Definition: Reliabilität einer Itemvariable}
-Reliabilität einer Itemvariable ($y$) lässt sich bestimmen als:
+Reliabilität einer Itemvariable ($x$) lässt sich bestimmen als:
   \begin{equation}
-    Rel(y_i) = \frac{Var(\tau_i)}{Var(y_i)} = \frac{Var(\tau_i)}{Var(\tau_i) + Var(\epsilon_i)}
+    Rel(x_i) = \frac{Var(\tau_i)}{Var(x_i)} = \frac{Var(\tau_i)}{Var(\tau_i) + Var(\epsilon_i)}
   \end{equation}
 \end{alertblock}
 
@@ -147,18 +151,15 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 [^2]: Erinnerung an Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
 [^3]: Erinnerung an das Konzept des "Item-Universums"
 
-## Übung 1: Selbstexperiment (..für daheim?)
+## Übung 1: Daheim-Experiment 
 
 \begin{example}
-Jetzt sind Sie an der Reihe! Testen Sie ihr bereits vorhandenes Wissen zur
-Paralleltest- und Retestreliabilität mit der `Übung 1` auf OLAT. Danach knüpfen
-wir mit der Testhalbierungsreliabilität und der internen Konsistenz an.
+Für daheim! Testen Sie ihr bereits vorhandenes Wissen zur Paralleltest- und
+Retestreliabilität mit der `Übung 1` auf OLAT. Danach machen wir mit der
+Testhalbierungsreliabilität und der internen Konsistenz weiter.
 \end{example}
 
 - Zeit: max. 10 Minuten
-
-Notiz: Ist wieder so viel Stoff, dass Sie Übung lieber daheim machen sollen! In
-der OLAT-Übung bekommen Sie die Lösungen angezeigt (so wissen Sie was stimmt).
 
 <!-- Beim Restest wird der Test an der gleichen Stichprobe zu zwei verschiedenen -->
 <!-- Zeitpunkten durchgeführt. Die Restest-Reliabilität berechnet sich dann als -->
@@ -252,9 +253,7 @@ Reliabilität geschätzt werden.
 
 ```{r}
 Rel_SBK <- function(X_p, X_q) {
-  rs_p <- rowSums(X_p)
-  rs_q <- rowSums(X_q)
-  r <- cor(rs_p, rs_q)
+  r <- cor(X_p, X_q)
   2 * r / (1+r)
 }
 ```
@@ -282,14 +281,17 @@ Zur Erinnerung: Die Aufteilungsmethode ist nach wie vor "Odds-Even".
 
 <p>&nbsp;</p>
 
-```{r}
+```{r include=FALSE}
 set.seed(123)
 N <- 1e3
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 even <- seq(1,8, by=2)
 uneven <- seq(2,8, by=2)
-X_p <- X[, even]
-X_q <- X[, uneven]
+X_p <- rowSums(X[, even])
+X_q <- rowSums(X[, uneven])
+```
+
+```{r}
 Rel_SBK(X_p, X_q)
 ```
 
@@ -318,11 +320,9 @@ N <- 1e3
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 m <- length(X) ; seq <- seq(m)
 rseq <- sample(seq, m, replace=FALSE)
-X_p <- X[,rseq[1:4]]
-X_q <- X[,rseq[5:8]]
-rsx_p <- rowSums(X_p)
-rsx_q <- rowSums(X_q)
-(Rel_halb <- cor(rsx_p, rsx_q))
+X_p <- rowSums(X[,rseq[1:4]])
+X_q <- rowSums(X[,rseq[5:8]])
+(Rel_halb <- cor(X_p, X_q))
 ```
 
 ## Übung 2: Lösungsvorschlag (..händisch & R)
@@ -531,7 +531,7 @@ Reliabilität zu erreichen.
 
 \begin{alertblock}{Reformulierung: Spearman-Brown-Formel}
   \begin{equation}
-  k = \frac{Rel^* \cdot (1-Rel)}{Rel \cdot (1-Rel*)}
+    k = \frac{Rel^* \cdot (1-Rel)}{Rel \cdot (1-Rel*)}
   \end{equation}
 \end{alertblock}
 
@@ -647,19 +647,19 @@ abline(v = ks, lty=2, lwd=.5)
 
 ## Homogenität/Heterogenität der Items
 
-Aus der Vorlesung:
-
-> Tests mit homogenen Items haben meistens eine hohe Reliabilität, da die Items
-sehr ähnlich sind und daher hoch positiv miteinander korrelieren.
+Aus der Vorlesung: "Tests mit homogenen Items haben meistens eine hohe
+Reliabilität, da die Items sehr ähnlich sind und daher hoch positiv miteinander
+korrelieren."
 
 \begin{alertblock}{Definition: Korrelation}
   \begin{equation}
-    Corr(X,Y) = \frac{Cov(x,y)}{\sqrt{Var(x){var(y)}}}
+    Corr(x,y) = \frac{Cov(x,y)}{\sqrt{Var(x){Var(y)}}}
   \end{equation}
 \end{alertblock}
 
-Knobelfrage: Wie wirkt sich ein Zuwachs in den Kovarianzen auf Cronbach's alpha
-aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $\alpha$ bleibt gleich
+Knobelfrage: Wie wirkt sich ein Zuwachs in den Kovarianzen -- ceteris paribus --
+auf Cronbach's alpha aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $\alpha$
+bleibt gleich
 
 ## Simulation: Zuwachs in den Kovarianzen
 
@@ -702,20 +702,19 @@ mtext("m = 6; step-size = + 0.01")
 
 ## Streuung der Testwerte
 
-Aus der Vorlesung:
-
-> "Eine hohe Streuung geht meist mit einer hohen Reliabilität einher, während bei
-geringer Streuung eine hohe Reliabilität unwahrscheinlich ist."
+Aus der Vorlesung: "Eine hohe Streuung ($Var(T)$) geht meist mit einer hohen
+Reliabilität einher, während bei geringer Streuung eine hohe Reliabilität
+unwahrscheinlich ist".
 
 \begin{alertblock}{Definition: Reliabilität}
   \begin{equation}
-  Rel(Y) = \frac{Var(T)}{Var(X)}
+  Rel(X) = \frac{Var(T)}{Var(X)}
   \end{equation}
 \end{alertblock}
 
-Knobelfrage: Wie wirkt sich ein Zuwachs in den Inter-Item-Kovarianzen auf
-Cronbach's alpha aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $alpha$ bleibt
-gleich
+Knobelfrage: Wie wirkt sich nach dieser Logik hingegen ein Zuwachs in den
+*Inter-Item-Varianzen* ($Var(X)$) -- ceteris paribus -- auf Cronbach's alpha
+aus? (a) $\alpha$ steigt (b) $\alpha$ sinkt (c) $\alpha$ bleibt gleich
 
 ## Simulation: Zuwachs in den Varianzen (Ausgansmatrix) 
 

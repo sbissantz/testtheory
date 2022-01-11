@@ -46,26 +46,18 @@ X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 #
 m <- length(X) ; seq <- seq(m)
 rseq <- sample(seq, m, replace=FALSE)
-X_p <- X[,rseq[1:4]]
-X_q <- X[,rseq[5:8]]
-
-# Summencores
-#
-rsx_p <- rowSums(X_p)
-rsx_q <- rowSums(X_q)
+X_p <- rowSums(X[,rseq[1:4]])
+X_q <- rowSums(X[,rseq[5:8]])
 
 # Halbtestreliabilität 
 #
-(Rel_halb <- cor(rsx_p, rsx_q))
+(Rel_halb <- cor(X_p, X_q))
 
 # Hilfsfunktion: Spearman Brown Korrektur 
 #
 Rel_SBK <- function(X_p, X_q) {
-  # Summenscores berechnen
-  rs_p <- rowSums(X_p)
-  rs_q <- rowSums(X_q)
   # Korrelation der Testhälften
-  r <- cor(rs_p, rs_q)
+  r <- cor(X_p, X_q)
   # Spearman-Brown-Korrektur
   2 * r / (1+r)
 }
@@ -184,16 +176,14 @@ rsx_uneven <- rowSums(X[,uneven])
 # Hilfsfunktion
 #
 Rel_SBK <- function(X_p, X_q) {
-  rs_p <- rowSums(X_p)
-  rs_q <- rowSums(X_q)
-  r <- cor(rs_p, rs_q)
+  r <- cor(X_p, X_q)
   2 * r / (1+r)
 }
 
 # Spearman Brown Korrektur
 #
-X_p <- X[, even]
-X_q <- X[, uneven]
+X_p <- rowSums(X[, even])
+X_q <- rowSums(X[, uneven])
 Rel_SBK(X_p, X_q)
 
 # Übung 3 aus dem Kurs ----------------------------------------------------
