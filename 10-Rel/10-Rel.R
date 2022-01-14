@@ -23,6 +23,10 @@ if(!requireNamespace("MASS", quietly = TRUE)) {
 # Generativer Prozess
 # (simuliert)
 #
+# TIPP: Wenn Sie für die Klausur noch leicht andere Werte zum üben haben wollen,
+# dann löschen Sie set.seed(123) und führen den nachfolgenden Code erneut aus.
+# Alternativ können Sie auch den Wert verändern, z.B. set.seed(007), und dann
+# den Code erneut ausführen.
 set.seed(123)
 # Tau-parallel
 M <- 8
@@ -38,7 +42,7 @@ Sigma <- matrix(
     .5, .5, .5, .5, .5, .5, .8, .5,
     .5, .5, .5, .5, .5, .5, .5, .8),
   M,M)
-N <- 1e3
+N <- 100 
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 
@@ -70,6 +74,10 @@ Rel_SBK(X_p, X_q)
 
 # Daten simulieren
 #
+# TIPP: Wenn Sie für die Klausur noch leicht andere Werte zum üben haben wollen,
+# dann löschen Sie set.seed(123) und führen den nachfolgenden Code erneut aus.
+# Alternativ können Sie auch den Wert verändern, z.B. set.seed(007), und dann
+# den Code erneut ausführen. Zum Schluss können sie zusätzlich(!) N kleiner
 set.seed(123)
 # Tau-parallel
 M <- 8
@@ -85,7 +93,7 @@ Sigma <- matrix(
     .5, .5, .5, .5, .5, .5, .8, .5,
     .5, .5, .5, .5, .5, .5, .5, .8),
   M,M)
-N <- 1e2
+N <- 100
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 
 # Kennwerte
@@ -161,7 +169,7 @@ Sigma <- matrix(
     .5, .5, .5, .5, .5, .5, .8, .5,
     .5, .5, .5, .5, .5, .5, .5, .8),
   M,M)
-N <- 1e3
+N <- 1000 
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 
@@ -205,7 +213,7 @@ Sigma <- matrix(
     .5, .5, .5, .5, .5, .5, 1.8, .5,
     .5, .5, .5, .5, .5, .5, .5, 1.8),
   M,M)
-N <- 1e3
+N <- 1000 
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 
@@ -253,7 +261,7 @@ Sigma <- matrix(
     .4, .4, .4, .4, .8, .4,
     .4, .4, .4, .4, .4, .7),
   M,M)
-N <- 1e3
+N <- 1000 
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 

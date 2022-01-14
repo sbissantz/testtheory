@@ -151,15 +151,15 @@ Möglichkeiten zur Mehrfachmessung (Population/Itemuniversum)
 [^2]: Erinnerung an Sitzung 04-KTT (v.a. Übungsaufgaben 2 & 3)
 [^3]: Erinnerung an das Konzept des "Item-Universums"
 
-## Übung 1: Daheim-Experiment 
+<!-- ## Übung 1: Daheim-Experiment  -->
 
-\begin{example}
-Für daheim! Testen Sie ihr bereits vorhandenes Wissen zur Paralleltest- und
-Retestreliabilität mit der `Übung 1` auf OLAT. Danach machen wir mit der
-Testhalbierungsreliabilität und der internen Konsistenz weiter.
-\end{example}
+<!-- \begin{example} -->
+<!-- Für daheim! Testen Sie ihr bereits vorhandenes Wissen zur Paralleltest- und -->
+<!-- Retestreliabilität mit der `Übung 1` auf OLAT. Danach machen wir mit der -->
+<!-- Testhalbierungsreliabilität und der internen Konsistenz weiter. -->
+<!-- \end{example} -->
 
-- Zeit: max. 10 Minuten
+<!-- - Zeit: max. 10 Minuten -->
 
 <!-- Beim Restest wird der Test an der gleichen Stichprobe zu zwei verschiedenen -->
 <!-- Zeitpunkten durchgeführt. Die Restest-Reliabilität berechnet sich dann als -->
@@ -218,7 +218,7 @@ Sigma <- matrix(
     .5, .5, .5, .5, .5, .5, .8, .5,
     .5, .5, .5, .5, .5, .5, .5, .8),
   M,M)
-N <- 1e3
+N <- 1000
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
@@ -283,7 +283,7 @@ Zur Erinnerung: Die Aufteilungsmethode ist nach wie vor "Odds-Even".
 
 ```{r include=FALSE}
 set.seed(123)
-N <- 1e3
+N <- 1000 
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 even <- seq(1,8, by=2)
 uneven <- seq(2,8, by=2)
@@ -316,7 +316,7 @@ Halbwertsreliabilität geben:
 set.seed(123)
 ```
 ```{r}
-N <- 1e3
+N <- 100 
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 m <- length(X) ; seq <- seq(m)
 rseq <- sample(seq, m, replace=FALSE)
@@ -331,10 +331,10 @@ X_q <- rowSums(X[,rseq[5:8]])
  \begin{split}
   Rel(X_{voll.}) & = \frac{2 \cdot Corr(X_p, X_q)}{1 + Corr(X_p, X_q)} \\
   & = \frac{2 \cdot Rel_{halb}}{1 + Rel_{halb}} \\
-  & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
-  & \approx \frac{2 \cdot 0.87}{1 + 0.87} \\
-  & \approx \frac{1.74}{1.87} \\
-  & \approx 0.93 \\
+  & \approx \frac{2 \cdot 0.84}{1 + 0.84} \\
+  & \approx \frac{2 \cdot 0.84}{1 + 0.84} \\
+  & \approx \frac{1.68}{1.84} \\
+  & \approx 0.91 \\
  \end{split}
 \end{equation*}
 
@@ -384,7 +384,7 @@ Sigma <- matrix(
     .5, .5, .5, .5, .5, .5, 1.8, .5,
     .5, .5, .5, .5, .5, .5, .5, 1.8),
   M,M)
-N <- 1e3
+N <- 1000 
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
@@ -441,7 +441,7 @@ Bei der Überprüfung der händischen Berechnung kommt nun `alpha()` zum Einsatz
 
 ```{r}
 set.seed(123)
-N <- 1e3
+N <- 1000 
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 alpha(X)
 ```
@@ -475,7 +475,7 @@ Datensatz. Finden Sie ihr Ergebnis im Output der Funktion wieder?
 set.seed(123)
 ```
 ```{r}
-N <- 1e2
+N <- 100 
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
 VCOV <- cov(X)
 V_items <- diag(VCOV)
@@ -554,7 +554,7 @@ Sigma <- matrix(
     .4, .4, .4, .4, .8, .4,
     .4, .4, .4, .4, .4, .7),
   M,M)
-N <- 1e3
+N <- 100 
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
@@ -676,7 +676,7 @@ Sigma <- matrix(
     .1, .1, .1, .1, .8, .1,
     .1, .1, .1, .1, .1, .7),
   M,M)
-N <- 1e3
+N <- 1000 
 # Multivariate Half-Normal Distribution
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ```
