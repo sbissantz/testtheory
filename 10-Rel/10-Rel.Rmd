@@ -77,7 +77,7 @@ dieser Übung sprengen.
 ## Reliabilität: Definitionen
 
 \begin{alertblock}{Definition: Reliabilität einer Testvariable}
-Die Reliabilität einer Testwertvariablen ($Y$) lässt sich bestimmen als:
+Die Reliabilität einer Testwertvariablen ($X$) lässt sich bestimmen als:
   \begin{equation}
     Rel(X) = \frac{Var(T)}{Var(X)} = \frac{Var(T)}{Var(T) + Var(E)}
   \end{equation}
@@ -295,7 +295,7 @@ X_q <- rowSums(X[, uneven])
 Rel_SBK(X_p, X_q)
 ```
 
-## Übung 2: Selbsttest
+## Übung 1: Selbsttest
 
 \begin{example}
 Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie eine
@@ -307,7 +307,7 @@ Anschluss daran nutzen Sie den Code zur Übungsaufgabe 1 in \texttt{10-Rel.R} un
 - Replikation: `set.seed(123)`
 - Anmerkung: Konzepte verstehen $\gg$ Codes verstehen!
 
-## Übung 2: Selbsttest
+## Übung 1: Selbsttest
 
 Nach untenstehender Zufallsaufteilung der Items ist folgende
 Halbwertsreliabilität geben:
@@ -323,9 +323,10 @@ rseq <- sample(seq, m, replace=FALSE)
 X_p <- rowSums(X[,rseq[1:4]])
 X_q <- rowSums(X[,rseq[5:8]])
 (Rel_halb <- cor(X_p, X_q))
+round(Rel_halb, 2)
 ```
 
-## Übung 2: Lösungsvorschlag (..händisch & R)
+## Übung 1: Lösungsvorschlag (..händisch & R)
 
 \begin{equation*}
  \begin{split}
@@ -338,7 +339,7 @@ X_q <- rowSums(X[,rseq[5:8]])
  \end{split}
 \end{equation*}
 
-## Übung 2: Lösungsvorschlag (..in R)
+## Übung 1: Lösungsvorschlag (..in R)
 
 ```{r}
 Rel_SBK(X_p, X_q)
@@ -356,8 +357,8 @@ Alpha[^8] ($\alpha$).
   \end{equation}
 \end{alertblock}
 
-Notes: Alpha is eine Verallgemeinerung der Testhalbierungsreliabilität auf
-beliebig viele ($m$) Testteile, Items (aus einem *Itemuniversum*).
+Note: Alpha is eine Verallgemeinerung der Testhalbierungsreliabilität auf
+beliebig viele ($m$) Testteile bzw. Items (aus einem *Itemuniversum*).
 
 [^8]: Neben Cronbach's Alpha gewinnt in der angewandten Forschung zunehmend eine
 Verallgemeinerung des alpha-Koffizient an Einfluss: McDonald's
@@ -453,23 +454,23 @@ item_stats <- psych::alpha(X)
 item_stats$total[["raw_alpha"]]
 ```
 
-## Übung 3: Selbsttest
+## Übung 2: Selbsttest
 
 \begin{example}
 Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie
 die Itemvarianzen sowie die Gesamtvarianz vorgegeben. Berechnen Sie Cronbach's
 alpha zunächst händisch. Im Anschluss daran nutzen Sie den Code zur
-Übungsaufgabe 3 in \texttt{10-Rel.R} und überprüfen ihr Ergebnis.
+Übungsaufgabe 2 in \texttt{10-Rel.R} und überprüfen Ihr Ergebnis.
 \end{example}
 
-Zusatz: Nutzen Sie im Anschluss die R Funktion `psych::alpha()` mit ihrem
-Datensatz. Finden Sie ihr Ergebnis im Output der Funktion wieder?
+Zusatz: Nutzen Sie im Anschluss die R Funktion `psych::alpha()` mit Ihrem
+Datensatz. Finden Sie Ihr Ergebnis im Output der Funktion wieder?
 
 - Zeit: 10-15 Minuten
 - Replikation: `set.seed(123)`
 - Anmerkung: Konzepte verstehen $\gg$ Codes verstehen!
 
-## Übung 3: Selbsttest
+## Übung 2: Selbsttest
 
 ```{r include=FALSE}
 set.seed(123)
@@ -484,7 +485,7 @@ list("Gesamtvarianz" = round(V_X, 2),
      "Itemvarianz" = round(V_items,2))
 ```
 
-## Übung 3: Lösungsvorschlag (..händisch & R)
+## Übung 2: Lösungsvorschlag (..händisch & R)
 
 \begin{equation}
   \begin{split}
@@ -562,7 +563,7 @@ X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 ## Testverlängerung & Reliabilität (via Cronbach's alpha)
 
 Stellen Sie sich vor, Sie wollen mit dem soeben simulierten Test eine
-Reliabilität von 0.99 erreichen, um wie viele Items müssten Sie ihren Test
+Reliabilität von 0.99 erreichen, um wie viele Items müssten Sie Ihren Test
 verlängern, wenn nachfolgende Reliabilitässchätzung gegeben ist?
 
 ```{r}
@@ -598,21 +599,21 @@ Rel_ast <- 0.99 ; Rel <- 0.87
 calc_k(Rel_ast, Rel)
 ```
 
-## Übung 4: Selbsttest
+## Übung 3: Selbsttest
 
 \begin{example}
 Versuchen Sie es nun selbst! Berechnen Sie wie viele Item nötig wären, um einen
 Test mit $m=3$ Items und einer Reliabilität von $0.45$ auf eine Reliabilität
 von $0.9$ ansteigen zu lassen. Berechnen Sie das Ergebnis zunächst händisch.
 Nutzen Sie danach den Code zur Übungsaufgabe 4 in \texttt{10-Rel.R} und
-überprüfen ihr Ergebnis.
+überprüfen Ihr Ergebnis.
 \end{example}
 
 - Zeit: 15 Minuten
 - Replikation: `set.seed(123)`
 - Anmerkung: Konzepte verstehen $\gg$ Codes verstehen!
 
-## Übung 4: Lösungsvorschlag
+## Übung 3: Lösungsvorschlag
 
 \begin{equation}
   \begin{split}
@@ -759,8 +760,8 @@ mtext("m = 6; step-size = +0.01")
 ## Messmodell-Roulette
 
 Im R-Skript finden Sie die Funktion: `messmodell_roulette()`. Damit können Sie
-für die Klausur üben. Die Funktion simuliert ihnen aus einer
-Halbnormalverteilung zufällig ein Messmodell und zeigt ihnen die
+für die Klausur üben. Die Funktion simuliert Ihnen aus einer
+Halbnormalverteilung zufällig ein Messmodell und zeigt Ihnen die
 Spaltenmittelwerte und die Kovarianzmatrix. Können Sie erraten, um welches
 Messmodell es sich handelt? Versuchen Sie es! 
 

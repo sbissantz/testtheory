@@ -18,12 +18,13 @@ if(!requireNamespace("MASS", quietly = TRUE)) {
   message("Time to rock! (*weird guitar sound*)")
 }
 
-# Übung 2 -----------------------------------------------------------------
+# Übung 1 -----------------------------------------------------------------
 
 # Generativer Prozess
 # (simuliert)
 #
-# TIPP: Wenn Sie für die Klausur noch leicht andere Werte zum üben haben wollen,
+# TIPP: 
+# Wenn Sie für die Klausur noch geringfügig andere Werte zum Üben generieren wollen
 # dann löschen Sie set.seed(123) und führen den nachfolgenden Code erneut aus.
 # Alternativ können Sie auch den Wert verändern, z.B. set.seed(007), und dann
 # den Code erneut ausführen.
@@ -70,7 +71,7 @@ Rel_SBK <- function(X_p, X_q) {
 #
 Rel_SBK(X_p, X_q)
 
-# Übung 3 -----------------------------------------------------------------
+# Übung 2 -----------------------------------------------------------------
 
 # Daten simulieren
 #
@@ -134,7 +135,7 @@ item_stats <- psych::alpha(X)
 item_stats$total[["raw_alpha"]]
 # alpha$total[1]
 
-# Übung 4 -----------------------------------------------------------------
+# Übung 3 -----------------------------------------------------------------
 
 # Hilfsfunktion
 #
@@ -152,7 +153,7 @@ calc_k(Rel_ast=0.9, Rel=0.45)
 # Übungen aus dem Kurs # 
 ########################
 
-# Übung 2 aus dem Kurs ----------------------------------------------------
+# Übung 1 aus dem Kurs ----------------------------------------------------
 
 set.seed(123)
 # Tau-parallel
@@ -194,7 +195,7 @@ X_p <- rowSums(X[, even])
 X_q <- rowSums(X[, uneven])
 Rel_SBK(X_p, X_q)
 
-# Übung 3 aus dem Kurs ----------------------------------------------------
+# Übung 2 aus dem Kurs ----------------------------------------------------
 
 # Daten simulieren
 #
@@ -246,7 +247,7 @@ alpha(X)
 #
 psych::alpha(X)
 
-# Übung 4 aus dem Kurs ----------------------------------------------------
+# Übung 3 aus dem Kurs ----------------------------------------------------
 
 set.seed(123)
 # Essenziell Tau-Äquivalent
