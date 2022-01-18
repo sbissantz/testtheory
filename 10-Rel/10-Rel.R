@@ -31,7 +31,7 @@ if(!requireNamespace("MASS", quietly = TRUE)) {
 set.seed(123)
 # Tau-parallel
 M <- 8
-mu <- c(5,4,3,4,5,3,5,4)
+mu <- c(4,4,4,4,4,4,4,4)
 # Kovarianzmatrix
 Sigma <- matrix(
   c(.8, .5, .5, .5, .5, .5, .5, .5,
