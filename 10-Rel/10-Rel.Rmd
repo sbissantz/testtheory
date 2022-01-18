@@ -504,7 +504,6 @@ V_items <- diag(VCOV)
 # Gesamtvarianz
 V_X <- sum(VCOV)
 # Kennwerte
-ls <- 
 list("Gesamtvarianz" = round(V_X, 2),
      "Itemvarianz" = round(V_items,2))
 ```
