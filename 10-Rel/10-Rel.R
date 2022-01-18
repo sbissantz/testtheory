@@ -294,7 +294,7 @@ messmodell_roulette <- function() {
     N <- 1e5 
     X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
     print(list( 
-      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Spaltenmittelwerte" = round(colMeans(X), digits = 1) , 
       "Kovarianzmatrix" = round(cov(X), digits = 1) 
     ))
     invisible("a")
@@ -312,7 +312,7 @@ messmodell_roulette <- function() {
     N <- 1e5
     X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
     print(list( 
-      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Spaltenmittelwerte" = round(colMeans(X), digits = 1) , 
       "Kovarianzmatrix" = round(cov(X), digits = 1) 
     ))
     invisible("b")
@@ -330,7 +330,7 @@ messmodell_roulette <- function() {
     N <- 1e5
     X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
     print(list( 
-      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Spaltenmittelwerte" = round(colMeans(X), digits = 1) , 
       "Kovarianzmatrix" = round(cov(X), digits = 1) 
     ))
     invisible("c")
@@ -348,7 +348,7 @@ messmodell_roulette <- function() {
     N <- 1e5
     X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
     print(list( 
-      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Spaltenmittelwerte" = round(colMeans(X), digits = 1) , 
       "Kovarianzmatrix" = round(cov(X), digits = 1) 
     ))
     invisible("d")
@@ -367,7 +367,7 @@ messmodell_roulette <- function() {
     N <- 1e5
     X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
     print(list( 
-      "Spaletenmittelwerte" = round(colMeans(X), digits = 1) , 
+      "Spaltenmittelwerte" = round(colMeans(X), digits = 1) , 
       "Kovarianzmatrix" = round(cov(X), digits = 1) 
     ))
     invisible("e")
@@ -382,7 +382,7 @@ output <- switch(smpl,
                  stop("Please answer 'yes' or 'no' (omit quotes!)"))
 prompt_msg <- paste0("Um welches Messmodell handelt es sich hier? Antwortalternativen: \n (a) parallel \n (b) essenziell-parallel \n (c) tau-aequivalent \n (d) essenziell-tau-aequivalent \n (e) tau-kongenerisch \n Tippen Sie in die Konsole bitte den entsprechenden Buchstaben ein; z.B.: a")
 input <- readline(prompt = message(prompt_msg))
-true_msg <- paste0("(", output, ") is die richtige Antwort! Klasse, weiter so!")
+true_msg <- paste0("(", output, ") ist die richtige Antwort! Klasse, weiter so!")
 false_msg <- paste0("Das war leider nicht korrekt. (", output, ") wäre richtig gewesen!")
 ifelse(input == output, true_msg, false_msg)
 }  
