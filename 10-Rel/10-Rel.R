@@ -175,8 +175,8 @@ N <- 1000
 X <- data.frame(abs(MASS::mvrnorm(N, mu, Sigma)))
 
 # Odds-Even Zuteilung
-even <- seq(1,8, by=2)
-uneven <- seq(2,8, by=2)
+even <- seq(2,8, by=2)
+uneven <- seq(1,8, by=2)
 rsx_even <- rowSums(X[,even])
 rsx_uneven <- rowSums(X[,uneven])
 # Halbtestreliabilität
