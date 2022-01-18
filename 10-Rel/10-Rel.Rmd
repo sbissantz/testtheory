@@ -457,10 +457,10 @@ item_stats$total[["raw_alpha"]]
 ## Übung 2: Selbsttest
 
 \begin{example}
-Versuchen Sie es nun selbst! Sie bekommen auf der nächsten Folie
-die Itemvarianzen sowie die Gesamtvarianz vorgegeben. Berechnen Sie Cronbach's
-alpha zunächst händisch. Im Anschluss daran nutzen Sie den Code zur
-Übungsaufgabe 2 in \texttt{10-Rel.R} und überprüfen Ihr Ergebnis.
+Versuchen Sie es nun selbst! Sie bekommen auf den nächsten zwei Folien
+nach der Simulation die Itemvarianzen sowie die Gesamtvarianz vorgegeben.
+Berechnen Sie Cronbach's alpha zunächst händisch. Im Anschluss daran nutzen Sie
+den Code zur Übungsaufgabe 2 in \texttt{10-Rel.R} und überprüfen Ihr Ergebnis.
 \end{example}
 
 Zusatz: Nutzen Sie im Anschluss die R Funktion `psych::alpha()` mit Ihrem
@@ -470,17 +470,41 @@ Datensatz. Finden Sie Ihr Ergebnis im Output der Funktion wieder?
 - Replikation: `set.seed(123)`
 - Anmerkung: Konzepte verstehen $\gg$ Codes verstehen!
 
-## Übung 2: Selbsttest
+## Übung 2: Selbsttest (Simulation)
 
 ```{r include=FALSE}
 set.seed(123)
 ```
 ```{r}
-N <- 100 
+# Tau-parallel
+M <- 8
+mu <- c(5,4,3,4,5,3,5,4)
+# Kovarianzmatrix
+Sigma <- matrix(
+  c(.8, .5, .5, .5, .5, .5, .5, .5,
+    .5, .8, .5, .5, .5, .5, .5, .5,
+    .5, .5, .8, .5, .5, .5, .5, .5,
+    .5, .5, .5, .8, .5, .5, .5, .5,
+    .5, .5, .5, .5, .8, .5, .5, .5,
+    .5, .5, .5, .5, .5, .8, .5, .5,
+    .5, .5, .5, .5, .5, .5, .8, .5,
+    .5, .5, .5, .5, .5, .5, .5, .8),
+  M,M)
+N <- 100
 X <- data.frame(MASS::mvrnorm(N, mu, Sigma))
+```
+
+## Übung 2: Selbsttest (Kennwerte)
+
+```{r}
+# Varianz-Kovarianz-Matrix
 VCOV <- cov(X)
+# Summe der Varianzen
 V_items <- diag(VCOV)
+# Gesamtvarianz
 V_X <- sum(VCOV)
+# Kennwerte
+ls <- 
 list("Gesamtvarianz" = round(V_X, 2),
      "Itemvarianz" = round(V_items,2))
 ```
@@ -490,11 +514,11 @@ list("Gesamtvarianz" = round(V_X, 2),
 \begin{equation}
   \begin{split}
     Rel: \alpha & = \frac{m}{m-1} \cdot \left[ 1 - \frac{\sum_{i=1}^m Var(x_i)}{Var(x)} \right] \\
-    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(1.69 + \dots + 1.74)}{34.95} \right] \\
-    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{12.73}{34.95} \right] \\
-    & \approx \frac{8}{7} \cdot \left[ 1 - 0.36 \right] \\
-    & \approx \frac{8}{7} \cdot 0.64 \\
-    & \approx 0.73 \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{(0.67 + \dots + 0.74)}{28.66} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - \frac{5.64}{28.66} \right] \\
+    & \approx \frac{8}{7} \cdot \left[ 1 - 0.20 \right] \\
+    & \approx \frac{8}{7} \cdot 0.80 \\
+    & \approx 0.91 \\
   \end{split}
 \end{equation}
 
