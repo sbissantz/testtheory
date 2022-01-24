@@ -595,7 +595,7 @@ alpha(X)
 
 \begin{equation}
   \begin{split}
-    k & \leq \frac{Rel^* \cdot (1-Rel)}{Rel \cdot (1-Rel*)} \\
+    k & = \frac{Rel^* \cdot (1-Rel)}{Rel \cdot (1-Rel*)} \\
     k & \approx \frac{0.99 \cdot (1-0.85)}{0.85 \cdot (1-0.99)} \\
     k & \approx \frac{0.99 \cdot 0.15}{0.85 \cdot 0.01} \\
     k & \approx 17 \\
@@ -650,6 +650,10 @@ Nutzen Sie danach den Code zur Übungsaufgabe 4 in \texttt{10-Rel.R} und
 ```{r}
 calc_k(Rel_ast=0.9, Rel=0.45)
 ```
+
+Konklusion: Der Test um 30 Items verlängert werden[^71]. 
+
+[^71]: $m \cdot k - m = 3 \cdot 11 - 3 = 33 - 3 = 30$
 
 ## Grafik: Testverlängerung & Reliabilität 
 
