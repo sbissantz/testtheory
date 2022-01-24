@@ -659,7 +659,7 @@ calc_Rel_ast <- function(k, Rel) {
 }
 ks <- 1:15
 plot(c(0,15), c(0.4,1), type = "n",
-     xlab="Verlängerung des Tests um k Items",
+     xlab="Verlängerung des Tests um den Faktor k",
      ylab="Reliabilitätskoeffizien (Rel*)")
 axis(1, at = ks)
 rs <- seq(0.4, 0.9, by=0.1)
