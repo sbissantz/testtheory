@@ -21,7 +21,7 @@ papers of their impressive smorgasbord:
 
 Kornbrot and their colleges joint in with the following article: 
 
-- Kornbrot, Wiseman & Georgiou (2018) [Quality science from quality measurement](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0192808)
+- Kornbrot, Wiseman & Georgiou (2018): [Quality science from quality measurement](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0192808)
 
 ## Additional resources
 
