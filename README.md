@@ -1,16 +1,20 @@
 # Measurement matters!
 
-This repository needs expansion. I decided to include references, podcasts,
-videos, and other golden *nuggets of truth* (...whatever that means). Over
-time, I try to include more and more resources to make two points clear:
-Measurement matters! And I am personally convinced that quality science can't 
+Measurement matters! And I am personally convinced that quality science can't
 rises from bad measurements. I was a fool to believe statistical methods can
-cope with bad data or fix screwed-up measurements. I was wrong!
-Garbage-In-Garbage-Out. It is that simple. Be wiser than me.
+cope with bad data or even fix screwed-up measurements. I was wrong!
+Garbage-In-Garbage-Out -- it is that simple. Be wiser than me.
 
-That's why I'd like to share with you some of my wake-up calls. In general, I
-highly recommend the works of Jessica Flake and Eiko Fried. But to jump right
-off the ground; here are two papers of their impressive smorgasbord: 
+To put words into action, I decided to expand this repository. The repo should
+become a staging ares for a dozen important resources in my field. Including
+references, podcasts, videos, and other golden *nuggets of truth* (...whatever
+that means) is my first strike. Furthermore, I would love to complement the
+collection with my own work in the field.
+
+Let's modestly start with the first on. In general, I highly recommend the
+works of Jessica Flake and Eiko Fried. Their works were like a wake-up call for
+me. To save you some time and make you jump right off the ground; here are two
+papers of their impressive smorgasbord: 
 
 - Fired & Flake (2018): (Measurement matters)[https://www.psychologicalscience.org/observer/measurement-matters]
 - Flake & Fried (2020): (Measurement Schmeasurement)[https://journals.sagepub.com/doi/10.1177/2515245920952393]
