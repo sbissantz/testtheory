@@ -1,7 +1,7 @@
 # Measurement matters!
 
 Measurement matters! And I am personally convinced that quality science can't
-rises from bad measurements. I was a fool to believe statistical methods can
+rises from *bad* measurements. I was a fool to believe statistical methods can
 cope with bad data or even fix screwed-up measurements. I was wrong!
 Garbage-In-Garbage-Out -- it is that simple. Be wiser than me.
 
@@ -28,6 +28,6 @@ Kornbrot and their colleges joint in with the following article:
 Fried & Fried (2018) recognized that scientists often lack training, for
 example, regarding validity theory, psychometrics, etc. Kindly they pooled
 together some additional material on OSF (see: https://osf.io/zrkd4/). To
-access the document directly, click
+access the documents directly, click
 (here)[https://docs.google.com/document/d/11jyoXtO0m2lUywpC04KjLvI5QcBUY4YtwEvw6cg2cMs/edit]
 
