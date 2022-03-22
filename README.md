@@ -31,3 +31,13 @@ together some additional material on OSF (see: https://osf.io/zrkd4/). To
 access the documents directly, click
 (here)[https://docs.google.com/document/d/11jyoXtO0m2lUywpC04KjLvI5QcBUY4YtwEvw6cg2cMs/edit]
 
+If you like to read a monograph on validating psychological constructs I warmly
+recommend Kathleen Slaney's book "Validating Psychological Constructs –
+Historical, Philosophical, and Practical Dimensions". Another great resource
+focusing on making constructs measurable is Garry Goertz's "Social Science
+Concepts and Measurement". It includes a great discussion about variables
+transformation, too. Think of it as an attempt to bring the qualitative and
+quantitative closer together. Last and least, one of my all-time favorites is
+Denny Borseboom's "Measuring the Mind: Conceptual Issues in Contemporary
+Psychometrics". This is a great evening read!
+
